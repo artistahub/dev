@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> HTML Componenets</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+    <script type="text/javascript">
+        $( document).ready( function(){
+               $( document).on( 'click', '.control', function(){
+                   var t = $( this).text();
+                   t == "ON" ?  OFF( this ) : ON( this );
+
+               });
+
+            function ON( $this){
+                $( $this).text("ON");
+                $( $this).animate({
+                    'margin-left' : '49%'
+                }, function(){
+                    $(this).parent().removeClass('red').addClass('green');
+                });
+            }
+            function OFF( $this){
+                $( $this).text("OFF");
+                $( $this).animate({
+                    'margin-left' : '0'
+                }, function(){
+                    $(this).parent().removeClass('green').addClass('red');
+                });
+            }
+
+        });
+
+        function OnOff( on, off){
+            this.on = on;
+            this.off = off;
+        }
+
+    </script>
+    <style>
+        *{
+            font-family: Arial,sans-serif;
+        }
+        #c{
+            border: solid 1px #e1e1e1;
+            position: relative;
+            border-radius: 4px;
+
+        }
+        .pil{
+            border: solid 1px #d4d4d4;
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+
+        }
+        .green{
+            background: -moz-linear-gradient(top, rgba(143,196,0,1) 0%, rgba(143,196,0,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(143,196,0,1)), color-stop(100%,rgba(143,196,0,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(143,196,0,1) 0%,rgba(143,196,0,1) 100%); /* W3C */
+        }
+        .red{
+            background: -moz-linear-gradient(top, rgba(255,48,25,1) 0%, rgba(207,4,4,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,48,25,1)), color-stop(100%,rgba(207,4,4,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(255,48,25,1) 0%,rgba(207,4,4,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(255,48,25,1) 0%,rgba(207,4,4,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(255,48,25,1) 0%,rgba(207,4,4,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(255,48,25,1) 0%,rgba(207,4,4,1) 100%); /* W3C */
+        }
+        .control{
+            border: solid 1px #797979;
+            padding: 5px 0px;
+            width: 50%;
+            text-align: center;
+            font-size: 15pt;
+            font-weight: 600;
+            float: left;
+            border-radius:18px;
+            background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+            background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+        }
+        .onoff{
+            width: 200px;
+            margin: 10px;
+        }
+        .f{
+            padding: 5px 0px;
+            margin: 10px auto;
+            width: 400px;
+            height: 235px;
+            border-top: solid 1px #eee;
+            border-left: solid 1px #eee;
+            border-right: solid 1px #eee;
+            border-bottom: solid 1px #ccc;
+            -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 0 rgba(0,0,0,.1);
+            border-radius: 5px;
+        }
+        .gray{
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fff),color-stop(100%,#ddd));
+            background: -webkit-linear-gradient(top,#fff 0,#ddd 100%);
+            background: -moz-linear-gradient(top,#fff 0,#ddd 100%);
+            background: -ms-linear-gradient(top,#fff 0,#ddd 100%);
+            background: -o-linear-gradient(top,#fff 0,#ddd 100%);
+            background: linear-gradient(top,#fff 0,#ddd 100%);
+        }
+        .sky{
+            background: -moz-linear-gradient(top, rgba(254,255,255,1) 0%, rgba(210,235,249,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,255,1)), color-stop(100%,rgba(210,235,249,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
+        }
+        .felemt{
+            width: 90%;
+            margin: 5px auto;
+            position: relative;
+        }
+        .inputText {
+            height: 30px;
+            width: 100%;
+            border-radius: 4px;
+            border: solid 1px #ccc;
+        }
+        .label{
+            position: absolute;
+            top: 9px;
+            left: 6px;
+            color: rgb(180, 179, 184);
+            font-size: 10pt;
+        }
+        .signup-btn{
+            color: #333;
+            background-color: #fd9512;
+            background-repeat: repeat-x;
+            background-image: -moz-linear-gradient(top,#fedc4d 0,#fd9512 100%);
+            background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fedc4d),color-stop(100%,#fd9512));
+            background-image: -webkit-linear-gradient(top,#fedc4d 0,#fd9512 100%);
+            background-image: -ms-linear-gradient(top,#fedc4d 0,#fd9512 100%);
+            background-image: -o-linear-gradient(top,#fedc4d 0,#fd9512 100%);
+            background-image: linear-gradient(top,#fedc4d 0,#fd9512 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fedc4d',endColorstr='#fd9512',GradientType=0);
+            border-color: #ec8b11;
+        }
+        .signup-btn:hover{
+            border: solid  1px #ff7824;
+        }
+        .btn {
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 18px;
+            color: #333;
+            text-shadow: 0 1px 1px rgba(255,255,255,.5);
+            background-color: #ccc;
+            background-repeat: no-repeat;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
+            box-shadow: 0 1px 0 rgba(255,255,255,.5);
+        }
+        .hr {
+            border-bottom: white;
+            border-top: 1px solid #e2e2e2;
+            margin: 10px 0px;
+        }
+        .h2 {
+            position: relative;
+            display: block;
+            margin: 0px;
+            font-size: 12pt;
+            font-weight: 500;
+            color: rgb(29, 20, 20);
+            text-shadow: 0 1px 0 rgba(26, 22, 22, 0.2);
+        }
+        #forms{
+            position: relative;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="c">
+    <div class="onoff">
+        <div class="pil red">
+            <div class="control"> OFF </div>
+        </div>
+    </div>
+    <div class="onoff">
+        <div class="pil red">
+            <div class="control"> OFF </div>
+        </div>
+    </div>
+    <hr class="hr">
+    <div id="forms">
+        <img src="images/cirque.jpg">
+
+        <div class="f gray">
+            <form method="get" action="">
+             <div class="felemt header">
+                 <div><h2 class="h2">New to ArtistaOne ? Sign up</h2></div>
+             </div>
+            <hr class="hr">
+             <div class="felemt" >
+                 <div class="label "> First Name</div>
+                 <input class="inputText" type="text">
+             </div>
+
+             <div class="felemt" >
+                 <div class="label "> Last Name</div>
+                 <input class="inputText" type="text">
+             </div>
+            <div class="felemt" >
+                 <div class="label "> Email</div>
+                 <input class="inputText" type="text">
+             </div>
+            <div class="felemt" >
+                 <div class="label "> Password</div>
+                 <input class="inputText" type="password">
+             </div>
+            <div class="felemt" >
+                <input class="btn signup-btn" type="submit" value="Sign up for ArtistaOne">
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
