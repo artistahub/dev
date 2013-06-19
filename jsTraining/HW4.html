@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script type="text/javascript">
+        var counter = 0;
+        var num = prompt(" Enter a number between 1 and 100", null);
+           counter ++;
+        while( num < 1 || num > 100 || num == '' || isNaN(num)){
+           num =  prompt(" Enter a number between 1 and 100", null);
+            counter ++;
+        }
+       document.write(" Number of times prompt the visitor before I got a valid number  : " + counter);
+
+        </script>
+
+</head>
+<body>
+
+</body>
+</html>
