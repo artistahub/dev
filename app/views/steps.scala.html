@@ -1,0 +1,89 @@
+@(message: String)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Screen - Step1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+
+    <script type="text/javascript" src="@routes.Assets.at("bootstrap/js/bootstrap.min.js")">  </script>
+    <script type="text/javascript" src="@routes.Assets.at("utils/api.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("utils/utils.js")"></script>
+
+    <script type="text/javascript">
+
+            $( document ).ready( function(){
+                var $userName = $( "#userName" );
+                var userName = '@session.get("userEmail")';
+                userName = userName.substring( 0, userName.indexOf('@@'));
+                $userName.val( userName );
+
+            });
+
+
+
+
+    </script>
+
+</head>
+<body>
+<h1 class="h1"> ArtistaOne @session.get("userEmail") </h1> <hr class="stepsHr">
+<img class="loader" src="../images/loading.gif" alt="">
+<div id="stepsPage" class="container">
+    <div class="row-fluid">
+        <div  class="span2">
+            <div id="setepsContainer" class="stepsBg">
+                <ul>
+                    <li id="addVideoStep" class="step-active"> <span class="badge badge-step"> Add video</span></span></li> <hr class="stepsHr">
+                    <li id="addPhotoStep" class="step-deactive"><span class="badge badge-step"> Add photo</span></li> <hr class="stepsHr">
+                    <li id="finishStep" class="step-deactive"> <span class="badge badge-step">Finish</span></li>
+                </ul>
+            </div>
+        </div>
+        <div  class="span10">
+            <div id="stepsContentContainer">
+                <h4 class="frow"> Set your showcase video</h4>
+                <div>
+                    <form action="" method="post">
+
+                        <div class="frow">
+                            <label class="flabel" for="userName" > UserName</label>
+                            <span class="formLabel"> Box</span>
+                            <input type="text" class="finputText" id="userName" name="userName">
+                        </div>
+                        <div class="frow">
+                            <label class="flabel" for="city" > City</label>
+                            <input type="text" class="finputText" id="city" name="city">
+                        </div>
+                        <div class="frow">
+                            <label class="flabel" for="state" > State</label>
+                            <input type="text" class="finputText" id="state" name="state">
+                        </div>
+                        <div class="frow">
+                            <label class="flabel" for="country" > Country</label>
+                            <input type="text" class="finputText" id="country" name="country">
+                        </div>
+                        <div class="frow">
+                            <label class="flabel" for="videoLink" > Youtube video</label>
+                            <input type="text" class="finputText" id="videoLink" name="videoLink">
+                        </div>
+                        <div class="frow">
+                        <label class="flabel" for="videoDescription" > Video Description</label>
+                        <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea>
+                    </div>
+                        <div class="frow">
+                            <input class="btn" type="button"  id="saveVideo" value="Save & continue">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
