@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> New Ui </title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+    <script type="text/javascript" src="domObjects.js"></script>
+    <script type="text/javascript" src="jquery.masonry.js"></script>
+    <script>
+        $(function(){
+
+            // create some screens
+            var $container = $(' #container ');
+            for ( var i = 0; i < 100; i ++){
+                var s1 = new Screen().render();
+                 $container.append( s1 );
+            }
+
+            console.log( s1 );
+              //
+            $('#container').masonry({
+                // options
+                itemSelector : '.item',
+                columnWidth : 0
+            });
+
+        });
+    </script>
+     <style>
+         .item {
+             width: 300px;
+             margin: 5px;
+             font-size: 11px;
+             line-height: 1.4em;
+             float: left;
+             -webkit-border-radius: 5px;
+             -moz-border-radius: 5px;
+             border-radius: 5px;
+         }
+         *{
+             font-family: arial;
+         }
+         h1{
+             font-size: 107%;
+             padding: 5px;
+         }
+         .screenBody{
+             height: 200px;
+             background-image: url("images/map.jpg");
+         }
+
+
+         .wrapper{
+             border: solid 1px #e1e1e1;
+             border-radius: 4px;
+             box-shadow: 0px 0px 6px rgba(5, 5, 5, 0.1);
+         }
+
+         .hr{
+             border-top: 1px solid white;
+             border-left: none;
+             margin: 0px;
+         }
+         .row{
+             border-bottom: 1px solid #e1e1e1;
+             padding: 10px 5px;
+         }
+     </style>
+</head>
+<body>
+<div id="container">
+
+
+
+</div>
+</body>
+</html>

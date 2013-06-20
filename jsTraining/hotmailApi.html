@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <script src="//js.live.net/v5.0/wl.js"></script>
+
+    <script>
+
+    function open_win(){
+
+
+        var clientId = "00000000480EA39C";
+        var redirectUri = "http://www.joynme.com/community-example";
+        var url = "https://login.live.com/oauth20_authorize.srf?client_id=" + clientId + "&scope=wl.signin&response_type=token&redirect_uri=" + redirectUri;
+        Window.open(url, '', 'width = 500 height = 600');
+
+       // METHOD https://apis.live.net/v5.0/REST_PATH?access_token=ACCESS_TOKEN
+       // GET https://apis.live.net/v5.0/me/contacts?access_token=ACCESS_TOKEN
+
+   }
+
+    </script>
+</head>
+<body>
+
+<input type="button" value="Open Window" onclick="open_win()">
+
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CNIT 133  HW2</title>
+
+    <script type="text/javascript">
+        var office1 = "SF";
+        var office2 = "LA";
+        var office3= "CHI";
+        var office4 = "NYC";
+        var rev1 = "12345679.02";
+        var rev2 = "12345679.02";
+        var rev3 = "3456789.35";
+        var rev4 = "4567809.36";
+        document.write('<div id="messageDiv"><h1 id="message"> CNIT 133 - HW 2 (JavaScript Data types, Variables)</h1></div>');
+        document.write("the parseFloat of office1: ", parseFloat(office1), "<br />");
+        document.write("the parseFloat of rev1: " + parseFloat(rev1) + "<br />");
+        document.write("the parseInt of office2: " + parseInt(office2) + "<br />");
+        document.write("the parseInt of rev2: " + parseInt(rev2) + "<br />");
+        document.write("the typeof office3: ", typeof(office3), "<br />");
+        document.write("the typeof rev3: ", typeof(rev3), "<br />");
+
+        document.write("Office1 is:  " + office1.bold());
+        document.write("<p>Office1 in bigger font:</p>" + office1.bold().fontsize(6));
+
+
+
+
+    </script>
+    <style>
+        #messageDiv{
+            border: solid 1px #e1e1e1;
+            background-color: rgb(20, 71, 43);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 32%;
+            border-radius: 6px;
+        }
+        #message{
+            background-color: rgb(16, 121, 88);
+            padding: 6px;
+            margin: 0px;
+            border-radius: 4px;
+            font-size: 16pt;
+            text-shadow: 1px 1px #120000;
+
+        }
+        #shade{
+            width: 600px;
+            position: absolute;
+            left: 487px;
+            top: 18px;
+            background-color: white;
+            opacity: .09;
+            height: 60px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="shade"></div>
+
+
+
+</body>
+</html>

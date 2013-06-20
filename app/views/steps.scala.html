@@ -1,0 +1,92 @@
+@(message: String)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Screen - Step1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+
+    <script type="text/javascript" src="@routes.Assets.at("bootstrap/js/bootstrap.min.js")">  </script>
+    <script type="text/javascript" src="@routes.Assets.at("utils/api.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("utils/utils.js")"></script>
+
+    <script type="text/javascript">
+
+            $( document ).ready( function(){
+                var $userName = $( "#userName" );
+                var userName = '@session.get("userEmail")';
+                userName = userName.substring( 0, userName.indexOf('@@'));
+                $userName.val( userName );
+            });
+    </script>
+
+</head>
+<body>
+<h1 class="h1"> ArtistaOne @session.get("userEmail") </h1> <hr class="stepsHr">
+<img class="loader" src="../images/loading.gif" alt="">
+<div id="stepsPage" class="container">
+    <div class="row-fluid">
+
+        <div>
+            <div id="stepsContentContainer">
+                <h4> Personal Info</h4>
+                <div>
+                    <form action="" method="post">
+                        <div class="input-prepend row-fluid">
+                            <span class="add-on">User Name: </span>
+                            <input class="span6" id="userName" type="text" placeholder="Username">
+                        </div>
+                        <div class="input-prepend row-fluid">
+                            <span class="add-on">Location: </span>
+                            <input class="span4" id="city" type="text" placeholder="City"/>
+                            <input class="span2" id="state" type="text" placeholder="State"/>
+                            <input class="span4" id="country" type="text" placeholder="Country"/>
+                        </div>
+                        <div class="input-prepend row-fluid">
+                            <span class="add-on">Birthday: </span>
+                            <select class="span2">
+                                <option>Month</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <select class="span2">
+                                <option>Day</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <select class="span2">
+                                <option>Year</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="row-fluid">
+                            <label class="radio inline">
+                                <input type="radio" id="female" value="femal"> Female
+                            </label>
+                            <label class="radio inline">
+                                <input type="radio" id="male" value="femal"> Male
+                            </label>
+                        </div>
+                        <div class="row-fluid">
+                            <input class="btn" type="button"  id="saveVideo" value="Save & continue">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

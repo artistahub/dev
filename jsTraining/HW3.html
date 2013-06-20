@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW3</title>
+
+    <script type="text/javascript">
+       var num1 = parseInt(prompt(' Enter first Number', null));
+        var num2 = parseInt(prompt(' Enter second Number', null));
+        document.write(" you entered " + num1 + " and " + num2);
+        document.write("<br> The sum is  " + (num1 + num2));
+
+        //
+        var num3 = parseInt(prompt(' Enter first Number', null));
+        var num4 = parseInt(prompt(' Enter second Number', null));
+        document.write("<hr><br> you entered " + num3 + " and " + num4);
+        document.write("<br> The sum is  " + (num3 + num4));
+        document.write("<br> The Difference is  " + (num3 - num4));
+        document.write("<br> The Product is  " + (num3 * num4));
+        document.write("<br> The Quotient is  " + (num3 / num4));
+        document.write("<br> The Modulus is  " + (num3 % num4));
+
+        //
+        var num5 = parseInt(prompt(' Enter first Number', null));
+        var num6 = parseInt(prompt(' Enter second Number', null));
+        var num7 = parseInt(prompt(' Enter second Number', null));
+        document.write("<hr><br> The Average for ( " + num5 + " + " + num6 + "+ " + num7 +  ") is : " + (num5 + num6 + num7)/3);
+
+        //
+        var hoursWorked = parseInt(prompt(' How many hours you worked this week', null));
+        var hourlyRate = 10;
+        var overTimeRate = hourlyRate + (hourlyRate/2);
+        if ( hoursWorked <= 40){
+            var total =  hoursWorked *  hourlyRate;
+            document.write("<hr><br>Total Hours Worked: " + hoursWorked );
+            document.write("<br>Regular Pay:  " + hoursWorked + "   hours @ $10/hour =  $" + total);
+            document.write("<br>Overtime Pay:  0 hours  @ $15/hour = $0");
+            document.write("<br>Total Pay:  $" + total );
+        }
+        else {
+            var overTimeHours = hoursWorked - 40;
+            var regularHoursTotal = 40 * hourlyRate;
+            var total1 = overTimeHours *  overTimeRate;
+            var total =  regularHoursTotal + total1;
+
+            document.write("<hr><br>Total Hours Worked: " + hoursWorked );
+            document.write("<br>Regular Pay:  " + 40 + "   hours @ $10/hour =  $" + regularHoursTotal);
+            document.write("<br>Overtime Pay:  " + overTimeHours + " hours  @ $15/hour = $" + total1);
+            document.write("<br>Total Pay:  $" + total );
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
