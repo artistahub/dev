@@ -20,12 +20,7 @@
                 var userName = '@session.get("userEmail")';
                 userName = userName.substring( 0, userName.indexOf('@@'));
                 $userName.val( userName );
-
             });
-
-
-
-
     </script>
 
 </head>
@@ -34,47 +29,55 @@
 <img class="loader" src="../images/loading.gif" alt="">
 <div id="stepsPage" class="container">
     <div class="row-fluid">
-        <div  class="span2">
-            <div id="setepsContainer" class="stepsBg">
-                <ul>
-                    <li id="addVideoStep" class="step-active"> <span class="badge badge-step"> Add video</span></span></li> <hr class="stepsHr">
-                    <li id="addPhotoStep" class="step-deactive"><span class="badge badge-step"> Add photo</span></li> <hr class="stepsHr">
-                    <li id="finishStep" class="step-deactive"> <span class="badge badge-step">Finish</span></li>
-                </ul>
-            </div>
-        </div>
-        <div  class="span10">
+
+        <div>
             <div id="stepsContentContainer">
-                <h4 class="frow"> Set your showcase video</h4>
+                <h4> Personal Info</h4>
                 <div>
                     <form action="" method="post">
-
-                        <div class="frow">
-                            <label class="flabel" for="userName" > UserName</label>
-                            <span class="formLabel"> Box</span>
-                            <input type="text" class="finputText" id="userName" name="userName">
+                        <div class="input-prepend row-fluid">
+                            <span class="add-on">User Name: </span>
+                            <input class="span6" id="userName" type="text" placeholder="Username">
                         </div>
-                        <div class="frow">
-                            <label class="flabel" for="city" > City</label>
-                            <input type="text" class="finputText" id="city" name="city">
+                        <div class="input-prepend row-fluid">
+                            <span class="add-on">Location: </span>
+                            <input class="span4" id="city" type="text" placeholder="City"/>
+                            <input class="span2" id="state" type="text" placeholder="State"/>
+                            <input class="span4" id="country" type="text" placeholder="Country"/>
                         </div>
-                        <div class="frow">
-                            <label class="flabel" for="state" > State</label>
-                            <input type="text" class="finputText" id="state" name="state">
+                        <div class="input-prepend row-fluid">
+                            <span class="add-on">Birthday: </span>
+                            <select class="span2">
+                                <option>Month</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <select class="span2">
+                                <option>Day</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <select class="span2">
+                                <option>Year</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
                         </div>
-                        <div class="frow">
-                            <label class="flabel" for="country" > Country</label>
-                            <input type="text" class="finputText" id="country" name="country">
+                        <div class="row-fluid">
+                            <label class="radio inline">
+                                <input type="radio" id="female" value="femal"> Female
+                            </label>
+                            <label class="radio inline">
+                                <input type="radio" id="male" value="femal"> Male
+                            </label>
                         </div>
-                        <div class="frow">
-                            <label class="flabel" for="videoLink" > Youtube video</label>
-                            <input type="text" class="finputText" id="videoLink" name="videoLink">
-                        </div>
-                        <div class="frow">
-                        <label class="flabel" for="videoDescription" > Video Description</label>
-                        <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea>
-                    </div>
-                        <div class="frow">
+                        <div class="row-fluid">
                             <input class="btn" type="button"  id="saveVideo" value="Save & continue">
                         </div>
                     </form>
