@@ -305,6 +305,7 @@ h1{
 
 
 .wrapper{
+    background-image: url("../images/noise-2.png");
     background-color: #112233;
     border: 1px solid #383737;
     border-radius: 4px 4px 4px 4px;
