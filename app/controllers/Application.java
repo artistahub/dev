@@ -22,13 +22,19 @@ public class Application extends Controller {
 
     public static Result index() {
         System.out.print( request().host());
-        File file = Play.application().getFile("/public/index.html");
-        File file2 = Play.application().getFile("/public/@videos.html");
+        //File file = Play.application().getFile("/public/index.html");
+        //File file2 = Play.application().getFile("/public/@videos.html");
         System.out.println( session("user") );
-        //if ( session("user") != null){
-            // return ok( views.html.index.render(" iwa "));
-       // }
+        if ( session("user") != null){
+            return redirect( routes.Application.artistas() );
+        }
         return ok(views.html.index.render(" Professional performers platform "));
+    }
+
+    public static Result signOut(){
+        session().remove("user");
+        return redirect("/");
+
     }
    public static Result artistas() {
        List<User> artistas = User.getArtistas();
