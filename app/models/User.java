@@ -27,6 +27,7 @@ public class User extends Model {
     private Address BillingAddress;
     private Address MailingAddress;
 
+
     public User( String fName, String lName, String email, String pass){
           this.firstName = fName;
           this.lastName = lName;
@@ -183,8 +184,5 @@ public class User extends Model {
         return " User: " + getId() + " Name: " + lastName + " " + firstName + " Email: " + email;
 
     }
-
-
-
 
 }
