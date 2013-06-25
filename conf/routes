@@ -10,18 +10,18 @@ GET     /deleteArtista/:id          controllers.Application.deleteArtista(id: Lo
 GET     /byName/:name               controllers.Application.byName(name: String)
 GET     /signOut                    controllers.Application.signOut()
 
-<<<<<<< HEAD
+
 POST     /register                  controllers.Register.index()
 POST     /addVideo                  controllers.Register.addVideo()
 POST     /addProfileImage           controllers.Register.addProfileImage()
 
 GET      /login                     controllers.LogIn.index()
 POST      /login                    controllers.LogIn.index()
-=======
+
 POST     /register                   controllers.Register.index()
 POST     /addVideo                   controllers.Register.addVideo()
 POST     /addProfileImage            controllers.Register.addProfileImage()
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

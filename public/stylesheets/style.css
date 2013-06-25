@@ -16,7 +16,6 @@
 
 .f{
     position: absolute;
-<<<<<<< HEAD
     top: 0px;
     right: 73px;
     padding: 5px 0px;
@@ -37,15 +36,7 @@
     width: 400px;
     border-radius: 5px;
     background-image: url("../images/noise-2.png");
-=======
-    top: 100px;
-    right: 73px;
-    padding: 5px 0px;
-    margin: 10px auto;
-    width: 400px;
-    height: 235px;
-    border-radius: 5px;
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
+
 }
 .gray{
     background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fff),color-stop(100%,#ddd));
@@ -121,15 +112,7 @@ input {
     -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
     box-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
-<<<<<<< HEAD
 
-=======
-.hr {
-    border-bottom: white;
-    border-top: 1px solid #e2e2e2;
-    margin: 10px 0px;
-}
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
 body, html{
     background-color: rgb(230, 227, 227);
     margin: 0px;
@@ -173,18 +156,11 @@ body, html{
     border: 1px solid rgba(0,0,0,.1);
     border-radius: 5px;
 }
-<<<<<<< HEAD
 
 .hr {
     border-bottom: white;
     border-top: 1px solid #e2e2e2;
     margin: 0px;
-=======
-.hr {
-    border-bottom: white;
-    border-top: 1px solid #e2e2e2;
-    margin: 10px 0px;
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
 }
 .h2 {
     position: relative;
@@ -200,10 +176,7 @@ body, html{
     position: relative;
 }
 #homeImage{
-<<<<<<< HEAD
     background-color: #222;
-=======
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
     margin: auto;
     text-align: center;
     height: 360px;
@@ -344,10 +317,7 @@ h1{
 
 
 .wrapper{
-<<<<<<< HEAD
-=======
     background-image: url("../images/noise-2.png");
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
     background-color: #112233;
     border: 1px solid #383737;
     border-radius: 4px 4px 4px 4px;
@@ -356,16 +326,6 @@ h1{
     font-size: 10pt;
     text-shadow: 0 1px 10px #112233;
 }
-
-<<<<<<< HEAD
-
-=======
-.hr{
-    border-top: 1px solid white;
-    border-left: none;
-    margin: 0px;
-}
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
 /*.row{
     border-bottom: 1px solid #e1e1e1;
     padding: 10px 5px;
@@ -409,7 +369,6 @@ h1{
     line-height: 24px;
     text-shadow: 0px 1px 7px black;
 }
-<<<<<<< HEAD
 
 input[type="text"],input[type="password"]{
     height: 30px;
@@ -419,5 +378,4 @@ input[type="text"],input[type="password"]{
 .row{
     margin-left: 0px;
 }
-=======
->>>>>>> 2be372dd82a19596f19f26cfc0f758b232aa9973
+
