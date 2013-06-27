@@ -62,6 +62,10 @@ public class User extends Model {
 
     }
 
+    public static User findUerByUserName ( String userName){
+        return  Ebean.find( User.class ).where().like( "userName", userName).findUnique();
+    }
+
     public static void createArtista() {
         User u = new User("hassan", "Rais", "email@email.com","1234");
         //System.out.println("\n UserId: **** " + Ebean.nextId(User.class) + "\n");

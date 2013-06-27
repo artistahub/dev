@@ -378,4 +378,7 @@ input[type="text"],input[type="password"]{
 .row{
     margin-left: 0px;
 }
-
+#artistaMainContent{
+    background-color: #222;
+    min-height: 600px;
+}

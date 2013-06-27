@@ -1,5 +1,6 @@
 package controllers;
 
+import dataHelpers.ProfileData;
 import models.User;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
@@ -67,6 +68,13 @@ public class Application extends Controller {
         System.out.print(allArtistas);
         return ok( Json.toJson( allArtistas ));
     }
+
+   public static Result profile( String userName ){
+       User user = User.findUerByUserName( userName );
+       ProfileData profileData = new ProfileData( user, user.getProfileImage() );
+       //return ok( views.html.profile.profile.render( profileData.toString() ));
+       return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
+   }
 
 
     @BodyParser.Of(BodyParser.Json.class)

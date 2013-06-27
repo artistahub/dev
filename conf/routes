@@ -9,6 +9,7 @@ GET     /newArtista                 controllers.Application.newArtista()
 GET     /deleteArtista/:id          controllers.Application.deleteArtista(id: Long)
 GET     /byName/:name               controllers.Application.byName(name: String)
 GET     /signOut                    controllers.Application.signOut()
+GET     /profile/:username          controllers.Application.profile( username: String)
 
 
 POST     /register                  controllers.Register.index()
