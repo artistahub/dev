@@ -65,4 +65,8 @@ public class ProfileImage extends Model {
         this.dateCreated = dateCreated;
     }
 
+    public String toString(){
+        return "Profileimage: " + " Url : " + getUrl() + " Description: " + getDescription();
+    }
+
 }

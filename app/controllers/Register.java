@@ -29,13 +29,13 @@ import static play.data.Form.form;
 
 public class Register extends Controller {
     public static Result index() {
-        File file = Play.application().getFile("/public/@videos.html");
+        //File file = Play.application().getFile("/public/@videos.html");
         DynamicForm requestData = form().bindFromRequest();
         String firstName = requestData.get("firstName");
         String lastName = requestData.get("lastName");
         String email = requestData.get("email");
         String password = requestData.get("password");
-        User u = new User(firstName, lastName, password);
+        User u = new User(firstName, lastName, email,  password);
         //u.setLocation(Address.createAddress());
         u.save();
         session("user", u.getId().toString());
@@ -93,7 +93,6 @@ public class Register extends Controller {
             if (!dir.mkdirs()) {
                 System.out.println(" ******* Can not make Directory " + dir.getName());
             }
-            ;
             // String original = "/public/artistasPhotos/" + new Date().getTime() + fileName;
             System.out.print(" dir name: " + dir.getName());
             System.out.print(" dir parent: " + dir.getParent());

@@ -27,9 +27,11 @@ public class User extends Model {
     private Address BillingAddress;
     private Address MailingAddress;
 
-    public User( String fName, String lName, String pass){
+
+    public User( String fName, String lName, String email, String pass){
           this.firstName = fName;
           this.lastName = lName;
+          this.email = email;
           this.password = pass;
           this.setDateCreated( new Date() );
     }
@@ -55,8 +57,17 @@ public class User extends Model {
         return artistas;
     }
 
+    public static User findUserByEmailAndPass( String email, String pass ){
+        return  Ebean.find( User.class ).where().like( "email", email).eq("password", pass).findUnique();
+
+    }
+
+    public static User findUerByUserName ( String userName){
+        return  Ebean.find( User.class ).where().like( "userName", userName).findUnique();
+    }
+
     public static void createArtista() {
-        User u = new User("hassan", "Rais", "1234");
+        User u = new User("hassan", "Rais", "email@email.com","1234");
         //System.out.println("\n UserId: **** " + Ebean.nextId(User.class) + "\n");
        // u.setLastName("Rais");
       //  u.setFirstName("Hassan");
@@ -170,6 +181,12 @@ public class User extends Model {
 
     public void setMailingAddress(Address mailingAddress) {
         MailingAddress = mailingAddress;
+    }
+
+    public String toString(){
+
+        return " User: " + getId() + " Name: " + lastName + " " + firstName + " Email: " + email;
+
     }
 
 }

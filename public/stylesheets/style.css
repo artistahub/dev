@@ -16,13 +16,27 @@
 
 .f{
     position: absolute;
-    top: 100px;
+    top: 0px;
     right: 73px;
     padding: 5px 0px;
     margin: 10px auto;
-    width: 400px;
+    width: 335px;
     height: 235px;
     border-radius: 5px;
+}
+.f2{
+    box-shadow: -1px 3px 20px #222;
+    background-color: rgb(231, 221, 221);
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    left: 0px;
+    padding: 0px;
+    margin: 0px auto;
+    width: 400px;
+    border-radius: 5px;
+    background-image: url("../images/noise-2.png");
+
 }
 .gray{
     background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#fff),color-stop(100%,#ddd));
@@ -98,11 +112,7 @@ input {
     -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5);
     box-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
-.hr {
-    border-bottom: white;
-    border-top: 1px solid #e2e2e2;
-    margin: 10px 0px;
-}
+
 body, html{
     background-color: rgb(230, 227, 227);
     margin: 0px;
@@ -146,10 +156,11 @@ body, html{
     border: 1px solid rgba(0,0,0,.1);
     border-radius: 5px;
 }
+
 .hr {
     border-bottom: white;
     border-top: 1px solid #e2e2e2;
-    margin: 10px 0px;
+    margin: 0px;
 }
 .h2 {
     position: relative;
@@ -165,6 +176,7 @@ body, html{
     position: relative;
 }
 #homeImage{
+    background-color: #222;
     margin: auto;
     text-align: center;
     height: 360px;
@@ -305,6 +317,7 @@ h1{
 
 
 .wrapper{
+    background-image: url("../images/noise-2.png");
     background-color: #112233;
     border: 1px solid #383737;
     border-radius: 4px 4px 4px 4px;
@@ -312,12 +325,6 @@ h1{
     color: white;
     font-size: 10pt;
     text-shadow: 0 1px 10px #112233;
-}
-
-.hr{
-    border-top: 1px solid white;
-    border-left: none;
-    margin: 0px;
 }
 /*.row{
     border-bottom: 1px solid #e1e1e1;
@@ -339,10 +346,11 @@ h1{
 
 }
 #stepsPage{
-    margin-top: 100px;
-    border: solid 1px #b0c5c9;
+    background-color: white;
+    border: solid 1px #e1f7fb;
     border-radius: 4px;
     width: 550px;
+    padding: 10px;
 }
 
 .formLabel{
@@ -360,4 +368,17 @@ h1{
     padding: 2px 5px;
     line-height: 24px;
     text-shadow: 0px 1px 7px black;
+}
+
+input[type="text"],input[type="password"]{
+    height: 30px;
+    margin-bottom: 0px;
+
+}
+.row{
+    margin-left: 0px;
+}
+#artistaMainContent{
+    background-color: #222;
+    min-height: 600px;
 }

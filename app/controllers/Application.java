@@ -1,5 +1,6 @@
 package controllers;
 
+import dataHelpers.ProfileData;
 import models.User;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
@@ -22,13 +23,20 @@ public class Application extends Controller {
 
     public static Result index() {
         System.out.print( request().host());
-        File file = Play.application().getFile("/public/index.html");
-        File file2 = Play.application().getFile("/public/@videos.html");
+        //File file = Play.application().getFile("/public/index.html");
+        //File file2 = Play.application().getFile("/public/@videos.html");
         System.out.println( session("user") );
-        //if ( session("user") != null){
-            // return ok( views.html.index.render(" iwa "));
-       // }
+        if ( session("user") != null){
+            return redirect( routes.Application.artistas() );
+        }
         return ok(views.html.index.render(" Professional performers platform "));
+    }
+
+    public static Result signOut(){
+        session().remove("user");
+        session().remove("userEmail");
+        return redirect("/");
+
     }
    public static Result artistas() {
        List<User> artistas = User.getArtistas();
@@ -60,6 +68,13 @@ public class Application extends Controller {
         System.out.print(allArtistas);
         return ok( Json.toJson( allArtistas ));
     }
+
+   public static Result profile( String userName ){
+       User user = User.findUerByUserName( userName );
+       ProfileData profileData = new ProfileData( user, user.getProfileImage() );
+       //return ok( views.html.profile.profile.render( profileData.toString() ));
+       return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
+   }
 
 
     @BodyParser.Of(BodyParser.Json.class)
