@@ -288,6 +288,7 @@ ul{
     line-height: 40px;
     font-size: 28px;
     padding-left: 10px;
+    margin: 0px;
 }
 .loader{
     position: absolute;
@@ -381,4 +382,27 @@ input[type="text"],input[type="password"]{
 #artistaMainContent{
     background-color: #222;
     min-height: 600px;
+}
+#profilePersonalInfo > div{
+    padding-left: 5px;
+}
+#profilePersonalInfo div p > strong{
+    color: #adadad;
+}
+#profilePersonalInfo div > .h{
+    margin: 0px;
+}
+#profileImageContainer{
+    border: solid 6px rgb(214, 214, 199);
+    border-radius: 2px;
+}
+#signInBtn{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+#signOutBtn{
+    position: absolute;
+    right: 100px;
+    top: 5px;
 }
