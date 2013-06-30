@@ -7,36 +7,44 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+    <script type="text/javascript" src="/javascripts/domObjects.js">  </script>
     <script type="text/javascript">
         $( document).ready( function(){
-            var profileDate = @Html(profileData);
+           var profileDate = @Html(profileData);
             //alert( profileDate );
             $("#pImage").attr('src' , "/" + profileDate.profileImage.url);
+            $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileDate.user).html);
         });
     </script>
-    <style>
-        div{
-            border: solid 1px #e1e1e1;
-        }
-        .row-fluid [class*="span"]{
-            margin: 0px;
-        }
-    </style>
+
 </head>
 
 <body>
-@profileData
 <h1 class="h1"> ArtistaOne </h1> <hr class="stepsHr">
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span12"> Top Bar</div>
+        <div class="span12"> <div class="container">
+            <div class="span4">
+                <div id="profileImageContainer">
+                    <img id="pImage" src=""/>
+                </div>
+            </div>
+            <div class="span8">
+                <div id="profilePersonalInfo">
+                    <div> <h2 class="h"> Elhassan Rais</h2></div>
+                    <div> <h4 class="h"> Professional Acrobat</h4></div>
+                    <div> <h5 class="h"> Berkeley, CA</h5></div>
+                    <div><p> <strong> Profession:</strong> Human pyramids, Moroccan Tumbling, Chinese pole and Hnd balancing </p></div>
+                </div>
+            </div>
+        </div></div>
     </div>
     <div class="row-fluid">
         <div class="span9" id="artistaMainContent">
 
         </div>
         <div class="span3">
-        <img id="pImage" src="" alt="">
+        right Side Menu
         </div>
     </div>
 
