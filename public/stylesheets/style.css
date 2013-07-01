@@ -383,6 +383,9 @@ input[type="text"],input[type="password"]{
     background-color: #222;
     min-height: 600px;
 }
+#profilePersonalInfo{
+    position: relative;
+}
 #profilePersonalInfo > div{
     padding-left: 5px;
 }
@@ -406,3 +409,27 @@ input[type="text"],input[type="password"]{
     right: 100px;
     top: 5px;
 }
+#personalInfoContainer{
+    margin: 10px auto;
+    position: relative;
+}
+
+.image-icon{
+    background-image: url( "/images/icons/image.png");
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    width: 52px;
+    height: 52px;
+    background-position: 50%;
+}
+.video-icon{
+    background-image: url( "/images/icons/video.png");
+    position: absolute;
+    right: 65px;
+    bottom: 0px;
+    width: 52px;
+    height: 52px;
+    background-position: 50%;
+}
+
