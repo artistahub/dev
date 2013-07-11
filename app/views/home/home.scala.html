@@ -1,0 +1,48 @@
+@(artistas: String)
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Artistas</title>
+    <link rel="stylesheet" href="stylesheets/style.css"/>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+    <script type="text/javascript" src="javascripts/jquery.masonry.js"></script>
+    <script type="text/javascript" src="javascripts/domObjects.js"></script>
+    <script>
+        $(function(){
+            // create some screens
+            var artistas = @Html(artistas);
+          console.log( artistas );
+            var $container = $(' #container ');
+            $.each( artistas.allArtistas , function ( i, element){
+                console.log( element );
+                var s1 = new Screen( element ).render();
+                $container.append( s1 );
+
+            });
+           /* for ( var i = 0; i < 100; i ++){
+                var s1 = new Screen().render();
+                $container.append( s1 );
+            }*/
+            //
+            $('#container').masonry({
+                // options
+                itemSelector : '.item',
+                columnWidth : 0
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+<h1> Welcome @session.get("userEmail")</h1>
+<a href="signOut"><p class="btn" id="signOutBtn"> Sign Out </p></a>
+<br>
+
+    <div id="container">
+
+
+
+    </div>
+</body>
+</html>
