@@ -1,14 +1,28 @@
-
-*{
-    font-family: Arial,sans-serif;
-    /*background-image: url("../images/noise-2.png");*/
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(230, 224, 224);
+    background-image: url("../images/noise-2.png");
 }
- h1{
-     padding: 0px;
-     margin: 0px;
-     font-weight: 500;
-     padding-left: 10px;
- }
+a{
+    color: #222;
+}
+html{
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(244, 238, 238);
+    background-image: url("../images/noise-2.png");
+}
+* {
+    font: 300 20px Roboto,arial,sans-serif;
+    white-space: normal;
+}
+h1{
+    padding: 0px;
+    margin: 0px;
+    font-weight: 500;
+    padding-left: 10px;
+}
 #c{
     position: relative;
     border-radius: 4px;
@@ -113,11 +127,7 @@ input {
     box-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 
-body, html{
-    background-color: rgb(230, 227, 227);
-    margin: 0px;
-    padding: 0px;
-}
+
 
 .pheader{
     position: absolute;
@@ -182,10 +192,7 @@ body, html{
     height: 360px;
     overflow: hidden;
 }
-body{
-    background-color: rgb(248, 242, 242);
-    background-image: url("../images/noise-2.png");
-}
+
 .pheader{
     position: absolute;
     color: white;
@@ -449,11 +456,7 @@ input[type="text"],input[type="password"]{
     border-radius: 2px;
     margin-bottom: 15px;
 }
-body, html{
-    background-color: rgb(230, 227, 227);
-    margin: 0px;
-    padding: 0px;
-}
+
 .collumn{
     border-top: red solid 2px;
 }

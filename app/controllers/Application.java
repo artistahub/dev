@@ -1,6 +1,7 @@
 package controllers;
 
 import dataHelpers.ProfileData;
+import models.Feed;
 import models.User;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
@@ -33,8 +34,9 @@ public class Application extends Controller {
     }
 
     public static Result home(){
-
-        return ok( views.html.home.home.render( " home" ));
+        List<Feed> feeds = Feed.getFeeds();
+        String feedsAsJson =  Json.toJson( feeds ).toString();
+        return ok( views.html.home.home.render(  feedsAsJson ));
     }
 
     public static Result signOut(){
