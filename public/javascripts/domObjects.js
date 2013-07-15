@@ -34,3 +34,18 @@ function ProfilePersonalInfo( user ){
      return this.html;
 }
 
+
+// Feeds screen
+  function FeedsScreen( feed ){
+     this.wrapperOpener = '<a href="/profile/' + feed.user.userName + '" >';
+     this.topBar = ' <div class="fc"><div class="padding5px"><div class="row-fluid"><h2 class="h1"> ' + feed.user.firstName + " " + feed.user.lastName + '</h2></div>';
+     this.body = '<div class="row-fluid"> <div class="span12"><img style="width: 100%" src="' + feed.url  +'"></div></div></div>';
+     this.footer ='<div class="fc-fotter padding5px"> Fotter</div> ';
+     this.comment='<div class="fc-comments padding5px"> Comments</div>';
+     this.wrapperCloser = "</div></a>";
+     this.screenHtml =  this.wrapperOpener + this.topBar + this.body + this.footer + this.comment + this.wrapperCloser;
+  }
+
+FeedsScreen.prototype.render = function (){
+    return this.screenHtml;
+};

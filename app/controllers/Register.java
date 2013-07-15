@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Address;
-import models.ProfileImage;
-import models.User;
-import models.Video;
+import models.*;
 import org.codehaus.jackson.node.ObjectNode;
 import org.h2.util.IOUtils;
 import play.*;
@@ -100,6 +97,8 @@ public class Register extends Controller {
             String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
             String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
             ProfileImage profileImage = new ProfileImage(imageUrl, fileName);
+            Feed f = new Feed( u, imageUrl, " Text text...") ;
+            f.save();
             //profileImage.setUser( u );
             profileImage.save();
             u.setProfileImage(profileImage);

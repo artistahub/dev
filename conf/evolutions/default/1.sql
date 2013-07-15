@@ -14,6 +14,15 @@ create table address (
   constraint pk_address primary key (id))
 ;
 
+create table feeds (
+  id                        varchar(255) not null,
+  user_id                   varchar(255),
+  url                       varchar(255),
+  description               varchar(255),
+  date_created              datetime,
+  constraint pk_feeds primary key (id))
+;
+
 create table profileImages (
   id                        varchar(255) not null,
   url                       varchar(255),
@@ -47,16 +56,18 @@ create table videos (
   constraint pk_videos primary key (id))
 ;
 
-alter table artistas add constraint fk_artistas_profileImage_1 foreign key (profile_image_id) references profileImages (id) on delete restrict on update restrict;
-create index ix_artistas_profileImage_1 on artistas (profile_image_id);
-alter table artistas add constraint fk_artistas_location_2 foreign key (location_id) references address (id) on delete restrict on update restrict;
-create index ix_artistas_location_2 on artistas (location_id);
-alter table artistas add constraint fk_artistas_BillingAddress_3 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
-create index ix_artistas_BillingAddress_3 on artistas (billing_address_id);
-alter table artistas add constraint fk_artistas_MailingAddress_4 foreign key (mailing_address_id) references address (id) on delete restrict on update restrict;
-create index ix_artistas_MailingAddress_4 on artistas (mailing_address_id);
-alter table videos add constraint fk_videos_user_5 foreign key (user_id) references artistas (id) on delete restrict on update restrict;
-create index ix_videos_user_5 on videos (user_id);
+alter table feeds add constraint fk_feeds_user_1 foreign key (user_id) references artistas (id) on delete restrict on update restrict;
+create index ix_feeds_user_1 on feeds (user_id);
+alter table artistas add constraint fk_artistas_profileImage_2 foreign key (profile_image_id) references profileImages (id) on delete restrict on update restrict;
+create index ix_artistas_profileImage_2 on artistas (profile_image_id);
+alter table artistas add constraint fk_artistas_location_3 foreign key (location_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_location_3 on artistas (location_id);
+alter table artistas add constraint fk_artistas_BillingAddress_4 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_BillingAddress_4 on artistas (billing_address_id);
+alter table artistas add constraint fk_artistas_MailingAddress_5 foreign key (mailing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_MailingAddress_5 on artistas (mailing_address_id);
+alter table videos add constraint fk_videos_user_6 foreign key (user_id) references artistas (id) on delete restrict on update restrict;
+create index ix_videos_user_6 on videos (user_id);
 
 
 
@@ -65,6 +76,8 @@ create index ix_videos_user_5 on videos (user_id);
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table address;
+
+drop table feeds;
 
 drop table profileImages;
 
