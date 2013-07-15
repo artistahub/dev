@@ -27,9 +27,14 @@ public class Application extends Controller {
         //File file2 = Play.application().getFile("/public/@videos.html");
         System.out.println( session("user") );
         if ( session("user") != null){
-            return redirect( routes.Application.artistas() );
+            return redirect( routes.Application.home() );
         }
         return ok(views.html.index.render(" Professional performers platform "));
+    }
+
+    public static Result home(){
+
+        return ok(  views.html.home.home.render( "test" ) );
     }
 
     public static Result signOut(){

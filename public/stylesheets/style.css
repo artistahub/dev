@@ -432,4 +432,47 @@ input[type="text"],input[type="password"]{
     height: 52px;
     background-position: 50%;
 }
+.row-fluid [class*="span"], .container-fluid [class*="span"],[class*="span"]{
+    margin: 0px;
+    margin-left: 0px;
+}
+.container-fluid .row-fluid{
+    padding: 0px;
+}
+.sideMenu-row{
+    border: solid 1px #e1e1e1;
+    padding: 10px 5px;
+}
+.fc{
+    background-color: white;
+    border: solid 1px rgb(194, 189, 189);
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+body, html{
+    background-color: rgb(230, 227, 227);
+    margin: 0px;
+    padding: 0px;
+}
+.collumn{
+    border-top: red solid 2px;
+}
+.tool-bar{
+    padding: 10px 0px;
+    border: solid 1px #f1f1f1;
+}
+.fc-fotter{
+    border-bottom: solid 1px #d6d6d6;
+}
+.fc-comments{
+    background-color: #eaeeff;
+}
+.padding5px{
+    padding: 5px;
+}
+.home-sideMenu{
+    background-color: white;
+    box-shadow: -10px 0px 0px #222;
+}
+
 

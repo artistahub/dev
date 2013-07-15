@@ -1,48 +1,203 @@
 @(artistas: String)
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title> Artistas</title>
-    <link rel="stylesheet" href="stylesheets/style.css"/>
+    <title> ArtistaOne - professional perfomers platform - </title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
-    <script type="text/javascript" src="javascripts/jquery.masonry.js"></script>
-    <script type="text/javascript" src="javascripts/domObjects.js"></script>
-    <script>
-        $(function(){
-            // create some screens
-            var artistas = @Html(artistas);
-          console.log( artistas );
-            var $container = $(' #container ');
-            $.each( artistas.allArtistas , function ( i, element){
-                console.log( element );
-                var s1 = new Screen( element ).render();
-                $container.append( s1 );
+    <style>
 
-            });
-           /* for ( var i = 0; i < 100; i ++){
-                var s1 = new Screen().render();
-                $container.append( s1 );
-            }*/
-            //
-            $('#container').masonry({
-                // options
-                itemSelector : '.item',
-                columnWidth : 0
-            });
-
-        });
-    </script>
-
+    </style>
 </head>
+
 <body>
-<h1> Welcome @session.get("userEmail")</h1>
+<h1 class="h1"> ArtistaOne </h1>
 <a href="signOut"><p class="btn" id="signOutBtn"> Sign Out </p></a>
-<br>
+<hr class="stepsHr">
+<div class="container-fluid">
+    <div class="container tool-bar"> tool bar</div>
+    <div class="row-fluid">
+        <div class="span2 home-sideMenu">
+            <div class="sideMenu-row"> Profile </div>
+            <div class="sideMenu-row"> Photos</div>
+            <div class="sideMenu-row"> Videos</div>
+        </div>
+        <div class="span10">
+            <div class="container-fluid">
+                <div class="collumn span4 ">
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Elhassan Rais</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/cirque.jpg"></div>
+                            </div>
+                        </div>
 
-    <div id="container">
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> James Bond</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/cirque2.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
 
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Alexia Nowy</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/cirque3.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Betty Wiliy</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/cirque4.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Elhassan Rais</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/hassan.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                </div>
+                <div class="collumn span4">
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Jamie Walnut</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/cirque5.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
 
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Rais Belaid</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/artista1.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
 
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Alex's Brothers</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/artista2.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Said Cherqaoui</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/artista7.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                </div>
+                <div class="collumn span4">
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Alexia Nowy</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/artista3.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Betty Wiliy</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/artista4.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Alexia Nowy</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/artista5.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                    <div class="fc">
+                        <div class="padding5px">
+                            <div class="row-fluid">
+                                <h2 class="h1"> Betty Wiliy</h2>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12"><img style="width: 100%" src="images/artista6.jpg"></div>
+                            </div>
+                        </div>
+                        <div class="fc-fotter padding5px"> Fotter</div>
+                        <div class="fc-comments padding5px"> Comments</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+</div>
+
 </body>
 </html>
