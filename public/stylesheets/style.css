@@ -413,7 +413,7 @@ input[type="text"],input[type="password"]{
 }
 #signOutBtn{
     position: absolute;
-    right: 100px;
+    right: 10px;
     top: 5px;
 }
 #personalInfoContainer{
