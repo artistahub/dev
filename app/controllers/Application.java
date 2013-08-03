@@ -34,6 +34,7 @@ public class Application extends Controller {
     }
 
     public static Result home(){
+
         List<Feed> feeds = Feed.getFeeds();
         String feedsAsJson =  Json.toJson( feeds ).toString();
         return ok( views.html.home.home.render(  feedsAsJson ));

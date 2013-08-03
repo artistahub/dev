@@ -38,6 +38,7 @@ public class LogIn extends Controller {
                     session("userEmail", user.getEmail());
                     System.out.println( " Logged in user: " + user );
                     System.out.println( "2 else Email: " + email + " Password: " + password );
+
                     return redirect( routes.Application.home() );
                 }
             }
