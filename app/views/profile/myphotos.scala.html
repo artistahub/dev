@@ -12,7 +12,7 @@
     <script type="text/javascript" src="javascripts/domObjects.js"></script>
     <script>
         $( document).ready( function(){
-            alert(" hi " + new ToolBar().render());
+            //alert(" hi " + new ToolBar().render());
             $('#tool-bar').html( new ToolBar().render());
         });
     </script>
@@ -22,14 +22,11 @@
 <body>
 @headerIn()
 
+
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>
     <div class="row-fluid">
-        <div class="span1 home-sideMenu">
-             <div class="sideMenu-row"> <a href="/myprofile" >My Profile </a></div>
-            <div class="sideMenu-row"> <a href="/myprofile" > My Photos </a></div>
-            <div class="sideMenu-row"> <a href="/myprofile" > My Videos </a></div>
-        </div>
+        @sidemenu.sidemenu()
         <div class="span11">
 
                 <div class="container-fluid">
