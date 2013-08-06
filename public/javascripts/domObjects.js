@@ -49,3 +49,20 @@ function ProfilePersonalInfo( user ){
 FeedsScreen.prototype.render = function (){
     return this.screenHtml;
 };
+
+function ToolBar(){
+    this.outer = "<div class='toolbar-outer'>";
+    this.inner = "<div class='toolbar-inner'>";
+    this.content = "<div class='toolbar-html'> <span class='btn '>Photos</span>" +
+        "<span class='btn'>Albums</span><span class='btn btn-success'>Upload Photos</span></div>";
+    this.innerCLose = "</div>";
+    this.outerCLose = "</div>";
+    this.html = function (){
+        return this.outer + this.inner + this.content + this.innerCLose + this.outerCLose;
+    }
+
+}
+
+ToolBar.prototype.render = function(){
+    return this.html();
+}

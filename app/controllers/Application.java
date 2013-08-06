@@ -84,6 +84,30 @@ public class Application extends Controller {
        return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
    }
 
+    //
+    public static Result myProfile(){
+
+        if ( session("user") != null){
+
+           return  ok( session("user"));
+        }
+        else {
+           return  ok(" no session -  not logged in");
+        }
+    }
+    //
+    public static Result myPhotos(){
+
+        if ( session("user") != null){
+
+            return  ok( views.html.profile.myphotos.render());
+            //return  ok( session("user"));
+        }
+        else {
+            return  ok(" no session -  not logged in");
+        }
+    }
+
 
     @BodyParser.Of(BodyParser.Json.class)
     public static Result artistasss(){

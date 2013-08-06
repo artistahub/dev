@@ -503,5 +503,11 @@ input[type="text"],input[type="password"]{
     padding: 5px 0px;
     text-align: center;
 }
+.toolbar-html{
+    text-align: center;
+}
+.toolbar-html span{
+    margin: 0px 5px;
+}
 
 
