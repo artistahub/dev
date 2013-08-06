@@ -34,7 +34,10 @@ public class Application extends Controller {
     }
 
     public static Result home(){
+        if ( session("user") == null){
 
+            return  redirect( routes.Application.index());
+        }
         List<Feed> feeds = Feed.getFeeds();
         String feedsAsJson =  Json.toJson( feeds ).toString();
         return ok( views.html.home.home.render(  feedsAsJson ));
