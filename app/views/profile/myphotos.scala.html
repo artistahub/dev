@@ -1,4 +1,4 @@
-
+@(myphotos: String)
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +15,23 @@
         $( document).ready( function(){
             //alert(" hi " + new ToolBar().render());
             $('#tool-bar').html( new ToolBar().render());
+            $('#tool-bar').on( 'click','#myphotos-upload', function(){
+                $body = $('body');
+                $bodyWidth = $body.width();
+                $bodyHeight = $body.height();
+                var $dropDownContainer = $("<div>");
+                var $dropDownShadow = $("<div>");
+                $dropDownShadow.attr('class', "dropDownShadow");
+                $dropDownContainer.attr({'id' : "dropDownContainer", 'class': "div-absolute-center" });
+                $dropDownShadow.css({'position' :'absolute', 'backgroundColor' :'rgb(6, 1, 8)','height' : $bodyHeight, 'width' : $bodyWidth,'top' : 0,'opacity' : 0.5});
+                $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : 0});
+                $body.append( $dropDownShadow );
+                // var wHtml = new DropDownWindow().render();
+                $dropDownContainer.html( new DropDownWindow().render() );
+                $body.append( $dropDownContainer );
+
+
+            });
         });
     </script>
 
@@ -22,7 +39,7 @@
 
 <body>
 @headerIn()
-
+@myphotos
 
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>

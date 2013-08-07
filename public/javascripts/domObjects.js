@@ -54,7 +54,7 @@ function ToolBar(){
     this.outer = "<div class='toolbar-outer'>";
     this.inner = "<div class='toolbar-inner'>";
     this.content = "<div class='toolbar-html'> <span class='btn '>Photos</span>" +
-        "<span class='btn'>Albums</span><span class='btn btn-success'>Upload Photos</span></div>";
+        "<span class='btn'>Albums</span><span id='myphotos-upload' class='btn btn-success'>Upload Photos</span></div>";
     this.innerCLose = "</div>";
     this.outerCLose = "</div>";
     this.html = function (){
@@ -64,5 +64,18 @@ function ToolBar(){
 }
 
 ToolBar.prototype.render = function(){
+    return this.html();
+}
+
+function DropDownWindow(){
+    this.wrapper = "<div class='window-wrapper'></div>";
+    this.header = "<div class='window-header'> Header</div>";
+    this.body = "<div class='window-body'> <form method='post' action='/addMyPhotos' enctype='multipart/form-data'><input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form></div>";
+    this.footer = "<div class='window-footer'>footer</div>";
+    this.html = function(){
+        return this.header + this.body + this.footer;
+    }
+}
+DropDownWindow.prototype.render = function(){
     return this.html();
 }
