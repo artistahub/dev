@@ -91,11 +91,12 @@ public class Register extends Controller {
                 System.out.println(" ******* Can not make Directory " + dir.getName());
             }
             // String original = "/public/artistasPhotos/" + new Date().getTime() + fileName;
-            System.out.print(" dir name: " + dir.getName());
+            /*System.out.print(" dir name: " + dir.getName());
             System.out.print(" dir parent: " + dir.getParent());
-            System.out.print(" dir path: " + dir.getPath());
+            System.out.print(" dir path: " + dir.getPath());*/
             String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
-            String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
+           // String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
+            String original = "/public/" + imageUrl;
             ProfileImage profileImage = new ProfileImage(imageUrl, fileName);
             Feed f = new Feed( u, imageUrl, " Text text...") ;
             f.save();

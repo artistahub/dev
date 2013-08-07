@@ -2,6 +2,7 @@ package controllers;
 
 import dataHelpers.ProfileData;
 import models.Feed;
+import models.MyPhoto;
 import models.User;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
@@ -100,10 +101,10 @@ public class Application extends Controller {
     }
     //
     public static Result myPhotos(){
-
+        User u = User.findUserById(session("user"));
         if ( session("user") != null){
-
-            return  ok( views.html.profile.myphotos.render());
+            List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
+            return  ok( views.html.profile.myphotos.render( Json.toJson( myphotos ).toString() ));
             //return  ok( session("user"));
         }
         else {
