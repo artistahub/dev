@@ -14,7 +14,22 @@
     <script>
         $( document).ready( function(){
             //alert(" hi " + new ToolBar().render());
+            var myphotos = @Html(myphotos);
+            var $myphotosContainer = $("#artista-photos-container");
             $('#tool-bar').html( new ToolBar().render());
+
+            $.each( myphotos, function( i, e){
+                 console.log( JSON.stringify(e));
+                var $imgContainer = $("<div>");
+                var $img = $("<img>");
+                    $imgContainer.attr('class','artista-img');
+                    $img.attr('src', e.url);
+                    $imgContainer.append( $img );
+                    $myphotosContainer.append( $imgContainer );
+
+
+            });
+
             $('#tool-bar').on( 'click','#myphotos-upload', function(){
                 $body = $('body');
                 $bodyWidth = $body.width();
@@ -39,7 +54,6 @@
 
 <body>
 @headerIn()
-@myphotos
 
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>
@@ -49,66 +63,7 @@
 
                 <div class="container-fluid">
                     <div class="container-fluid" id="artista-photos-container">
-                        <div class="artista-img">
-                            <img src="/images/artista-1.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista-2.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista1.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista2.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista3.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista4.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista5.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista6.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista7.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/hassan.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista-1.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista-2.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista1.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista2.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista3.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista4.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista5.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista6.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/artista7.jpg">
-                        </div>
-                        <div class="artista-img">
-                            <img src="/images/hassan.jpg">
-                        </div>
+
                     </div>
 
 
