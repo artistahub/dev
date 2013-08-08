@@ -112,6 +112,19 @@ public class Application extends Controller {
         }
     }
 
+    public static Result myVideos(){
+        User u = User.findUserById(session("user"));
+        if ( session("user") != null){
+            List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
+            return  ok( views.html.profile.myvideos.render( Json.toJson( myphotos ).toString() ));
+            //return  ok( session("user"));
+        }
+        else {
+            return  ok(" no session -  not logged in");
+        }
+    }
+
+
 
     @BodyParser.Of(BodyParser.Json.class)
     public static Result artistasss(){

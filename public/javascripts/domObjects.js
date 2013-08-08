@@ -50,11 +50,24 @@ FeedsScreen.prototype.render = function (){
     return this.screenHtml;
 };
 
-function ToolBar(){
+var toolBarObjects = { myphotosToolBar : [{ name: "Photos", id : "myvideos-btn", link : "", class: "btn"},
+                     {name: "Albums", id : "", link : "",class: "btn"},
+                     {name: "upload Photos", id : "myphotos-upload", link : "",class: "btn btn-success"}],
+                      myvideosToolBar:  [{ name: "Videos", id : "myvideos-btn", link : "", class: "btn"},
+                     {name: "Albums", id : "", link : "",class: "btn"},
+                     {name: "upload Videos", id : "myvideos-upload", link : "",class: "btn btn-success"}]};
+
+function ToolBar( o ){
+    console.log( JSON.stringify( o ));
     this.outer = "<div class='toolbar-outer'>";
     this.inner = "<div class='toolbar-inner'>";
-    this.content = "<div class='toolbar-html'> <span class='btn '>Photos</span>" +
-        "<span class='btn'>Albums</span><span id='myphotos-upload' class='btn btn-success'>Upload Photos</span></div>";
+    this.content = "<div class='toolbar-html'>";
+    var thisContent = this.content;
+    $.each ( o, function( i, e){
+         //console.log( " e " + e.name );
+         thisContent +=  '<span id="'+ e.id +'" class= "'+ e.class +'"> ' + e.name + '</span>';
+    });
+    this.content = thisContent + "</div>";
     this.innerCLose = "</div>";
     this.outerCLose = "</div>";
     this.html = function (){
@@ -62,6 +75,8 @@ function ToolBar(){
     }
 
 }
+
+
 
 ToolBar.prototype.render = function(){
     return this.html();
@@ -71,7 +86,7 @@ function DropDownWindow(){
     this.wrapper = "<div class='window-wrapper'></div>";
     this.header = "<div class='window-header'> Header</div>";
     this.body = "<div class='window-body'> <form method='post' action='/addMyPhotos' enctype='multipart/form-data'><input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form></div>";
-    this.footer = "<div class='window-footer'>footer</div>";
+    this.footer = "<div class='window-footer'><span class='close-dropDown btn btn-primary'>Close</span></div>";
     this.html = function(){
         return this.header + this.body + this.footer;
     }

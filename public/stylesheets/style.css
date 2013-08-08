@@ -421,10 +421,7 @@ input[type="text"],input[type="password"]{
     height: 52px;
     background-position: 50%;
 }
-.row-fluid [class*="span"], .container-fluid [class*="span"],[class*="span"]{
-    margin: 0px;
-    margin-left: 0px;
-}
+
 .container-fluid .row-fluid{
     padding: 0px;
 }

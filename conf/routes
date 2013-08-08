@@ -13,6 +13,7 @@ GET     /signOut                    controllers.Application.signOut()
 GET     /profile/:userName          controllers.Application.profile( userName: String)
 GET     /myprofile                  controllers.Application.myProfile()
 GET     /myphotos                  controllers.Application.myPhotos()
+GET     /myvideos                  controllers.Application.myVideos()
 
 
 POST     /register                  controllers.Register.index()

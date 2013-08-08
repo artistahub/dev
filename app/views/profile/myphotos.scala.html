@@ -16,10 +16,10 @@
             //alert(" hi " + new ToolBar().render());
             var myphotos = @Html(myphotos);
             var $myphotosContainer = $("#artista-photos-container");
-            $('#tool-bar').html( new ToolBar().render());
+            $('#tool-bar').html( new ToolBar( toolBarObjects.myphotosToolBar ).render());
 
             $.each( myphotos, function( i, e){
-                 console.log( JSON.stringify(e));
+                 //console.log( JSON.stringify(e));
                 var $imgContainer = $("<div>");
                 var $img = $("<img>");
                     $imgContainer.attr('class','artista-img');
@@ -34,16 +34,29 @@
                 $body = $('body');
                 $bodyWidth = $body.width();
                 $bodyHeight = $body.height();
+
                 var $dropDownContainer = $("<div>");
                 var $dropDownShadow = $("<div>");
                 $dropDownShadow.attr('class', "dropDownShadow");
                 $dropDownContainer.attr({'id' : "dropDownContainer", 'class': "div-absolute-center" });
                 $dropDownShadow.css({'position' :'absolute', 'backgroundColor' :'rgb(6, 1, 8)','height' : $bodyHeight, 'width' : $bodyWidth,'top' : 0,'opacity' : 0.5});
-                $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : 0});
+                $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : "-400px"});
                 $body.append( $dropDownShadow );
                 // var wHtml = new DropDownWindow().render();
                 $dropDownContainer.html( new DropDownWindow().render() );
                 $body.append( $dropDownContainer );
+                $dropDownContainer.animate({
+                    top: 0
+                }, "slow");
+                $dropDownContainer.on( 'click', '.close-dropDown', function(){
+                    //alert( 'hi' );
+                    $dropDownContainer.animate({
+                        top: - $dropDownContainer.height()
+                    }, "slow", function(){
+                        $dropDownContainer.remove();
+                        $dropDownShadow.fadeOut();
+                    });
+                });
 
 
             });
