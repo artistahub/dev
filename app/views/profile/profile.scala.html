@@ -17,19 +17,29 @@
     <script type="text/javascript" src="/javascripts/domObjects.js">  </script>
     <script type="text/javascript">
         $( document).ready( function(){
-           var profileDate = @Html(profileData);
+           var profileData = @Html(profileData);
+            var profileMyphotos = profileData.myphotos;
+            var $myphotosContainer = $("#artista-photos-container");
             //alert( profileDate );
-            $("#pImage").attr('src' , "/" + profileDate.profileImage.url);
-            $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileDate.user).html);
+            $("#pImage").attr('src' , "/" + profileData.profileImage.url);
+            $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
+
+
+            $.each( profileMyphotos, function( i, e){
+                console.log( JSON.stringify(e));
+                var $imgContainer = $("<div>");
+                var $img = $("<img>");
+                $imgContainer.attr('class','artista-img');
+                $img.attr('src', "/" + e.url);
+                $imgContainer.append( $img );
+                $myphotosContainer.append( $imgContainer );
+            });
         });
     </script>
 
 </head>
 
 <body>
-
-
-
 
 <div class="container-fluid">
     <div class="row-fluid" >
@@ -60,66 +70,7 @@
     <hr class="stepsHr">
     <div class="container-fluid">
         <div class="container-fluid" id="artista-photos-container">
-            <div class="artista-img">
-                <img src="/images/artista-1.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista-2.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista1.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista2.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista3.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista4.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista5.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista6.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista7.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/hassan.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista-1.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista-2.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista1.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista2.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista3.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista4.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista5.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista6.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/artista7.jpg">
-            </div>
-            <div class="artista-img">
-                <img src="/images/hassan.jpg">
-            </div>
+
         </div>
 
 

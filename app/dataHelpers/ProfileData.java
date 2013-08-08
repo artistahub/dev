@@ -1,7 +1,10 @@
 package dataHelpers;
 
+import models.MyPhoto;
 import models.ProfileImage;
 import models.User;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +16,7 @@ import models.User;
 public class ProfileData {
     private User user;
     private ProfileImage profileImage;
+    private List<MyPhoto> myphotos;
 
     public ProfileData( User user, ProfileImage profileImage){
           setUser( user );
@@ -38,5 +42,14 @@ public class ProfileData {
 
     public String toString(){
         return "Profile Data: " + getUser() + getProfileImage();
+    }
+
+    public List<MyPhoto> getMyphotos() {
+        this.myphotos = MyPhoto.getMyPhotos( this.user.getId());
+        return myphotos;
+    }
+
+    public void setMyphotos(List<MyPhoto> myphotos) {
+        this.myphotos = myphotos;
     }
 }
