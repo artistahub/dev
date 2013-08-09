@@ -1,4 +1,4 @@
-@(myphotos: String)
+@(myvideos: String)
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,24 +11,25 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
     <script type="text/javascript" src="javascripts/jquery.masonry.js"></script>
     <script type="text/javascript" src="javascripts/domObjects.js"></script>
+    <script type="text/javascript" src="@routes.Assets.at("utils/api.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("utils/utils.js")"></script>
     <script>
         $( document).ready( function(){
             //alert(" hi " + new ToolBar().render());
-            var myphotos = @Html(myphotos);
-            var $myphotosContainer = $("#artista-photos-container");
-            $('#tool-bar').html( new ToolBar( toolBarObjects.myvideosToolBar ).render());
+            var myvideos = @Html( myvideos );
+            var $myvideosContainer = $("#artista-videos-container");
+           $('#tool-bar').html( new ToolBar( toolBarObjects.myvideosToolBar ).render());
 
-            $.each( myphotos, function( i, e){
+            $.each( myvideos, function( i, e){
                  //console.log( JSON.stringify(e));
-                var $imgContainer = $("<div>");
-                var $img = $("<img>");
-                    $imgContainer.attr('class','artista-img');
-                    $img.attr('src', e.url);
-                    $imgContainer.append( $img );
-                    //$myphotosContainer.append( $imgContainer );
-
-
-            });
+               var $videoContainer = $("<div>");
+                var $iframe = $("<iframe>");
+                   $videoContainer.attr('class','artista-video');
+                   $iframe.attr('src', "//" + e.url);
+                   $iframe.css({ width: "100%", height  : "100%", border: 0});
+                   $videoContainer.append( $iframe );
+                   $myvideosContainer.append( $videoContainer );
+ });
 
             $('#tool-bar').on( 'click','#myvideos-upload', function(){
                 $body = $('body');
@@ -43,7 +44,7 @@
                 $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : "-400px"});
                 $body.append( $dropDownShadow );
                 // var wHtml = new DropDownWindow().render();
-                $dropDownContainer.html( new DropDownWindow().render() );
+                $dropDownContainer.html( new DropDownWindow( forms.uploadMyvideos ).render() );
                 $body.append( $dropDownContainer );
                 $dropDownContainer.animate({
                     top: 0
@@ -75,71 +76,8 @@
         <div class="span11">
 
                 <div class="container-fluid">
-                    <div class="container-fluid" id="artista-photos-container">
+                    <div class="container-fluid" id="artista-videos-container">
 
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/Se_x8ARG4LM" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/aH37Gsm6MOI" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/EOMlmcZGCRk" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/6YtCBBieP2Q" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/1qMAUYZvdic" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/6OQ0XRIBxHI" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/QPV-o01raj4" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/Se_x8ARG4LM" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/aH37Gsm6MOI" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/EOMlmcZGCRk" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/6YtCBBieP2Q" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/1qMAUYZvdic" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/6OQ0XRIBxHI" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/QPV-o01raj4" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/Se_x8ARG4LM" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/aH37Gsm6MOI" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/EOMlmcZGCRk" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/6YtCBBieP2Q" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/1qMAUYZvdic" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/6OQ0XRIBxHI" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="artista-img">
-                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/QPV-o01raj4" frameborder="0" allowfullscreen></iframe>
-                        </div>
                     </div>
 
 

@@ -43,7 +43,7 @@
                 $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : "-400px"});
                 $body.append( $dropDownShadow );
                 // var wHtml = new DropDownWindow().render();
-                $dropDownContainer.html( new DropDownWindow().render() );
+                $dropDownContainer.html( new DropDownWindow( forms.uploadMyphotos ).render() );
                 $body.append( $dropDownContainer );
                 $dropDownContainer.animate({
                     top: 0
@@ -57,9 +57,19 @@
                         $dropDownShadow.fadeOut();
                     });
                 });
-
-
             });
+
+            $('body').on( 'click', '.artista-img', function(){
+                var $imgPreview = $("#img-preview");
+                 $imgPreview.css('backgroundColor', '#222');
+                $imgPreview.animate({
+                    height: "600px"
+                }, 'slow', function(){
+                    alert( "DONE" );
+                });
+            });
+
+
         });
     </script>
 
@@ -67,7 +77,7 @@
 
 <body>
 @headerIn()
-
+   <div id="img-preview"></div>
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>
     <div class="row-fluid">

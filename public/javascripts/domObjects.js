@@ -81,11 +81,18 @@ function ToolBar( o ){
 ToolBar.prototype.render = function(){
     return this.html();
 }
+var forms = {};
+    forms.uploadMyphotos = "<form method='post' action='/addMyPhotos' enctype='multipart/form-data'><input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form>";
+    forms.uploadMyvideos = '<form action="/addVideo" method="post"> <div class="frow"> <label class="flabel" for="videoLink" > Youtube video</label>' +
+        ' <input type="text" class="finputText" id="videoLink" name="videoLink"> </div> <div class="frow"> ' +
+        '<label class="flabel" for="videoDescription" > Video Description</label>' +
+        ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
+        ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
 
-function DropDownWindow(){
+function DropDownWindow( f ){
     this.wrapper = "<div class='window-wrapper'></div>";
     this.header = "<div class='window-header'> Header</div>";
-    this.body = "<div class='window-body'> <form method='post' action='/addMyPhotos' enctype='multipart/form-data'><input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form></div>";
+    this.body = "<div class='window-body'> " + f + "</div>";
     this.footer = "<div class='window-footer'><span class='close-dropDown btn btn-primary'>Close</span></div>";
     this.html = function(){
         return this.header + this.body + this.footer;

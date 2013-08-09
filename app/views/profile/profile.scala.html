@@ -34,13 +34,22 @@
                 $imgContainer.append( $img );
                 $myphotosContainer.append( $imgContainer );
             });
+            $('body').on( 'click', '.artista-img', function(){
+                var $imgPreview = $("#img-preview");
+                $imgPreview.css('backgroundColor', '#222');
+                $imgPreview.animate({
+                    height: "600px"
+                }, 'slow', function(){
+                    alert( "DONE" );
+                });
+            });
         });
     </script>
 
 </head>
 
 <body>
-
+<div id="img-preview"></div>
 <div class="container-fluid">
     <div class="row-fluid" >
         <div class="span12">

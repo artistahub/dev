@@ -29,10 +29,9 @@ public class Video extends Model {
 
     private static Finder<Long, Video> find = new Finder<Long, Video>(Long.class, Video.class);
 
-    public static List<Video> getVideos() {
-        List<Video> videos = Ebean.find(Video.class).findList();
-        System.out.print(">>>>>>> " + videos);
-        return videos;
+    public static List<Video> getMyVideos( String id) {
+        List<Video> myvideos = Ebean.find(Video.class).where().ilike("user_id", id).findList();
+        return myvideos;
     }
 
     public String getId() {

@@ -457,7 +457,8 @@ input[type="text"],input[type="password"]{
     background-color: white;
     box-shadow: -10px 0px 0px #222;
 }
-.artista-img{
+.artista-img, .artista-video{
+    margin: 5px;
     display: inline-block;
     box-shadow: 1px 1px 20px #222;
     width: 250px;
@@ -478,7 +479,7 @@ input[type="text"],input[type="password"]{
     right: 0;
     margin: auto;
 }
-#artista-photos-container{
+#artista-photos-container, #artista-videos-container{
     padding: 5px 0px;
     text-align: center;
 }

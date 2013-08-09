@@ -4,6 +4,7 @@ import dataHelpers.ProfileData;
 import models.Feed;
 import models.MyPhoto;
 import models.User;
+import models.Video;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
 import play.api.mvc.*;
@@ -115,8 +116,8 @@ public class Application extends Controller {
     public static Result myVideos(){
         User u = User.findUserById(session("user"));
         if ( session("user") != null){
-            List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
-            return  ok( views.html.profile.myvideos.render( Json.toJson( myphotos ).toString() ));
+            List<Video> myvideos = Video.getMyVideos( u.getId());
+            return  ok( views.html.profile.myvideos.render( Json.toJson( myvideos ).toString() ));
             //return  ok( session("user"));
         }
         else {
