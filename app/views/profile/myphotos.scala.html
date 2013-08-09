@@ -59,13 +59,30 @@
                 });
             });
 
+            $('body').on( 'click', '#img-preview', function(){
+                var $imgPreview = $( this );
+
+                $imgPreview.animate({
+                    height: "0px"
+                }, 500, function(){
+                    $imgPreview.html("");
+                });
+
+            });
+
             $('body').on( 'click', '.artista-img', function(){
                 var $imgPreview = $("#img-preview");
-                 $imgPreview.css('backgroundColor', '#222');
+                $imgPreview.html("");
+                var $thisChild = $( this ).children(":first");
+                // $imgPreview.append( $thisChild );
+                var $img = $('<img>');
+                $img.attr('src', $thisChild.attr('src'));
+                $imgPreview.html( $img );
+                $imgPreview.css('backgroundColor', '#222');
                 $imgPreview.animate({
                     height: "600px"
                 }, 'slow', function(){
-                    alert( "DONE" );
+                    // alert( "DONE" );
                 });
             });
 

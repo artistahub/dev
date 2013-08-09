@@ -469,7 +469,7 @@ input[type="text"],input[type="password"]{
     /* outline: 1px solid #222;*/
 
 }
-.artista-img img {
+.artista-img img, .artista-video img {
     width: 100%;
     height: auto;
     position: absolute;
