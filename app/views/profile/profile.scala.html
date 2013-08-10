@@ -1,32 +1,77 @@
 @(profileData: String)
+@if(session.get("user")) {
+@headerIn()
+} else {
+@headerOut()
+}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title> ArtistaOne - professional perfomers platform - </title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>-->
+    <script type="text/javascript" src="/javascripts/jquery-1.9.0.min.js">  </script>
     <script type="text/javascript" src="/javascripts/domObjects.js">  </script>
     <script type="text/javascript">
         $( document).ready( function(){
-           var profileDate = @Html(profileData);
+           var profileData = @Html(profileData);
+            var profileMyphotos = profileData.myphotos;
+            var $myphotosContainer = $("#artista-photos-container");
             //alert( profileDate );
-            $("#pImage").attr('src' , "/" + profileDate.profileImage.url);
-            $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileDate.user).html);
+            $("#pImage").attr('src' , "/" + profileData.profileImage.url);
+            $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
+
+
+            $.each( profileMyphotos, function( i, e){
+                console.log( JSON.stringify(e));
+                var $imgContainer = $("<div>");
+                var $img = $("<img>");
+                $imgContainer.attr('class','artista-img');
+                $img.attr('src', "/" + e.url);
+                $imgContainer.append( $img );
+                $myphotosContainer.append( $imgContainer );
+            });
+            $('body').on( 'click', '#img-preview', function(){
+                var $imgPreview = $( this );
+
+                $imgPreview.animate({
+                    height: "0px"
+                }, 500, function(){
+                    $imgPreview.html("");
+                });
+
+            });
+            $('body').on( 'click', '.artista-img', function(){
+                var $imgPreview = $("#img-preview");
+                $imgPreview.html("");
+                var $thisChild = $( this ).children(":first");
+               // $imgPreview.append( $thisChild );
+                var $img = $('<img>');
+                $img.attr('src', $thisChild.attr('src'));
+                $imgPreview.html( $img );
+                $imgPreview.css('backgroundColor', '#222');
+                $imgPreview.animate({
+                    height: "600px"
+                }, 'slow', function(){
+                   // alert( "DONE" );
+                });
+            });
         });
     </script>
 
 </head>
 
 <body>
-<h1 class="h1"> ArtistaOne </h1> <hr class="stepsHr">
+<div id="img-preview"></div>
 <div class="container-fluid">
     <div class="row-fluid" >
         <div class="span12">
             <div class="container" id="personalInfoContainer" >
             <div class="span4">
-                <div id="profileImageContainer">
+                <div class="artista-img" id="profileImageContainer">
                     <img id="pImage" src=""/>
                 </div>
             </div>
@@ -45,17 +90,20 @@
         </div>
         </div>
     </div>
-    <!--<div class="row-fluid">
-        <div class="span9" id="artistaMainContent">
-
-        </div>
-        <div class="span3">
-        right Side Menu
-        </div>
-    </div> -->
-
 
 </div>
+    <hr class="stepsHr">
+    <div class="container-fluid">
+        <div class="container-fluid" id="artista-photos-container">
+
+        </div>
+
+
+    </div>
+
+
+
+
 
 </body>
 </html>

@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Address;
-import models.ProfileImage;
-import models.User;
-import models.Video;
+import models.*;
 import org.codehaus.jackson.node.ObjectNode;
 import org.h2.util.IOUtils;
 import play.*;
@@ -47,30 +44,17 @@ public class Register extends Controller {
 
     public static Result addVideo() {
         DynamicForm requestData = form().bindFromRequest();
-        String userName = requestData.get("userName");
-        String userCity = requestData.get("userCity");
-        String userState = requestData.get("userState");
-        String userCountry = requestData.get("userCountry");
+        User u = User.findUserById(session("user"));
         String videoLink = requestData.get("videoLink");
         String videoDescription = requestData.get("videoDescription");
-        System.out.println("*******************");
-        System.out.println(userName);
-        System.out.println(userCity);
-        System.out.println(userState);
-        System.out.println(userCountry);
-        System.out.println(videoLink);
-        System.out.println(videoDescription);
-        System.out.println("*******************");
         Video video = new Video(videoLink, videoDescription);
-        User u = User.findUserById(session("user"));
-        u.setUserName(userName);
-        u.setLocation(new Address(userCity, userState, "****", userCountry));
-        u.update();
+        video.setUser( u );
         video.save();
         //return ok( Json.toJson( video ) );
         //return ok( json + " Name: " + name + " age: " + age );
         //return ok( views.html.f.aza.render( "aza" ) );
-        return ok(views.html.f.uplaodProfileImage.render());
+
+       return redirect( routes.Application.myVideos());
 
     }
 
@@ -81,8 +65,6 @@ public class Register extends Controller {
         MultipartFormData b = request().body().asMultipartFormData();
         System.out.print(b);
         FilePart picture = b.getFile("profileImage");
-        System.out.print(" from Add profileImage function ----------------");
-        System.out.print(" picture = " + picture);
         if (picture != null) {
             String fileName = picture.getFilename();
             String contentType = picture.getContentType();
@@ -94,12 +76,15 @@ public class Register extends Controller {
                 System.out.println(" ******* Can not make Directory " + dir.getName());
             }
             // String original = "/public/artistasPhotos/" + new Date().getTime() + fileName;
-            System.out.print(" dir name: " + dir.getName());
+            /*System.out.print(" dir name: " + dir.getName());
             System.out.print(" dir parent: " + dir.getParent());
-            System.out.print(" dir path: " + dir.getPath());
+            System.out.print(" dir path: " + dir.getPath());*/
             String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
-            String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
+           // String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
+            String original = "/public/" + imageUrl;
             ProfileImage profileImage = new ProfileImage(imageUrl, fileName);
+            Feed f = new Feed( u, imageUrl, " Text text...") ;
+            f.save();
             //profileImage.setUser( u );
             profileImage.save();
             u.setProfileImage(profileImage);

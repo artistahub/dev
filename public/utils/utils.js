@@ -1,31 +1,32 @@
 $(function () {
     var $finputText = $('.finputText');
     var $frow = $('.frow');
+    var $body = $('body');
     $finputText.val("");
 
-    $frow.on('click', '.flabel', function () {
+    $body.on('click', '.flabel', function () {
         $.each($finputText, function (i, element) {
             $(element).val().length > 0 ? "" : $(element).siblings().fadeIn();
         });
         $(this).hide().siblings().focus();
     });
 
-    $frow.on('click', '.finputText', function () {
+    $body.on('click', '.finputText', function () {
         $.each($finputText, function (i, element) {
             $(element).val().length > 0 ? "" : $(element).siblings().fadeIn();
         });
         $(this).focus().siblings().hide();
     });
 
-    $frow.on('focus', '.finputText', function () {
+    $body.on('focus', '.finputText', function () {
         $(this).siblings().hide();
     });
 
     //   @videos
-    $(document).on('click', '#addVideo', function () {
+   /* $(document).on('click', '#addVideo', function () {
         $("#addVideoScreen").slideDown();
-    });
-    $(document).on('click', '#saveVideo', function () {
+    });*/
+    /*$(document).on('click', '#saveVideo', function () {
         //  alert( "Start api call" );
         var userName = $("#userName").val();
         var userCity = $("#city").val();
@@ -40,8 +41,9 @@ $(function () {
         o.userCountry = userCountry;
         o.userVideoLink = userVideoLink;
         o.userVideoDescription = userVideoDescription;
+        alert( JSON.stringify( o ));
         ajaxHtml('/addVideo', "#stepsContentContainer", o);
-    });
+    });*/
     $(document).on('click', '#uploadProfileImage', function () {
         // alert( "Start api call" );
         /// ajaxImageUplaod('/addProfileImage', "#stepsContentContainer");

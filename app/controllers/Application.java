@@ -1,7 +1,10 @@
 package controllers;
 
 import dataHelpers.ProfileData;
+import models.Feed;
+import models.MyPhoto;
 import models.User;
+import models.Video;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
 import play.api.mvc.*;
@@ -27,9 +30,19 @@ public class Application extends Controller {
         //File file2 = Play.application().getFile("/public/@videos.html");
         System.out.println( session("user") );
         if ( session("user") != null){
-            return redirect( routes.Application.artistas() );
+            return redirect( routes.Application.home() );
         }
         return ok(views.html.index.render(" Professional performers platform "));
+    }
+
+    public static Result home(){
+        if ( session("user") == null){
+
+            return  redirect( routes.Application.index());
+        }
+        List<Feed> feeds = Feed.getFeeds();
+        String feedsAsJson =  Json.toJson( feeds ).toString();
+        return ok( views.html.home.home.render(  feedsAsJson ));
     }
 
     public static Result signOut(){
@@ -75,6 +88,43 @@ public class Application extends Controller {
        //return ok( views.html.profile.profile.render( profileData.toString() ));
        return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
    }
+
+    //
+    public static Result myProfile(){
+
+        if ( session("user") != null){
+
+           return  ok( session("user"));
+        }
+        else {
+           return  ok(" no session -  not logged in");
+        }
+    }
+    //
+    public static Result myPhotos(){
+        User u = User.findUserById(session("user"));
+        if ( session("user") != null){
+            List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
+            return  ok( views.html.profile.myphotos.render( Json.toJson( myphotos ).toString() ));
+            //return  ok( session("user"));
+        }
+        else {
+            return  ok(" no session -  not logged in");
+        }
+    }
+
+    public static Result myVideos(){
+        User u = User.findUserById(session("user"));
+        if ( session("user") != null){
+            List<Video> myvideos = Video.getMyVideos( u.getId());
+            return  ok( views.html.profile.myvideos.render( Json.toJson( myvideos ).toString() ));
+            //return  ok( session("user"));
+        }
+        else {
+            return  ok(" no session -  not logged in");
+        }
+    }
+
 
 
     @BodyParser.Of(BodyParser.Json.class)

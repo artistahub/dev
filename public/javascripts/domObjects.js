@@ -34,3 +34,70 @@ function ProfilePersonalInfo( user ){
      return this.html;
 }
 
+
+// Feeds screen
+  function FeedsScreen( feed ){
+     this.wrapperOpener = '<a href="/profile/' + feed.user.userName + '" >';
+     this.topBar = ' <div class="fc"><div class="padding5px"><div class="row-fluid"><h2 class="h1"> ' + feed.user.firstName + " " + feed.user.lastName + '</h2></div>';
+     this.body = '<div class="row-fluid"> <div class="span12"><img style="width: 100%" src="' + feed.url  +'"></div></div></div>';
+     this.footer ='<div class="fc-fotter padding5px"> Fotter</div> ';
+     this.comment='<div class="fc-comments padding5px"> Comments</div>';
+     this.wrapperCloser = "</div></a>";
+     this.screenHtml =  this.wrapperOpener + this.topBar + this.body + this.footer + this.comment + this.wrapperCloser;
+  }
+
+FeedsScreen.prototype.render = function (){
+    return this.screenHtml;
+};
+
+var toolBarObjects = { myphotosToolBar : [{ name: "Photos", id : "myvideos-btn", link : "", class: "btn"},
+                     {name: "Albums", id : "", link : "",class: "btn"},
+                     {name: "upload Photos", id : "myphotos-upload", link : "",class: "btn btn-success"}],
+                      myvideosToolBar:  [{ name: "Videos", id : "myvideos-btn", link : "", class: "btn"},
+                     {name: "Albums", id : "", link : "",class: "btn"},
+                     {name: "upload Videos", id : "myvideos-upload", link : "",class: "btn btn-success"}]};
+
+function ToolBar( o ){
+    console.log( JSON.stringify( o ));
+    this.outer = "<div class='toolbar-outer'>";
+    this.inner = "<div class='toolbar-inner'>";
+    this.content = "<div class='toolbar-html'>";
+    var thisContent = this.content;
+    $.each ( o, function( i, e){
+         //console.log( " e " + e.name );
+         thisContent +=  '<span id="'+ e.id +'" class= "'+ e.class +'"> ' + e.name + '</span>';
+    });
+    this.content = thisContent + "</div>";
+    this.innerCLose = "</div>";
+    this.outerCLose = "</div>";
+    this.html = function (){
+        return this.outer + this.inner + this.content + this.innerCLose + this.outerCLose;
+    }
+
+}
+
+
+
+ToolBar.prototype.render = function(){
+    return this.html();
+}
+var forms = {};
+    forms.uploadMyphotos = "<form method='post' action='/addMyPhotos' enctype='multipart/form-data'><input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form>";
+    forms.uploadMyvideos = '<form action="/addVideo" method="post"> <div class="frow"> <label class="flabel" for="videoLink" > Youtube video</label>' +
+        ' <input type="text" class="finputText" id="videoLink" name="videoLink"> </div> <div class="frow"> ' +
+        '<label class="flabel" for="videoDescription" > Video Description</label>' +
+        ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
+        ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
+
+function DropDownWindow( f ){
+    this.wrapper = "<div class='window-wrapper'></div>";
+    this.header = "<div class='window-header'> Header</div>";
+    this.body = "<div class='window-body'> " + f + "</div>";
+    this.footer = "<div class='window-footer'><span class='close-dropDown btn btn-primary'>Close</span></div>";
+    this.html = function(){
+        return this.header + this.body + this.footer;
+    }
+}
+DropDownWindow.prototype.render = function(){
+    return this.html();
+}

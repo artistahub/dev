@@ -1,0 +1,119 @@
+@(myphotos: String)
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> ArtistaOne - professional perfomers platform - </title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+    <script type="text/javascript" src="javascripts/jquery.masonry.js"></script>
+    <script type="text/javascript" src="javascripts/domObjects.js"></script>
+    <script>
+        $( document).ready( function(){
+            //alert(" hi " + new ToolBar().render());
+            var myphotos = @Html(myphotos);
+            var $myphotosContainer = $("#artista-photos-container");
+            $('#tool-bar').html( new ToolBar( toolBarObjects.myphotosToolBar ).render());
+
+            $.each( myphotos, function( i, e){
+                 //console.log( JSON.stringify(e));
+                var $imgContainer = $("<div>");
+                var $img = $("<img>");
+                    $imgContainer.attr('class','artista-img');
+                    $img.attr('src', e.url);
+                    $imgContainer.append( $img );
+                    $myphotosContainer.append( $imgContainer );
+
+
+            });
+
+            $('#tool-bar').on( 'click','#myphotos-upload', function(){
+                $body = $('body');
+                $bodyWidth = $body.width();
+                $bodyHeight = $body.height();
+
+                var $dropDownContainer = $("<div>");
+                var $dropDownShadow = $("<div>");
+                $dropDownShadow.attr('class', "dropDownShadow");
+                $dropDownContainer.attr({'id' : "dropDownContainer", 'class': "div-absolute-center" });
+                $dropDownShadow.css({'position' :'absolute', 'backgroundColor' :'rgb(6, 1, 8)','height' : $bodyHeight, 'width' : $bodyWidth,'top' : 0,'opacity' : 0.5});
+                $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : "-400px"});
+                $body.append( $dropDownShadow );
+                // var wHtml = new DropDownWindow().render();
+                $dropDownContainer.html( new DropDownWindow( forms.uploadMyphotos ).render() );
+                $body.append( $dropDownContainer );
+                $dropDownContainer.animate({
+                    top: 0
+                }, "slow");
+                $dropDownContainer.on( 'click', '.close-dropDown', function(){
+                    //alert( 'hi' );
+                    $dropDownContainer.animate({
+                        top: - $dropDownContainer.height()
+                    }, "slow", function(){
+                        $dropDownContainer.remove();
+                        $dropDownShadow.fadeOut();
+                    });
+                });
+            });
+
+            $('body').on( 'click', '#img-preview', function(){
+                var $imgPreview = $( this );
+
+                $imgPreview.animate({
+                    height: "0px"
+                }, 500, function(){
+                    $imgPreview.html("");
+                });
+
+            });
+
+            $('body').on( 'click', '.artista-img', function(){
+                var $imgPreview = $("#img-preview");
+                $imgPreview.html("");
+                var $thisChild = $( this ).children(":first");
+                // $imgPreview.append( $thisChild );
+                var $img = $('<img>');
+                $img.attr('src', $thisChild.attr('src'));
+                $imgPreview.html( $img );
+                $imgPreview.css('backgroundColor', '#222');
+                $imgPreview.animate({
+                    height: "600px"
+                }, 'slow', function(){
+                    // alert( "DONE" );
+                });
+            });
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+@headerIn()
+   <div id="img-preview"></div>
+<div class="container-fluid">
+    <div class="container tool-bar" id="tool-bar"> tool bar</div>
+    <div class="row-fluid">
+        @sidemenu.sidemenu()
+        <div class="span11">
+
+                <div class="container-fluid">
+                    <div class="container-fluid" id="artista-photos-container">
+
+                    </div>
+
+
+                </div>
+            </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
