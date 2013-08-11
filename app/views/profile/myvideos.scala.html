@@ -22,11 +22,12 @@
 
             $.each( myvideos, function( i, e){
                  //console.log( JSON.stringify(e));
-               var $videoContainer = $("<div>");
+                var $videoContainer = $("<div>");
                 var $img = $("<img>");
                    $videoContainer.attr('class','artista-video');
-                   var videoId =  e.url.substring(e.url.indexOf("embed") + 6);
-                   var tumbnail = "http://img.youtube.com/vi/" + videoId + "/2.jpg";
+                //var videoId =  e.url.substring(e.url.indexOf("embed") + 6);
+                var videoId =  getYouTubeVideoId(e.url);
+                var tumbnail = "http://img.youtube.com/vi/" + videoId + "/mqdefault.jpg";
                    $img.attr('src', tumbnail);
                    $img.attr('id', videoId);
                    $img.css({ width: "100%", height  : "100%", border: 0});
@@ -82,7 +83,7 @@
                 var $thisChild = $( this ).children(":first");
                 // $imgPreview.append( $thisChild );
                 var $iframe = $('<iframe>');
-                $iframe.css({ width: '570px', height: '340px', border: 0});
+                $iframe.css({ width: '95%', height: '600px', border: 0});
                 var videoUrl =  "//www.youtube.com/embed/" + $thisChild.attr('id') + "?rel=0";
                 $iframe.attr('src', videoUrl);
                 $imgPreview.html( $iframe );
@@ -100,9 +101,10 @@
 
 <body>
 @headerIn()
-<div id="img-preview"></div>
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>
+    <div id="img-preview"></div>
+
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">

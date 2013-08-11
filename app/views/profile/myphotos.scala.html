@@ -77,6 +77,7 @@
                 // $imgPreview.append( $thisChild );
                 var $img = $('<img>');
                 $img.attr('src', $thisChild.attr('src'));
+                $img.css({ width: '100%', height: 'auto'});
                 $imgPreview.html( $img );
                 $imgPreview.css('backgroundColor', '#222');
                 $imgPreview.animate({
@@ -94,9 +95,10 @@
 
 <body>
 @headerIn()
-   <div id="img-preview"></div>
+
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>
+    <div id="img-preview"></div>
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">

@@ -84,7 +84,7 @@ public class Application extends Controller {
 
    public static Result profile( String userName ){
        User user = User.findUerByUserName( userName );
-       ProfileData profileData = new ProfileData( user, user.getProfileImage() );
+       ProfileData profileData = new ProfileData( user, user.getProfileImages() );
        //return ok( views.html.profile.profile.render( profileData.toString() ));
        return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
    }

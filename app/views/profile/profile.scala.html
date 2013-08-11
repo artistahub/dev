@@ -21,7 +21,7 @@
             var profileMyphotos = profileData.myphotos;
             var $myphotosContainer = $("#artista-photos-container");
             //alert( profileDate );
-            $("#pImage").attr('src' , "/" + profileData.profileImage.url);
+            $("#pImage").attr('src' , "/" + profileData.user.activeProfileImage.url);
             $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
 
 
@@ -65,7 +65,6 @@
 </head>
 
 <body>
-<div id="img-preview"></div>
 <div class="container-fluid">
     <div class="row-fluid" >
         <div class="span12">
@@ -93,6 +92,7 @@
 
 </div>
     <hr class="stepsHr">
+<div id="img-preview"></div>
     <div class="container-fluid">
         <div class="container-fluid" id="artista-photos-container">
 

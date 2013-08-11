@@ -308,13 +308,13 @@ h1{
 
 .wrapper{
     background-image: url("../images/noise-2.png");
-    background-color: #112233;
+    background-color: #f7f7f7;
     border: 1px solid #383737;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 0 6px rgba(5, 5, 5, 0.1);
-    color: white;
+    color: #2f2f2f;
     font-size: 10pt;
-    text-shadow: 0 1px 10px #112233;
+    text-shadow: 0 1px 10px #dfdfdf;
 }
 /*.row{
     border-bottom: 1px solid #e1e1e1;
@@ -505,6 +505,9 @@ input[type="text"],input[type="password"]{
 .window-footer{
     padding: 10px;
     border-bottom: 1px solid #f5f5f5;
+}
+#img-preview{
+   overflow: hidden;
 }
 
 

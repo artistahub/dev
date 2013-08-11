@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.annotation.EnumMapping;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -15,14 +16,46 @@ public class ProfileImage extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     private String url;
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @EnumMapping(nameValuePairs="active = a, inactive = i")
+    public enum Status {
+        active, inactive
+    }
 
     public ProfileImage(String url, String description){
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
+    }
+
+    @Enumerated(value=EnumType.ORDINAL)
+    Status status = Status.active;
+
+    /**
+     * Return status.
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * Set status.
+     */
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     private static Finder<Long, ProfileImage> find = new Finder<Long, ProfileImage>(Long.class, ProfileImage.class);

@@ -18,12 +18,22 @@ public class ProfileData {
     private ProfileImage profileImage;
     private List<MyPhoto> myphotos;
 
-    public ProfileData( User user, ProfileImage profileImage){
+    public ProfileData( User user, List<ProfileImage> profileImages){
+          ProfileImage p =  getActiveProfileImage( profileImages );
           setUser( user );
           setProfileImage( profileImage );
     }
 
 
+    public ProfileImage getActiveProfileImage( List<ProfileImage> profileImages){
+        ProfileImage pImg = new ProfileImage("","");
+        for (ProfileImage profileImage: profileImages){
+             if ( profileImage.getStatus() == ProfileImage.Status.active){
+                pImg = profileImage;
+             }
+        }
+        return  pImg;
+    }
     public User getUser() {
         return user;
     }

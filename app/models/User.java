@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.annotation.EnumMapping;
 import play.db.ebean.*;
 
 
@@ -20,12 +21,37 @@ public class User extends Model {
     private int age;
     private String password;
     private String email;
-    private ProfileImage profileImage;
+    @OneToOne(cascade = CascadeType.ALL)
+    private ProfileImage activeProfileImage;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<ProfileImage> profileImages;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     private Address location;
     private Address BillingAddress;
     private Address MailingAddress;
+
+    public List<ProfileImage> getProfileImages() {
+
+        return profileImages;
+    }
+
+    public void setProfileImages(List<ProfileImage> profileImages) {
+        this.profileImages = profileImages;
+    }
+
+    public ProfileImage getActiveProfileImage() {
+        return activeProfileImage;
+    }
+
+    public void setActiveProfileImage(ProfileImage activeProfileImage) {
+        this.activeProfileImage = activeProfileImage;
+    }
+
+    @EnumMapping(nameValuePairs="artista=a, performance=p, agency= ag")
+    public enum ActorType {
+        artista, performance, agency
+    }
 
 
     public User( String fName, String lName, String email, String pass){
@@ -35,6 +61,9 @@ public class User extends Model {
           this.password = pass;
           this.setDateCreated( new Date() );
     }
+
+    @Enumerated(value=EnumType.ORDINAL)
+    ActorType actorType = ActorType.artista;
 
     private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
@@ -150,14 +179,7 @@ public class User extends Model {
         this.userName = userName;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    public ProfileImage getProfileImage() {
-        return profileImage;
-    }
 
-    public void setProfileImage(ProfileImage profileImage) {
-        this.profileImage = profileImage;
-    }
     @OneToOne(cascade = CascadeType.ALL)
     public Address getLocation() {
         return location;

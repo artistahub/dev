@@ -14,6 +14,7 @@ import views.html.*;
 import org.codehaus.jackson.*;
 import play.mvc.BodyParser;
 import play.libs.Json;
+import views.html.f.uplaodProfileImage;
 
 import java.io.*;
 import java.util.Date;
@@ -58,6 +59,28 @@ public class Register extends Controller {
 
     }
 
+    public static Result addPersonalInfo(){
+        DynamicForm requestData = form().bindFromRequest();
+               String userName = requestData.get("userName");
+               String userCity = requestData.get("userCity");
+               String userState = requestData.get("userState");
+               String userCountry = requestData.get("userCountry");
+               User u = User.findUserById(session("user"));
+               System.out.println("*******************");
+               System.out.println(userName);
+               System.out.println(userCity);
+               System.out.println(userState);
+               System.out.println(userCountry);
+               u.setUserName(userName);
+               u.setLocation(new Address(userCity, userState, "****", userCountry));
+               u.update();
+        //return ok( Json.toJson( video ) );
+        //return ok( json + " Name: " + name + " age: " + age );
+        //return ok( views.html.f.aza.render( "aza" ) );
+               //return ok(views.html.f.uplaodProfileImage.render());
+        return ok(uplaodProfileImage.render());
+    }
+
     public static Result addProfileImage() throws IOException {
 
         User u = User.findUserById(session("user"));
@@ -87,7 +110,8 @@ public class Register extends Controller {
             f.save();
             //profileImage.setUser( u );
             profileImage.save();
-            u.setProfileImage(profileImage);
+
+            u.setActiveProfileImage(profileImage);
             u.update();
             IOUtils.copy(is, new FileOutputStream(Play.application().getFile(original)));
             //System.out.print("Logged in User: " +  Json.toJson( u ));
