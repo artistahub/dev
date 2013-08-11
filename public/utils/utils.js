@@ -49,4 +49,21 @@ $(function () {
         /// ajaxImageUplaod('/addProfileImage', "#stepsContentContainer");
     });
 
+
 });
+//
+function getYouTubeVideoId ( url ){
+    var videoId;
+    if (url.indexOf('iframe') < 0 && url.indexOf('src') < 0){
+        videoId = url.replace(/(?:https?:\/\/)?(?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=))([\w\-]{10,12})\b[?=&\w]*(?!['"][^<>]*>|<\/a>)/ig,'$1');
+    }
+    else if ( url.indexOf('iframe') < 0 && url.indexOf('src') > 0){
+        return; // to be completed
+    }
+    else {
+        var e = $( url );
+        videoId =  e.attr('src').replace(/(?:https?:\/\/)?(?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=))([\w\-]{10,12})\b[?=&\w]*(?!['"][^<>]*>|<\/a>)/ig,'$1');
+    }
+    return videoId;
+}
+
