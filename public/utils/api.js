@@ -54,7 +54,7 @@ function ajaxGetContent(uri, containerToFillIn) {
 }
 
 function ajaxImageUplaod(uri, containerToFillIn) {
-    // alert(" Go AJax ");
+     alert(" Go AJax ");
 
     $.ajax({
         url:url + uri,

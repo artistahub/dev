@@ -26,8 +26,6 @@ public class Application extends Controller {
 
     public static Result index() {
         System.out.print( request().host());
-        //File file = Play.application().getFile("/public/index.html");
-        //File file2 = Play.application().getFile("/public/@videos.html");
         System.out.println( session("user") );
         if ( session("user") != null){
             return redirect( routes.Application.home() );
@@ -84,7 +82,7 @@ public class Application extends Controller {
 
    public static Result profile( String userName ){
        User user = User.findUerByUserName( userName );
-       ProfileData profileData = new ProfileData( user, user.getProfileImage() );
+       ProfileData profileData = new ProfileData( user, user.getProfileImages() );
        //return ok( views.html.profile.profile.render( profileData.toString() ));
        return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
    }

@@ -26,7 +26,8 @@ $(function () {
    /* $(document).on('click', '#addVideo', function () {
         $("#addVideoScreen").slideDown();
     });*/
-    /*$(document).on('click', '#saveVideo', function () {
+
+    $(document).on('click', '#savePersonalInfo', function () {
         //  alert( "Start api call" );
         var userName = $("#userName").val();
         var userCity = $("#city").val();
@@ -42,8 +43,8 @@ $(function () {
         o.userVideoLink = userVideoLink;
         o.userVideoDescription = userVideoDescription;
         alert( JSON.stringify( o ));
-        ajaxHtml('/addVideo', "#stepsContentContainer", o);
-    });*/
+        ajaxHtml('/addPersonalInfo', "#stepsContentContainer", o);
+    });
     $(document).on('click', '#uploadProfileImage', function () {
         // alert( "Start api call" );
         /// ajaxImageUplaod('/addProfileImage', "#stepsContentContainer");
@@ -51,6 +52,7 @@ $(function () {
 
 
 });
+
 //
 function getYouTubeVideoId ( url ){
     var videoId;
@@ -66,4 +68,5 @@ function getYouTubeVideoId ( url ){
     }
     return videoId;
 }
+
 

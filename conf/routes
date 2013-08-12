@@ -12,20 +12,20 @@ GET     /byName/:name               controllers.Application.byName(name: String)
 GET     /signOut                    controllers.Application.signOut()
 GET     /profile/:userName          controllers.Application.profile( userName: String)
 GET     /myprofile                  controllers.Application.myProfile()
-GET     /myphotos                  controllers.Application.myPhotos()
-GET     /myvideos                  controllers.Application.myVideos()
+GET     /myphotos                   controllers.Application.myPhotos()
+GET     /myvideos                   controllers.Application.myVideos()
 
 
 POST     /register                  controllers.Register.index()
+POST     /addPersonalInfo           controllers.Register.addPersonalInfo()
 POST     /addVideo                  controllers.Register.addVideo()
 POST     /addProfileImage           controllers.Register.addProfileImage()
-POST     /addMyPhotos                  controllers.AddPhotos.addMyPhotos()
+POST     /addMyPhotos               controllers.AddPhotos.addMyPhotos()
 
 GET      /login                     controllers.LogIn.index()
 POST      /login                    controllers.LogIn.index()
 
 POST     /register                   controllers.Register.index()
-POST     /addVideo                   controllers.Register.addVideo()
 POST     /addProfileImage            controllers.Register.addProfileImage()
 
 
