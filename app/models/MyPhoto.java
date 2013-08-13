@@ -15,14 +15,16 @@ public class MyPhoto extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private User u;
+    private User user;
     private String url;
     private String description;
+    private List<Comment> comments;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
 
+
     public MyPhoto(String url, String description, User u){
-        this.setU( u );
+        this.setUser(u);
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
@@ -30,9 +32,13 @@ public class MyPhoto extends Model {
 
     private static Finder<Long, MyPhoto> find = new Finder<Long, MyPhoto>(Long.class, MyPhoto.class);
 
+    public static MyPhoto findMyPhotoById( String id){
+        return  Ebean.find( MyPhoto.class).where().like( "id", id).findUnique();
+    }
+
     public static List<MyPhoto> getMyPhotos( String id ) {
        // List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).findList();
-        List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).where().ilike("u_id", id).findList();
+        List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).where().ilike("user_id", id).findList();
         System.out.print(">>>>>>> " + myphotos);
         return myphotos;
     }
@@ -73,11 +79,20 @@ public class MyPhoto extends Model {
         return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription();
     }
 
-    public User getU() {
-        return u;
+    public User getUser() {
+        return user;
     }
 
-    public void setU(User u) {
-        this.u = u;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments( String id ) {
+        List<Comment> comments = Ebean.find(Comment.class).where().like("myphoto_id", id).findList();
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

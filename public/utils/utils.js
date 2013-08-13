@@ -2,7 +2,7 @@ $(function () {
     var $finputText = $('.finputText');
     var $frow = $('.frow');
     var $body = $('body');
-    $finputText.val("");
+        $finputText.val("");
 
     $body.on('click', '.flabel', function () {
         $.each($finputText, function (i, element) {
@@ -42,16 +42,19 @@ $(function () {
         o.userCountry = userCountry;
         o.userVideoLink = userVideoLink;
         o.userVideoDescription = userVideoDescription;
-        alert( JSON.stringify( o ));
+       // alert( JSON.stringify( o ));
         ajaxHtml('/addPersonalInfo', "#stepsContentContainer", o);
     });
-    $(document).on('click', '#uploadProfileImage', function () {
-        // alert( "Start api call" );
-        /// ajaxImageUplaod('/addProfileImage', "#stepsContentContainer");
-    });
+
+
+
+
+
 
 
 });
+
+
 
 //
 function getYouTubeVideoId ( url ){
