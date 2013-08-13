@@ -22,18 +22,19 @@ function apiCall(uri) {
 }
 
 function ajaxHtml(uri, containerToFillIn, o) {
-    // alert(" Go AJax ");
+     alert(" Go AJax ");
     $.ajax({
         url:url + uri,
         type:'POST',
         data:o,
         success:function (data, textStatus, jqXHR) {
-            $(containerToFillIn).html(data);
-            $("#addVideoStep").removeClass("step-active").addClass("step-deactive");
-            $("#addPhotoStep").removeClass("step-deactive").addClass("step-active");
+            $(containerToFillIn).html( JSON.stringify( data ) );
+           // $("#addVideoStep").removeClass("step-active").addClass("step-deactive");
+           // $("#addPhotoStep").removeClass("step-deactive").addClass("step-active");
         },
         error:function (data, textStatus, jqXHR) {
             console.log(textStatus);
+            alert(textStatus);
         }
     });
 

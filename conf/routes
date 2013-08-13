@@ -25,8 +25,10 @@ POST     /addMyPhotos               controllers.AddPhotos.addMyPhotos()
 GET      /login                     controllers.LogIn.index()
 POST      /login                    controllers.LogIn.index()
 
-POST     /register                   controllers.Register.index()
-POST     /addProfileImage            controllers.Register.addProfileImage()
+POST     /register                  controllers.Register.index()
+POST     /addProfileImage           controllers.Register.addProfileImage()
+
+POST     /addComment                controllers.Application.addComment()
 
 
 # Map static resources from the /public folder to the /assets URL path
