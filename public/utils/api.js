@@ -22,13 +22,15 @@ function apiCall(uri) {
 }
 
 function ajaxHtml(uri, containerToFillIn, o) {
-     alert(" Go AJax ");
+     //alert(" Go AJax ");
     $.ajax({
         url:url + uri,
         type:'POST',
         data:o,
         success:function (data, textStatus, jqXHR) {
-            $(containerToFillIn).html( JSON.stringify( data ) );
+            $(containerToFillIn).html( data  );
+           // console.log( JSON.stringify( data ) );
+           // $(containerToFillIn).text( JSON.stringify( data ) );
            // $("#addVideoStep").removeClass("step-active").addClass("step-deactive");
            // $("#addPhotoStep").removeClass("step-deactive").addClass("step-active");
         },

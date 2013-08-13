@@ -63,17 +63,18 @@
                 var $imgPreview = $( '#img-preview' );
 
                 $imgPreview.animate({
-                    height: "0px"
+                    height: "0px",
+                    padding: '0px'
                 }, 500, function(){
                     $imgPreview.html("");
+                    $(this).height('auto');
                 });
 
             });
 
             $('body').on( 'click', '.artista-img', function(){
                 var $commentsContainer = $('<div>');
-                    $commentsContainer.attr('id', 'comments-Container');
-                $commentsContainer.css({ position: 'absolute',right: '2px', top: '200px', border: 'solid 1px #e1e1e1', 'backgroundColor': '#eee', 'min-Width' : '850px', 'min-height': '400px'});
+                    $commentsContainer.attr({ id : 'comments-Container', class: 'container','text-align' : 'center'});
 
                 var $imgPreview = $("#img-preview");
                 $imgPreview.html("");
@@ -82,14 +83,20 @@
                 var dataId = $thisChild.attr('data-id');
                 var $img = $('<img>');
                 $img.attr({'src': $thisChild.attr('src'), 'data-id' : dataId});
-                $img.css({ width: '50%', height: 'auto'});
-                $imgPreview.html( $img);
-                $imgPreview.append( forms.submitMyphotoComment( dataId ) );
+                $img.css({ 'max-width': '600px', height: 'auto'});
+                var $imgContainer = $('<div>');
+                    $imgContainer.css({ 'max-width': '500px', 'text-align': 'center', margin: 'auto'});
+                $imgContainer.append( $img);
+
+                $imgPreview.html( $imgContainer );
                 $imgPreview.append( $commentsContainer );
+                $imgPreview.append( forms.submitMyphotoComment( dataId ) );
+              //  $imgPreview.append( $commentsContainer );
                 $imgPreview.append( '<div><span class="btn close-img-preview " style="position: absolute;top: 0px; right: 0px"> Close</span></div>' );
                 $imgPreview.css('backgroundColor', '#222');
                 $imgPreview.animate({
-                    height: "600px"
+                    height: "auto",
+                    padding:'25px 0px'
                 }, 'slow', function(){
                     // alert( "DONE" );
                 });

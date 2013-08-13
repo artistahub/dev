@@ -89,8 +89,9 @@ var forms = {};
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
         ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
     forms.submitMyphotoComment =  function( dataId ){
-        var f = "<form style='display: inline-block;position: absolute; top:10px'>Comment Box:<div>" +
-            "<textarea id='myphoto-comment' style='width: 400px' rows='2' cols='30'/></div><div><input type='button' id='do-comment' data-id='" + dataId + "' class='btn btn-primary' value='Comment'></div></form>";
+        var f = '<div class="container" style="text-align: center"> <div><h4>Comments:</h4></div> <div> ' +
+                '<textarea id="myphoto-comment" style="width: 60%" rows="2" cols="30"></textarea> </div> <div>' +
+                '<input id="do-comment" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
         return f ;
     }
 

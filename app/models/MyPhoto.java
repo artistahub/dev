@@ -2,10 +2,11 @@ package models;
 
 import com.avaje.ebean.Ebean;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.UUID;
 
 @Entity
@@ -18,9 +19,11 @@ public class MyPhoto extends Model {
     private User user;
     private String url;
     private String description;
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Comment> comments;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
+    private String tag;
 
 
     public MyPhoto(String url, String description, User u){
@@ -39,7 +42,7 @@ public class MyPhoto extends Model {
     public static List<MyPhoto> getMyPhotos( String id ) {
        // List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).findList();
         List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).where().ilike("user_id", id).findList();
-        System.out.print(">>>>>>> " + myphotos);
+        System.out.print(">>>>>>> " + Json.toJson( myphotos ).toString());
         return myphotos;
     }
 
@@ -76,7 +79,7 @@ public class MyPhoto extends Model {
     }
 
     public String toString(){
-        return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription();
+        return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription() + "\n";
     }
 
     public User getUser() {
@@ -88,11 +91,19 @@ public class MyPhoto extends Model {
     }
 
     public List<Comment> getComments( String id ) {
-        List<Comment> comments = Ebean.find(Comment.class).where().like("myphoto_id", id).findList();
+        List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", id).findList();
         return comments;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

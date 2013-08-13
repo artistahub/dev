@@ -38,6 +38,7 @@ create table myphoto (
   url                       varchar(255),
   description               varchar(255),
   date_created              datetime,
+  tag                       varchar(255),
   constraint pk_myphoto primary key (id))
 ;
 
