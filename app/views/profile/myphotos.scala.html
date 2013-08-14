@@ -75,6 +75,7 @@
             $('body').on( 'click', '.artista-img', function(){
                 var $commentsContainer = $('<div>');
                     $commentsContainer.attr({ id : 'comments-Container', class: 'container','text-align' : 'center'});
+                    $commentsContainer.append( new CommentObject().render());
 
                 var $imgPreview = $("#img-preview");
                 $imgPreview.html("");
@@ -86,7 +87,7 @@
                 $img.css({ 'max-width': '600px', height: 'auto'});
                 var $imgContainer = $('<div>');
                     $imgContainer.css({ 'max-width': '500px', 'text-align': 'center', margin: 'auto'});
-                $imgContainer.append( $img);
+                    $imgContainer.append( $img);
 
                 $imgPreview.html( $imgContainer );
                 $imgPreview.append( $commentsContainer );

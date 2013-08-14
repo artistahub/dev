@@ -29,8 +29,8 @@ function ajaxHtml(uri, containerToFillIn, o) {
         data:o,
         success:function (data, textStatus, jqXHR) {
             $(containerToFillIn).html( data  );
-           // console.log( JSON.stringify( data ) );
-           // $(containerToFillIn).text( JSON.stringify( data ) );
+           console.log( JSON.stringify( data ) );
+          // $(containerToFillIn).text( JSON.stringify( data ) );
            // $("#addVideoStep").removeClass("step-active").addClass("step-deactive");
            // $("#addPhotoStep").removeClass("step-deactive").addClass("step-active");
         },

@@ -29,6 +29,7 @@ POST     /register                  controllers.Register.index()
 POST     /addProfileImage           controllers.Register.addProfileImage()
 
 POST     /addComment                controllers.Application.addComment()
+GET      /getComments/:photoId      controllers.Application.getComments( photoId: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -132,10 +132,17 @@ public class Application extends Controller {
         MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
         myComment.setMyphoto( myphoto );
         myComment.save();
-        return ok( Json.toJson( myphoto.getComments( myphoto.getId()) ) );
+        return ok( Json.toJson( Comment.getCommentsByMyPhoto( myphotoId )));
         //return ok( json + " Name: " + name + " age: " + age );
         //return ok( views.html.f.aza.render( "aza" ) );
         //return ok(views.html.f.uplaodProfileImage.render());
+    }
+
+    public static Result getComments( String myphotoId){
+        MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
+        List <Comment> comments = Comment.getCommentsByMyPhoto( myphotoId);
+        return ok( Json.toJson( comments));
+
     }
 
 

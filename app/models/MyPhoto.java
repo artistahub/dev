@@ -19,7 +19,6 @@ public class MyPhoto extends Model {
     private User user;
     private String url;
     private String description;
-    @OneToMany(cascade=CascadeType.ALL)
     private List<Comment> comments;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
@@ -90,8 +89,8 @@ public class MyPhoto extends Model {
         this.user = user;
     }
 
-    public List<Comment> getComments( String id ) {
-        List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", id).findList();
+    public List<Comment> getComments(  ) {
+       //List<Comment> comments = Comment.getCommentsByMyPhoto( getId());
         return comments;
     }
 
