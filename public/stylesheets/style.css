@@ -514,5 +514,27 @@ input[type="text"],input[type="password"]{
     background: white;
     min-height: 100px;
 }
+.commenterAvatar{
+    border: solid 1px pink;
+}
+.comment{
+    top: 10px;
+    position: relative;
+}
+.comment-row{
+    background-color: white;
+    position: relative;
+    border-bottom: 1px solid #e1e1e1;
+}
+.comment-date{
+    color: #333;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+#do-comment-container{
+    max-width: 600px;
+    margin: auto;
+}
 
 

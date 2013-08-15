@@ -108,11 +108,15 @@ DropDownWindow.prototype.render = function(){
     return this.html();
 }
 
-function CommentObject(){
+function CommentObject( o ){
+    var commenterObject = o.commenter;
+    var comment = o.description;
+    var commenterImg = commenterObject.activeProfileImage.url;
+
     this.wrapper = '<div class="row-fluid comment-row">';
-    this.commenter = '<div class="span2 commenterAvatar"> <img src="images/artista-1.jpg"> </div> ';
-    this.comment = '</div> <div class="span10 comment"> <p>It is a long The point of using Lorem Ipsum is that it has a more-or-less normal </p> </div>';
-    this.commnetDate = '<div class="comment-date"> comment date</div>';
+    this.commenter = '<div class="span2 commenterAvatar"> <img src="' + commenterImg + '"> </div> ';
+    this.comment = '<div class="span10 comment"> <p>' + comment  + ' </p> </div>';
+    this.commnetDate = '<div class="comment-date"> ' + new Date(o.dateCreated).toString("MM/dd/yyyy HH:mm tt") + '</div>';
     this.wrapperCloser = '</div>';
     this.html = function(){
         return this.wrapper + this.commenter + this.comment + this.commnetDate + this.wrapperCloser;

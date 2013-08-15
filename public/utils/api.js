@@ -41,6 +41,42 @@ function ajaxHtml(uri, containerToFillIn, o) {
     });
 
 }
+
+function ajaxReturnJson(uri, callback) {
+     //alert(" Go AJax ");
+    $.ajax({
+        url:url + uri,
+        type:'GET',
+        success:function (data, textStatus, jqXHR) {
+           console.log( JSON.stringify( data ) );
+            callback( data );
+        },
+        error:function (data, textStatus, jqXHR) {
+            console.log(textStatus);
+            alert(textStatus);
+        }
+    });
+
+}
+
+
+function ajaxAppendHtml(uri, containerToFillIn, o , fObject) {
+     //alert(" Go AJax ");
+    $.ajax({
+        url:url + uri,
+        type:'POST',
+        data:o,
+        success:function (data, textStatus, jqXHR) {
+            $(containerToFillIn).append( $(new  fObject( data ).render()).fadeIn(500)   );
+
+        },
+        error:function (data, textStatus, jqXHR) {
+            console.log(textStatus);
+            alert(textStatus);
+        }
+    });
+
+}
 function ajaxGetContent(uri, containerToFillIn) {
     // alert(" Go AJax ");
     $.ajax({
