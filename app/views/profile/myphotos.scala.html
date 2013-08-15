@@ -22,8 +22,8 @@
                  //console.log( JSON.stringify(e));
                 var $imgContainer = $("<div>");
                 var $img = $("<img>");
-                    $imgContainer.attr('class','artista-img');
-                    $img.attr('src', e.url);
+                    $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
+                    $img.attr({'src': e.url, 'data-id':e.id});
                     $imgContainer.append( $img );
                     $myphotosContainer.append( $imgContainer );
 
@@ -59,32 +59,55 @@
                 });
             });
 
-            $('body').on( 'click', '#img-preview', function(){
-                var $imgPreview = $( this );
+            $('body').on( 'click', '#img-preview .close-img-preview', function(){
+                var $imgPreview = $( '#img-preview' );
 
                 $imgPreview.animate({
-                    height: "0px"
+                    height: "0px",
+                    padding: '0px'
                 }, 500, function(){
                     $imgPreview.html("");
+                    $(this).height('auto');
                 });
 
             });
 
             $('body').on( 'click', '.artista-img', function(){
+                var $commentsContainer = $('<div>');
+                    $commentsContainer.attr({ id : 'comments-Container', class: 'container','text-align' : 'center'});
+                    $commentsContainer.append( new CommentObject().render());
+
                 var $imgPreview = $("#img-preview");
                 $imgPreview.html("");
                 var $thisChild = $( this ).children(":first");
                 // $imgPreview.append( $thisChild );
+                var dataId = $thisChild.attr('data-id');
                 var $img = $('<img>');
-                $img.attr('src', $thisChild.attr('src'));
-                $img.css({ width: '100%', height: 'auto'});
-                $imgPreview.html( $img );
+                $img.attr({'src': $thisChild.attr('src'), 'data-id' : dataId});
+                $img.css({ 'max-width': '600px', height: 'auto'});
+                var $imgContainer = $('<div>');
+                    $imgContainer.css({ 'max-width': '500px', 'text-align': 'center', margin: 'auto'});
+                    $imgContainer.append( $img);
+
+                $imgPreview.html( $imgContainer );
+                $imgPreview.append( $commentsContainer );
+                $imgPreview.append( forms.submitMyphotoComment( dataId ) );
+              //  $imgPreview.append( $commentsContainer );
+                $imgPreview.append( '<div><span class="btn close-img-preview " style="position: absolute;top: 0px; right: 0px"> Close</span></div>' );
                 $imgPreview.css('backgroundColor', '#222');
                 $imgPreview.animate({
-                    height: "600px"
+                    height: "auto",
+                    padding:'25px 0px'
                 }, 'slow', function(){
                     // alert( "DONE" );
                 });
+            });
+
+            $('body').on('click', '#do-comment', function () {
+                var comment = $('#myphoto-comment').val();
+                var dataId = $(this).attr('data-id');
+                var o = {dataId : dataId, comment : comment};
+                ajaxHtml('/addComment', "#comments-Container", o);
             });
 
 

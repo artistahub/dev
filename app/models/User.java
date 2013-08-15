@@ -23,7 +23,7 @@ public class User extends Model {
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileImage activeProfileImage;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ProfileImage> profileImages;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
@@ -31,7 +31,15 @@ public class User extends Model {
     private Address BillingAddress;
     private Address MailingAddress;
 
-    public List<ProfileImage> getProfileImages() {
+    public User( String fName, String lName, String email, String pass){
+        this.firstName = fName;
+        this.lastName = lName;
+        this.email = email;
+        this.password = pass;
+        this.setDateCreated( new Date() );
+    }
+
+    public List<ProfileImage> getProfileImages( ) {
 
         return profileImages;
     }
@@ -54,13 +62,7 @@ public class User extends Model {
     }
 
 
-    public User( String fName, String lName, String email, String pass){
-          this.firstName = fName;
-          this.lastName = lName;
-          this.email = email;
-          this.password = pass;
-          this.setDateCreated( new Date() );
-    }
+
 
     @Enumerated(value=EnumType.ORDINAL)
     ActorType actorType = ActorType.artista;
@@ -207,7 +209,7 @@ public class User extends Model {
 
     public String toString(){
 
-        return " User: " + getId() + " Name: " + lastName + " " + firstName + " Email: " + email;
+        return " User: " + getId() + " Name: " + getLastName() + " " + getFirstName() + " Email: " + getEmail();
 
     }
 

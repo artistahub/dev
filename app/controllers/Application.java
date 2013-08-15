@@ -1,13 +1,11 @@
 package controllers;
 
 import dataHelpers.ProfileData;
-import models.Feed;
-import models.MyPhoto;
-import models.User;
-import models.Video;
+import models.*;
 import org.codehaus.jackson.node.ObjectNode;
 import play.*;
 import play.api.mvc.*;
+import play.data.DynamicForm;
 import play.mvc.*;
 
 import play.mvc.Controller;
@@ -16,10 +14,12 @@ import views.html.*;
 import org.codehaus.jackson.*;
 import play.mvc.BodyParser;
 import play.libs.Json;
+import views.html.f.uplaodProfileImage;
 
 import java.io.File;
 import java.util.List;
 
+import static play.data.Form.form;
 
 
 public class Application extends Controller {
@@ -121,6 +121,28 @@ public class Application extends Controller {
         else {
             return  ok(" no session -  not logged in");
         }
+    }
+
+    public static Result addComment(){
+        DynamicForm requestData = form().bindFromRequest();
+        User u = User.findUserById(session("user"));
+        String myphotoId = requestData.get("dataId");
+        String comment = requestData.get("comment");
+        Comment myComment = new Comment( u, comment );
+        MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
+        myComment.setMyphoto( myphoto );
+        myComment.save();
+        return ok( Json.toJson( Comment.getCommentsByMyPhoto( myphotoId )));
+        //return ok( json + " Name: " + name + " age: " + age );
+        //return ok( views.html.f.aza.render( "aza" ) );
+        //return ok(views.html.f.uplaodProfileImage.render());
+    }
+
+    public static Result getComments( String myphotoId){
+        MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
+        List <Comment> comments = Comment.getCommentsByMyPhoto( myphotoId);
+        return ok( Json.toJson( comments));
+
     }
 
 

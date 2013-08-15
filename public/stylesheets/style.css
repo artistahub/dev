@@ -507,7 +507,12 @@ input[type="text"],input[type="password"]{
     border-bottom: 1px solid #f5f5f5;
 }
 #img-preview{
-   overflow: hidden;
+    overflow: hidden;
+    position: relative;
+}
+#comments-Container{
+    background: white;
+    min-height: 100px;
 }
 
 

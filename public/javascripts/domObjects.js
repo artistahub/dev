@@ -88,6 +88,12 @@ var forms = {};
         '<label class="flabel" for="videoDescription" > Video Description</label>' +
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
         ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
+    forms.submitMyphotoComment =  function( dataId ){
+        var f = '<div class="container" style="text-align: center"> <div><h4>Comments:</h4></div> <div> ' +
+                '<textarea id="myphoto-comment" style="width: 60%" rows="2" cols="30"></textarea> </div> <div>' +
+                '<input id="do-comment" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
+        return f ;
+    }
 
 function DropDownWindow( f ){
     this.wrapper = "<div class='window-wrapper'></div>";
@@ -101,3 +107,15 @@ function DropDownWindow( f ){
 DropDownWindow.prototype.render = function(){
     return this.html();
 }
+
+function CommentObject(){
+    this.wrapper = '<div class="row-fluid comment-row">';
+    this.commenter = '<div class="span2 commenterAvatar"> <img src="images/artista-1.jpg"> </div> ';
+    this.comment = '</div> <div class="span10 comment"> <p>It is a long The point of using Lorem Ipsum is that it has a more-or-less normal </p> </div>';
+    this.commnetDate = '<div class="comment-date"> comment date</div>';
+    this.wrapperCloser = '</div>';
+    this.html = function(){
+        return this.wrapper + this.commenter + this.comment + this.commnetDate + this.wrapperCloser;
+    }
+}
+CommentObject.prototype.render = function(){ return this.html()};

@@ -2,10 +2,11 @@ package models;
 
 import com.avaje.ebean.Ebean;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.UUID;
 
 @Entity
@@ -15,14 +16,17 @@ public class MyPhoto extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private User u;
+    private User user;
     private String url;
     private String description;
+    private List<Comment> comments;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
+    private String tag;
+
 
     public MyPhoto(String url, String description, User u){
-        this.setU( u );
+        this.setUser(u);
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
@@ -30,10 +34,14 @@ public class MyPhoto extends Model {
 
     private static Finder<Long, MyPhoto> find = new Finder<Long, MyPhoto>(Long.class, MyPhoto.class);
 
+    public static MyPhoto findMyPhotoById( String id){
+        return  Ebean.find( MyPhoto.class).where().like( "id", id).findUnique();
+    }
+
     public static List<MyPhoto> getMyPhotos( String id ) {
        // List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).findList();
-        List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).where().ilike("u_id", id).findList();
-        System.out.print(">>>>>>> " + myphotos);
+        List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).where().ilike("user_id", id).findList();
+        System.out.print(">>>>>>> " + Json.toJson( myphotos ).toString());
         return myphotos;
     }
 
@@ -70,14 +78,31 @@ public class MyPhoto extends Model {
     }
 
     public String toString(){
-        return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription();
+        return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription() + "\n";
     }
 
-    public User getU() {
-        return u;
+    public User getUser() {
+        return user;
     }
 
-    public void setU(User u) {
-        this.u = u;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments(  ) {
+       //List<Comment> comments = Comment.getCommentsByMyPhoto( getId());
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
