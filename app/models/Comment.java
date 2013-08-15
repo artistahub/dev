@@ -33,7 +33,7 @@ public class Comment extends Model {
     private static Finder<Long, Comment> find = new Finder<Long, Comment>(Long.class, Comment.class);
 
      public static List<Comment> getCommentsByMyPhoto( String myphotoId ) {
-        List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", myphotoId).findList();
+        List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", myphotoId).orderBy(" dateCreated asc").findList();
         return comments;
     }
 

@@ -132,7 +132,8 @@ public class Application extends Controller {
         MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
         myComment.setMyphoto( myphoto );
         myComment.save();
-        return ok( Json.toJson( Comment.getCommentsByMyPhoto( myphotoId )));
+        //return ok( Json.toJson( Comment.getCommentsByMyPhoto( myphotoId )));
+        return ok( Json.toJson( myComment));
         //return ok( json + " Name: " + name + " age: " + age );
         //return ok( views.html.f.aza.render( "aza" ) );
         //return ok(views.html.f.uplaodProfileImage.render());

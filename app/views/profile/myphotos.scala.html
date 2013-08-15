@@ -9,8 +9,10 @@
 
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+    <script type="text/javascript" src="javascripts/date.js"></script>
     <script type="text/javascript" src="javascripts/jquery.masonry.js"></script>
     <script type="text/javascript" src="javascripts/domObjects.js"></script>
+
     <script>
         $( document).ready( function(){
             //alert(" hi " + new ToolBar().render());
@@ -73,15 +75,25 @@
             });
 
             $('body').on( 'click', '.artista-img', function(){
+
                 var $commentsContainer = $('<div>');
                     $commentsContainer.attr({ id : 'comments-Container', class: 'container','text-align' : 'center'});
-                    $commentsContainer.append( new CommentObject().render());
+                    //$commentsContainer.append( new CommentObject().render());
 
                 var $imgPreview = $("#img-preview");
                 $imgPreview.html("");
                 var $thisChild = $( this ).children(":first");
                 // $imgPreview.append( $thisChild );
                 var dataId = $thisChild.attr('data-id');
+
+                ajaxReturnJson( '/getComments/' + dataId, function( data ){
+                    //alert( data );
+                    console.log( JSON.stringify(data) );
+                    $.each( data , function( i, e){
+                        $("#comments-Container").append( new  CommentObject( e ).render() );
+
+                    });
+                });
                 var $img = $('<img>');
                 $img.attr({'src': $thisChild.attr('src'), 'data-id' : dataId});
                 $img.css({ 'max-width': '600px', height: 'auto'});
@@ -107,7 +119,7 @@
                 var comment = $('#myphoto-comment').val();
                 var dataId = $(this).attr('data-id');
                 var o = {dataId : dataId, comment : comment};
-                ajaxHtml('/addComment', "#comments-Container", o);
+                ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
             });
 
 
