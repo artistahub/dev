@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
 
 
+
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
     <script type="text/javascript" src="javascripts/date.js"></script>
     <script type="text/javascript" src="javascripts/jquery.masonry.js"></script>
@@ -77,7 +79,7 @@
             $('body').on( 'click', '.artista-img', function(){
 
                 var $commentsContainer = $('<div>');
-                    $commentsContainer.attr({ id : 'comments-Container', class: 'container','text-align' : 'center'});
+                    $commentsContainer.attr('id' , 'comments-Container');
                     //$commentsContainer.append( new CommentObject().render());
 
                 var $imgPreview = $("#img-preview");
@@ -98,7 +100,7 @@
                 $img.attr({'src': $thisChild.attr('src'), 'data-id' : dataId});
                 $img.css({ 'max-width': '600px', height: 'auto'});
                 var $imgContainer = $('<div>');
-                    $imgContainer.css({ 'max-width': '500px', 'text-align': 'center', margin: 'auto'});
+                    $imgContainer.css({ 'text-align': 'center', margin: 'auto'});
                     $imgContainer.append( $img);
 
                 $imgPreview.html( $imgContainer );
@@ -106,7 +108,7 @@
                 $imgPreview.append( forms.submitMyphotoComment( dataId ) );
               //  $imgPreview.append( $commentsContainer );
                 $imgPreview.append( '<div><span class="btn close-img-preview " style="position: absolute;top: 0px; right: 0px"> Close</span></div>' );
-                $imgPreview.css('backgroundColor', '#222');
+                $imgPreview.css('backgroundColor', '');
                 $imgPreview.animate({
                     height: "auto",
                     padding:'25px 0px'
@@ -116,7 +118,7 @@
             });
 
             $('body').on('click', '#do-comment', function () {
-                var comment = $('#myphoto-comment').val();
+                var comment = $('#comment-text-area').val();
                 var dataId = $(this).attr('data-id');
                 var o = {dataId : dataId, comment : comment};
                 ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);

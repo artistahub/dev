@@ -509,32 +509,58 @@ input[type="text"],input[type="password"]{
 #img-preview{
     overflow: hidden;
     position: relative;
-}
-#comments-Container{
-    background: white;
-    min-height: 100px;
+    width: 600px;
+    margin: auto;
 }
 .commenterAvatar{
-    border: solid 1px pink;
+    border: solid 1px rgb(230, 214, 216);
+    vertical-align: middle;
+    box-shadow: 0px 0px 6px #BDBDBD;
 }
-.comment{
-    top: 10px;
-    position: relative;
+#comments-Container{
+    width: 600px;
+    margin: auto;
+    border-radius: 5px;
+    background-image: url("../images/noise-2.png");
+    background-color: rgb(243, 243, 243);
+}
+.comment {
+    padding: 2px 0px 0px 6px;
 }
 .comment-row{
-    background-color: white;
     position: relative;
-    border-bottom: 1px solid #e1e1e1;
+    text-shadow: 0px 2px 0px white;
+    border-top: solid 1px white;
+    border-bottom: solid 1px #9d9d9d;
 }
+div#comments-Container .comment-row:last-child{
+    border-bottom: none;
+}
+div#ccomments-Container .comment-row:first-child {
+    border-top: none;
+}
+
 .comment-date{
     color: #333;
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 0px;
+    right: 27px;
 }
 #do-comment-container{
-    max-width: 600px;
+    width: 600px;
     margin: auto;
+}
+.commenter-name{
+    margin: -3px 0px;
+}
+#comment-text-area{
+    padding: 4px 0px;
+}
+.width-600px{
+    width: 600px
+}
+.padding5px{
+    padding: 5px;
 }
 
 
