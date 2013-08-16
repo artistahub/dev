@@ -89,7 +89,7 @@ var forms = {};
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
         ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
     forms.submitMyphotoComment =  function( dataId ){
-        var f = '<div class="container"> <div><h4>Comments:</h4></div> <div class="width-600px"> ' +
+        var f = '<div > <div><h4>Comments:</h4></div> <div class="width-100"> ' +
                 '<textarea id="comment-text-area" style="width: 100%" rows="2" cols="30"></textarea> </div> <div>' +
                 '<input id="do-comment" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
         return f ;
@@ -115,7 +115,7 @@ function CommentObject( o ){
 
     this.wrapper = '<div class="row-fluid comment-row"> <div class="padding5px">';
     this.commenter = '<div class="span2 commenterAvatar"> <img src="' + commenterImg + '"> </div> ';
-    this.comment = '<div class="span10 comment"><h5 class="commenter-name">Elhassan Rais</h5><p>' + comment  + ' </p> </div>';
+    this.comment = '<div class="comment span10 "><h5 class="commenter-name">Elhassan Rais</h5><p>' + comment  + ' </p> </div>';
     this.commnetDate = '<div class="comment-date"> ' + new Date(o.dateCreated).toString("MM/dd/yyyy HH:mm tt") + '</div>';
     this.wrapperCloser = '</div></div>';
     this.html = function(){

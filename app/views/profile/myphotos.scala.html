@@ -64,7 +64,9 @@
             });
 
             $('body').on( 'click', '#img-preview .close-img-preview', function(){
+                $( this).hide();
                 var $imgPreview = $( '#img-preview' );
+
 
                 $imgPreview.animate({
                     height: "0px",
@@ -100,20 +102,22 @@
                 $img.attr({'src': $thisChild.attr('src'), 'data-id' : dataId});
                 $img.css({ 'max-width': '600px', height: 'auto'});
                 var $imgContainer = $('<div>');
-                    $imgContainer.css({ 'text-align': 'center', margin: 'auto'});
+                    $imgContainer.attr('class', 'div-img-top-curves');
+                    $imgContainer.css({ 'text-align': 'center', margin: 'auto','background-color' : '#222'});
                     $imgContainer.append( $img);
 
                 $imgPreview.html( $imgContainer );
                 $imgPreview.append( $commentsContainer );
                 $imgPreview.append( forms.submitMyphotoComment( dataId ) );
               //  $imgPreview.append( $commentsContainer );
-                $imgPreview.append( '<div><span class="btn close-img-preview " style="position: absolute;top: 0px; right: 0px"> Close</span></div>' );
+
                 $imgPreview.css('backgroundColor', '');
                 $imgPreview.animate({
                     height: "auto",
                     padding:'25px 0px'
                 }, 'slow', function(){
                     // alert( "DONE" );
+                    $imgPreview.append( '<div><span class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></span></div>').fadeIn();
                 });
             });
 
@@ -135,11 +139,11 @@
 
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>
-    <div id="img-preview"></div>
+
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">
-
+            <div id="img-preview"></div>
                 <div class="container-fluid">
                     <div class="container-fluid" id="artista-photos-container">
 
