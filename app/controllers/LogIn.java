@@ -36,6 +36,7 @@ public class LogIn extends Controller {
                 else {
                     session("user", user.getId().toString());
                     session("userEmail", user.getEmail());
+                    session("userName", user.getUserName());
                     System.out.println( " Logged in user: " + user );
                     System.out.println( "2 else Email: " + email + " Password: " + password );
 

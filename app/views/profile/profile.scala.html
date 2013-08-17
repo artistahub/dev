@@ -14,6 +14,7 @@
 
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>-->
     <script type="text/javascript" src="/javascripts/jquery-1.9.0.min.js">  </script>
+
     <script type="text/javascript" src="/javascripts/domObjects.js">  </script>
     <script type="text/javascript">
         $( document).ready( function(){
@@ -29,35 +30,77 @@
                 console.log( JSON.stringify(e));
                 var $imgContainer = $("<div>");
                 var $img = $("<img>");
-                $imgContainer.attr('class','artista-img');
-                $img.attr('src', "/" + e.url);
+                $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
+                $img.attr({'src': "/" + e.url, 'data-id':e.id});
                 $imgContainer.append( $img );
                 $myphotosContainer.append( $imgContainer );
             });
-            $('body').on( 'click', '#img-preview', function(){
-                var $imgPreview = $( this );
-
+            $('body').on( 'click', '#img-preview .close-img-preview', function(){
+                $(this).hide();
+                var $imgPreview = $( '#img-preview' );
                 $imgPreview.animate({
-                    height: "0px"
+                    height: "0px",
+                    padding: '0px'
                 }, 500, function(){
                     $imgPreview.html("");
+                    $(this).height('auto');
                 });
 
             });
             $('body').on( 'click', '.artista-img', function(){
+                var $commentsContainer = $('<div>');
+                $commentsContainer.attr('id' , 'comments-Container');
+
                 var $imgPreview = $("#img-preview");
-                $imgPreview.html("");
+                    $imgPreview.html("");
                 var $thisChild = $( this ).children(":first");
-               // $imgPreview.append( $thisChild );
-                var $img = $('<img>');
-                $img.attr('src', $thisChild.attr('src'));
-                $imgPreview.html( $img );
-                $imgPreview.css('backgroundColor', '#222');
-                $imgPreview.animate({
-                    height: "600px"
-                }, 'slow', function(){
-                   // alert( "DONE" );
+                var dataId = $thisChild.attr('data-id');
+
+                ajaxReturnJson( '/getComments/' + dataId, function( data ){
+                    console.log( JSON.stringify(data) );
+                    $.each( data , function( i, e){
+                        $commentsContainer.append( new CommentObject( e ).render() );
+
+                    });
                 });
+                var $img = $('<img>');
+                $img.attr({'src': $thisChild.attr('src'), 'data-id' : dataId});
+                $img.css({ 'max-width': '600px', height: 'auto'});
+                var $imgContainer = $('<div>');
+                $imgContainer.attr('class', 'div-img-top-curves');
+                $imgContainer.css({ 'text-align': 'center', margin: 'auto','background-color' : '#222'});
+                $imgContainer.append( $img);
+
+                $imgPreview.html( $imgContainer );
+                $imgPreview.append( $commentsContainer );
+                @if(session.get("user")) {
+                    $imgPreview.append( forms.submitMyphotoComment( dataId ) );
+                } else {
+                    var $signInBtn = $('<div>');
+                    $signInBtn.attr({'class' :'btn btn-primary' });
+                    $signInBtn.css({'position' :'absolute', 'left' : 0, 'right': 0 });
+                    $signInBtn.text(" Please sign in to leave a comment");
+                    $imgPreview.append( $signInBtn );
+                }
+
+
+
+                $imgPreview.css('backgroundColor', '');
+                $imgPreview.animate({
+                    height: "auto",
+                    padding:'25px 0px'
+                }, 'slow', function(){
+                    // alert( "DONE" );
+                    $imgPreview.append( '<div><span class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></span></div>').fadeIn();
+                });
+
+            });
+
+            $('body').on('click', '#do-comment', function () {
+                var comment = $('#comment-text-area').val();
+                var dataId = $(this).attr('data-id');
+                var o = {dataId : dataId, comment : comment};
+                ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
             });
         });
     </script>
@@ -84,8 +127,8 @@
                 </div>
 
             </div>
-                <div class="image-icon"></div>
-                <div class="video-icon"></div>
+                <div id="profile-image-icon-btn" class="image-icon"></div>
+                <div id="profile-video-icon-btn" class="video-icon"></div>
         </div>
         </div>
     </div>

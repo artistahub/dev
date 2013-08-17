@@ -1,19 +1,11 @@
 @(myphotos: String)
+@headerIn()
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title> ArtistaOne - professional perfomers platform - </title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
 
-
-
-
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
-    <script type="text/javascript" src="javascripts/date.js"></script>
-    <script type="text/javascript" src="javascripts/jquery.masonry.js"></script>
-    <script type="text/javascript" src="javascripts/domObjects.js"></script>
 
     <script>
         $( document).ready( function(){
@@ -92,9 +84,10 @@
 
                 ajaxReturnJson( '/getComments/' + dataId, function( data ){
                     //alert( data );
+                   // var $commentsContainer = $("#comments-Container");
                     console.log( JSON.stringify(data) );
                     $.each( data , function( i, e){
-                        $("#comments-Container").append( new  CommentObject( e ).render() );
+                        $commentsContainer.append( new  CommentObject( e ).render() );
 
                     });
                 });
@@ -135,7 +128,7 @@
 </head>
 
 <body>
-@headerIn()
+
 
 <div class="container-fluid">
     <div class="container tool-bar" id="tool-bar"> tool bar</div>

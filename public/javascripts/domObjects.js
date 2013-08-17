@@ -112,11 +112,16 @@ function CommentObject( o ){
     var commenterObject = o.commenter;
     var comment = o.description;
     var commenterImg = commenterObject.activeProfileImage.url;
+   // alert(o.dateCreated);
+    //var dateCreated = new Date(o.dateCreated).toString("MM/dd/yyyy HH:mm tt");
+    var dateCreated = new Date(o.dateCreated);
+   // alert( dateCreated);
+   // alert(timeAgo(dateCreated));
 
     this.wrapper = '<div class="row-fluid comment-row"> <div class="padding5px">';
-    this.commenter = '<div class="span2 commenterAvatar"> <img src="' + commenterImg + '"> </div> ';
-    this.comment = '<div class="comment span10 "><h5 class="commenter-name">Elhassan Rais</h5><p>' + comment  + ' </p> </div>';
-    this.commnetDate = '<div class="comment-date"> ' + new Date(o.dateCreated).toString("MM/dd/yyyy HH:mm tt") + '</div>';
+    this.commenter = '<div class="span2 commenterAvatar"> <img src="/' + commenterImg + '"> </div> ';
+    this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterObject.firstName + ' ' + commenterObject.lastName + '</h5><p>' + comment  + ' </p> </div>';
+    this.commnetDate = '<div class="comment-date"> ' + timeAgo(dateCreated) + '</div>';
     this.wrapperCloser = '</div></div>';
     this.html = function(){
         return this.wrapper + this.commenter + this.comment + this.commnetDate + this.wrapperCloser;
