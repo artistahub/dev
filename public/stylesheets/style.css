@@ -396,7 +396,7 @@ input[type="text"],input[type="password"]{
 #signOutBtn{
     position: absolute;
     right: 10px;
-    top: 5px;
+    bottom: 10px;
 }
 #personalInfoContainer{
     margin: 10px auto;
@@ -596,6 +596,25 @@ div#comments-Container .comment-row:first-child {
     width: 50px;
     height: 50px;
 }
+.top{
+    background-color: #9cd4b3;
+}
+#profile-ul{
+    list-style: none;
+    border: solid 1px orange;
+    overflow: hidden;
+    float: right;
+    margin: 0px;
+}
+#profile-ul li{
+    display: inline-block;
+    border: solid 1px green;
+    float: left;
+}
+.profile-li-height{
+    line-height: 50px;
+}
+
 
 
 

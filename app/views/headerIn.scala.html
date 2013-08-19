@@ -14,8 +14,10 @@
         var userProfileImg = "/" + u.activeProfileImage.url || "/images/clown.jpg";
         var userFullName = u.fullName;
         this.wrapper = "";
-        this.profileImage = "<li><span style='width: 75px;overflow: hidden;height: 55px; display: inline-block;border: solid 1px'> <img width='100%'  src= " + userProfileImg +"></span></li>";
-        this.fullName = "<li> <span style='height: 55px; border: solid 1px'> <strong> " + userFullName + " </strong></span> </li>";
+       // this.profileImage = "<li><span style='width: 75px;overflow: hidden;height: 55px; display: inline-block;border: solid 1px'> <img width='100%'  src= " + userProfileImg +"></span></li>";
+        this.profileImage = " <li> <div style='border: solid 1px red; width: 53px;'><img width='100%'  src= " + userProfileImg +"></div></li>";
+       // this.fullName = "<li> <span style='height: 55px; border: solid 1px'> <strong> " + userFullName + " </strong></span> </li>";
+        this.fullName = "  <li class='profile-li-height'><strong> " + userFullName + "</strong></li>";
         this.html = function(){
             return this.wrapper + this.profileImage + this.fullName ;
         }
@@ -26,13 +28,36 @@
 
     $( document).ready( function(){
         var u = @Html(session.get("sessionUser"));
-        var $profileContainer = $("#profile-container");
+        var $profileContainer = $("#profile-ul");
             $profileContainer.html( new UserProfile( u ).render() );
     });
 </script>
-<a href="/"> <h1 class="h1"> ArtistaOne </h1></a>
-<a href="/signOut"><p class="btn" id="signOutBtn"> Sign Out </p></a>
-Hello @session.get("userName");
+
+<hr class="stepsHr">
+<div class="top">
+    <div class="row-fluid">
+        <div class="span3"> <h2> ArtistaOne</h2></div>
+        <div class="span6"> Search box</div>
+        <div class="span3">
+            <ul id="profile-ul">
+                <li>
+                    <div style="border: solid 1px red; width: 53px;"><img width="100%"  src="/images/artista3.jpg"></div>
+                </li>
+                <li class="profile-li-height">
+                    <strong> Elhassan Rais </strong>
+                </li>
+
+            </ul>
+            <li class="profile-li-height" id="signOutBtn">
+                <a href="/signOut"><p class="btn" > Sign Out </p></a>
+            </li>
+        </div>
+
+    </div>
+
+</div>
+
+
 <div>
     <ul id="profile-container">
 
