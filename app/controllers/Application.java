@@ -142,7 +142,7 @@ public class Application extends Controller {
     public static Result getComments( String myphotoId){
         MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
         List <Comment> comments = Comment.getCommentsByMyPhoto( myphotoId);
-        return ok( Json.toJson( comments));
+        return ok( Json.toJson( comments ));
 
     }
 
