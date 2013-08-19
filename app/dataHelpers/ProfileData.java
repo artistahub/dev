@@ -6,13 +6,6 @@ import models.User;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: derectionfree
- * Date: 6/26/13
- * Time: 11:31 PM
- * To change this template use File | Settings | File Templates.
- */
 public class ProfileData {
     private User user;
     private ProfileImage profileImage;

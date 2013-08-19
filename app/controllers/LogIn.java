@@ -1,6 +1,8 @@
 package controllers;
 
+import dataHelpers.SessionUser;
 import models.User;
+import play.api.libs.json.Json;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Result;
@@ -34,6 +36,9 @@ public class LogIn extends Controller {
                     return ok( views.html.login.render( " Wrong user name or password" ));
                 }
                 else {
+                    SessionUser sessionUser = new SessionUser( user );
+                    String s = play.libs.Json.toJson( sessionUser).toString();
+                    session("sessionUser" , s);
                     session("user", user.getId().toString());
                     session("userEmail", user.getEmail());
                     session("userName", user.getUserName());

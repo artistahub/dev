@@ -67,32 +67,34 @@
 
             });
 
-            $('body').on( 'click', '#img-preview', function(){
-                var $imgPreview = $( this );
+            $('body').on( 'click', '#video-preview .close-img-preview', function(){
 
-                $imgPreview.animate({
+                $( this).hide();
+                var $videoPreview =  $("#video-preview");;
+
+                $videoPreview.animate({
                     height: "0px"
                 }, 500, function(){
-                    $imgPreview.html("");
+                    $videoPreview.html("");
                 });
 
             });
 
             $('body').on( 'click', '.artista-video', function(){
-                var $imgPreview = $("#img-preview");
-                $imgPreview.html("");
+                var $videoPreview = $("#video-preview");
+                $videoPreview.html("");
                 var $thisChild = $( this ).children(":first");
-                // $imgPreview.append( $thisChild );
+                // $videoPreview.append( $thisChild );
                 var $iframe = $('<iframe>');
-                $iframe.css({ width: '95%', height: '600px', border: 0});
+                $iframe.css({ width: '100%', height: '600px', border: 0});
                 var videoUrl =  "//www.youtube.com/embed/" + $thisChild.attr('id') + "?rel=0";
                 $iframe.attr('src', videoUrl);
-                $imgPreview.html( $iframe );
-                $imgPreview.css('backgroundColor', '#222');
-                $imgPreview.animate({
+                $videoPreview.html( $iframe );
+                $videoPreview.css('backgroundColor', '#222');
+                $videoPreview.animate({
                     height: "600px"
                 }, 'slow', function(){
-                    // alert( "DONE" );
+                    $videoPreview.append( '<div><span class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></span></div>').fadeIn();
                 });
             });
         });
@@ -102,14 +104,14 @@
 
 <body>
 @headerIn()
-<div class="container-fluid">
-    <div class="container tool-bar" id="tool-bar"> tool bar</div>
-    <div id="img-preview"></div>
 
+    <div class="container-fluid tool-bar" id="tool-bar"> tool bar</div>
+
+<div class="container-fluid">
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">
-
+            <div id="video-preview"></div>
                 <div class="container-fluid">
                     <div class="container-fluid" id="artista-videos-container">
 
