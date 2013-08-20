@@ -422,6 +422,10 @@ input[type="text"],input[type="password"]{
     background-size: 40px;
     display: inline-block;
     box-shadow: -8px 1px 2px #222;
+    opacity: .8;
+}
+.my-profile-icon:hover{
+    opacity: 1;
 }
 #profile-video-icon-btn{
     position: absolute;
@@ -609,7 +613,6 @@ div#comments-Container .comment-row:first-child {
 #profile-ul li{
     display: inline-block;
     border: solid 1px green;
-    float: left;
 }
 .profile-li-height{
     line-height: 50px;
