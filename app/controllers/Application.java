@@ -44,6 +44,7 @@ public class Application extends Controller {
     }
 
     public static Result signOut(){
+        session().remove("sessionUser");
         session().remove("user");
         session().remove("userEmail");
         return redirect("/");

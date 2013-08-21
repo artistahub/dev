@@ -22,7 +22,8 @@
             var profileMyphotos = profileData.myphotos;
             var $myphotosContainer = $("#artista-photos-container");
             //alert( profileDate );
-            $("#pImage").attr('src' , "/" + profileData.user.activeProfileImage.url);
+           // $("#pImage").attr('src' , "/" + profileData.user.activeProfileImage.url);
+            $("#pImage").attr({'src': "/" + profileData.user.activeProfileImage.url, 'data-id' : profileData.user.activeProfileImage.id});
             $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
 
 

@@ -1,5 +1,6 @@
 package controllers;
 
+import dataHelpers.SessionUser;
 import models.*;
 import org.codehaus.jackson.node.ObjectNode;
 import org.h2.util.IOUtils;
@@ -67,10 +68,8 @@ public class Register extends Controller {
                String userCountry = requestData.get("userCountry");
                User u = User.findUserById(session("user"));
                System.out.println("*******************");
-               System.out.println(userName);
-               System.out.println(userCity);
-               System.out.println(userState);
-               System.out.println(userCountry);
+               System.out.println( session("sessionUser"));
+
                u.setUserName(userName);
                u.setLocation(new Address(userCity, userState, "****", userCountry));
                u.update();
@@ -112,6 +111,9 @@ public class Register extends Controller {
             profileImage.save();
             u.setActiveProfileImage(profileImage);
             u.update();
+            SessionUser sessionUser = new SessionUser( u );
+            String s = play.libs.Json.toJson( sessionUser).toString();
+            session("sessionUser" , s);
             IOUtils.copy(is, new FileOutputStream(Play.application().getFile(original)));
             //System.out.print("Logged in User: " +  Json.toJson( u ));
             return redirect(routes.Application.index());
