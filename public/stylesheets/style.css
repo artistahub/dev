@@ -421,7 +421,7 @@ input[type="text"],input[type="password"]{
     border-radius: 25px;
     background-size: 40px;
     display: inline-block;
-    box-shadow: -8px 1px 2px #222;
+    box-shadow: -8px 1px 2px #fff;
     opacity: .8;
 }
 .my-profile-icon:hover{
@@ -459,7 +459,7 @@ input[type="text"],input[type="password"]{
 }
 .tool-bar{
     padding: 10px 0px;
-    background-color: rgb(49, 46, 46);
+    background-color: rgb(255, 255, 255);
 }
 .fc-fotter{
     border-bottom: solid 1px #d6d6d6;
@@ -472,7 +472,6 @@ input[type="text"],input[type="password"]{
     overflow: hidden;
 }
 .home-sideMenu{
-    box-shadow: -10px 0px 0px rgb(49, 46, 46);
 }
 .artista-img, .artista-video{
     margin: 5px;
@@ -601,21 +600,45 @@ div#comments-Container .comment-row:first-child {
     height: 50px;
 }
 .top{
-    background-color: #9cd4b3;
+    background-color: transparent;
+    padding: 0px 0px 0px 5px;
 }
 #profile-ul{
     list-style: none;
-    border: solid 1px orange;
-    overflow: hidden;
     float: right;
     margin: 0px;
+    padding: 0px 12px 0px 5px;
 }
-#profile-ul li{
+#profile-ul > li{
     display: inline-block;
-    border: solid 1px green;
 }
 .profile-li-height{
     line-height: 50px;
+    padding: 0px 5px;
+}
+
+#drop-down-account{
+    position: relative;
+}
+.caret{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    right: -7px;
+}
+.dropdown-menu li{
+    display: block;
+}
+.dropdown-menu{
+    width: 100%;
+}
+.top h2{
+    margin: 0px;
+}
+#profile-ul:hover{
+    opacity: .8;
+    background: white;
 }
 
 

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/stylesheets/style.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
+
 <script type="text/javascript" src="/javascripts/date.js"></script>
 <script type="text/javascript" src="/utils/api.js"></script>
 <script type="text/javascript" src="/utils/utils.js"></script>
@@ -20,9 +21,11 @@
        // this.profileImage = "<li><span style='width: 75px;overflow: hidden;height: 55px; display: inline-block;border: solid 1px'> <img width='100%'  src= " + userProfileImg +"></span></li>";
         this.profileImage = " <li> <div style='border: solid 1px red; width: 53px;'><img width='100%'  src= " + userProfileImg +"></div></li>";
        // this.fullName = "<li> <span style='height: 55px; border: solid 1px'> <strong> " + userFullName + " </strong></span> </li>";
-        this.fullName = "  <li class='profile-li-height'><strong> " + userFullName + "</strong></li>";
+        this.fullName = "  <li id='drop-down-account' class='profile-li-height'><strong> " + userFullName + "<span class='caret'></span></strong></li>";
+        this.dropDown = "   <div class='dropdown'><ul id='d' class='dropdown-menu'> <li><a tabindex='-1' href='/signOut'>Sign Out </a></li>" +
+                "<li class='divider'></li> <li><a tabindex='-1' href='#'>Setting</a></li> </ul><div>";
         this.html = function(){
-            return this.wrapper + this.profileImage + this.fullName ;
+            return this.wrapper + this.profileImage + this.fullName + this.dropDown ;
         }
     }
     UserProfile.prototype.render = function(){
@@ -33,6 +36,16 @@
         var u = @Html(session.get("sessionUser"));
         var $profileContainer = $("#profile-ul");
             $profileContainer.html( new UserProfile( u ).render() );
+
+        $('#drop-down-account').on('click', function(){
+            $('#d').slideDown();
+
+        });
+        $('.dropdown-menu').mouseleave( function(){
+            $('#d').slideUp();
+        });
+
+
     });
 </script>
 </head>
@@ -42,16 +55,10 @@
     <div class="row-fluid">
         <div class="span3"><a href="/"> <h2> ArtistaOne</h2></a></div>
         <div class="span6">
-            <div style="margin-top: 7px"><input type="text" class="input-large" style="width: 80%" value="Search performers, Artists, Acrobats ..."></div>
+            <div style="margin-top: 5px"><input type="text" class="input-large" style="width: 80%" value="Search performers, Artists, Acrobats ..."></div>
         </div>
         <div class="span3">
             <ul id="profile-ul">
-                <li>
-                    <div style="border: solid 1px red; width: 53px;"><img width="100%"  src="/images/artista3.jpg"></div>
-                </li>
-                <li class="profile-li-height">
-                    <strong> Elhassan Rais </strong>
-                </li>
 
             </ul>
             <li class="profile-li-height" id="signOutBtn">
