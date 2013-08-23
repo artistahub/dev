@@ -110,6 +110,7 @@ DropDownWindow.prototype.render = function(){
 
 function CommentObject( o ){
     var commenterObject = o.commenter;
+    var commenterUserName = o.commenter.userName;
     var comment = o.description;
     var commenterImg = commenterObject.activeProfileImage.url;
    // alert(o.dateCreated);
@@ -119,8 +120,8 @@ function CommentObject( o ){
    // alert(timeAgo(dateCreated));
 
     this.wrapper = '<div class="row-fluid comment-row"> <div class="padding5px">';
-    this.commenter = '<div class="span2 commenterAvatar"> <img src="/' + commenterImg + '"> </div> ';
-    this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterObject.firstName + ' ' + commenterObject.lastName + '</h5><p>' + comment  + ' </p> </div>';
+    this.commenter = '<div class="commenterAvatar"><a href="/profile/' + commenterUserName + '"> <img src="/' + commenterImg + '"></div> ';
+    this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterObject.firstName + ' ' + commenterObject.lastName + '</h5></a><p>' + comment  + ' </p> </div>';
     this.commnetDate = '<div class="comment-date"> ' + timeAgo(dateCreated) + '</div>';
     this.wrapperCloser = '</div></div>';
     this.html = function(){
