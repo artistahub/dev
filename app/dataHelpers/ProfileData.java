@@ -13,7 +13,7 @@ public class ProfileData {
     private List<MyPhoto> myphotos;
     private List<Video> myvideos;
 
-    public ProfileData( User user, List<ProfileImage> profileImages){
+    public ProfileData( User user){
           setUser( user );
           setProfileImage( user.getActiveProfileImage() );
     }

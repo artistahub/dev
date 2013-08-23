@@ -23,8 +23,8 @@ public class User extends Model {
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileImage activeProfileImage;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ProfileImage> profileImages;
+   // @OneToMany(cascade = CascadeType.ALL)
+   // private List<ProfileImage> profileImages;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     private Address location;
@@ -40,14 +40,14 @@ public class User extends Model {
         this.setDateCreated( new Date() );
     }
 
-    public List<ProfileImage> getProfileImages( ) {
+ //   public List<ProfileImage> getProfileImages( ) {
 
-        return profileImages;
-    }
+   //     return profileImages;
+   // }
 
-    public void setProfileImages(List<ProfileImage> profileImages) {
-        this.profileImages = profileImages;
-    }
+  //  public void setProfileImages(List<ProfileImage> profileImages) {
+   //     this.profileImages = profileImages;
+   // }
 
     public ProfileImage getActiveProfileImage() {
         return activeProfileImage;

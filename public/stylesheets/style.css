@@ -329,6 +329,7 @@ h1{
     height: 100%;
     width: 100%;
     overflow: hidden;
+    position: relative;
 }
 .screenBody{
     padding: 0px;
@@ -619,12 +620,12 @@ div#comments-Container .comment-row:first-child {
     display: inline-block;
 }
 .profile-li-height{
-    line-height: 50px;
     padding: 0px 5px;
 }
 
 #drop-down-account{
     position: relative;
+    top: -10px;
 }
 .caret{
     position: absolute;
@@ -652,7 +653,14 @@ div#comments-Container .comment-row:first-child {
     overflow: hidden;
     vertical-align: middle;
     position: relative;
-    top: 6px;
+    top: 3px;
+    border: solid 1px #222;
+}
+.v-center{
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    margin: auto;
 }
 
 
