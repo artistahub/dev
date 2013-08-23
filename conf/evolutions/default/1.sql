@@ -66,6 +66,7 @@ create table artistas (
   location_id               varchar(255),
   billing_address_id        varchar(255),
   mailing_address_id        varchar(255),
+  test                      varchar(255),
   actor_type                varchar(3),
   constraint ck_artistas_actor_type check (actor_type in ('p','ag','a')),
   constraint pk_artistas primary key (id))

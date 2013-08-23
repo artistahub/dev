@@ -30,6 +30,7 @@ public class User extends Model {
     private Address location;
     private Address BillingAddress;
     private Address MailingAddress;
+    private String test;
 
     public User( String fName, String lName, String email, String pass){
         this.firstName = fName;
@@ -54,6 +55,14 @@ public class User extends Model {
 
     public void setActiveProfileImage(ProfileImage activeProfileImage) {
         this.activeProfileImage = activeProfileImage;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 
     @EnumMapping(nameValuePairs="artista=a, performance=p, agency= ag")
