@@ -398,6 +398,11 @@ input[type="text"],input[type="password"]{
     right: 10px;
     bottom: 10px;
 }
+#header-sign-up{
+    position: absolute;
+    right: 85px;
+    top: 5px;
+}
 #personalInfoContainer{
     margin: 10px auto;
     position: relative;
@@ -522,7 +527,7 @@ input[type="text"],input[type="password"]{
     padding: 10px;
     border-bottom: 1px solid #f5f5f5;
 }
-#img-preview{
+#img-preview, #media-preview{
     position: relative;
     width: 600px;
     margin: auto;
@@ -608,6 +613,7 @@ div#comments-Container .comment-row:first-child {
     float: right;
     margin: 0px;
     padding: 0px 12px 0px 5px;
+    position: relative;
 }
 #profile-ul > li{
     display: inline-block;
@@ -639,6 +645,14 @@ div#comments-Container .comment-row:first-child {
 #profile-ul:hover{
     opacity: .8;
     background: white;
+}
+#user-profile-div{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    vertical-align: middle;
+    position: relative;
+    top: 6px;
 }
 
 
