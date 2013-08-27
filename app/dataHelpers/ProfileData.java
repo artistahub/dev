@@ -3,6 +3,7 @@ package dataHelpers;
 import models.MyPhoto;
 import models.ProfileImage;
 import models.User;
+import models.Video;
 
 import java.util.List;
 
@@ -10,22 +11,17 @@ public class ProfileData {
     private User user;
     private ProfileImage profileImage;
     private List<MyPhoto> myphotos;
+    private List<Video> myvideos;
 
-    public ProfileData( User user, List<ProfileImage> profileImages){
-          ProfileImage p =  getActiveProfileImage( profileImages );
+    public ProfileData( User user){
           setUser( user );
-          setProfileImage( profileImage );
+          setProfileImage( user.getActiveProfileImage() );
     }
 
 
-    public ProfileImage getActiveProfileImage( List<ProfileImage> profileImages){
-        ProfileImage pImg = new ProfileImage("","");
-        for (ProfileImage profileImage: profileImages){
-             if ( profileImage.getStatus() == ProfileImage.Status.active){
-                pImg = profileImage;
-             }
-        }
-        return  pImg;
+    public ProfileImage getActiveProfileImage( ){
+
+        return  getUser().getActiveProfileImage();
     }
     public User getUser() {
         return user;
@@ -54,5 +50,14 @@ public class ProfileData {
 
     public void setMyphotos(List<MyPhoto> myphotos) {
         this.myphotos = myphotos;
+    }
+
+    public List<Video> getMyvideos() {
+        this.myvideos = Video.getMyVideos( this.user.getId());
+        return myvideos;
+    }
+
+    public void setMyvideos(List<Video> myvideos) {
+        this.myvideos = myvideos;
     }
 }

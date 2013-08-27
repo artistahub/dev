@@ -23,13 +23,14 @@ public class User extends Model {
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileImage activeProfileImage;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ProfileImage> profileImages;
+   // @OneToMany(cascade = CascadeType.ALL)
+   // private List<ProfileImage> profileImages;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     private Address location;
     private Address BillingAddress;
     private Address MailingAddress;
+    private String test;
 
     public User( String fName, String lName, String email, String pass){
         this.firstName = fName;
@@ -39,14 +40,14 @@ public class User extends Model {
         this.setDateCreated( new Date() );
     }
 
-    public List<ProfileImage> getProfileImages( ) {
+ //   public List<ProfileImage> getProfileImages( ) {
 
-        return profileImages;
-    }
+   //     return profileImages;
+   // }
 
-    public void setProfileImages(List<ProfileImage> profileImages) {
-        this.profileImages = profileImages;
-    }
+  //  public void setProfileImages(List<ProfileImage> profileImages) {
+   //     this.profileImages = profileImages;
+   // }
 
     public ProfileImage getActiveProfileImage() {
         return activeProfileImage;
@@ -54,6 +55,14 @@ public class User extends Model {
 
     public void setActiveProfileImage(ProfileImage activeProfileImage) {
         this.activeProfileImage = activeProfileImage;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 
     @EnumMapping(nameValuePairs="artista=a, performance=p, agency= ag")

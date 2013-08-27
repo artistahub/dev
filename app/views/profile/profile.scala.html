@@ -7,26 +7,100 @@
     <script type="text/javascript">
         $( document).ready( function(){
            var profileData = @Html(profileData);
-            var profileMyphotos = profileData.myphotos;
-            var $myphotosContainer = $("#artista-photos-container");
+            var profileMyPhotos = profileData.myphotos;
+            var profileMyVideos = profileData.myvideos;
+            var $mediaContainer = $("#artista-photos-container");
+            var $mediaViewer = $("#media-preview");
+            var $headerBar = $('#header-top-bar');
             //alert( profileDate );
            // $("#pImage").attr('src' , "/" + profileData.user.activeProfileImage.url);
             $("#pImage").attr({'src': "/" + profileData.user.activeProfileImage.url, 'data-id' : profileData.user.activeProfileImage.id});
             $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
 
 
-            $.each( profileMyphotos, function( i, e){
+            $.each( profileMyPhotos, function( i, e){
                 console.log( JSON.stringify(e));
                 var $imgContainer = $("<div>");
                 var $img = $("<img>");
                 $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
                 $img.attr({'src': "/" + e.url, 'data-id':e.id});
                 $imgContainer.append( $img );
-                $myphotosContainer.append( $imgContainer );
+                $mediaContainer.append( $imgContainer );
             });
-            $('body').on( 'click', '#img-preview .close-img-preview', function(){
+
+             $('#profile-image-icon-btn').on( 'click', function(){
+                 $mediaContainer.html('');
+                 $mediaViewer.animate({
+                     height: "0px",
+                     padding: '0px'
+                 }, 500, function(){
+                     $(this).html("");
+                     $(this).height('auto');
+                 });
+                 $.each( profileMyPhotos, function( i, e){
+                     console.log( JSON.stringify(e));
+                     var $imgContainer = $("<div>");
+                     var $img = $("<img>");
+                     $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
+                     $img.attr({'src': "/" + e.url, 'data-id':e.id});
+                     $imgContainer.append( $img);
+                     $mediaContainer.append( $imgContainer );
+                 });
+
+             });
+
+
+
+             $('#profile-video-icon-btn').on( 'click', function(){
+                 $mediaContainer.html('');
+                 $mediaViewer.animate({
+                     height: "0px",
+                     padding: '0px'
+                 }, 500, function(){
+                     $(this).html("");
+                     $(this).height('auto');
+
+                 });
+                 $.each( profileMyVideos, function( i, e){
+                     //console.log( JSON.stringify(e));
+                     var $videoContainer = $("<div>");
+                     var $img = $("<img>");
+                     $videoContainer.attr('class','artista-video');
+                     //var videoId =  e.url.substring(e.url.indexOf("embed") + 6);
+                     var videoId =  getYouTubeVideoId(e.url);
+                     var tumbnail = "http://img.youtube.com/vi/" + videoId + "/mqdefault.jpg";
+
+                     $img.attr('src', tumbnail);
+                     $img.attr('id', videoId);
+                     $img.css({ width: "100%", height  : "100%", border: 0});
+                     $videoContainer.append( $img );
+                     $mediaContainer.append( $videoContainer );
+                 });
+             });
+
+
+
+            $('body').on( 'click', '.artista-video', function(){
+                var $videoPreview = $("#media-preview");
+                $videoPreview.html("");
+                var $thisChild = $( this ).children(":first");
+                // $videoPreview.append( $thisChild );
+                var $iframe = $('<iframe>');
+                $iframe.css({ width: '100%', height: '600px', border: 0});
+                var videoUrl =  "//www.youtube.com/embed/" + $thisChild.attr('id') + "?rel=0";
+                $iframe.attr('src', videoUrl);
+                $videoPreview.html( $iframe );
+                $videoPreview.css('backgroundColor', '');
+                $videoPreview.animate({
+                    height: "600px",
+                    padding:'25px 0px'
+                }, 'slow', function(){
+                    $videoPreview.append( '<div><span class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></span></div>').fadeIn();
+                });
+            });
+            $('body').on( 'click', '#media-preview .close-img-preview', function(){
                 $(this).hide();
-                var $imgPreview = $( '#img-preview' );
+                var $imgPreview = $( '#media-preview' );
                 $imgPreview.animate({
                     height: "0px",
                     padding: '0px'
@@ -40,7 +114,7 @@
                 var $commentsContainer = $('<div>');
                 $commentsContainer.attr('id' , 'comments-Container');
 
-                var $imgPreview = $("#img-preview");
+                var $imgPreview = $("#media-preview");
                     $imgPreview.html("");
                 var $thisChild = $( this ).children(":first");
                 var dataId = $thisChild.attr('data-id');
@@ -124,7 +198,7 @@
 
 </div>
     <hr class="stepsHr">
-<div id="img-preview"></div>
+<div id="media-preview"></div>
     <div class="container-fluid">
         <div class="container-fluid" id="artista-photos-container">
 

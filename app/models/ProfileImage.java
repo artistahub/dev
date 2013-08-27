@@ -16,19 +16,20 @@ public class ProfileImage extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     private String url;
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+   // @OneToOne(cascade = CascadeType.ALL)
+    //private User user;
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
 
-    public User getUser() {
+   /** public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
+    **/
 
     @EnumMapping(nameValuePairs="active = a, inactive = i")
     public enum Status {
