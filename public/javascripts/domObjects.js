@@ -37,7 +37,7 @@ function ProfilePersonalInfo( user ){
 
 // Feeds screen
   function FeedsScreen( feed ){
-     this.wrapperOpener = '<a href="/profile/' + feed.user.userName + '" >';
+     this.wrapperOpener = '<a class="feed-item" href="/profile/' + feed.user.userName + '" >';
      this.topBar = ' <div class="fc"><div class="padding5px"><div class="row-fluid"><h2 class="h1"> ' + feed.user.firstName + " " + feed.user.lastName + '</h2></div>';
      this.body = '<div class="row-fluid"> <div class="span12"><img style="width: 100%" src="' + feed.url  +'"></div></div></div>';
      this.footer ='<div class="fc-fotter padding5px"> Fotter</div> ';
