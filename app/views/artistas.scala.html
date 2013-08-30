@@ -19,20 +19,17 @@
                 console.log( element );
                 var s1 = new Screen( element ).render();
                 $container.append( s1 );
-
             });
-           /* for ( var i = 0; i < 100; i ++){
-                var s1 = new Screen().render();
-                $container.append( s1 );
-            }*/
-            //
-            $('#container').masonry({
-                // options
-                itemSelector : '.item',
-                columnWidth : 0
+
+            $container.imagesLoaded( function() {
+                $container.masonry();
             });
 
         });
+
+
+
+
     </script>
 
 </head>

@@ -302,7 +302,6 @@ h1{
     padding: 5px;
 }
 .screenBody{
-    height: 200px;
 }
 
 
@@ -661,7 +660,7 @@ div#comments-Container .comment-row:first-child {
     border: solid 1px #222;
 }
 .v-center{
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     top: 0;
     margin: auto;
