@@ -297,12 +297,22 @@ ul{
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+
+.feed-item{
+    width: 400px;
+    margin: 5px;
+    font-size: 11px;
+    line-height: 1.4em;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
 h1{
     font-size: 107%;
     padding: 5px;
 }
 .screenBody{
-    height: 200px;
 }
 
 
@@ -542,6 +552,10 @@ input[type="text"],input[type="password"]{
     border: solid 1px rgb(230, 214, 216);
     vertical-align: middle;
     box-shadow: 0px 0px 6px #BDBDBD;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    float: left;
 }
 #comments-Container{
     width: 100%;
@@ -657,7 +671,7 @@ div#comments-Container .comment-row:first-child {
     border: solid 1px #222;
 }
 .v-center{
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     top: 0;
     margin: auto;

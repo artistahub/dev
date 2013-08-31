@@ -1,5 +1,6 @@
 //var url = "http://localhost:9000";
 var url = '';
+
 var o = {name:"hassan", age:33};
 function apiCall(uri) {
     // alert(" Go AJax ");
