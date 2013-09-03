@@ -46,12 +46,6 @@ $(function () {
         ajaxHtml('/addPersonalInfo', "#stepsContentContainer", o);
     });
 
-
-
-
-
-
-
 });
 
 

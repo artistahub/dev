@@ -1,9 +1,11 @@
 package models;
 
+import java.rmi.server.ExportException;
 import java.util.*;
 import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Expr;
 import com.avaje.ebean.annotation.EnumMapping;
 import play.db.ebean.*;
 
@@ -93,7 +95,8 @@ public class User extends Model {
     }
 
     public static List<User> findByName(String name) {
-        List<User> artistas = Ebean.find(User.class).where().ilike("lastName", name).findList();
+      //  List<User> artistas = Ebean.find(User.class).where().ilike("lastName", "%" + name + "%").findList();
+        List<User> artistas = Ebean.find(User.class).where(Expr.or( Expr.ilike("firstName", "%" + name + "%"), Expr.ilike("lastName", "%" + name + "%"))).findList();
         return artistas;
     }
 
