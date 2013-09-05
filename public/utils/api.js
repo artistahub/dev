@@ -45,12 +45,13 @@ function ajaxHtml(uri, containerToFillIn, o) {
 }
 
 function ajaxReturnJson(uri, callback) {
-     //alert(" Go AJax ");
+    // alert(" Go AJax ");
     $.ajax({
         url:url + uri,
         type:'GET',
         success:function (data, textStatus, jqXHR) {
            console.log( JSON.stringify( data ) );
+         //  alert( JSON.stringify( data ) );
             callback( data );
         },
         error:function (data, textStatus, jqXHR) {

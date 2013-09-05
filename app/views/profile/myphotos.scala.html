@@ -17,9 +17,10 @@
             $.each( myphotos, function( i, e){
                  //console.log( JSON.stringify(e));
                 var $imgContainer = $("<div>");
+                var url = e.url;
                 var $img = $("<img>");
                     $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
-                    $img.attr({'src': e.url, 'data-id':e.id});
+                    $img.attr({'src': url , 'data-id':e.id});
                     $imgContainer.append( $img );
                     $myphotosContainer.append( $imgContainer );
 

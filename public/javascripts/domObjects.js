@@ -12,7 +12,7 @@ function Screen( o ){
     this.wrapperOpener = "<a href='/profile/" + userName +"'> <div class=' item wrapper'>";
     this.topBar = "<div class='row topBar'> <b>" + o.firstName + " " + o.lastName +"</b></div>";
     this.secondaryBar = "<div class='row secondaryBar'> Secondary Bar</div>";
-    this.body = "<div class='row screenBody'><div class='imgContainer'> <img class='v-center' style='width: 100%' src='" + o.activeProfileImage.url +"' alt=''></div></div>";
+    this.body = "<div class='row screenBody'><div class='imgContainer'> <img style='width: 100%' src='" + o.activeProfileImage.url +"' alt=''></div></div>";
     this.footer = "<div class='row screenFooter'>  <b>" + o.location.city + ", " + o.location.country +  "</b></div>";
     this.wrapperCloser = "</div></a>";
    // this.screenHtml = this.wrapperOpener + this.topBar + this.secondaryBar + this.body + this.footer; + this.wrapperCloser;
@@ -129,3 +129,20 @@ function CommentObject( o ){
     }
 }
 CommentObject.prototype.render = function(){ return this.html()};
+
+function SearchResultObject( o ){
+    var profileImg = o.activeProfileImage.url || 'images/clown.jpg';
+    var profileLink = "/profile/" + o.userName;
+    this.rowWrapper = "<div class='row-fluid search-result-row'>";
+    this.rowContent = " <a href='" + profileLink + "'><div class='search-result-img-div' > <img class='v-center' width='100%' src='/" + profileImg + "'></div>" +
+                    "<div class='span10'> <p class='title'> " +  o.firstName + " " + o.lastName + "</p></div></a>";
+    this.rowWrapperCloser = "</div>";
+    this.html = function(){
+        return this.rowWrapper + this.rowContent + this.rowWrapperCloser;
+    }
+
+}
+SearchResultObject.prototype.render = function(){
+    return this.html();
+}
+

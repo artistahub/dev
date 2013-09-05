@@ -101,7 +101,8 @@ public class Register extends Controller {
             /*System.out.print(" dir name: " + dir.getName());
             System.out.print(" dir parent: " + dir.getParent());
             System.out.print(" dir path: " + dir.getPath());*/
-            String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
+            String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName.toLowerCase().replaceAll("\\s","-");
+            System.out.println( "))))))))))))))))))) " + imageUrl);
            // String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
             String original = "/public/" + imageUrl;
             ProfileImage profileImage = new ProfileImage(imageUrl, fileName);
@@ -109,6 +110,7 @@ public class Register extends Controller {
             f.save();
             //profileImage.setUser( u );
             profileImage.save();
+            System.out.println( "-----------++++++++++--------- " + profileImage.getId());
             u.setActiveProfileImage(profileImage);
             u.update();
             SessionUser sessionUser = new SessionUser( u );

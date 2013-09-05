@@ -74,11 +74,18 @@ public class Application extends Controller {
     }
     public static Result byName( String name){
         System.out.print( "Name: ***********" + name );
-         List<User> artistas = User.findByName( name );
+        List<User> artistas = User.findByName( name );
         ObjectNode allArtistas = Json.newObject();
         allArtistas.put("all artistas Found with Name: " + name, Json.toJson( artistas ));
         System.out.print(allArtistas);
         return ok( Json.toJson( allArtistas ));
+    }
+
+    public static Result searchArtistas( String q ){
+        List<User> artistas = User.findByName( q );
+        ObjectNode searchResult = Json.newObject();
+        searchResult.put( "searchResult", Json.toJson( artistas ));
+        return ok( Json.toJson( searchResult ));
     }
 
    public static Result profile( String userName ){

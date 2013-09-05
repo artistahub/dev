@@ -45,6 +45,22 @@
             $('#d').slideUp();
         });
 
+        $( "#search-artistas").keyup( function(){
+            var $resultContainer = $( "#search-result" );
+            $resultContainer.html("");
+            var q = $( this).val();
+            if (q.length >= 1){
+               // alert( " > 3 " );
+                ajaxReturnJson( "/search/" + q, function ( data ){
+                    //alert( JSON.stringify(data) );
+                    $.each( data.searchResult , function( i, e){
+                        $resultContainer.append(  new SearchResultObject( e ).render() );
+                    });
+                } );
+
+            }
+        });
+
 
     });
 </script>
@@ -53,11 +69,16 @@
 <hr class="stepsHr">
 <div id="header-top-bar" class="top">
     <div class="row-fluid">
-        <div class="span3"><a href="/"> <h2> ArtistaOne ...</h2></a></div>
-        <div class="span6">
-            <div style="margin-top: 5px"><input type="text" class="input-large" style="width: 80%" value="Search performers, Artists, Acrobats ..."></div>
+        <div class="span4"> <h2> <a href="/">ArtistaOne ...</a></h2></div>
+        <div class="span4">
+            <div style="margin-top: 5px; position: relative;">
+                <input id="search-artistas" type="text" class="input-large" style="width: 100%" placeholder="Search performers, Artists, Acrobats ... "/>
+                <div id="search-result">
+
+                </div>
+            </div>
         </div>
-        <div class="span3">
+        <div class="span4">
             <ul id="profile-ul">
 
             </ul>

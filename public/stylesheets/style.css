@@ -14,7 +14,7 @@ html{
     background-image: url("../images/noise-2.png");
 }
 * {
-    font: 300 20px Roboto,arial,sans-serif;
+    font: Roboto,arial,sans-serif;
     white-space: normal;
 }
 h1{
@@ -299,7 +299,7 @@ ul{
 }
 
 .feed-item{
-    width: 400px;
+    width: 365px;
     margin: 5px;
     font-size: 11px;
     line-height: 1.4em;
@@ -671,10 +671,39 @@ div#comments-Container .comment-row:first-child {
     border: solid 1px #222;
 }
 .v-center{
-    /*position: absolute;*/
+    position: absolute;
     bottom: 0;
     top: 0;
     margin: auto;
+}
+#search-artistas{
+    padding: 4px 0px;
+    text-indent: 5px;
+    font-size: 13pt;
+}
+#search-result{
+    border: solid 1px pink;
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+    background: white;
+}
+.search-result-row{
+    border-bottom: solid 1px #F8EAEA;
+
+}
+.search-result-img-div{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    float: left;
+    border: solid 1px #e1e1e1;
+    overflow: hidden;
+}
+.title {
+    margin: 0 0 10px;
+    font-size: 12pt;
+    line-height: 30px;
 }
 
 
