@@ -699,6 +699,7 @@ div#comments-Container .comment-row:first-child {
     position: relative;
     float: left;
     border: solid 1px #e1e1e1;
+    overflow: hidden;
 }
 .title {
     margin: 0 0 10px;
