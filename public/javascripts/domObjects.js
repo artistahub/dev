@@ -12,7 +12,11 @@ function Screen( o ){
     this.wrapperOpener = "<a href='/profile/" + userName +"'> <div class=' item wrapper'>";
     this.topBar = "<div class='row topBar'> <b>" + o.firstName + " " + o.lastName +"</b></div>";
     this.secondaryBar = "<div class='row secondaryBar'> Secondary Bar</div>";
+<<<<<<< HEAD
     this.body = "<div class='row screenBody'><div class='imgContainer'> <img class='' style='width: 100%' src='" + o.activeProfileImage.url +"' alt=''></div></div>";
+=======
+    this.body = "<div class='row screenBody'><div class='imgContainer'> <img style='width: 100%' src='" + o.activeProfileImage.url +"' alt=''></div></div>";
+>>>>>>> 24723f4c82697b9bd35d46df92148f7e88ffe212
     this.footer = "<div class='row screenFooter'>  <b>" + o.location.city + ", " + o.location.country +  "</b></div>";
     this.wrapperCloser = "</div></a>";
    // this.screenHtml = this.wrapperOpener + this.topBar + this.secondaryBar + this.body + this.footer; + this.wrapperCloser;
@@ -120,7 +124,7 @@ function CommentObject( o ){
    // alert(timeAgo(dateCreated));
 
     this.wrapper = '<div class="row-fluid comment-row"> <div class="padding5px">';
-    this.commenter = '<div class="commenterAvatar"><a href="/profile/' + commenterUserName + '"> <img src="/' + commenterImg + '"></div> ';
+    this.commenter = '<div class="commenterAvatar"><a href="/profile/' + commenterUserName + '"> <img class="v-center" src="/' + commenterImg + '"></div> ';
     this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterObject.firstName + ' ' + commenterObject.lastName + '</h5></a><p>' + comment  + ' </p> </div>';
     this.commnetDate = '<div class="comment-date"> ' + timeAgo(dateCreated) + '</div>';
     this.wrapperCloser = '</div></div>';

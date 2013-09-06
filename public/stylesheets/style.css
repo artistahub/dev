@@ -556,6 +556,7 @@ input[type="text"],input[type="password"]{
     height: 50px;
     overflow: hidden;
     float: left;
+    position: relative;
 }
 #comments-Container{
     width: 100%;
@@ -698,6 +699,7 @@ div#comments-Container .comment-row:first-child {
     position: relative;
     float: left;
     border: solid 1px #e1e1e1;
+    overflow: hidden;
 }
 .title {
     margin: 0 0 10px;

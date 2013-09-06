@@ -34,7 +34,8 @@ public class AddPhotos extends Controller {
             String contentType = picture.getContentType();
             file = picture.getFile();
             FileInputStream is = new FileInputStream(file);
-            String imageUrl = "myphotos/"  + new Date().getTime() + fileName;
+            String imageUrl = "myphotos/"  + new Date().getTime() + fileName.toLowerCase().replaceAll("\\s","-");
+            System.out.println(" **************** " + imageUrl);
             String myphotosDir = "/public/" + imageUrl;
             IOUtils.copy(is, new FileOutputStream(Play.application().getFile(myphotosDir)));
             MyPhoto myphoto = new MyPhoto(imageUrl, fileName, u);
