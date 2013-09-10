@@ -119,6 +119,15 @@ public class Application extends Controller {
         }
     }
 
+    public static Result myWidget( String userName){
+        User u = User.findUerByUserName( userName );
+        ProfileData profileData = new ProfileData( u );
+        //return ok( views.html.profile.profile.render( profileData.toString() ));
+
+        return  ok( views.html.widget.mywidget.render( Json.toJson( profileData ).toString() ));
+
+    }
+
     public static Result myVideos(){
         User u = User.findUserById(session("user"));
         if ( session("user") != null){
