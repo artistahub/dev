@@ -115,6 +115,7 @@ public class Register extends Controller {
             u.update();
             SessionUser sessionUser = new SessionUser( u );
             String s = play.libs.Json.toJson( sessionUser).toString();
+            System.out.println( " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: " +  s );
             session("sessionUser" , s);
             IOUtils.copy(is, new FileOutputStream(Play.application().getFile(original)));
             //System.out.print("Logged in User: " +  Json.toJson( u ));

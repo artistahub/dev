@@ -1,0 +1,155 @@
+@(profileData: String)
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title> video app</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" >
+    <meta name="viewport" content="user-scalable=no, initial-scale = 1.0,maximum-scale = 0.8,width=device-width" />
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+        function WidgetMyPhoto( o ){
+           // alert( JSON.stringify( o ));
+            var img = o.url || "walo";
+            var imgId = o.id;
+            this.header = " <div class='v-center'>";
+            this.body = "<img alt='Thumbnail' src='/" + o.url + "' width='100%'> <div class=' order-btn'></div>";
+            this.footer= "<div class='img-footer'></div></div>";
+            this.html = function(){
+                return this.header + this.body + this.footer;
+            }
+        }
+        WidgetMyPhoto.prototype.render = function (){
+            return this.html();
+        }
+
+        $( document).ready( function(){
+            var profileData = @Html(profileData);
+            var userFullName = profileData.user.firstName + ' ' + profileData.user.lastName;
+            var myPhotos = profileData.myphotos;
+            var myVideos = profileData.myvideos;
+            $('#profile-user-name').html( userFullName );
+            var  $mediaContainer  = $('#body');
+
+            $.each( myPhotos, function( i, e){
+                console.log( e );
+                $mediaContainer.append(  new WidgetMyPhoto( e ).render( ) );
+            });
+
+        });
+
+    </script>
+
+    <style>
+
+        .topBar {
+            border-bottom: solid 1px rgb(5, 185, 255);
+            box-shadow: 0px 0px 20px rgba(114, 111, 111, 0.86);
+            width: 100%;
+            height: 45px;
+            background-color: rgb(0, 194, 255);
+            position: fixed;
+            z-index: 999;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+        }
+        .header{
+            border-bottom:solid 1px rgb(238, 238, 238);
+            box-shadow: 0px 0px 20px rgba(114, 111, 111, 0.86);
+            width: 100%;
+            height: 30px;
+            background-color: rgb(212, 212, 212);
+            position: fixed;
+            display: none;
+        }
+        .body{
+            border-bottom: solid 1px rgb(165, 164, 164);
+            box-shadow: 0px 0px 20px rgba(114, 111, 111, 0.86);
+            width: 100%;
+            background-color: rgb(252, 252, 252);
+            overflow: auto;
+            padding: 60px 0px;
+        }
+        .footer{
+            border-bottom: solid 1px rgb(5, 5, 5);
+            box-shadow: 0px 0px 20px rgba(114, 111, 111, 0.86);
+            width: 100%;
+            background-color: rgb(34, 34, 34);
+            height: 40px;
+            position: fixed;
+            bottom: 0px;
+            z-index: 999;
+            color: #e1e1e1;
+        }
+        .v-center{
+            max-width: 500px;
+            margin: auto;
+            position: relative;
+            box-shadow: 1px 2px 20px;
+
+        }
+        .order-btn,.img-footer{
+            position: absolute;
+            z-index: 1;
+            bottom: 0px;
+            border: solid 1px;
+            left: 0px;
+            right: 0px;
+            padding: 2px 0px;
+            text-align: center;
+        }
+        .img-footer{
+            height: 30px;
+            background: rgb(26, 26, 24);
+            opacity: .8;
+            z-index: 0;
+        }
+        .white{
+            color: white;
+            font-size: 25px;
+            line-height: 6px;
+            text-shadow: 0px 1px 3px rgb(2, 4, 17);
+        }
+        .badge-success{
+            font-size: 18pt;
+            color: rgb(255, 122, 0);
+            background: transparent;
+            line-height: 2px;
+        }
+        #cart{
+            position: fixed;
+            z-index: 999;
+            right: 0px;
+        }
+        .text-center{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row-fluid">
+    <div class="topBar"> <h1 id="profile-user-name" class="text-center white"></h1></div>
+</div>
+
+
+<div class="row-fluid">
+    <div class="header"></div>
+</div>
+<div class="row-fluid">
+    <div class="body" id="body">
+
+
+
+
+
+</div>
+<div class="row-fluid">
+    <div class="footer"><p class="text-center">2013 all rights reserved.</p></div>
+</div>
+
+</body>
+</html>
