@@ -13,8 +13,8 @@
             var $mediaViewer = $("#media-preview");
             var $headerBar = $('#header-top-bar');
             //alert( profileDate );
-           // $("#pImage").attr('src' , "/" + profileData.user.activeProfileImage.url);
-            $("#pImage").attr({'src': "/" + profileData.user.activeProfileImage.url, 'data-id' : profileData.user.activeProfileImage.id});
+           // $("#pImage").attr('src' , profileData.user.activeProfileImage.url);
+            $("#pImage").attr({'src': profileData.user.activeProfileImage.url, 'data-id' : profileData.user.activeProfileImage.id});
             $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
 
 
@@ -23,7 +23,7 @@
                 var $imgContainer = $("<div>");
                 var $img = $("<img>");
                 $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
-                $img.attr({'src': "/" + e.url, 'data-id':e.id});
+                $img.attr({'src': e.url, 'data-id':e.id});
                 $imgContainer.append( $img );
                 $mediaContainer.append( $imgContainer );
             });
@@ -42,7 +42,7 @@
                      var $imgContainer = $("<div>");
                      var $img = $("<img>");
                      $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
-                     $img.attr({'src': "/" + e.url, 'data-id':e.id});
+                     $img.attr({'src': e.url, 'data-id':e.id});
                      $imgContainer.append( $img);
                      $mediaContainer.append( $imgContainer );
                  });

@@ -85,39 +85,44 @@ public class Register extends Controller {
         User u = User.findUserById(session("user"));
 
         MultipartFormData b = request().body().asMultipartFormData();
-        System.out.print(b);
+       // System.out.print(b);
         FilePart picture = b.getFile("profileImage");
         if (picture != null) {
-            String fileName = picture.getFilename();
-            String contentType = picture.getContentType();
-            File file = picture.getFile();
-            FileInputStream is = new FileInputStream(file);
-            String userFolderName = session("userEmail").substring(0, session("userEmail").indexOf("@")).toLowerCase();
-            File dir = Play.application().getFile("/public/artistasPhotos/" + userFolderName);
-            if (!dir.mkdirs()) {
-                System.out.println(" ******* Can not make Directory " + dir.getName());
-            }
+           // String fileName = picture.getFilename();
+           // String contentType = picture.getContentType();
+          //  File file = picture.getFile();
+          //  FileInputStream is = new FileInputStream(file);
+           // String userFolderName = session("userEmail").substring(0, session("userEmail").indexOf("@")).toLowerCase();
+           // File dir = Play.application().getFile("/public/artistasPhotos/" + userFolderName);
+           /// if (!dir.mkdirs()) {
+               // System.out.println(" ******* Can not make Directory " + dir.getName());
+         //   }
             // String original = "/public/artistasPhotos/" + new Date().getTime() + fileName;
             /*System.out.print(" dir name: " + dir.getName());
             System.out.print(" dir parent: " + dir.getParent());
             System.out.print(" dir path: " + dir.getPath());*/
-            String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName.toLowerCase().replaceAll("\\s","-");
-            System.out.println( "))))))))))))))))))) " + imageUrl);
+          //  String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName.toLowerCase().replaceAll("\\s","-");
+           // System.out.println( "))))))))))))))))))) " + imageUrl);
            // String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
-            String original = "/public/" + imageUrl;
-            ProfileImage profileImage = new ProfileImage(imageUrl, fileName);
-            Feed f = new Feed( u, imageUrl, " Text text...") ;
+           // String original = "/public/" + imageUrl;
+            S3File s3File = new S3File();
+            s3File.name = picture.getFilename();
+            s3File.file = picture.getFile();
+            s3File.save();
+
+            ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
+            Feed f = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
             f.save();
             //profileImage.setUser( u );
             profileImage.save();
-            System.out.println( "-----------++++++++++--------- " + profileImage.getId());
+            //System.out.println( "-----------++++++++++--------- " + profileImage.getId());
             u.setActiveProfileImage(profileImage);
             u.update();
             SessionUser sessionUser = new SessionUser( u );
             String s = play.libs.Json.toJson( sessionUser).toString();
-            System.out.println( " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: " +  s );
+           // System.out.println( " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: " +  s );
             session("sessionUser" , s);
-            IOUtils.copy(is, new FileOutputStream(Play.application().getFile(original)));
+           // IOUtils.copy(is, new FileOutputStream(Play.application().getFile(original)));
             //System.out.print("Logged in User: " +  Json.toJson( u ));
             return redirect(routes.Application.index());
         } else {
