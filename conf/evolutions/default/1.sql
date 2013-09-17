@@ -52,6 +52,13 @@ create table profileImages (
   constraint pk_profileImages primary key (id))
 ;
 
+create table s3file (
+  id                        varchar(40) not null,
+  bucket                    varchar(255),
+  name                      varchar(255),
+  constraint pk_s3file primary key (id))
+;
+
 create table artistas (
   id                        varchar(255) not null,
   first_name                varchar(255),
@@ -114,6 +121,8 @@ drop table feeds;
 drop table myphoto;
 
 drop table profileImages;
+
+drop table s3file;
 
 drop table artistas;
 
