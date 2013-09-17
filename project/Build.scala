@@ -10,6 +10,7 @@ object ApplicationBuild extends Build {
   val appDependencies = Seq(
     // Add your project dependencies here,
      "mysql" % "mysql-connector-java" % "5.1.25",
+    "com.amazonaws" % "aws-java-sdk" % "1.3.11",
     javaCore,
     javaJdbc,
     javaEbean
