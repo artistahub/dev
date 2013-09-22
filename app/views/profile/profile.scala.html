@@ -154,13 +154,14 @@
                     padding:'25px 0px'
                 }, 'slow', function(){
                     // alert( "DONE" );
-                    $imgPreview.append( '<div><span class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></span></div>').fadeIn();
+                    $imgPreview.append( '<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></button></div>').fadeIn();
                 });
 
             });
 
             $('body').on('click', '#do-comment', function () {
                 var comment = $('#comment-text-area').val();
+                $('#comment-text-area').val('');
                 var dataId = $(this).attr('data-id');
                 var o = {dataId : dataId, comment : comment};
                 ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);

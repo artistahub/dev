@@ -16,6 +16,7 @@ html{
 * {
     font: Roboto,arial,sans-serif;
     white-space: normal;
+    font-weight: 300 !important;
 }
 h1{
     padding: 0px;
