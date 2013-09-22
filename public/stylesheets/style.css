@@ -438,11 +438,11 @@ input[type="text"],input[type="password"]{
     border-radius: 25px;
     background-size: 40px;
     display: inline-block;
-    box-shadow: -8px 1px 2px #fff;
+    box-shadow: 0px 0px 7px;
     opacity: .8;
 }
 .my-profile-icon:hover{
-    opacity: 1;
+    background-color: #0E9DEE;
 }
 #profile-video-icon-btn{
     position: absolute;
@@ -725,6 +725,10 @@ div#comments-Container .comment-row:first-child {
 }
 .slider-icon:hover{
     opacity: .8;
+}
+
+#widget #body{
+    text-align: center
 }
 
 
