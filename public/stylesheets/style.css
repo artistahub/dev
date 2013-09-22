@@ -619,6 +619,8 @@ div#comments-Container .comment-row:first-child {
     background-position: 50% 50%;
     width: 50px;
     height: 50px;
+    border: none;
+    background-color: transparent;
 }
 .top{
     background-color: transparent;
@@ -716,6 +718,9 @@ div#comments-Container .comment-row:first-child {
     background-position: 50%;
     top: 3px;
     left: 3px;
+    border-radius: 4px;
+    background-color: rgba(13, 45, 112, 0);
+    border: none;
 }
 .slider-icon:hover{
     opacity: .8;
