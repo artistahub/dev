@@ -126,7 +126,7 @@ function CommentObject( o ){
    // alert(timeAgo(dateCreated));
 
     this.wrapper = '<div class="row-fluid comment-row"> <div class="padding5px">';
-    this.commenter = '<div class="commenterAvatar"><a href="/profile/' + commenterUserName + '"> <img class="v-center" src="/' + commenterImg + '"></div> ';
+    this.commenter = '<div class="commenterAvatar"><a href="/profile/' + commenterUserName + '"> <img class="v-center" src="' + commenterImg + '"></div> ';
     this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterObject.firstName + ' ' + commenterObject.lastName + '</h5></a><p>' + comment  + ' </p> </div>';
     this.commnetDate = '<div class="comment-date"> ' + timeAgo(dateCreated) + '</div>';
     this.wrapperCloser = '</div></div>';
@@ -140,7 +140,7 @@ function SearchResultObject( o ){
     var profileImg = o.activeProfileImage.url || 'images/clown.jpg';
     var profileLink = "/profile/" + o.userName;
     this.rowWrapper = "<div class='row-fluid search-result-row'>";
-    this.rowContent = " <a href='" + profileLink + "'><div class='search-result-img-div' > <img class='v-center' width='100%' src='/" + profileImg + "'></div>" +
+    this.rowContent = " <a href='" + profileLink + "'><div class='search-result-img-div' > <img class='v-center' width='100%' src='" + profileImg + "'></div>" +
                     "<div class='span10'> <p class='title'> " +  o.firstName + " " + o.lastName + "</p></div></a>";
     this.rowWrapperCloser = "</div>";
     this.html = function(){
