@@ -152,3 +152,12 @@ SearchResultObject.prototype.render = function(){
     return this.html();
 }
 
+var showShadow = function(){
+    var div =  $('<div>').attr('id', 'shadow-box').css({ opacity:.8,'background-color': '#333', width: '100%', height: '100%', position:'absolute',top:0, bottom: 0});
+    $('body').append( div );
+    $('#shadow-box').click( function(){
+        $( this).remove();
+        $( "#media-preview").hide();
+    });
+}
+

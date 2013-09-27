@@ -30,7 +30,12 @@ public class Application extends Controller {
         if ( session("user") != null){
             return redirect( routes.Application.home() );
         }
-        return ok(views.html.index.render(" Professional performers platform "));
+        List<User> artistas = User.getArtistas();
+        ObjectNode allArtistas = Json.newObject();
+        allArtistas.put("allArtistas", Json.toJson( artistas ));
+        //System.out.print(allArtistas);
+        String artistasAsJson = allArtistas.toString();
+        return ok(views.html.index.render( artistasAsJson ));
     }
 
     public static Result home(){
