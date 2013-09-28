@@ -751,7 +751,10 @@ div#comments-Container .comment-row:first-child {
 #widget #body{
     text-align: center
 }
-
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
 
 
 

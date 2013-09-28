@@ -58,6 +58,7 @@
 
             $('body').on( 'click', '#img-preview .close-img-preview', function(){
                     $( this).hide();
+                    $("#shadow-box").remove();
                 var $imgPreview = $( '#img-preview' );
 
 
@@ -72,7 +73,7 @@
             });
 
             $('body').on( 'click', '.artista-img', function(){
-
+                showShadow();
                 var $commentsContainer = $('<div>');
                     $commentsContainer.attr('id' , 'comments-Container');
                     //$commentsContainer.append( new CommentObject().render());
