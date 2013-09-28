@@ -1,4 +1,13 @@
+
+// wait for the document to be loaded
+$( document).ready( function(){
+    grayScaleHtmlPage();
+    unGrayScale(); // put the dom's into normal mode no black and white
+});
+
 $(function () {
+
+
     var $finputText = $('.finputText');
     var $frow = $('.frow');
     var $body = $('body');
@@ -112,6 +121,21 @@ function timeAgo(time){
                 return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
         }
     return time;
+}
+
+
+function grayScaleHtmlPage(){
+    $( 'html').addClass( 'grayscale' );
+}
+function unGrayScale( ){
+    var s = 1000; // 1 second
+    $( 'html' ).animate({
+        opacity: 1
+    }, 5 * s , function(){
+
+        $( 'html').removeClass( 'grayscale' );
+
+    });
 }
 
 

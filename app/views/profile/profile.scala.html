@@ -81,6 +81,7 @@
 
 
             $('body').on( 'click', '.artista-video', function(){
+                showShadow();
                 var $videoPreview = $("#media-preview");
                 $videoPreview.html("");
                 var $thisChild = $( this ).children(":first");
@@ -100,6 +101,7 @@
             });
             $('body').on( 'click', '#media-preview .close-img-preview', function(){
                 $(this).hide();
+                $("#shadow-box").remove();
                 var $imgPreview = $( '#media-preview' );
                 $imgPreview.animate({
                     height: "0px",
@@ -111,6 +113,7 @@
 
             });
             $('body').on( 'click', '.artista-img', function(){
+                showShadow();
                 var $commentsContainer = $('<div>');
                 $commentsContainer.attr('id' , 'comments-Container');
 
@@ -199,7 +202,7 @@
 
 </div>
     <hr class="stepsHr">
-<div id="media-preview"></div>
+<div class="center"><div id="media-preview"></div> </div>
     <div class="container-fluid">
         <div class="container-fluid" id="artista-photos-container">
 

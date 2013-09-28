@@ -1,4 +1,4 @@
-@(title: String)
+@(artistas: String)
 @headerOut()
 
     <script type="text/javascript">
@@ -18,11 +18,29 @@
             }
             // get all artistas
 
-            ajaxGetContent( "/artistas", "#artistas-container");
+         //   ajaxGetContent( "/artistas", "#artistas-container");
+
+            $(function(){
+                // create some screens
+                var artistas = @Html(artistas);
+                console.log( artistas );
+                var $container = $(' #artistas-container ');
+                $.each( artistas.allArtistas , function ( i, element){
+                    console.log( element );
+                    var s1 = new Screen( element ).render();
+                    $container.append( s1 );
+                });
+
+                $container.imagesLoaded( function() {
+                    $container.masonry();
+                });
+
+            });
 
 
 
-        });
+
+});
 
 
     </script>
