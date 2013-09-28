@@ -12,8 +12,8 @@
             }, 5000);
 
             function changeHomeImage( images, counter ){
-                $("#homebg").fadeIn(1000).attr('src', "images/" + images[counter]+ ".jpg");
-                console.log(images[counter] + " ---- " + counter);
+               // $("#homebg").fadeIn(1000).attr('src', "images/" + images[counter]+ ".jpg");
+                //console.log(images[counter] + " ---- " + counter);
 
             }
             // get all artistas
@@ -27,13 +27,127 @@
 
     </script>
 
+<style type="text/css">
+    .hexagon-right{
+        width: 400px;
+        height: 200px;
+        -webkit-transform: rotate(120deg);
+        transform: rotate(120deg);
+        position: absolute;
+        overflow: hidden;
+    }
+    .hexagon-left{
+        /**border: solid 1px blue;*/
+        width: 400px;
+        height: 200px;
+        -webkit-transform: rotate(120deg);
+        transform: rotate(120deg);
+        position: absolute;
+        overflow: hidden;
+    }
+    .hexagon-container{
+        position: relative;
+        width: 200px;
+        height: 200px;
+
+    }
+    .content{
+        background-color: red;
+        height: 100%;
+        width: 100%;
+        -webkit-transform: rotate(120deg);
+        transform: rotate(120deg);
+        overflow: hidden;
+
+    }
+    .hexagon1{
+        top: -100px;
+        left: 180px;
+    }
+    .hexagon2{
+        top: -92px;
+        left: 182px;
+    }
+    .hexagon3{
+        top: -398px;
+        left: 361px;
+    }
+    .hexagon4{
+        top: -392px;
+        left: 362px;
+    }
+    .hexagon5{
+        top: -695px;
+        left: 540px;
+    }
+
+</style>
+
 
 <body>
 <div id="c">
 
     <div id="forms">
         <div id="homeImage">
-            <img id="homebg" class="homeImage" src="images/cirque5.jpg">
+      <!--     <img id="homebg" class="homeImage" src="images/cirque5.jpg"> -->
+            <div class="hexagon-container hexagon0">
+                <div class="hexagon-right">
+                    <div class="hexagon-left">
+                        <a href="#"><div class="content">
+                            <img src="/images/artista7.jpg" alt="">
+                        </div>  </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hexagon-container hexagon1">
+                <div class="hexagon-right">
+                    <div class="hexagon-left">
+                        <a href="#"><div class="content">
+                            <img src="/images/artista-2.jpg" alt="">
+                        </div>  </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hexagon-container hexagon2">
+                <div class="hexagon-right">
+                    <div class="hexagon-left">
+                        <a href="#"><div class="content">
+                            <img src="/images/artista1.jpg" alt="">
+                        </div>  </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hexagon-container hexagon3">
+                <div class="hexagon-right">
+                    <div class="hexagon-left">
+                        <a href="#"><div class="content">
+                            <img src="/images/artista2.jpg" alt="">
+
+                        </div>  </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hexagon-container hexagon4">
+                <div class="hexagon-right">
+                    <div class="hexagon-left">
+                        <a href="#"><div class="content">
+                            <img src="/images/artista3.jpg" alt="">
+
+                        </div>  </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hexagon-container hexagon5 ">
+                <div class="hexagon-right">
+                    <div class="hexagon-left">
+                        <a href="#"><div class="content">
+                            <img src="/images/artista4.jpg" alt="">
+                        </div>  </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="f ">

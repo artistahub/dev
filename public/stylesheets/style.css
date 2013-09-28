@@ -541,7 +541,7 @@ input[type="text"],input[type="password"]{
 }
 #img-preview, #media-preview{
     position: relative;
-    width: 600px;
+    max-width: 600px;
     margin: auto;
 }
 #video-preview{
