@@ -305,13 +305,15 @@ ul{
 }
 .item {
     width: 300px;
-    margin: 5px;
     font-size: 11px;
     line-height: 1.4em;
     float: left;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+}
+.row.topBar{
+    display: none;
+}
+.row.screenFooter{
+    display: none;
 }
 
 .feed-item{
@@ -336,7 +338,6 @@ h1{
     background-image: url("../images/noise-2.png");
     background-color: #f7f7f7;
     border: 1px solid #383737;
-    border-radius: 4px 4px 4px 4px;
     box-shadow: 0 0 6px rgba(5, 5, 5, 0.1);
     color: #2f2f2f;
     font-size: 10pt;
@@ -348,7 +349,6 @@ h1{
 }*/
 .row {
     padding: 10px 5px;
-    border-bottom: 1px solid #121212;
     box-shadow: 0 1px #2A2A2A;
 }
 .imgContainer{
