@@ -33,9 +33,21 @@
 
                 $container.imagesLoaded( function() {
                     $container.masonry();
+                    $('#artistas-container .item').hover(
+                            function() {
+                               console.log( $( this).children(":last"));
+                                $( this).children(":first").fadeIn();
+                                $( this).children(":last").delay(1000).slideDown('slow');
+                            }, function() {
+                                $( this).children(":first").fadeOut();
+                                $( this).children(":last").slideUp( );
+                            }
+                    );
                 });
 
             });
+
+
 
 
 

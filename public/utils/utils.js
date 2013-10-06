@@ -1,8 +1,11 @@
 
 // wait for the document to be loaded
 $( document).ready( function(){
-    grayScaleHtmlPage();
-    unGrayScale(); // put the dom's into normal mode no black and white
+    $( 'body').imagesLoaded( function() {
+        grayScaleHtmlPage();
+    });
+
+    //unGrayScale(); // put the dom's into normal mode no black and white
 });
 
 $(function () {
@@ -125,7 +128,13 @@ function timeAgo(time){
 
 
 function grayScaleHtmlPage(){
-    $( 'html').addClass( 'grayscale' );
+    $('img').addClass( 'grayscale').hover(
+        function() {
+            $( this ).removeClass( 'grayscale' );
+        }, function() {
+            $( this ).addClass( 'grayscale');
+        }
+    );
 }
 function unGrayScale( ){
     var s = 1000; // 1 second
