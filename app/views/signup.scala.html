@@ -16,7 +16,7 @@
                     var s1 = new Screen( element ).render();
                     $container.append( s1 );
                 });
-            if ( !navigator.userAgent.match(/iPhone/i)){
+            if ( documentWidth > 480){
                // alert( " add class psan 2" );
                 if ( documentWidth >= 1200){
                     $('.item').css( 'width', documentWidth/ 6 - 6 + "px");
