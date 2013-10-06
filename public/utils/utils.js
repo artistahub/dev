@@ -128,7 +128,7 @@ function timeAgo(time){
 
 
 function grayScaleHtmlPage(){
-    $('img').addClass( 'grayscale').hover(
+    $('img').addClass( 'grayscale').css('visibility', 'visible').hover(
         function() {
             $( this ).removeClass( 'grayscale' );
         }, function() {
