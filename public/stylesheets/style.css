@@ -577,10 +577,16 @@ input[type="text"],input[type="password"]{
     top: 25px;
     height: auto;
 }
+#dropDownContainer{
+    z-index: 99
+}
 #video-preview{
-    position: relative;
+    position: absolute;
     width: 100%;
     margin: auto;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 .commenterAvatar{
     border: solid 1px rgb(230, 214, 216);
