@@ -188,7 +188,8 @@ input {
     margin: auto;
     text-align: center;
     overflow: hidden;
-    height: 608px;
+    height: 280px;
+    padding-top: 20px;
 }
 
 .pheader{
@@ -304,7 +305,6 @@ ul{
     top: 9px;
 }
 .item {
-    width: 300px;
     font-size: 11px;
     line-height: 1.4em;
     float: left;
@@ -529,6 +529,7 @@ input[type="text"],input[type="password"]{
     /* outline: 1px solid #222;*/
 
 }
+
 .artista-img img, .artista-video img {
     width: 100%;
     height: auto;
@@ -728,7 +729,7 @@ div#comments-Container .comment-row:first-child {
     border: solid 1px pink;
     width: 100%;
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     background: white;
 }
 .search-result-row{

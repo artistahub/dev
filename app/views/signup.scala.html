@@ -3,64 +3,66 @@
 
     <script type="text/javascript">
         $( document).ready( function(){
-            var images = ['cirque','cirque2','cirque3','cirque4','cirque5'];
-            var counter =0;
-            setInterval( function(){
-                changeHomeImage( images, counter);
-                counter++;
-                counter == 5 ? counter = 0 : "";
-            }, 5000);
-
-            function changeHomeImage( images, counter ){
-               // $("#homebg").fadeIn(1000).attr('src', "images/" + images[counter]+ ".jpg");
-                //console.log(images[counter] + " ---- " + counter);
-
-            }
-            // get all artistas
-
-         //   ajaxGetContent( "/artistas", "#artistas-container");
-
+            var documentWidth = $( document).width();
+          // alert( $( document).width());
             $(function(){
                 // create some screens
                 var artistas = @Html(artistas);
                 console.log( artistas );
                 var $container = $(' #artistas-container ');
+                $container.css( 'visibility', 'hidden');
                 $.each( artistas.allArtistas , function ( i, element){
                     console.log( element );
                     var s1 = new Screen( element ).render();
                     $container.append( s1 );
                 });
+            if ( documentWidth > 480){
+               // alert( " add class psan 2" );
+                if ( documentWidth >= 1200){
+                    $('.item').css( 'width', documentWidth/ 6 - 6 + "px");
+                }
+                else if ( documentWidth >=  800){
+                    $('.item').css( 'width', documentWidth/ 4 - 8 + "px");
+                }
+                else {
+                    $('.item').css( 'width', documentWidth/ 2 -  12  + "px");
+                }
+
+           }
+            else {
+                $('#artistas-container .item').css( 'width' , documentWidth+ "px");
+            }
+
+                //
+               // grayScaleHtmlPage();
 
                 $container.imagesLoaded( function() {
-                    $container.masonry();
+                    $container.masonry().css('visibility', 'visible');
                     $('#artistas-container .item').hover(
                             function() {
                                console.log( $( this).children(":last"));
                                 $( this).children(":first").fadeIn();
-                                $( this).children(":last").delay(1000).slideDown('slow');
+                                $( this).children(":last").delay(1000).fadeIn();
                             }, function() {
                                 $( this).children(":first").fadeOut();
-                                $( this).children(":last").slideUp( );
+                                $( this).children(":last").fadeOut( );
                             }
                     );
                 });
 
             });
-
-
-
-
-
-
 });
 
 
     </script>
 
 <style type="text/css">
+    img{
+        visibility: hidden;
+    }
     .hexagon-right{
-        width: 400px;
-        height: 200px;
+        width: 200px;
+        height: 100px;
         -webkit-transform: rotate(120deg);
         transform: rotate(120deg);
         position: absolute;
@@ -68,8 +70,8 @@
     }
     .hexagon-left{
         /**border: solid 1px blue;*/
-        width: 400px;
-        height: 200px;
+        width: 200px;
+        height: 100px;
         -webkit-transform: rotate(120deg);
         transform: rotate(120deg);
         position: absolute;
@@ -77,8 +79,8 @@
     }
     .hexagon-container{
         position: relative;
-        width: 200px;
-        height: 200px;
+        width: 100px;
+        height: 100px;
 
     }
     .content{
@@ -90,25 +92,34 @@
         overflow: hidden;
 
     }
-    .hexagon1{
-        top: -100px;
-        left: 180px;
+    .hexagon0{
+        left: 91px;
+        top: 55px;
+        z-index: 6;
     }
-    .hexagon2{
-        top: -92px;
+    .hexagon1{
+        top: -97px;
         left: 182px;
+        z-index: 5;
+    }
+    .hexagon2{: -91px;
+        left: 182px;
+        z-index: 4;
     }
     .hexagon3{
-        top: -398px;
-        left: 361px;
+        top: -244px;
+        left: 273px;
+        z-index: 3;
     }
     .hexagon4{
-        top: -392px;
+        top: -293px;
         left: 362px;
+        z-index: 2;
     }
     .hexagon5{
-        top: -695px;
-        left: 540px;
+        top: -444px;
+        left: 457px;
+        z-index: 1;
     }
 
 </style>
