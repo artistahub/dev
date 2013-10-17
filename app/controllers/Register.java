@@ -1,30 +1,15 @@
 package controllers;
-
-import dataHelpers.SessionUser;
 import models.*;
-import org.codehaus.jackson.node.ObjectNode;
-import org.h2.util.IOUtils;
-import play.*;
-import play.mvc.Http.MultipartFormData;
-import play.mvc.Http.MultipartFormData.*;
+import dataHelpers.SessionUser;
 import play.data.DynamicForm;
-import play.mvc.*;
 import play.mvc.Controller;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
-import views.html.*;
-import org.codehaus.jackson.*;
-import play.mvc.BodyParser;
-import play.libs.Json;
 import views.html.f.uplaodProfileImage;
+import java.io.IOException;
 
-import java.io.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-
-import static play.data.Form.form;
+import static play.data.Form.*;
 
 public class Register extends Controller {
     public static Result index() {

@@ -19,7 +19,7 @@ import views.html.f.uplaodProfileImage;
 import java.io.File;
 import java.util.List;
 
-import static play.data.Form.form;
+import static play.data.Form.*;
 
 
 public class Application extends Controller {
