@@ -15,7 +15,7 @@ import views.html.*;
 import org.codehaus.jackson.*;
 import play.mvc.BodyParser;
 import play.libs.Json;
-import views.html.f.uplaodProfileImage;
+
 
 import java.io.*;
 import java.util.Date;
@@ -28,6 +28,22 @@ import static play.data.Form.form;
 
 public class Register extends Controller {
     public static Result index() {
+        DynamicForm requestData = form().bindFromRequest();
+        String firstName = requestData.get("firstName");
+        String lastName = requestData.get("lastName");
+        String email = requestData.get("email");
+       // String password = requestData.get("password");
+       // User u = new User(firstName, lastName, email,  password);
+        //u.setLocation(Address.createAddress());
+       // u.save();
+       // session("user", u.getId().toString());
+        //session("userEmail", email);
+
+        // return redirect( routes.Application.artistas() );
+        return ok( register.render( firstName, lastName, email ) );
+    }
+
+ public static Result indexOld() {
         //File file = Play.application().getFile("/public/@videos.html");
         DynamicForm requestData = form().bindFromRequest();
         String firstName = requestData.get("firstName");
@@ -80,31 +96,23 @@ public class Register extends Controller {
         return ok(uplaodProfileImage.render());
     }
 
-    public static Result addProfileImage() throws IOException {
+    public static Result completeRegistration() throws IOException {
+        DynamicForm requestData = form().bindFromRequest();
+        String firstName = requestData.get("firstName");
+        String lastName = requestData.get("lastName");
+        String email = requestData.get("email");
+        String password = requestData.get("password");
+        String userName = requestData.get("userName");
+        User u = new User(firstName, lastName, email,  password);
+        u.setUserName( firstName + "." + lastName );
+        u.setLocation(Address.createAddress());
+        u.save();
 
-        User u = User.findUserById(session("user"));
-
+        // Save the file in AWS
         MultipartFormData b = request().body().asMultipartFormData();
        // System.out.print(b);
         FilePart picture = b.getFile("profileImage");
         if (picture != null) {
-           // String fileName = picture.getFilename();
-           // String contentType = picture.getContentType();
-          //  File file = picture.getFile();
-          //  FileInputStream is = new FileInputStream(file);
-           // String userFolderName = session("userEmail").substring(0, session("userEmail").indexOf("@")).toLowerCase();
-           // File dir = Play.application().getFile("/public/artistasPhotos/" + userFolderName);
-           /// if (!dir.mkdirs()) {
-               // System.out.println(" ******* Can not make Directory " + dir.getName());
-         //   }
-            // String original = "/public/artistasPhotos/" + new Date().getTime() + fileName;
-            /*System.out.print(" dir name: " + dir.getName());
-            System.out.print(" dir parent: " + dir.getParent());
-            System.out.print(" dir path: " + dir.getPath());*/
-          //  String imageUrl = "artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName.toLowerCase().replaceAll("\\s","-");
-           // System.out.println( "))))))))))))))))))) " + imageUrl);
-           // String original = "/public/artistasPhotos/" + dir.getName() + "/" + new Date().getTime() + fileName;
-           // String original = "/public/" + imageUrl;
             S3File s3File = new S3File();
             s3File.name = picture.getFilename();
             s3File.file = picture.getFile();

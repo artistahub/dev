@@ -14,7 +14,10 @@ $(function () {
     var $finputText = $('.finputText');
     var $frow = $('.frow');
     var $body = $('body');
-        $finputText.val("");
+        //$finputText.val("");
+    $.each($finputText, function (i, element) {
+        $(element).val().length > 0 ? $(element).siblings().hide() : $(element).siblings().fadeIn();
+    });
 
     $body.on('click', '.flabel', function () {
         $.each($finputText, function (i, element) {
