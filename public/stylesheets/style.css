@@ -300,8 +300,7 @@ ul{
 }
 .h1{
     line-height: 40px;
-    font-size: 28px;
-    padding-left: 10px;
+    font-size: 23px;
     margin: 0px;
 }
 .loader{
@@ -337,7 +336,6 @@ ul{
 }
 
 .feed-item{
-    width: 365px;
     margin: 5px;
     font-size: 11px;
     line-height: 1.4em;
@@ -493,7 +491,7 @@ input[type="text"],input[type="password"]{
 }
 .sideMenu-row{
     border: solid 1px #e1e1e1;
-    padding: 10px 5px;
+    padding: 10px 0px 0px 10px;
 }
 .fc{
     background-color: white;
@@ -574,7 +572,6 @@ input[type="text"],input[type="password"]{
 }
 #img-preview, #media-preview{
     max-width: 600px;
-    padding: 25px 0px;
     position: absolute;
     margin: auto;
     left: 0px;
@@ -731,7 +728,6 @@ div#comments-Container .comment-row:first-child {
     font-size: 13pt;
 }
 #search-result{
-    border: solid 1px pink;
     width: 100%;
     position: absolute;
     z-index: 1;
@@ -780,7 +776,9 @@ div#comments-Container .comment-row:first-child {
     padding-left: 0px;
 }
 #header-top-bar{
-    background-color: white;
+    background-color: #ffffff;
+    background-image: url("/images/noise-2.png");
+    padding: 5px 0px 5px 15px;
 
 }
 
