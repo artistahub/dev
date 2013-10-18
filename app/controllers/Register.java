@@ -11,8 +11,6 @@ import views.html.*;
 import org.codehaus.jackson.*;
 import play.mvc.BodyParser;
 import play.libs.Json;
-
-
 import static play.data.Form.*;
 
 public class Register extends Controller {
@@ -21,69 +19,22 @@ public class Register extends Controller {
         String firstName = requestData.get("firstName");
         String lastName = requestData.get("lastName");
         String email = requestData.get("email");
-       // String password = requestData.get("password");
-       // User u = new User(firstName, lastName, email,  password);
-        //u.setLocation(Address.createAddress());
-       // u.save();
-       // session("user", u.getId().toString());
-        //session("userEmail", email);
-
-        // return redirect( routes.Application.artistas() );
         return ok( register.render( firstName, lastName, email ) );
     }
 
- /*public static Result indexOld() {
-        //File file = Play.application().getFile("/public/@videos.html");
-        DynamicForm requestData = form().bindFromRequest();
-        String firstName = requestData.get("firstName");
-        String lastName = requestData.get("lastName");
-        String email = requestData.get("email");
-        String password = requestData.get("password");
-        User u = new User(firstName, lastName, email,  password);
-        //u.setLocation(Address.createAddress());
-        u.save();
-        session("user", u.getId().toString());
-        session("userEmail", email);
-
-        // return redirect( routes.Application.artistas() );
-        return ok(views.html.steps.render(session("user")));
-    }*/
 
     public static Result addVideo() {
         DynamicForm requestData = form().bindFromRequest();
-        User u = User.findUserById(session("user"));
+        User u = User.findUserById(session( "currentUserId" ));
         String videoLink = requestData.get("videoLink");
         String videoDescription = requestData.get("videoDescription");
         Video video = new Video(videoLink, videoDescription);
         video.setUser( u );
         video.save();
-        //return ok( Json.toJson( video ) );
-        //return ok( json + " Name: " + name + " age: " + age );
-        //return ok( views.html.f.aza.render( "aza" ) );
-
        return redirect( routes.Application.myVideos());
 
     }
 
-    public static Result addPersonalInfo(){
-        DynamicForm requestData = form().bindFromRequest();
-               String userName = requestData.get("userName");
-               String userCity = requestData.get("userCity");
-               String userState = requestData.get("userState");
-               String userCountry = requestData.get("userCountry");
-               User u = User.findUserById(session("user"));
-               System.out.println("*******************");
-               System.out.println( session("sessionUser"));
-
-               u.setUserName(userName);
-               u.setLocation(new Address(userCity, userState, "****", userCountry));
-               u.update();
-        //return ok( Json.toJson( video ) );
-        //return ok( json + " Name: " + name + " age: " + age );
-        //return ok( views.html.f.aza.render( "aza" ) );
-               //return ok(views.html.f.uplaodProfileImage.render());
-        return ok("");
-    }
 
     public static Result completeRegistration() throws IOException {
         DynamicForm requestData = form().bindFromRequest();
@@ -119,8 +70,7 @@ public class Register extends Controller {
             String s = play.libs.Json.toJson( sessionUser).toString();
            // System.out.println( " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: " +  s );
             session("sessionUser" , s);
-           // IOUtils.copy(is, new FileOutputStream(Play.application().getFile(original)));
-            //System.out.print("Logged in User: " +  Json.toJson( u ));
+            session("currentUserId" , u.getId());
             return redirect(routes.Application.index());
         } else {
             System.out.print("Missing file");

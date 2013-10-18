@@ -23,21 +23,11 @@ public class AddPhotos extends Controller {
 
     public static Result addMyPhotos() throws IOException {
 
-        User u = User.findUserById(session("user"));
+        User u = User.findUserById(session("currentUserId"));
         String fileName = "";
-       // File file;
-
         Http.MultipartFormData b = request().body().asMultipartFormData();
         FilePart picture = b.getFile("myphotos-upload");
         if (picture != null) {
-           // fileName = picture.getFilename();
-           // String contentType = picture.getContentType();
-           // file = picture.getFile();
-           // FileInputStream is = new FileInputStream(file);
-           // String imageUrl = "myphotos/"  + new Date().getTime() + fileName.toLowerCase().replaceAll("\\s","-");
-           // System.out.println(" **************** " + imageUrl);
-           // String myphotosDir = "/public/" + imageUrl;
-          //  IOUtils.copy(is, new FileOutputStream(Play.application().getFile(myphotosDir)));
             S3File s3File = new S3File();
             s3File.name = picture.getFilename();
             s3File.file = picture.getFile();
@@ -45,8 +35,6 @@ public class AddPhotos extends Controller {
            // MyPhoto myphoto = new MyPhoto(imageUrl, fileName, u);
             MyPhoto myphoto = new MyPhoto(s3File.getUrl().toString(), fileName, u);
             myphoto.save();
-
-
           }
         return redirect( routes.Application.myPhotos());
 
