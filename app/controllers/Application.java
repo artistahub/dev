@@ -14,7 +14,7 @@ import views.html.*;
 import org.codehaus.jackson.*;
 import play.mvc.BodyParser;
 import play.libs.Json;
-import views.html.f.uplaodProfileImage;
+
 
 import java.io.File;
 import java.util.List;
