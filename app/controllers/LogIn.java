@@ -23,11 +23,8 @@ public class LogIn extends Controller {
         DynamicForm requestData = form().bindFromRequest();
         String email = requestData.get("email");
         String password = requestData.get( "password" );
-        System.out.println( "1 Email: " + email + " Password: " + password );
-        //return ok( views.html.login.render( "test" ));
-        if ( session("user") == null ){
+        if ( session("currentUserId") == null ){
             if ( email == null || email.isEmpty() || password == null || password.isEmpty() ){
-                System.out.println( "************ email and pass are null *************");
                 return  ok( views.html.login.render( "test" ));
             }
             else{
@@ -39,12 +36,7 @@ public class LogIn extends Controller {
                     SessionUser sessionUser = new SessionUser( user );
                     String s = play.libs.Json.toJson( sessionUser).toString();
                     session("sessionUser" , s);
-                    session("user", user.getId().toString());
-                    session("userEmail", user.getEmail());
-                    session("userName", user.getUserName());
-                    System.out.println( " Logged in user: " + user );
-                    System.out.println( "2 else Email: " + email + " Password: " + password );
-
+                    session("currentUserId", user.getId());
                     return redirect( routes.Application.home() );
                 }
             }

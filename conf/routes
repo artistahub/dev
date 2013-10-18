@@ -21,7 +21,7 @@ GET     /widget/:userName           controllers.Application.myWidget( userName: 
 
 
 
-POST     /addPersonalInfo           controllers.Register.addPersonalInfo()
+
 POST     /addVideo                  controllers.Register.addVideo()
 POST     /completeRegistration      controllers.Register.completeRegistration()
 POST     /addMyPhotos               controllers.AddPhotos.addMyPhotos()
