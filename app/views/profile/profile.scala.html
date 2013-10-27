@@ -1,5 +1,5 @@
 @(profileData: String)
-@if(session.get("user")) {
+@if(session.get("sessionUser")) {
 @headerIn()
 } else {
 @headerOut()
@@ -139,7 +139,7 @@
 
                 $imgPreview.html( $imgContainer );
                 $imgPreview.append( $commentsContainer );
-                @if(session.get("user")) {
+                @if(session.get("sessionUser")) {
                     $imgPreview.append( forms.submitMyphotoComment( dataId ) );
                 } else {
                     var $signInBtn = $('<div>');

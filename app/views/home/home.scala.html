@@ -4,12 +4,16 @@
 @headerIn()
 
     <script>
+        $( document).ready( function(){
+
+
+
         $(function(){
             // create some screens
             var feeds = @Html(feeds);
-            console.log( feeds );
+            //console.log( feeds );
             var $container = $(' #fc-container ');
-            //$container.append( "<h1> New Artistas</h1>" );
+            var feedPageWidth = $container.width();
             $.each( feeds , function ( i, element){
                 console.log( element );
                 var f = new FeedsScreen( element).render();
@@ -18,9 +22,28 @@
             $container.imagesLoaded( function() {
                 $container.masonry();
             });
+            if ( feedPageWidth > 480){
+                // alert( " add class psan 2" );
+                if ( feedPageWidth  >= 1200){
+                    $('.feed-item').css( 'width', feedPageWidth/ 4 - 20 + "px");
+                }
+                else if ( feedPageWidth >=  800){
+                    $('.feed-item').css( 'width', feedPageWidth/ 4 - 20 + "px");
+                }
+                else {
+                    $('.feed-item').css( 'width', feedPageWidth/ 2 -  20  + "px");
+                }
+
+            }
+            else {
+                $('feed-item').css( 'width' , feedPageWidth + "px");
+            }
+        });
 
 
         });
+
+
     </script>
 
 

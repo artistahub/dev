@@ -36,8 +36,10 @@
                 var $dropDownShadow = $("<div>");
                 $dropDownShadow.attr('class', "dropDownShadow");
                 $dropDownContainer.attr({'id' : "dropDownContainer", 'class': "div-absolute-center" });
-                $dropDownShadow.css({'z-index' : 999 ,'position' :'absolute', 'backgroundColor' :'rgb(6, 1, 8)','height' : $bodyHeight, 'width' : $bodyWidth,'top' : 0,'opacity' : 0.5});
+
+                $dropDownShadow.css({'z-index' : 1 ,'position' :'absolute', 'backgroundColor' :'rgb(6, 1, 8)','height' : $bodyHeight, 'width' : $bodyWidth,'top' : 0,'opacity' : 0.5});
                 $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : "-400px"});
+
                 $body.append( $dropDownShadow );
                 // var wHtml = new DropDownWindow().render();
                 $dropDownContainer.html( new DropDownWindow( forms.uploadMyphotos ).render() );
