@@ -1,10 +1,6 @@
 @(myphotos: String)
 @headerIn()
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title> ArtistaOne - professional perfomers platform - </title>
 
 
     <script>
@@ -19,6 +15,7 @@
                 var $imgContainer = $("<div>");
                 var url = e.url;
                 var $img = $("<img>");
+                    $img.addClass( 'grayscale' );
                     $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
                     $img.attr({'src': url , 'data-id':e.id});
                     $imgContainer.append( $img );
@@ -129,14 +126,7 @@
         });
     </script>
 
-</head>
-
-<body>
-
-
-    <div class="container-fluid tool-bar" id="tool-bar"> tool bar</div>
-
-    <div class="container-fluid">
+    <div class="container-fluid" id="content-container">
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">

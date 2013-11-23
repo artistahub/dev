@@ -153,7 +153,9 @@ SearchResultObject.prototype.render = function(){
 }
 
 var showShadow = function(){
-    var div =  $('<div>').attr('id', 'shadow-box').css({ opacity:.9,'background-color': '#000', width: '100%', height: '100%', position:'absolute',top:0, bottom: 0});
+    var $document = $(document);
+    var documentHeight = $document.height();
+    var div =  $('<div>').attr('id', 'shadow-box').css({ opacity:.7,'background-color': '#000', width: '100%', height: documentHeight+"px", position:'absolute',top:0, bottom: 0,'z-index': 2});
     $('body').append( div );
     $('#shadow-box').click( function(){
         $( this).remove();

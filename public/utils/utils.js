@@ -150,4 +150,23 @@ function unGrayScale( ){
     });
 }
 
+// set animation - margin top for the main content
+
+function slideDownMainContent(){
+    var $topHeaderBar = $('#header-top-bar');
+    var $contentWrapper = $('#content-container');
+    var marginTop =  $topHeaderBar.height() + 10;
+    //alert( marginTop)
+
+    //console.log( $contentWrapper );
+    $contentWrapper.css({opacity:0});
+    $contentWrapper.animate({
+        'margin-top' : marginTop + "px",
+        'opacity': 1
+    }, 'slow', function(){
+        //alert(' done ');
+    });
+
+}
+
 

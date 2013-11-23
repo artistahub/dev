@@ -1,13 +1,7 @@
 @(myvideos: String)
-<!DOCTYPE html>
-<html lang="en">
+@headerIn()
 
-<head>
-    <title> ArtistaOne - professional perfomers platform - </title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js">  </script>
-    <script type="text/javascript" src="@routes.Assets.at("utils/api.js")"></script>
-    <script type="text/javascript" src="@routes.Assets.at("utils/utils.js")"></script>
-    <script>
+<script>
         $( document).ready( function(){
             //alert(" hi " + new ToolBar().render());
             var myvideos = @Html( myvideos );
@@ -25,10 +19,11 @@
 
                    $img.attr('src', tumbnail);
                    $img.attr('id', videoId);
+                   $img.addClass('grayscale');
                    $img.css({ width: "100%", height  : "100%", border: 0});
                    $videoContainer.append( $img );
                    $myvideosContainer.append( $videoContainer );
- });
+             });
 
             $('#tool-bar').on( 'click','#myvideos-upload', function(){
                 $body = $('body');
@@ -94,14 +89,7 @@
         });
     </script>
 
-</head>
-
-<body>
-@headerIn()
-
-    <div class="container-fluid tool-bar" id="tool-bar"> tool bar</div>
-
-<div class="container-fluid">
+<div class="container-fluid" id="content-container">
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">
