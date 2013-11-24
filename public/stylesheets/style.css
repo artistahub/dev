@@ -377,7 +377,7 @@ ul{
     margin: 0px;
 
 }
-#stepsPage{
+.signUpPage{
     background-color: white;
     border: solid 1px #e1f7fb;
     border-radius: 4px;
@@ -505,7 +505,7 @@ input[type="text"],input[type="password"]{
     border-top: red solid 2px;
 }
 .tool-bar{
-    padding: 10px 0px;
+    padding: 8px 0px;
     background-color: rgb(255, 255, 255);
 }
 .fc-fotter{
@@ -519,6 +519,7 @@ input[type="text"],input[type="password"]{
     overflow: hidden;
 }
 .home-sideMenu{
+    position: fixed;
 }
 .artista-img, .artista-video{
     margin: 5px;
@@ -641,6 +642,7 @@ div#comments-Container .comment-row:first-child {
 }
 .commenter-name{
     margin: -3px 0px;
+    display: inline-block;
 }
 #comment-text-area{
     padding: 4px 0px;
@@ -780,8 +782,16 @@ div#comments-Container .comment-row:first-child {
 #header-top-bar{
     background-color: #ffffff;
     background-image: url("/images/noise-2.png");
-    padding: 5px 0px 5px 15px;
-
+    padding: 0px 0px 3px 0px;
+    position: fixed;
+    top:0;
+    z-index: 1;
+    width: 100%;
+    border-bottom: 1px solid rgb(125, 141, 9);
+    box-shadow: 0px -3px 21px #333;
+}
+.inner-header{
+    padding: 3px;
 }
 
 

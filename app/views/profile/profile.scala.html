@@ -163,19 +163,19 @@
             });
 
             $('body').on('click', '#do-comment', function () {
-                var comment = $('#comment-text-area').val();
+                var comment = stripTagsFromHtml( $('#comment-text-area').val() );
                 $('#comment-text-area').val('');
                 var dataId = $(this).attr('data-id');
                 var o = {dataId : dataId, comment : comment};
-                ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
+                if ( comment ){
+                    ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
+                }
             });
         });
     </script>
 
 
-
-<body>
-<div class="container-fluid">
+<div class="container-fluid" id="content-container">
     <div class="row-fluid" >
         <div class="span12">
             <div class="container" id="personalInfoContainer" >

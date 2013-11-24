@@ -16,7 +16,7 @@
 <script type="text/javascript" src="/utils/utils.js"></script>
 <script type="text/javascript" src="/javascripts/jquery.masonry.js"></script>
 <script type="text/javascript" src="/javascripts/domObjects.js"></script>
-    <script type="text/javascript" src="/javascripts/ie.js"></script>
+<script type="text/javascript" src="/javascripts/ie.js"></script>
 <script type="text/javascript" >
 
 
@@ -39,6 +39,8 @@
     }
 
     $( document).ready( function(){
+        // Slide down main content
+        slideDownMainContent();
         var u = @Html(session.get("sessionUser"));
         var $profileContainer = $("#profile-ul");
             $profileContainer.html( new UserProfile( u ).render() );
@@ -63,18 +65,18 @@
                         $resultContainer.append(  new SearchResultObject( e ).render() );
                     });
                 } );
-
             }
         });
 
 
     });
+
 </script>
 </head>
-
+<body>
 <hr class="stepsHr">
 <div id="header-top-bar" class="top">
-    <div class="row-fluid">
+    <div class="row-fluid inner-header">
         <div class="span4"> <h2> <a href="/">ArtistaPlus ...</a></h2></div>
         <div class="span4">
             <div style=" position: relative;">
@@ -92,14 +94,10 @@
         </div>
 
     </div>
+    <!---  Sub top bar  -->
+    <hr class="stepsHr">
+    <div class="tool-bar" id="tool-bar"> tool bar</div>
+
 
 </div>
 
-
-<div>
-    <ul id="profile-container">
-
-
-    </ul>
-</div>
-<hr class="stepsHr">
