@@ -17,7 +17,6 @@
             $("#pImage").attr({'src': profileData.user.activeProfileImage.url, 'data-id' : profileData.user.activeProfileImage.id});
             $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
 
-
             $.each( profileMyPhotos, function( i, e){
                 console.log( JSON.stringify(e));
                 var $imgContainer = $("<div>");
@@ -88,7 +87,8 @@
                 // $videoPreview.append( $thisChild );
                 var $iframe = $('<iframe>');
                 $iframe.css({ width: '100%', height: '600px', border: 0});
-                var videoUrl =  "//www.youtube.com/embed/" + $thisChild.attr('id') + "?rel=0";
+                var youtubeQuery = "?wmode=opaque&rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&modestbranding=0";
+                var videoUrl =  "//www.youtube.com/embed/" + $thisChild.attr('id') + youtubeQuery;
                 $iframe.attr('src', videoUrl);
                 $videoPreview.html( $iframe );
                 $videoPreview.css('backgroundColor', '');
