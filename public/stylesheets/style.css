@@ -590,7 +590,7 @@ input[type="text"],input[type="password"]{
     margin: auto;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 3;
 }
 .commenterAvatar{
     border: solid 1px rgb(230, 214, 216);

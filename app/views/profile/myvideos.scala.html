@@ -59,7 +59,8 @@
             $('body').on( 'click', '#video-preview .close-img-preview', function(){
 
                 $( this).hide();
-                var $videoPreview =  $("#video-preview");;
+                $('#shadow-box').fadeOut().remove();
+                var $videoPreview =  $("#video-preview");
 
                 $videoPreview.animate({
                     height: "0px"
@@ -70,20 +71,22 @@
             });
 
             $('body').on( 'click', '.artista-video', function(){
+                showVideoShadow();
                 var $videoPreview = $("#video-preview");
                 $videoPreview.html("");
                 var $thisChild = $( this ).children(":first");
                 // $videoPreview.append( $thisChild );
                 var $iframe = $('<iframe>');
                 $iframe.css({ width: '100%', height: '600px', border: 0});
-                var videoUrl =  "//www.youtube.com/embed/" + $thisChild.attr('id') + "?rel=0";
+                var youtubeQuery = "?wmode=opaque&rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&modestbranding=0";
+                var videoUrl =  "//www.youtube.com/embed/" + $thisChild.attr('id') + youtubeQuery;
                 $iframe.attr('src', videoUrl);
                 $videoPreview.html( $iframe );
                 $videoPreview.css('backgroundColor', '#222');
                 $videoPreview.animate({
                     height: "600px"
                 }, 'slow', function(){
-                    $videoPreview.append( '<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></button></div>').fadeIn();
+                    $videoPreview.append( '<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -5px"></button></div>').fadeIn();
                 });
             });
         });
