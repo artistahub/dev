@@ -170,6 +170,8 @@ function slideDownMainContent(){
 }
 
 function stripTagsFromHtml( input ){
-   return $( input).text();
+    var $d = $("<div></div>");
+    $d.text(input.replace(/(<([^>]+)>)/ig,""))  ;
+   return $d.text();
 }
 
