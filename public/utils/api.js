@@ -1,4 +1,5 @@
 //var url = "http://localhost:9000";
+$.ajaxSetup({ cache: false });
 var url = '';
 
 var o = {name:"hassan", age:33};
@@ -95,6 +96,7 @@ function ajaxGetContent(uri, containerToFillIn) {
 
 }
 
+/**
 function ajaxImageUplaod(uri, containerToFillIn) {
      alert(" Go AJax ");
 
@@ -113,3 +115,4 @@ function ajaxImageUplaod(uri, containerToFillIn) {
     });
 
 }
+ **/
