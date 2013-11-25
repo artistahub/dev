@@ -2,148 +2,144 @@
 @headerIn()
 
 
+<script>
+    $(document).ready(function () {
+        //alert(" hi " + new ToolBar().render());
+        var myphotos = @Html(myphotos);
+        var $myphotosContainer = $("#artista-photos-container");
+        $('#tool-bar').html(new ToolBar(toolBarObjects.myphotosToolBar).render());
 
-    <script>
-        $( document).ready( function(){
-            //alert(" hi " + new ToolBar().render());
-            var myphotos = @Html(myphotos);
-            var $myphotosContainer = $("#artista-photos-container");
-            $('#tool-bar').html( new ToolBar( toolBarObjects.myphotosToolBar ).render());
-
-            $.each( myphotos, function( i, e){
-                 //console.log( JSON.stringify(e));
-                var $imgContainer = $("<div>");
-                var url = e.url;
-                var $img = $("<img>");
-                    $img.addClass( 'grayscale' );
-                    $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
-                    $img.attr({'src': url , 'data-id':e.id});
-                    $imgContainer.append( $img );
-                    $myphotosContainer.append( $imgContainer );
-
-
-            });
-
-            $('#tool-bar').on( 'click','#myphotos-upload', function(){
-                $body = $('body');
-                $bodyWidth = $body.width();
-                $bodyHeight = $body.height();
-
-                var $dropDownContainer = $("<div>");
-                var $dropDownShadow = $("<div>");
-                $dropDownShadow.attr('class', "dropDownShadow");
-                $dropDownContainer.attr({'id' : "dropDownContainer", 'class': "div-absolute-center" });
-
-                $dropDownShadow.css({'z-index' : 1 ,'position' :'absolute', 'backgroundColor' :'rgb(6, 1, 8)','height' : $bodyHeight, 'width' : $bodyWidth,'top' : 0,'opacity' : 0.5});
-                $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(214, 206, 206)','height' : "400px", 'width' : $bodyWidth/2,'top' : "-400px"});
-
-                $body.append( $dropDownShadow );
-                // var wHtml = new DropDownWindow().render();
-                $dropDownContainer.html( new DropDownWindow( forms.uploadMyphotos ).render() );
-                $body.append( $dropDownContainer );
-                $dropDownContainer.animate({
-                    top: 0
-                }, "slow");
-                $dropDownContainer.on( 'click', '.close-dropDown', function(){
-                    //alert( 'hi' );
-                    $dropDownContainer.animate({
-                        top: - $dropDownContainer.height()
-                    }, "slow", function(){
-                        $dropDownContainer.remove();
-                        $dropDownShadow.fadeOut();
-                    });
-                });
-            });
-
-            $('body').on( 'click', '#img-preview .close-img-preview', function(){
-                    $( this).hide();
-                    $("#shadow-box").remove();
-                var $imgPreview = $( '#img-preview' );
-
-
-                $imgPreview.animate({
-                    height: "0px",
-                    padding: '0px'
-                }, 500, function(){
-                    $imgPreview.html("");
-                    $(this).height('auto');
-                });
-
-            });
-
-            $('body').on( 'click', '.artista-img', function(){
-                showShadow();
-                var $commentsContainer = $('<div>');
-                    $commentsContainer.attr('id' , 'comments-Container');
-                    //$commentsContainer.append( new CommentObject().render());
-
-                var $imgPreview = $("#img-preview");
-                $imgPreview.html("");
-                var $thisChild = $( this ).children(":first");
-                // $imgPreview.append( $thisChild );
-                var dataId = $thisChild.attr('data-id');
-
-                ajaxReturnJson( '/getComments/' + dataId, function( data ){
-                    //alert( data );
-                   // var $commentsContainer = $("#comments-Container");
-                    console.log( JSON.stringify(data) );
-                    $.each( data , function( i, e){
-                        $commentsContainer.append( new  CommentObject( e ).render() );
-
-                    });
-                });
-                var $img = $('<img>');
-                $img.attr({'src': $thisChild.attr('src'), 'data-id' : dataId});
-                $img.css({ height: 'auto'});
-                var $imgContainer = $('<div>');
-                    $imgContainer.attr('class', 'div-img-top-curves');
-                    $imgContainer.css({ 'text-align': 'center', margin: 'auto','background-color' : '#222'});
-                    $imgContainer.append( $img);
-
-                $imgPreview.html( $imgContainer );
-                $imgPreview.append( $commentsContainer );
-                $imgPreview.append( forms.submitMyphotoComment( dataId ) );
-              //  $imgPreview.append( $commentsContainer );
-
-                $imgPreview.css('backgroundColor', '');
-                $imgPreview.animate({
-                    height: "auto",
-                    padding:'25px 0px'
-                }, 'slow', function(){
-                    // alert( "DONE" );
-                    $imgPreview.append( '<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></button></div>').fadeIn();
-                });
-            });
-
-
-
-            $('body').on('click', '#do-comment', function () {
-                var comment = stripTagsFromHtml( $('#comment-text-area').val() );
-                $('#comment-text-area').val('');
-                var dataId = $(this).attr('data-id');
-                var o = {dataId : dataId, comment : comment};
-                if ( comment ){
-                    ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
-                }
-            });
+        $.each(myphotos, function (i, e) {
+            //console.log( JSON.stringify(e));
+            var $imgContainer = $("<div>");
+            var url = e.url;
+            var $img = $("<img>");
+            $img.addClass('grayscale');
+            $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
+            $img.attr({'src':url, 'data-id':e.id});
+            $imgContainer.append($img);
+            $myphotosContainer.append($imgContainer);
 
 
         });
-    </script>
 
-    <div class="container-fluid" id="content-container">
+        $('#tool-bar').on('click', '#myphotos-upload', function () {
+            $body = $('body');
+            $bodyWidth = $body.width();
+            $bodyHeight = $body.height();
+
+            var $dropDownContainer = $("<div>");
+            var $dropDownShadow = $("<div>");
+            $dropDownShadow.attr('class', "dropDownShadow");
+            $dropDownContainer.attr({'id':"dropDownContainer", 'class':"div-absolute-center" });
+
+            $dropDownShadow.css({'z-index':1, 'position':'absolute', 'backgroundColor':'rgb(6, 1, 8)', 'height':$bodyHeight, 'width':$bodyWidth, 'top':0, 'opacity':0.5});
+            $dropDownContainer.css({'position':'absolute', 'backgroundColor':'rgb(214, 206, 206)', 'height':"400px", 'width':$bodyWidth / 2, 'top':"-400px"});
+
+            $body.append($dropDownShadow);
+            // var wHtml = new DropDownWindow().render();
+            $dropDownContainer.html(new DropDownWindow(forms.uploadMyphotos).render());
+            $body.append($dropDownContainer);
+            $dropDownContainer.animate({
+                top:0
+            }, "slow");
+            $dropDownContainer.on('click', '.close-dropDown', function () {
+                //alert( 'hi' );
+                $dropDownContainer.animate({
+                    top:-$dropDownContainer.height()
+                }, "slow", function () {
+                    $dropDownContainer.remove();
+                    $dropDownShadow.fadeOut();
+                });
+            });
+        });
+
+        $('body').on('click', '#img-preview .close-img-preview', function () {
+            $(this).hide();
+            $("#shadow-box").remove();
+            var $imgPreview = $('#img-preview');
+
+
+            $imgPreview.animate({
+                height:"0px",
+                padding:'0px'
+            }, 500, function () {
+                $imgPreview.html("");
+                $(this).height('auto');
+            });
+
+        });
+
+        $('body').on('click', '.artista-img', function () {
+            showShadow();
+            var $commentsContainer = $('<div>');
+            $commentsContainer.attr('id', 'comments-Container');
+            //$commentsContainer.append( new CommentObject().render());
+
+            var $imgPreview = $("#img-preview");
+            $imgPreview.html("");
+            var $thisChild = $(this).children(":first");
+            // $imgPreview.append( $thisChild );
+            var dataId = $thisChild.attr('data-id');
+
+            ajaxReturnJson('/getComments/' + dataId, function (data) {
+                //alert( data );
+                // var $commentsContainer = $("#comments-Container");
+                console.log(JSON.stringify(data));
+                $.each(data, function (i, e) {
+                    $commentsContainer.append(new CommentObject(e).render());
+
+                });
+            });
+            var $img = $('<img>');
+            $img.attr({'src':$thisChild.attr('src'), 'data-id':dataId});
+            $img.css({ height:'auto'});
+            var $imgContainer = $('<div>');
+            $imgContainer.attr('class', 'div-img-top-curves');
+            $imgContainer.css({ 'text-align':'center', margin:'auto', 'background-color':'#222'});
+            $imgContainer.append($img);
+
+            $imgPreview.html($imgContainer);
+            $imgPreview.append($commentsContainer);
+            $imgPreview.append(forms.submitMyphotoComment(dataId));
+            //  $imgPreview.append( $commentsContainer );
+
+            $imgPreview.css('backgroundColor', '');
+            $imgPreview.animate({
+                height:"auto",
+                padding:'25px 0px'
+            }, 'slow', function () {
+                // alert( "DONE" );
+                $imgPreview.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></button></div>').fadeIn();
+            });
+        });
+
+        $('body').on('click', '#do-comment', function () {
+            var comment = stripTagsFromHtml($('#comment-text-area').val());
+            $('#comment-text-area').val('');
+            var dataId = $(this).attr('data-id');
+            var dataType = $(this).attr('data-type');
+            var o = {dataType:dataType, dataId:dataId, comment:comment};
+            if (comment) {
+                ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
+            }
+        });
+    });
+</script>
+
+<div class="container-fluid" id="content-container">
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">
             <div id="img-preview"></div>
-                <div class="container-fluid">
-                    <div class="container-fluid" id="artista-photos-container">
-
-                    </div>
-
+            <div class="container-fluid">
+                <div class="container-fluid" id="artista-photos-container">
 
                 </div>
+
+
             </div>
+        </div>
 
     </div>
 

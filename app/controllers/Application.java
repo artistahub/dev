@@ -138,9 +138,10 @@ public class Application extends Controller {
         String dataType = requestData.get("dataType");
         String photoId = requestData.get( "dataId");
         String comment = requestData.get("comment");
+        System.out.println(" *******  Add Coment");
 
         if ( dataType.equals("profileImage")){
-             System.out.println(" Ite is profile Image ");
+             System.out.println(" It is profile Image ");
              ProfileImageComment profileImagecomment = new ProfileImageComment( u, comment);
              ProfileImage profileImage = ProfileImage.findMyProfilePhotoById( photoId );
              profileImagecomment.setMyphoto( profileImage );
