@@ -94,10 +94,10 @@ var forms = {};
         '<label class="flabel" for="videoDescription" > Video Description</label>' +
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
         ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
-    forms.submitMyphotoComment =  function( dataId ){
+    forms.submitMyphotoComment =  function( dataId, dataType){
         var f = '<div > <div><h4>Comments:</h4></div> <div class="width-100"> ' +
                 '<textarea id="comment-text-area" style="width: 100%" rows="2" cols="30"></textarea> </div> <div>' +
-                '<input id="do-comment" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
+                '<input id="do-comment" data-type="' + dataType + '" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
         return f ;
     }
 

@@ -134,20 +134,41 @@ public class Application extends Controller {
 
     public static Result addComment(){
         DynamicForm requestData = form().bindFromRequest();
-        User u = User.findUserById( session("currentUserId") );
-        String myphotoId = requestData.get("dataId");
+        User u = User.findUserById(session("currentUserId"));
+        String dataType = requestData.get("dataType");
+        String photoId = requestData.get( "dataId");
         String comment = requestData.get("comment");
-        Comment myComment = new Comment( u, comment );
-        MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
-        myComment.setMyphoto( myphoto );
-        myComment.save();
+
+        if ( dataType.equals("profileImage")){
+             System.out.println(" Ite is profile Image ");
+             ProfileImageComment profileImagecomment = new ProfileImageComment( u, comment);
+             ProfileImage profileImage = ProfileImage.findMyProfilePhotoById( photoId );
+             profileImagecomment.setMyphoto( profileImage );
+             profileImagecomment.save();
+            return ok( Json.toJson( profileImagecomment ));
+        }
+        else {
+             Comment myPhotoComment = new Comment( u, comment );
+             MyPhoto myphoto = MyPhoto.findMyPhotoById( photoId );
+             myPhotoComment.setMyphoto( myphoto );
+             myPhotoComment.save();
+             return ok( Json.toJson( myPhotoComment));
+        }
+
         //return ok( Json.toJson( Comment.getCommentsByMyPhoto( myphotoId )));
-        return ok( Json.toJson( myComment));
+        //return ok( Json.toJson( myComment));
     }
 
     public static Result getComments( String myphotoId){
         MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
         List <Comment> comments = Comment.getCommentsByMyPhoto( myphotoId);
+        return ok( Json.toJson( comments ));
+
+    }
+    // Get Comments for profile Images
+    public static Result getProfileImageComment( String imageId){
+        ProfileImage profileImage = ProfileImage.findMyProfilePhotoById( imageId );
+        List <ProfileImageComment> comments = ProfileImageComment.getCommentsByMyProfilePhoto( imageId );
         return ok( Json.toJson( comments ));
 
     }

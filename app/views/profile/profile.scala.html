@@ -12,9 +12,9 @@
             var $mediaContainer = $("#artista-photos-container");
             var $mediaViewer = $("#media-preview");
             var $headerBar = $('#header-top-bar');
-            //alert( profileDate );
+            console.log( profileData );
            // $("#pImage").attr('src' , profileData.user.activeProfileImage.url);
-            $("#pImage").attr({'src': profileData.user.activeProfileImage.url, 'data-id' : profileData.user.activeProfileImage.id});
+            $("#pImage").attr({'src': profileData.user.activeProfileImage.url, 'data-id' : profileData.user.activeProfileImage.id, 'data-type' : profileData.user.activeProfileImage.imageType});
             $("#profilePersonalInfo").html( new ProfilePersonalInfo( profileData.user).html);
 
             $.each( profileMyPhotos, function( i, e){
@@ -120,10 +120,13 @@
                 var $imgPreview = $("#media-preview");
                     $imgPreview.html("");
                 var $thisChild = $( this ).children(":first");
-                var dataId = $thisChild.attr('data-id');
+                var dataId = $thisChild.attr( 'data-id' );
+                var dataType = $thisChild.attr( 'data-type' );
+                var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';
+               // alert( getCommentsUrl );
 
-                ajaxReturnJson( '/getComments/' + dataId, function( data ){
-                    console.log( JSON.stringify(data) );
+                ajaxReturnJson( getCommentsUrl + dataId, function( data ){
+                    //alert ( JSON.stringify(data) );
                     $.each( data , function( i, e){
                         $commentsContainer.append( new CommentObject( e ).render() );
 
@@ -140,7 +143,7 @@
                 $imgPreview.html( $imgContainer );
                 $imgPreview.append( $commentsContainer );
                 @if(session.get("sessionUser")) {
-                    $imgPreview.append( forms.submitMyphotoComment( dataId ) );
+                    $imgPreview.append( forms.submitMyphotoComment( dataId, dataType ) );
                 } else {
                     var $signInBtn = $('<div>');
                     $signInBtn.attr({'class' :'btn btn-primary' });
@@ -148,8 +151,6 @@
                     $signInBtn.text(" Please sign in to leave a comment");
                     $imgPreview.append( $signInBtn );
                 }
-
-
 
                 $imgPreview.css('backgroundColor', '');
                 $imgPreview.animate({
@@ -163,10 +164,12 @@
             });
 
             $('body').on('click', '#do-comment', function () {
+                //alert( " Do comment " );
                 var comment = stripTagsFromHtml( $('#comment-text-area').val() );
                 $('#comment-text-area').val('');
                 var dataId = $(this).attr('data-id');
-                var o = {dataId : dataId, comment : comment};
+                var dataType = $(this).attr('data-type');
+                var o = {dataType: dataType, dataId : dataId, comment : comment};
                 if ( comment ){
                     ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
                 }

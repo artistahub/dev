@@ -19,17 +19,12 @@ public class ProfileImage extends Model {
    // @OneToOne(cascade = CascadeType.ALL)
     //private User user;
     private String description;
+    private List<ProfileImageComment> comments;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
+    private String imageType;
 
-   /** public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-    **/
 
     @EnumMapping(nameValuePairs="active = a, inactive = i")
     public enum Status {
@@ -40,6 +35,7 @@ public class ProfileImage extends Model {
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
+        this.setImageType("profileImage");
     }
 
     @Enumerated(value=EnumType.ORDINAL)
@@ -59,7 +55,20 @@ public class ProfileImage extends Model {
         this.status = status;
     }
 
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
     private static Finder<Long, ProfileImage> find = new Finder<Long, ProfileImage>(Long.class, ProfileImage.class);
+
+    public static ProfileImage findMyProfilePhotoById( String id){
+        return  Ebean.find( ProfileImage.class).where().like( "id", id).findUnique();
+    }
+
 
     public static List<ProfileImage> getProfileImages() {
         List<ProfileImage> profileImages = Ebean.find(ProfileImage.class).findList();
@@ -97,6 +106,15 @@ public class ProfileImage extends Model {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public List<ProfileImageComment> getComments(  ) {
+
+        return comments;
+    }
+
+    public void setComments(List<ProfileImageComment> comments) {
+        this.comments = comments;
     }
 
     public String toString(){
