@@ -2,7 +2,7 @@ package controllers;
 
 import dataHelpers.ProfileData;
 import models.*;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.api.mvc.*;
 import play.data.DynamicForm;
 import play.mvc.*;
