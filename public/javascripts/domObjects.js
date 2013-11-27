@@ -155,7 +155,7 @@ SearchResultObject.prototype.render = function(){
 var showShadow = function(){
     var $document = $(document);
     var documentHeight = $document.height();
-    var div =  $('<div>').attr('id', 'shadow-box').css({ opacity:.7,'background-color': '#000', width: '100%', height: documentHeight+"px", position:'absolute',top:0, bottom: 0,'z-index': 2});
+    var div =  $('<div>').attr('id', 'shadow-box').css({ opacity:.7,'background-color': '#000', width: '100%', height: documentHeight+"px", position:'fixed',top:0, bottom: 0,'z-index': 2});
     $('body').append( div );
     $('#shadow-box').click( function(){
         $( this).remove();
@@ -165,7 +165,7 @@ var showShadow = function(){
 var showVideoShadow = function(){
     var $document = $(document);
     var documentHeight = $document.height();
-    var div =  $('<div>').attr('id', 'shadow-box').css({'background-color': '#000', width: '100%', height: documentHeight+"px", position:'absolute',top:0, bottom: 0,'z-index': 2});
+    var div =  $('<div>').attr('id', 'shadow-box').css({'background-color': '#000', width: '100%', height: documentHeight+"px", position:'fixed',top:0, bottom: 0,'z-index': 2});
     $('body').append( div );
     $('#shadow-box').click( function(){
         $( this).remove();
