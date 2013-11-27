@@ -6,8 +6,6 @@
     <script>
         $( document).ready( function(){
 
-
-
         $(function(){
             // create some screens
             var feeds = @Html(feeds);
@@ -36,10 +34,11 @@
 
             }
             else {
-                $('feed-item').css( 'width' , feedPageWidth + "px");
+                //alert('yeah');
+                //$('feed-item').css( 'width' , feedPageWidth + "px");
+                $('.feed-item').css( 'width' ,"98%");
             }
         });
-
 
         });
 
