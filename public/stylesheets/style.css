@@ -11,7 +11,8 @@
 body{
     margin: 0px;
     padding: 0px;
-    background-color: rgb(230, 224, 224);
+    /*background-color: rgb(230, 224, 224);*/
+    background-color: rgb(246, 239, 240);
     background-image: url("../images/noise-2.png");
 }
 .center:first-child{
@@ -22,12 +23,7 @@ body{
 a{
     color: #222;
 }
-html{
-    margin: 0px;
-    padding: 0px;
-    background-color: rgb(244, 238, 238);
-    background-image: url("../images/noise-2.png");
-}
+
 * {
     font: Roboto,arial,sans-serif;
     white-space: normal;
@@ -490,7 +486,6 @@ input[type="text"],input[type="password"]{
     padding: 0px;
 }
 .sideMenu-row{
-    border: solid 1px #e1e1e1;
     padding: 10px 0px 0px 10px;
 }
 .fc{
