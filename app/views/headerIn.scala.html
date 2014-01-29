@@ -21,7 +21,7 @@
 
 
     function UserProfile( u ){
-        var userProfileImg =  u.activeProfileImage.url || "/images/clown.jpg";
+        var userProfileImg =  u.activeProfileImage != null ?   u.activeProfileImage.url : "/images/clown.jpg";
         var userFullName = u.fullName;
         this.wrapper = "";
        // this.profileImage = "<li><span style='width: 75px;overflow: hidden;height: 55px; display: inline-block;border: solid 1px'> <img width='100%'  src= " + userProfileImg +"></span></li>";
@@ -42,6 +42,8 @@
         // Slide down main content
         slideDownMainContent();
         var u = @Html(session.get("sessionUser"));
+
+        console.log( JSON.stringify( u ) );
         var $profileContainer = $("#profile-ul");
             $profileContainer.html( new UserProfile( u ).render() );
 

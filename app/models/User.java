@@ -24,7 +24,7 @@ public class User extends Model {
     private String password;
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
-    private ProfileImage activeProfileImage;
+    private ProfileImage activeProfileImage = new ProfileImage("/images/clown.jpg", "");
    // @OneToMany(cascade = CascadeType.ALL)
    // private List<ProfileImage> profileImages;
     @Temporal(TemporalType.TIMESTAMP)

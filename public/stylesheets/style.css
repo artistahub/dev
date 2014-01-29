@@ -567,7 +567,7 @@ input[type="text"],input[type="password"]{
     border-bottom: 1px solid #f5f5f5;
 }
 #img-preview, #media-preview{
-    max-width: 600px;
+    width: 90%;
     position: fixed;
     margin: auto;
     left: 0px;
@@ -575,6 +575,12 @@ input[type="text"],input[type="password"]{
     z-index: 99;
     top: 25px;
     height: auto;
+    border: solid 1px #333333;
+}
+.imageWrapper {
+    border: solid 1px #2f2f2f;
+    max-width: 600px;
+    margin: auto;
 }
 #dropDownContainer{
     z-index: 99
@@ -598,7 +604,6 @@ input[type="text"],input[type="password"]{
     position: relative;
 }
 #comments-Container{
-    width: 100%;
     max-height: 600px;
     overflow-y: auto;
     margin: auto;
