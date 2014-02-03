@@ -99,14 +99,15 @@
         });
         $('body').on('click', '#media-preview .close-img-preview', function () {
             $(this).hide();
-            $("#shadow-box").remove();
-            var $imgPreview = $('#media-preview');
-            $imgPreview.animate({
+
+            var $mediaWrapper = $('#media-wrapper');
+            $mediaWrapper.animate({
                 height:"0px",
                 padding:'0px'
-            }, 500, function () {
-                $imgPreview.html("");
-                $(this).height('auto');
+            }, 50, function () {
+                $("#shadow-box").remove();
+             //   $mediaWrapper.html("");
+                //$(this).height('auto');
             });
 
         });
@@ -116,6 +117,8 @@
             $commentsContainer.attr('id', 'comments-Container');
 
             var $imgPreview = $("#media-preview");
+            var $imgWrapper = $("#media-wrapper");
+            $imgWrapper.css({ 'z-index' : 5, height: 'auto'});
             $imgPreview.html("");
             var $thisChild = $(this).children(":first");
             var dataId = $thisChild.attr('data-id');
@@ -204,7 +207,7 @@
 
 </div>
 <hr class="stepsHr">
-<div class="center">
+<div id="media-wrapper">
     <div id="media-preview"></div>
 </div>
 <div class="container-fluid">
