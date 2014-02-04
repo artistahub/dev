@@ -580,7 +580,9 @@ input[type="text"],input[type="password"]{
     left: 0px;
     right: 0px;
     height: auto;
+
     position: relative;
+
 }
 #dropDownContainer{
     z-index: 99
