@@ -99,14 +99,15 @@
         });
         $('body').on('click', '#media-preview .close-img-preview', function () {
             $(this).hide();
-            $("#shadow-box").remove();
-            var $imgPreview = $('#media-preview');
-            $imgPreview.animate({
+
+            var $mediaWrapper = $('#media-wrapper');
+            $mediaWrapper.animate({
                 height:"0px",
                 padding:'0px'
-            }, 500, function () {
-                $imgPreview.html("");
-                $(this).height('auto');
+            }, 50, function () {
+                $("#shadow-box").remove();
+             //   $mediaWrapper.html("");
+                //$(this).height('auto');
             });
 
         });
@@ -117,6 +118,8 @@
 
 
             var $imgPreview = $("#media-preview");
+            var $imgWrapper = $("#media-wrapper");
+            $imgWrapper.css({ 'z-index' : 5, height: 'auto'});
             $imgPreview.html("");
             var $thisChild = $(this).children(":first");
             var dataId = $thisChild.attr('data-id');
@@ -207,8 +210,10 @@
 
 </div>
 <hr class="stepsHr">
-<div class="center">
-    <div class="row-fluid" id="media-preview"></div>
+
+<div id="media-wrapper">
+    <div id="media-preview"></div>
+>>>>>>> eec474f43953619e0e1ac2b65d96fd566ee97384
 </div>
 <div class="container-fluid">
     <div class="container-fluid" id="artista-photos-container">

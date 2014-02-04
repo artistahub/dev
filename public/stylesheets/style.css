@@ -15,6 +15,14 @@ body{
     background-color: rgb(246, 239, 240);
     background-image: url("../images/noise-2.png");
 }
+#media-wrapper{
+    position: fixed;
+    top: 30px;
+    bottom: 30px;
+    left:0; right: 0;
+    overflow-y: auto;
+
+}
 .center:first-child{
     text-align: center;
     margin: 0 auto;
@@ -569,11 +577,10 @@ input[type="text"],input[type="password"]{
 #img-preview, #media-preview{
     width: 90%;
     position: fixed;
+    max-width: 600px;
     margin: auto;
     left: 0px;
     right: 0px;
-    z-index: 99;
-    top: 25px;
     height: auto;
     border: solid 1px #333333;
 }
@@ -581,6 +588,7 @@ input[type="text"],input[type="password"]{
     border: solid 1px #2f2f2f;
     max-width: 600px;
     margin: auto;
+    position: relative;
 }
 #dropDownContainer{
     z-index: 99
