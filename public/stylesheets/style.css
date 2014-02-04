@@ -630,14 +630,14 @@ div#comments-Container .comment-row:first-child {
     border-top: none;
 }
 
-.comment-date{
-    position: relative;
+
+.comment-date {
+    position: absolute;
     bottom: 0px;
-    right: -3px;
+    right: 5px;
     float: right;
     font-size: 8pt;
     color: #999;
-    top: -2px;
 }
 #do-comment-container{
     width: 100%;
