@@ -1,6 +1,5 @@
 package models;
 
-import java.rmi.server.ExportException;
 import java.util.*;
 import javax.persistence.*;
 
@@ -12,7 +11,7 @@ import play.db.ebean.*;
 
 @Entity
 @Table(name = "artistas")
-public class User extends Model {
+public class SystemUser extends Model {
 
     @Id
     //private Long id;
@@ -25,39 +24,14 @@ public class User extends Model {
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileImage activeProfileImage;
-   // @OneToMany(cascade = CascadeType.ALL)
-   // private List<ProfileImage> profileImages;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     private Address location;
     private Address BillingAddress;
     private Address MailingAddress;
+    @Enumerated(value=EnumType.STRING)
+    private UserType userType;
     private String test;
-
-    public User( String fName, String lName, String email, String pass){
-        this.firstName = fName;
-        this.lastName = lName;
-        this.email = email;
-        this.password = pass;
-        this.setDateCreated( new Date() );
-    }
-
- //   public List<ProfileImage> getProfileImages( ) {
-
-   //     return profileImages;
-   // }
-
-  //  public void setProfileImages(List<ProfileImage> profileImages) {
-   //     this.profileImages = profileImages;
-   // }
-
-    public ProfileImage getActiveProfileImage() {
-        return activeProfileImage;
-    }
-
-    public void setActiveProfileImage(ProfileImage activeProfileImage) {
-        this.activeProfileImage = activeProfileImage;
-    }
 
     public String getTest() {
         return test;
@@ -67,66 +41,78 @@ public class User extends Model {
         this.test = test;
     }
 
-    @EnumMapping(nameValuePairs="artista=a, performance=p, agency= ag")
-    public enum ActorType {
-        artista, performance, agency
+
+    @EnumMapping(nameValuePairs="ARTIST = artist, PERFORMANCE = performance, AGENCY = agency, THEATER = theater, FESTIVAL = festival")
+    public enum UserType {
+         ARTIST, PERFORMANCE, AGENCY, THEATER, FESTIVAL;
+
     }
 
+    public SystemUser(String fName, String lName, String email, String pass){
+        this.firstName = fName;
+        this.lastName = lName;
+        this.email = email;
+        this.password = pass;
+        this.setDateCreated( new Date() );
+    }
 
+    public ProfileImage getActiveProfileImage() {
+        return activeProfileImage;
+    }
 
+    public void setActiveProfileImage(ProfileImage activeProfileImage) {
+        this.activeProfileImage = activeProfileImage;
+    }
 
-    @Enumerated(value=EnumType.ORDINAL)
-    ActorType actorType = ActorType.artista;
+    private static Finder<Long, SystemUser> find = new Finder<Long, SystemUser>(Long.class, SystemUser.class);
 
-    private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
-
-    public static List<User> getArtistas() {
-        List<User> artistas = Ebean.find(User.class).findList();
+    public static List<SystemUser> getArtistas() {
+        List<SystemUser> artistas = Ebean.find(SystemUser.class).findList();
         System.out.print(">>>>>>> " + artistas);
         return artistas;
     }
 
     public static void deleteArtista(Long id) {
-        User.getFind().ref(id).delete();
+        SystemUser.getFind().ref(id).delete();
     }
 
-    public static User findUserById( String id){
-        return  Ebean.find( User.class).where().like( "id", id).findUnique();
+    public static SystemUser findUserById( String id){
+        return  Ebean.find( SystemUser.class).where().like( "id", id).findUnique();
     }
 
-    public static List<User> findByName(String name) {
-      //  List<User> artistas = Ebean.find(User.class).where().ilike("lastName", "%" + name + "%").findList();
-        List<User> artistas = Ebean.find(User.class).where(Expr.or( Expr.ilike("firstName", "%" + name + "%"), Expr.ilike("lastName", "%" + name + "%"))).findList();
+    public static List<SystemUser> findByName(String name) {
+      //  List<SystemUser> artistas = Ebean.find(SystemUser.class).where().ilike("lastName", "%" + name + "%").findList();
+        List<SystemUser> artistas = Ebean.find(SystemUser.class).where(Expr.or( Expr.ilike("firstName", "%" + name + "%"), Expr.ilike("lastName", "%" + name + "%"))).findList();
         return artistas;
     }
 
-    public static User findUserByEmailAndPass( String email, String pass ){
-        return  Ebean.find( User.class ).where().like( "email", email).eq("password", pass).findUnique();
+    public static SystemUser findUserByEmailAndPass( String email, String pass ){
+        return  Ebean.find( SystemUser.class ).where().like( "email", email).eq("password", pass).findUnique();
 
     }
 
-    public static User findUerByUserName ( String userName){
-        return  Ebean.find( User.class ).where().like( "userName", userName).findUnique();
+    public static SystemUser findUerByUserName ( String userName){
+        return  Ebean.find( SystemUser.class ).where().like( "userName", userName).findUnique();
     }
 
     public static void createArtista() {
-        User u = new User("hassan", "Rais", "email@email.com","1234");
-        //System.out.println("\n UserId: **** " + Ebean.nextId(User.class) + "\n");
+        SystemUser u = new SystemUser("hassan", "Rais", "email@email.com","1234");
+        //System.out.println("\n UserId: **** " + Ebean.nextId(SystemUser.class) + "\n");
        // u.setLastName("Rais");
       //  u.setFirstName("Hassan");
         u.setAge(33);
-        System.out.print(" new user Id: " + Ebean.nextId(User.class));
+        System.out.print(" new user Id: " + Ebean.nextId(SystemUser.class));
         u.setMailingAddress(Address.createAddress());
         u.setBillingAddress(Address.createAddress());
         u.save();
     }
 
-    public static Finder<Long, User> getFind() {
+    public static Finder<Long, SystemUser> getFind() {
         return find;
     }
 
-    public static void setFind(Finder<Long, User> find) {
-        User.find = find;
+    public static void setFind(Finder<Long, SystemUser> find) {
+        SystemUser.find = find;
     }
 
     public String getFirstName() {
@@ -219,10 +205,20 @@ public class User extends Model {
         MailingAddress = mailingAddress;
     }
 
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
     public String toString(){
 
-        return " User: " + getId() + " Name: " + getLastName() + " " + getFirstName() + " Email: " + getEmail();
+        return " SystemUser: " + getId() + " Name: " + getLastName() + " " + getFirstName() + " Email: " + getEmail();
 
     }
+
 
 }

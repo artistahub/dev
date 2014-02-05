@@ -13,9 +13,9 @@
         var $mediaViewer = $("#media-preview");
         var $headerBar = $('#header-top-bar');
         console.log(profileData);
-        // $("#pImage").attr('src' , profileData.user.activeProfileImage.url);
-        $("#pImage").attr({'src':profileData.user.activeProfileImage.url, 'data-id':profileData.user.activeProfileImage.id, 'data-type':profileData.user.activeProfileImage.imageType});
-        $("#profilePersonalInfo").html(new ProfilePersonalInfo(profileData.user).html);
+        // $("#pImage").attr('src' , profileData.systemUser.activeProfileImage.url);
+        $("#pImage").attr({'src':profileData.systemUser.activeProfileImage.url, 'data-id':profileData.systemUser.activeProfileImage.id, 'data-type':profileData.systemUser.activeProfileImage.imageType});
+        $("#profilePersonalInfo").html(new ProfilePersonalInfo(profileData.systemUser).html);
 
         $.each(profileMyPhotos, function (i, e) {
             console.log(JSON.stringify(e));

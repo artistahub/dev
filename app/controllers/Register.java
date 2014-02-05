@@ -8,9 +8,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import java.io.IOException;
 import views.html.*;
-import org.codehaus.jackson.*;
-import play.mvc.BodyParser;
-import play.libs.Json;
+
 import static play.data.Form.*;
 
 public class Register extends Controller {
@@ -25,11 +23,11 @@ public class Register extends Controller {
 
     public static Result addVideo() {
         DynamicForm requestData = form().bindFromRequest();
-        User u = User.findUserById(session( "currentUserId" ));
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
         String videoLink = requestData.get("videoLink");
         String videoDescription = requestData.get("videoDescription");
         Video video = new Video(videoLink, videoDescription);
-        video.setUser( u );
+        video.setSystemUser(u);
         video.save();
        return redirect( routes.Application.myVideos());
 
@@ -43,7 +41,8 @@ public class Register extends Controller {
         String email = requestData.get("email");
         String password = requestData.get("password");
         String userName = requestData.get("userName");
-        User u = new User(firstName, lastName, email,  password);
+        SystemUser u = new SystemUser(firstName, lastName, email,  password);
+        u.setUserType(SystemUser.UserType.ARTIST);
         u.setUserName( firstName + "." + lastName );
         u.setLocation(Address.createAddress());
         u.save();
@@ -61,7 +60,7 @@ public class Register extends Controller {
             ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
             Feed f = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
             f.save();
-            //profileImage.setUser( u );
+            //profileImage.setSystemUser( u );
             profileImage.save();
             //System.out.println( "-----------++++++++++--------- " + profileImage.getId());
             u.setActiveProfileImage(profileImage);

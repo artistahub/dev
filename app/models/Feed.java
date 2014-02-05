@@ -15,17 +15,17 @@ public class Feed extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    private SystemUser systemUser;
     private String url;
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
 
-    public Feed( User user, String url, String description){
+    public Feed( SystemUser systemUser, String url, String description){
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
-        this.setUser( user );
+        this.setSystemUser(systemUser);
     }
 
     private static Finder<Long, Feed> find = new Finder<Long, Feed>(Long.class, Feed.class);
@@ -68,11 +68,11 @@ public class Feed extends Model {
         this.dateCreated = dateCreated;
     }
 
-    public User getUser() {
-        return user;
+    public SystemUser getSystemUser() {
+        return systemUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSystemUser(SystemUser systemUser) {
+        this.systemUser = systemUser;
     }
 }

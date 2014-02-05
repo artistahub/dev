@@ -21,6 +21,7 @@ body{
     bottom: 30px;
     left:0; right: 0;
     overflow-y: auto;
+    height: 0;
 
 }
 .center:first-child{

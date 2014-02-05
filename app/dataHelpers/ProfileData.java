@@ -2,33 +2,33 @@ package dataHelpers;
 
 import models.MyPhoto;
 import models.ProfileImage;
-import models.User;
+import models.SystemUser;
 import models.Video;
 
 import java.util.List;
 
 public class ProfileData {
-    private User user;
+    private SystemUser systemUser;
     private ProfileImage profileImage;
     private List<MyPhoto> myphotos;
     private List<Video> myvideos;
 
-    public ProfileData( User user){
-          setUser( user );
-          setProfileImage( user.getActiveProfileImage() );
+    public ProfileData( SystemUser systemUser){
+          setSystemUser(systemUser);
+          setProfileImage( systemUser.getActiveProfileImage() );
     }
 
 
     public ProfileImage getActiveProfileImage( ){
 
-        return  getUser().getActiveProfileImage();
+        return  getSystemUser().getActiveProfileImage();
     }
-    public User getUser() {
-        return user;
+    public SystemUser getSystemUser() {
+        return systemUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSystemUser(SystemUser systemUser) {
+        this.systemUser = systemUser;
     }
 
     public ProfileImage getProfileImage() {
@@ -40,11 +40,11 @@ public class ProfileData {
     }
 
     public String toString(){
-        return "Profile Data: " + getUser() + getProfileImage();
+        return "Profile Data: " + getSystemUser() + getProfileImage();
     }
 
     public List<MyPhoto> getMyphotos() {
-        this.myphotos = MyPhoto.getMyPhotos( this.user.getId());
+        this.myphotos = MyPhoto.getMyPhotos( this.systemUser.getId());
         return myphotos;
     }
 
@@ -53,7 +53,7 @@ public class ProfileData {
     }
 
     public List<Video> getMyvideos() {
-        this.myvideos = Video.getMyVideos( this.user.getId());
+        this.myvideos = Video.getMyVideos( this.systemUser.getId());
         return myvideos;
     }
 

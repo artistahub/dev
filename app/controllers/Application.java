@@ -3,12 +3,9 @@ package controllers;
 import dataHelpers.ProfileData;
 import models.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import play.api.mvc.*;
 import play.data.DynamicForm;
-import play.mvc.*;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.BodyParser;
 import play.libs.Json;
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class Application extends Controller {
         if ( session("sessionUser") != null){
             return redirect( routes.Application.home() );
         }
-        List<User> artistas = User.getArtistas();
+        List<SystemUser> artistas = SystemUser.getArtistas();
         ObjectNode allArtistas = Json.newObject();
         allArtistas.put("allArtistas", Json.toJson( artistas ));
         //System.out.print(allArtistas);
@@ -46,7 +43,7 @@ public class Application extends Controller {
 
     }
    public static Result artistas() {
-       List<User> artistas = User.getArtistas();
+       List<SystemUser> artistas = SystemUser.getArtistas();
        ObjectNode allArtistas = Json.newObject();
        allArtistas.put("allArtistas", Json.toJson( artistas ));
        //System.out.print(allArtistas);
@@ -57,32 +54,32 @@ public class Application extends Controller {
     }
 
     public static Result deleteArtista( Long id){
-        System.out.println( "User Id: " + id);
-         User.deleteArtista( id );
+        System.out.println( "SystemUser Id: " + id);
+         SystemUser.deleteArtista(id);
         return redirect( routes.Application.artistas() );
     }
 
     public static Result newArtista() {
-        User.createArtista();
+        SystemUser.createArtista();
         return redirect( routes.Application.artistas() );
     }
     public static Result byName( String name){
-        List<User> artistas = User.findByName( name );
+        List<SystemUser> artistas = SystemUser.findByName(name);
         ObjectNode allArtistas = Json.newObject();
         allArtistas.put("all artistas Found with Name: " + name, Json.toJson( artistas ));
         return ok( Json.toJson( allArtistas ));
     }
 
     public static Result searchArtistas( String q ){
-        List<User> artistas = User.findByName( q );
+        List<SystemUser> artistas = SystemUser.findByName(q);
         ObjectNode searchResult = Json.newObject();
         searchResult.put( "searchResult", Json.toJson( artistas ));
         return ok( Json.toJson( searchResult ));
     }
 
    public static Result profile( String userName ){
-       User user = User.findUerByUserName( userName );
-       ProfileData profileData = new ProfileData( user );
+       SystemUser systemUser = SystemUser.findUerByUserName(userName);
+       ProfileData profileData = new ProfileData(systemUser);
        //return ok( views.html.profile.profile.render( profileData.toString() ));
        return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
    }
@@ -100,7 +97,7 @@ public class Application extends Controller {
     }
     //
     public static Result myPhotos(){
-        User u = User.findUserById( session("currentUserId") );
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
         if ( session("sessionUser") != null){
             List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
             return  ok( views.html.profile.myphotos.render( Json.toJson( myphotos ).toString() ));
@@ -112,7 +109,7 @@ public class Application extends Controller {
     }
 
     public static Result myWidget( String userName){
-        User u = User.findUerByUserName( userName );
+        SystemUser u = SystemUser.findUerByUserName(userName);
         ProfileData profileData = new ProfileData( u );
         //return ok( views.html.profile.profile.render( profileData.toString() ));
 
@@ -121,7 +118,7 @@ public class Application extends Controller {
     }
 
     public static Result myVideos(){
-        User u = User.findUserById(session("currentUserId"));
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
         if ( session("sessionUser") != null){
             List<Video> myvideos = Video.getMyVideos( u.getId());
             return  ok( views.html.profile.myvideos.render( Json.toJson( myvideos ).toString() ));
@@ -134,7 +131,7 @@ public class Application extends Controller {
 
     public static Result addComment(){
         DynamicForm requestData = form().bindFromRequest();
-        User u = User.findUserById(session("currentUserId"));
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
         String dataType = requestData.get("dataType");
         String photoId = requestData.get( "dataId");
         String comment = requestData.get("comment");

@@ -15,7 +15,7 @@ public class Video extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    private SystemUser systemUser;
     private String url;
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
@@ -30,7 +30,7 @@ public class Video extends Model {
     private static Finder<Long, Video> find = new Finder<Long, Video>(Long.class, Video.class);
 
     public static List<Video> getMyVideos( String id) {
-        List<Video> myvideos = Ebean.find(Video.class).where().ilike("user_id", id).findList();
+        List<Video> myvideos = Ebean.find(Video.class).where().ilike("system_user_id", id).findList();
         return myvideos;
     }
 
@@ -66,11 +66,11 @@ public class Video extends Model {
         this.dateCreated = dateCreated;
     }
 
-    public User getUser() {
-        return user;
+    public SystemUser getSystemUser() {
+        return systemUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSystemUser(SystemUser systemUser) {
+        this.systemUser = systemUser;
     }
 }

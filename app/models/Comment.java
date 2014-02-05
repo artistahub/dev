@@ -2,7 +2,6 @@ package models;
 
 import com.avaje.ebean.Ebean;
 import play.db.ebean.Model;
-import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,7 +15,7 @@ public class Comment extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private User commenter;
+    private SystemUser commenter;
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     private MyPhoto myphoto;
@@ -24,7 +23,7 @@ public class Comment extends Model {
     private Date dateCreated;
 
 
-    public Comment( User commenter, String comment){
+    public Comment( SystemUser commenter, String comment){
        setCommenter( commenter );
        setDescription( comment );
        setDateCreated( new Date());
@@ -47,11 +46,11 @@ public class Comment extends Model {
         this.id = id;
     }
 
-    public User getCommenter() {
+    public SystemUser getCommenter() {
         return commenter;
     }
 
-    public void setCommenter(User commenter) {
+    public void setCommenter(SystemUser commenter) {
         this.commenter = commenter;
     }
 

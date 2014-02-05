@@ -17,14 +17,14 @@ public class ProfileImage extends Model {
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     private String url;
    // @OneToOne(cascade = CascadeType.ALL)
-    //private User user;
+    //private SystemUser user;
     private String description;
     private List<ProfileImageComment> comments;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     private String imageType;
-
-
+    @Enumerated(value=EnumType.ORDINAL)
+    Status status = Status.active;
 
     @EnumMapping(nameValuePairs="active = a, inactive = i")
     public enum Status {
@@ -38,8 +38,7 @@ public class ProfileImage extends Model {
         this.setImageType("profileImage");
     }
 
-    @Enumerated(value=EnumType.ORDINAL)
-    Status status = Status.active;
+
 
     /**
      * Return status.

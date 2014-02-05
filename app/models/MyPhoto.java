@@ -16,7 +16,7 @@ public class MyPhoto extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    private SystemUser systemUser;
     private String url;
     private String description;
     private List<Comment> comments;
@@ -25,8 +25,8 @@ public class MyPhoto extends Model {
     private String tag;
 
 
-    public MyPhoto(String url, String description, User u){
-        this.setUser(u);
+    public MyPhoto(String url, String description, SystemUser u){
+        this.setSystemUser(u);
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
@@ -40,7 +40,7 @@ public class MyPhoto extends Model {
 
     public static List<MyPhoto> getMyPhotos( String id ) {
        // List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).findList();
-        List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).where().ilike("user_id", id).findList();
+        List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).where().ilike("system_user_id", id).findList();
         System.out.print(">>>>>>> " + Json.toJson( myphotos ).toString());
         return myphotos;
     }
@@ -81,12 +81,12 @@ public class MyPhoto extends Model {
         return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription() + "\n";
     }
 
-    public User getUser() {
-        return user;
+    public SystemUser getSystemUser() {
+        return systemUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSystemUser(SystemUser systemUser) {
+        this.systemUser = systemUser;
     }
 
     public List<Comment> getComments(  ) {

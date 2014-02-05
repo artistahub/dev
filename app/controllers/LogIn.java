@@ -1,10 +1,8 @@
 package controllers;
 
 import dataHelpers.SessionUser;
-import models.User;
-import play.api.libs.json.Json;
+import models.SystemUser;
 import play.data.DynamicForm;
-import play.data.Form;
 import play.mvc.Result;
 import play.mvc.Controller;
 
@@ -12,7 +10,7 @@ import static play.data.Form.form;
 
 /**
  * Created with IntelliJ IDEA.
- * User: derectionfree
+ * SystemUser: derectionfree
  * Date: 6/24/13
  * Time: 9:13 PM
  * To change this template use File | Settings | File Templates.
@@ -28,15 +26,15 @@ public class LogIn extends Controller {
                 return  ok( views.html.login.render( "test" ));
             }
             else{
-                User user = User.findUserByEmailAndPass( email, password);
-                if ( user == null ){
-                    return ok( views.html.login.render( " Wrong user name or password" ));
+                SystemUser systemUser = SystemUser.findUserByEmailAndPass(email, password);
+                if ( systemUser == null ){
+                    return ok( views.html.login.render( " Wrong systemUser name or password" ));
                 }
                 else {
-                    SessionUser sessionUser = new SessionUser( user );
+                    SessionUser sessionUser = new SessionUser(systemUser);
                     String s = play.libs.Json.toJson( sessionUser).toString();
                     session("sessionUser" , s);
-                    session("currentUserId", user.getId());
+                    session("currentUserId", systemUser.getId());
                     return redirect( routes.Application.home() );
                 }
             }

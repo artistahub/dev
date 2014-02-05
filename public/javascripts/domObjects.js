@@ -22,11 +22,11 @@ Screen.prototype.render = function(){
     return  this.screenHtml;
 };
 
-function ProfilePersonalInfo( user ){
+function ProfilePersonalInfo( systemUser ){
    // alert( " from profile p i function" );
-     this.userFullName = "<div> <h2 class='h'> " + user.firstName + " " + user.lastName + "</h2></div>";
+     this.userFullName = "<div> <h2 class='h'> " + systemUser.firstName + " " + systemUser.lastName + "</h2></div>";
      this.userTitle = " <div> <h4 class='h'> Professional Acrobat</h4></div>";
-     this.userLocation = " <div> <h5 class='h'> " +  user.location.city + ", " + user.location.state + "</h5></div>";
+     this.userLocation = " <div> <h5 class='h'> " +  systemUser.location.city + ", " + systemUser.location.state + "</h5></div>";
      this.html = this.userFullName;
      this.html += this.userTitle;
      this.html += this.userLocation;
@@ -37,8 +37,8 @@ function ProfilePersonalInfo( user ){
 
 // Feeds screen
   function FeedsScreen( feed ){
-     this.wrapperOpener = '<a class="feed-item" href="/profile/' + feed.user.userName + '" >';
-     this.topBar = ' <div class="fc"><div class="padding5px"><div class="row-fluid"><h2 class="h1"> ' + feed.user.firstName + " " + feed.user.lastName + '</h2></div>';
+     this.wrapperOpener = '<a class="feed-item" href="/profile/' + feed.systemUser.userName + '" >';
+     this.topBar = ' <div class="fc"><div class="padding5px"><div class="row-fluid"><h2 class="h1"> ' + feed.systemUser.firstName + " " + feed.systemUser.lastName + '</h2></div>';
      this.body = '<div class="row-fluid"> <div class="span12"><img style="width: 100%" src="' + feed.url  +'"></div></div></div>';
      this.footer ='<div class="fc-fotter padding5px"> Fotter</div> ';
      this.comment='<div class="fc-comments padding5px"> Comments</div>';
