@@ -532,9 +532,9 @@ input[type="text"],input[type="password"]{
     width: 250px;
     height: 150px;
     border: solid 1px #666666;
+    position: relative;
     overflow: hidden;
     position: relative;
-    /* outline: 1px solid #222;*/
 
 }
 
