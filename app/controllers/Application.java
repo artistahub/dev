@@ -15,21 +15,39 @@ import static play.data.Form.*;
 public class Application extends Controller {
 
     public static Result index() {
+
         if ( session("sessionUser") != null){
-            return redirect( routes.Application.home() );
+            return redirect( controllers.routes.Application.home() );
         }
+
+        List< UserType > userTypes = UserType.getUserTypes();
+        List< AccountType > accountTypes = AccountType.getAccountTypes();
+        if ( userTypes.size() <=0 ){
+          createUserTypeIfNotExist();
+            userTypes = UserType.getUserTypes();
+        }
+        if ( accountTypes.size() <= 0 ){
+           createAccountTypeIfNotExist();
+            accountTypes = AccountType.getAccountTypes();
+        }
+
+        System.out.println( " User Types ------ " + Json.toJson( UserType.getUserTypes()).toString() );
+        System.out.println(" Account Types ------ " + Json.toJson(AccountType.getAccountTypes()).toString());
+
         List<SystemUser> artistas = SystemUser.getArtistas();
         ObjectNode allArtistas = Json.newObject();
         allArtistas.put("allArtistas", Json.toJson( artistas ));
+        String userTypesAsJson = Json.toJson( userTypes ).toString();
         //System.out.print(allArtistas);
         String artistasAsJson = allArtistas.toString();
-        return ok(views.html.index.render( artistasAsJson ));
+       // return ok(views.html.index.render( artistasAsJson, userTypes ));
+        return ok(views.html.index.render( artistasAsJson, userTypesAsJson));
     }
 
     public static Result home(){
         if ( session("sessionUser") == null){
 
-            return  redirect( routes.Application.index());
+            return  redirect( controllers.routes.Application.index());
         }
         List<Feed> feeds = Feed.getFeeds();
         String feedsAsJson =  Json.toJson( feeds ).toString();
@@ -59,10 +77,12 @@ public class Application extends Controller {
         return redirect( routes.Application.artistas() );
     }
 
+    /*
     public static Result newArtista() {
         SystemUser.createArtista();
         return redirect( routes.Application.artistas() );
     }
+    */
     public static Result byName( String name){
         List<SystemUser> artistas = SystemUser.findByName(name);
         ObjectNode allArtistas = Json.newObject();
@@ -168,6 +188,21 @@ public class Application extends Controller {
         ProfileImage profileImage = ProfileImage.findMyProfilePhotoById( imageId );
         List <ProfileImageComment> comments = ProfileImageComment.getCommentsByMyProfilePhoto( imageId );
         return ok( Json.toJson( comments ));
+
+    }
+
+    public static void createAccountTypeIfNotExist(){
+        new AccountType( "free", "at-00001", "free" ).save();
+        new AccountType( "silver", "at-00002", "silver").save();
+        new AccountType( "gold", "at-00003", "gold" ).save();
+        new AccountType( "platinum", "at-00004", "platinum" ).save();
+
+    }
+    public static void createUserTypeIfNotExist(){
+        new UserType( "artist", "ut-00001", "an artist / performer" ).save();
+        new UserType( "performance", "ut-00002", " a performance / show" ).save();
+        new UserType( "festival", "ut-00003", "a festival" ).save();
+        new UserType( "theater", "ut-00004", "a theater" ).save();
 
     }
 

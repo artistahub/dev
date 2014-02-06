@@ -3,6 +3,15 @@
 
 # --- !Ups
 
+create table accounttype (
+  id                        varchar(255) not null,
+  create_time               datetime,
+  reference                 varchar(255),
+  name                      varchar(255),
+  label                     varchar(255),
+  constraint pk_accounttype primary key (id))
+;
+
 create table address (
   id                        varchar(255) not null,
   address                   varchar(255),
@@ -91,10 +100,18 @@ create table artistas (
   location_id               varchar(255),
   billing_address_id        varchar(255),
   mailing_address_id        varchar(255),
-  user_type                 varchar(12),
   test                      varchar(255),
-  constraint ck_artistas_user_type check (user_type in ('festival','performance','artist','theater','agency')),
+  user_type_id              varchar(255),
   constraint pk_artistas primary key (id))
+;
+
+create table usertype (
+  id                        varchar(255) not null,
+  create_time               datetime,
+  reference                 varchar(255),
+  name                      varchar(255),
+  label                     varchar(255),
+  constraint pk_usertype primary key (id))
 ;
 
 create table videos (
@@ -128,14 +145,18 @@ alter table artistas add constraint fk_artistas_BillingAddress_10 foreign key (b
 create index ix_artistas_BillingAddress_10 on artistas (billing_address_id);
 alter table artistas add constraint fk_artistas_MailingAddress_11 foreign key (mailing_address_id) references address (id) on delete restrict on update restrict;
 create index ix_artistas_MailingAddress_11 on artistas (mailing_address_id);
-alter table videos add constraint fk_videos_systemUser_12 foreign key (system_user_id) references artistas (id) on delete restrict on update restrict;
-create index ix_videos_systemUser_12 on videos (system_user_id);
+alter table artistas add constraint fk_artistas_userType_12 foreign key (user_type_id) references usertype (id) on delete restrict on update restrict;
+create index ix_artistas_userType_12 on artistas (user_type_id);
+alter table videos add constraint fk_videos_systemUser_13 foreign key (system_user_id) references artistas (id) on delete restrict on update restrict;
+create index ix_videos_systemUser_13 on videos (system_user_id);
 
 
 
 # --- !Downs
 
 SET FOREIGN_KEY_CHECKS=0;
+
+drop table accounttype;
 
 drop table address;
 
@@ -154,6 +175,8 @@ drop table s3file;
 drop table systemaccount;
 
 drop table artistas;
+
+drop table usertype;
 
 drop table videos;
 

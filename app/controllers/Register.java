@@ -14,10 +14,11 @@ import static play.data.Form.*;
 public class Register extends Controller {
     public static Result index() {
         DynamicForm requestData = form().bindFromRequest();
-        String firstName = requestData.get("firstName");
-        String lastName = requestData.get("lastName");
-        String email = requestData.get("email");
-        return ok( register.render( firstName, lastName, email ) );
+        String firstName = requestData.get( "firstName" );
+        String lastName = requestData.get( "lastName" );
+        String email = requestData.get( "email" );
+        String userType = requestData.get( "userType" );
+        return ok( register.render( firstName, lastName, email, userType ) );
     }
 
 
@@ -41,8 +42,10 @@ public class Register extends Controller {
         String email = requestData.get("email");
         String password = requestData.get("password");
         String userName = requestData.get("userName");
-        SystemUser u = new SystemUser(firstName, lastName, email,  password);
-        u.setUserType(SystemUser.UserType.ARTIST);
+        String userType = requestData.get( "userType" );
+        UserType systemUsertype = UserType.findUserTypeByName( userType );
+        SystemUser u = new SystemUser(firstName, lastName, email,  password, systemUsertype);
+       // u.setUserType(SystemUser.UserType.ARTIST);
         u.setUserName( firstName + "." + lastName );
         u.setLocation(Address.createAddress());
         u.save();

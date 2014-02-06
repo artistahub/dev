@@ -1,4 +1,4 @@
-@(artistas: String)
+@(artistas: String, userTypes: String )
 @headerOut()
 
     <script type="text/javascript">
@@ -8,7 +8,15 @@
             $(function(){
                 // create some screens
                 var artistas = @Html(artistas);
-                console.log( artistas );
+                var userTypes = @Html(userTypes);
+                $.each( userTypes, function( i, ut ){
+                    console.log( ut );
+                    var $e = $('<option>');
+                    $e.attr({ 'value' : ut.name , 'data-ref' : ut.reference});
+                    $e.text( ucFirstAllWords(ut.label) );
+
+                    $("#user-types-select").append( $e );
+                });
                 var $container = $(' #artistas-container ');
                 $container.css( 'visibility', 'hidden');
                 $.each( artistas.allArtistas , function ( i, element){
@@ -196,6 +204,13 @@
                         <div><h2 class="h2">New to ArtistaOne ? Sign up</h2></div>
                     </div>
                     <hr class="hr">
+                    <div class="frow"  >
+                        <div class="flabel "> Who are you?</div>
+                        <select class="finputText" name="userType" id="user-types-select">
+                            <option></option>
+
+                        </select>
+                    </div>
                     <div class="frow" >
                         <div class="flabel "> First Name</div>
                         <input class="finputText" type="text" name="firstName">

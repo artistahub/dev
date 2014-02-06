@@ -29,9 +29,9 @@ public class SystemUser extends Model {
     private Address location;
     private Address BillingAddress;
     private Address MailingAddress;
-    @Enumerated(value=EnumType.STRING)
-    private UserType userType;
     private String test;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserType userType;
 
     public String getTest() {
         return test;
@@ -42,17 +42,12 @@ public class SystemUser extends Model {
     }
 
 
-    @EnumMapping(nameValuePairs="ARTIST = artist, PERFORMANCE = performance, AGENCY = agency, THEATER = theater, FESTIVAL = festival")
-    public enum UserType {
-         ARTIST, PERFORMANCE, AGENCY, THEATER, FESTIVAL;
-
-    }
-
-    public SystemUser(String fName, String lName, String email, String pass){
-        this.firstName = fName;
-        this.lastName = lName;
-        this.email = email;
-        this.password = pass;
+    public SystemUser(String fName, String lName, String email, String pass, UserType userType){
+        setFirstName( fName );
+        setLastName( lName );
+        setEmail( email );
+        setPassword( pass );
+        setUserType( userType);
         this.setDateCreated( new Date() );
     }
 
@@ -95,17 +90,17 @@ public class SystemUser extends Model {
         return  Ebean.find( SystemUser.class ).where().like( "userName", userName).findUnique();
     }
 
-    public static void createArtista() {
-        SystemUser u = new SystemUser("hassan", "Rais", "email@email.com","1234");
+   // public static void createArtista() {
+        //SystemUser u = new SystemUser("hassan", "Rais", "email@email.com","1234", "artist");
         //System.out.println("\n UserId: **** " + Ebean.nextId(SystemUser.class) + "\n");
        // u.setLastName("Rais");
       //  u.setFirstName("Hassan");
-        u.setAge(33);
-        System.out.print(" new user Id: " + Ebean.nextId(SystemUser.class));
-        u.setMailingAddress(Address.createAddress());
-        u.setBillingAddress(Address.createAddress());
-        u.save();
-    }
+      //  u.setAge(33);
+      //  System.out.print(" new user Id: " + Ebean.nextId(SystemUser.class));
+      //  u.setMailingAddress(Address.createAddress());
+       // u.setBillingAddress(Address.createAddress());
+       // u.save();
+    //}
 
     public static Finder<Long, SystemUser> getFind() {
         return find;
@@ -206,13 +201,13 @@ public class SystemUser extends Model {
     }
 
 
-    public UserType getUserType() {
+   /* public UserType getUserType() {
         return userType;
     }
 
     public void setUserType(UserType userType) {
         this.userType = userType;
-    }
+    }*/
 
     public String toString(){
 
@@ -221,4 +216,11 @@ public class SystemUser extends Model {
     }
 
 
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 }
