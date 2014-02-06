@@ -6,7 +6,6 @@
 GET     /                           controllers.Application.index()
 GET     /home                       controllers.Application.home()
 GET     /artistas                   controllers.Application.artistas()
-GET     /newArtista                 controllers.Application.newArtista()
 GET     /deleteArtista/:id          controllers.Application.deleteArtista( id: Long )
 GET     /byName/:name               controllers.Application.byName( name: String )
 GET     /signOut                    controllers.Application.signOut()

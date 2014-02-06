@@ -1,7 +1,7 @@
-@(firstName: String, lastName: String, email: String )
+@(firstName: String, lastName: String, email: String, userType: String  )
 @headerOut()
 
-
+      @{ userType }
 <body>
  <!--   id="stepsPage" -->
 <div class="container signUpPage" id="content-container">
@@ -13,6 +13,10 @@
                 <div>
                     <form action="completeRegistration" method="post" enctype="multipart/form-data">
                          <div class="frow" >
+                             <div class="flabel "> User Type</div>
+                                <input class="finputText" readonly="true"  value="@{ userType }" type="text" name="userType" id="userType">
+                        </div>
+                        <div class="frow" >
                              <div class="flabel "> First Name:</div>
                                 <input class="finputText"  value="@{ firstName }" type="text" name="firstName" id="firstName">
                         </div>
