@@ -15,7 +15,7 @@
             $("#user-types-select").append( $e );
         });
         if ( selectedUserType.length > 0  ){
-            $("#registration-form .flabel").hide();
+            $("#registration-form .flabel").first().hide();
             $("#user-types-select").val( selectedUserType )
         }
     });
