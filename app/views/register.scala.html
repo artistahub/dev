@@ -1,7 +1,28 @@
-@(firstName: String, lastName: String, email: String, userType: String  )
+@(firstName: String, lastName: String, email: String, userType: String, userTypes: String  )
 @headerOut()
 
-      @{ userType }
+<script type="text/javascript">
+    // set default userTypes on selection html element
+    $( document).ready( function(){
+        var userTypes = @Html(userTypes);
+        var selectedUserType = "@{ userType }";
+        $.each( userTypes, function( i, ut ){
+            console.log( ut );
+            var $e = $('<option>');
+            $e.attr({ 'value' : ut.name , 'data-ref' : ut.reference});
+            $e.text( ucFirstAllWords(ut.label) );
+
+            $("#user-types-select").append( $e );
+        });
+        if ( selectedUserType.length > 0  ){
+            $("#registration-form .flabel").hide();
+            $("#user-types-select").val( selectedUserType )
+        }
+    });
+
+
+</script>
+
 <body>
  <!--   id="stepsPage" -->
 <div class="container signUpPage" id="content-container">
@@ -11,11 +32,15 @@
             <div id="stepsContentContainer">
                 <h4> Personal Info</h4>
                 <div>
-                    <form action="completeRegistration" method="post" enctype="multipart/form-data">
-                         <div class="frow" >
-                             <div class="flabel "> User Type</div>
-                                <input class="finputText" readonly="true"  value="@{ userType }" type="text" name="userType" id="userType">
+                    <form id="registration-form" action="completeRegistration" method="post" enctype="multipart/form-data">
+                        <div class="frow">
+                            <div class="flabel " style="display: none;"> Who are you?</div>
+                            <select class="finputText" name="userType" id="user-types-select">
+                                <option></option>
+
+                            </select>
                         </div>
+
                         <div class="frow" >
                              <div class="flabel "> First Name:</div>
                                 <input class="finputText"  value="@{ firstName }" type="text" name="firstName" id="firstName">

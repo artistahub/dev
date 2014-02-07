@@ -31,8 +31,8 @@ public class Application extends Controller {
             accountTypes = AccountType.getAccountTypes();
         }
 
-        System.out.println( " User Types ------ " + Json.toJson( UserType.getUserTypes()).toString() );
-        System.out.println(" Account Types ------ " + Json.toJson(AccountType.getAccountTypes()).toString());
+        //System.out.println( " User Types ------ " + Json.toJson( UserType.getUserTypes()).toString() );
+        //System.out.println(" Account Types ------ " + Json.toJson(AccountType.getAccountTypes()).toString());
 
         List<SystemUser> artistas = SystemUser.getArtistas();
         ObjectNode allArtistas = Json.newObject();

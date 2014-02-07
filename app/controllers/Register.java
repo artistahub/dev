@@ -1,12 +1,16 @@
 package controllers;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
 import dataHelpers.SessionUser;
 import play.data.DynamicForm;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import java.io.IOException;
+import java.util.List;
+
 import views.html.*;
 
 import static play.data.Form.*;
@@ -18,7 +22,9 @@ public class Register extends Controller {
         String lastName = requestData.get( "lastName" );
         String email = requestData.get( "email" );
         String userType = requestData.get( "userType" );
-        return ok( register.render( firstName, lastName, email, userType ) );
+        List< UserType > userTypes = UserType.getUserTypes();
+        String userTypesAsJson = Json.toJson( userTypes ).toString();
+        return ok( register.render( firstName, lastName, email, userType, userTypesAsJson ) );
     }
 
 

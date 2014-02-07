@@ -51,10 +51,10 @@ h1{
 
 .f{
     position: absolute;
-    top: -20px;
+    top: 0;
     right: 0;
     padding: 5px 0px;
-    margin: 10px auto;
+    margin: auto;
     width: 335px;
     height: 235px;
     border-radius: 5px;
