@@ -67,9 +67,9 @@ h1{
     top: 60px;
     right: 0px;
     left: 0px;
-    padding: 1px 0px 0px 16px;
     margin: 0px auto;
-    width: 400px;
+    max-width: 400px;
+    width:100%;
     border-radius: 5px;
     background-image: url("../images/noise-2.png");
 
@@ -386,8 +386,9 @@ ul{
     background-color: white;
     border: solid 1px #e1f7fb;
     border-radius: 4px;
-    width: 550px;
+    max-width: 550px;
     padding: 10px;
+    width: 100%;
 }
 
 .formLabel{
