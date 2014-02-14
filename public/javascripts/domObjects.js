@@ -159,7 +159,10 @@ var showShadow = function(){
     $('body').append( div );
     $('#shadow-box').click( function(){
         $( this).remove();
-        $( "#media-wrapper, #media-preview, #img-preview").hide();
+        //$( "#media-wrapper, #media-preview, #img-preview").hide();
+        var $mediaWrapper = $('#media-wrapper');
+        $mediaWrapper.css( "display", "none");
+
     });
 }
 var showVideoShadow = function(){

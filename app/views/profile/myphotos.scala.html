@@ -54,18 +54,18 @@
             });
         });
 
-        $('body').on('click', '#img-preview .close-img-preview', function () {
+        $('body').on('click', '#media-wrapper .close-img-preview', function () {
             $(this).hide();
-            $("#shadow-box").remove();
-            var $imgPreview = $('#img-preview');
 
-
-            $imgPreview.animate({
+            var $mediaWrapper = $('#media-wrapper');
+            $mediaWrapper.animate({
                 height:"0px",
                 padding:'0px'
-            }, 500, function () {
-                $imgPreview.html("");
-                $(this).height('auto');
+            }, 50, function () {
+                $("#shadow-box").remove();
+                $( this ).hide();
+                //   $mediaWrapper.html("");
+                //$(this).height('auto');
             });
 
         });
@@ -74,18 +74,19 @@
             showShadow();
             var $commentsContainer = $('<div>');
             $commentsContainer.attr('id', 'comments-Container');
-            //$commentsContainer.append( new CommentObject().render());
 
-            var $imgPreview = $("#img-preview");
+            var $imgPreview = $("#media-preview");
+            var $imgWrapper = $("#media-wrapper");
+            $imgWrapper.css({ 'z-index' : 5, height: 'auto', display: 'block'});
             $imgPreview.html("");
             var $thisChild = $(this).children(":first");
-            // $imgPreview.append( $thisChild );
             var dataId = $thisChild.attr('data-id');
+            var dataType = $thisChild.attr('data-type');
+            var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';
+            // alert( getCommentsUrl );
 
-            ajaxReturnJson('/getComments/' + dataId, function (data) {
-                //alert( data );
-                // var $commentsContainer = $("#comments-Container");
-                console.log(JSON.stringify(data));
+            ajaxReturnJson(getCommentsUrl + dataId, function (data) {
+                //alert ( JSON.stringify(data) );
                 $.each(data, function (i, e) {
                     $commentsContainer.append(new CommentObject(e).render());
 
@@ -93,7 +94,7 @@
             });
             var $img = $('<img>');
             $img.attr({'src':$thisChild.attr('src'), 'data-id':dataId});
-            $img.css({ height:'auto'});
+            $img.css({height:'auto'});
             var $imgContainer = $('<div>');
             $imgContainer.attr('class', 'div-img-top-curves');
             $imgContainer.css({ 'text-align':'center', margin:'auto', 'background-color':'#222'});
@@ -101,18 +102,28 @@
 
             $imgPreview.html($imgContainer);
             $imgPreview.append($commentsContainer);
-            $imgPreview.append(forms.submitMyphotoComment(dataId));
-            //  $imgPreview.append( $commentsContainer );
+                @if(session.get("sessionUser")) {
+                $imgPreview.append(forms.submitMyphotoComment(dataId, dataType));
+            } else {
+                var $signInBtn = $('<div>');
+                $signInBtn.attr({'class':'btn btn-primary' });
+                $signInBtn.css({'position':'absolute', 'left':0, 'right':0 });
+                $signInBtn.text(" Please sign in to leave a comment");
+                $imgPreview.append($signInBtn);
+            }
 
             $imgPreview.css('backgroundColor', '');
             $imgPreview.animate({
                 height:"auto",
-                padding:'25px 0px'
+                padding:'0px'
             }, 'slow', function () {
                 // alert( "DONE" );
-                $imgPreview.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></button></div>').fadeIn();
+                $imgWrapper.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 6px; right: -21px"></button></div>').fadeIn();
             });
+
         });
+
+
 
         $('body').on('click', '#do-comment', function () {
             var comment = stripTagsFromHtml($('#comment-text-area').val());
@@ -128,10 +139,15 @@
 </script>
 
 <div class="container-fluid" id="content-container">
+    <div id="media-wrapper">
+        <div class="container-fluid boundery-top-bar"> Top bar</div>
+        <div id="media-preview"></div>
+        <div class="container-fluid boundery-bottom-bar"> .....</div>
+    </div>
     <div class="row-fluid">
         @sidemenu.sidemenu()
         <div class="span11">
-            <div id="img-preview"></div>
+
             <div class="container-fluid">
                 <div class="container-fluid" id="artista-photos-container">
 

@@ -94,10 +94,10 @@
                 height:"600px",
                 padding:'25px 0px'
             }, 'slow', function () {
-                $videoPreview.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></button></div>').fadeIn();
+                $videoPreview.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 6px; right: -21px"></button></div>').fadeIn();
             });
         });
-        $('body').on('click', '#media-preview .close-img-preview', function () {
+        $('body').on('click', '#media-wrapper .close-img-preview', function () {
             $(this).hide();
 
             var $mediaWrapper = $('#media-wrapper');
@@ -106,6 +106,7 @@
                 padding:'0px'
             }, 50, function () {
                 $("#shadow-box").remove();
+                $( this ).hide();
              //   $mediaWrapper.html("");
                 //$(this).height('auto');
             });
@@ -118,7 +119,7 @@
 
             var $imgPreview = $("#media-preview");
             var $imgWrapper = $("#media-wrapper");
-            $imgWrapper.css({ 'z-index' : 5, height: 'auto'});
+            $imgWrapper.css({ 'z-index' : 5, height: 'auto', display: 'block'});
             $imgPreview.html("");
             var $thisChild = $(this).children(":first");
             var dataId = $thisChild.attr('data-id');
@@ -156,10 +157,10 @@
             $imgPreview.css('backgroundColor', '');
             $imgPreview.animate({
                 height:"auto",
-                padding:'25px 0px'
+                padding:'0px'
             }, 'slow', function () {
                 // alert( "DONE" );
-                $imgPreview.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 0px; right: -24px"></button></div>').fadeIn();
+                $imgWrapper.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 6px; right: -21px"></button></div>').fadeIn();
             });
 
         });
@@ -208,7 +209,9 @@
 </div>
 <hr class="stepsHr">
 <div id="media-wrapper">
+    <div class="container-fluid boundery-top-bar"> Top bar</div>
     <div id="media-preview"></div>
+    <div class="container-fluid boundery-bottom-bar"> .....</div>
 </div>
 <div class="container-fluid">
     <div class="container-fluid" id="artista-photos-container">
