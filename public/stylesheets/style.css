@@ -327,21 +327,27 @@ ul{
 }
 .row.topBar{
     display: none;
-    opacity: 0.8;
+    opacity: 0.6;
     position: absolute;
     z-index: 1;
     right: 0px;
     left: 0px;
-    background-color: rgb(225, 225, 225);
+    background-color: rgb(31, 30, 30);
+    color: white;
+    text-shadow: none;
+    font-size: 13pt;
 }
 .row.screenFooter{
     display: none;
+    opacity: 0.6;
     position: absolute;
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: #e1e1e1;
-    opacity: .8;
+    background-color:rgb(31, 30, 30);
+    color: white;
+    text-shadow: none;
+    font-size: 13pt;
 }
 
 .feed-item{
