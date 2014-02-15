@@ -105,6 +105,7 @@ create table artistas (
   constraint pk_artistas primary key (id))
 ;
 
+
 create table usertype (
   id                        varchar(255) not null,
   create_time               datetime,
@@ -147,8 +148,16 @@ alter table artistas add constraint fk_artistas_MailingAddress_11 foreign key (m
 create index ix_artistas_MailingAddress_11 on artistas (mailing_address_id);
 alter table artistas add constraint fk_artistas_userType_12 foreign key (user_type_id) references usertype (id) on delete restrict on update restrict;
 create index ix_artistas_userType_12 on artistas (user_type_id);
-alter table videos add constraint fk_videos_systemUser_13 foreign key (system_user_id) references artistas (id) on delete restrict on update restrict;
-create index ix_videos_systemUser_13 on videos (system_user_id);
+alter table artistas add constraint fk_artistas_activeProfileImage_13 foreign key (active_profile_image_id) references profileImages (id) on delete restrict on update restrict;
+create index ix_artistas_activeProfileImage_13 on artistas (active_profile_image_id);
+alter table artistas add constraint fk_artistas_location_14 foreign key (location_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_location_14 on artistas (location_id);
+alter table artistas add constraint fk_artistas_BillingAddress_15 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_BillingAddress_15 on artistas (billing_address_id);
+alter table artistas add constraint fk_artistas_MailingAddress_16 foreign key (mailing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_MailingAddress_16 on artistas (mailing_address_id);
+alter table videos add constraint fk_videos_systemUser_17 foreign key (system_user_id) references artistas (id) on delete restrict on update restrict;
+create index ix_videos_systemUser_17 on videos (system_user_id);
 
 
 
@@ -173,6 +182,8 @@ drop table profileimagecomments;
 drop table s3file;
 
 drop table systemaccount;
+
+drop table artistas;
 
 drop table artistas;
 
