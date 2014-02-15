@@ -160,6 +160,7 @@ var showShadow = function(){
     $('body').append( div );
     $('#shadow-box').click( function(){
         $( this).remove();
+        $('body').removeClass('.overflow-hidden');
         //$( "#media-wrapper, #media-preview, #img-preview").hide();
         var $mediaWrapper = $('#media-wrapper');
         $mediaWrapper.css( "display", "none");
