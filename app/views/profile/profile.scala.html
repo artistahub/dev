@@ -168,6 +168,9 @@
 
             $( 'body' ).append( $mediaFrame );
             $mediaFrame.contents().find('body').append( $imgWrapper );
+            var $head = $mediaFrame.contents().find("head");
+            $head.append($("<link/>",{ rel: "stylesheet", href: "/bootstrap/css/bootstrap.css", type: "text/css" }));
+            $head.append($("<link/>",{ rel: "stylesheet", href: "/stylesheets/style.css", type: "text/css" }));
             console.log( $mediaFrame );
 
         });
