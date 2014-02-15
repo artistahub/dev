@@ -24,13 +24,14 @@
                     var s1 = new Screen( element ).render();
                     $container.append( s1 );
                 });
+
             if ( documentWidth > 480){
                // alert( " add class psan 2" );
                 if ( documentWidth >= 1200){
-                    $('.item').css( 'width', documentWidth/ 6 - 6 + "px");
+                    $('.item').css( 'width', documentWidth/ 5 - 6 + "px");
                 }
                 else if ( documentWidth >=  800){
-                    $('.item').css( 'width', documentWidth/ 4 - 8 + "px");
+                    $('.item').css( 'width', documentWidth/ 3 - 8 + "px");
                 }
                 else {
                     $('.item').css( 'width', documentWidth/ 2 -  12  + "px");

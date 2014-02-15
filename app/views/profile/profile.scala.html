@@ -14,7 +14,7 @@
         var $headerBar = $('#header-top-bar');
         console.log(profileData);
         // $("#pImage").attr('src' , profileData.systemUser.activeProfileImage.url);
-        $("#pImage").attr({'src':profileData.systemUser.activeProfileImage.url, 'data-id':profileData.systemUser.activeProfileImage.id, 'data-type':profileData.systemUser.activeProfileImage.imageType});
+        $("#pImage").attr({'src':encodeURI(profileData.systemUser.activeProfileImage.url), 'data-id':profileData.systemUser.activeProfileImage.id, 'data-type':profileData.systemUser.activeProfileImage.imageType});
         $("#profilePersonalInfo").html(new ProfilePersonalInfo(profileData.systemUser).html);
 
         $.each(profileMyPhotos, function (i, e) {

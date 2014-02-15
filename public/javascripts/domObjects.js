@@ -9,10 +9,11 @@ function Screen( o ){
         o.location.city = "Agadir";
         o.location.country = "Morocco";
     }
-    this.wrapperOpener = "<a href='/profile/" + userName +"'> <div class=' item wrapper'>";
+   // this.wrapperOpener = "<a href='/profile/" +  userName +"'> <div class=' item wrapper'>";
+    this.wrapperOpener = '<a href=' + "/profile/" + encodeURI( userName )  +'> <div class="item wrapper">';
     this.topBar = "<div class='row topBar'> <b>" + o.firstName + " " + o.lastName +"</b></div>";
     this.secondaryBar = "<div class='row secondaryBar'> Secondary Bar</div>";
-    this.body = "<div class='row screenBody'><div class='imgContainer'> <img class='' style='width: 100%' src='" + o.activeProfileImage.url +"' alt=''></div></div>";
+    this.body = '<div class="row screenBody"><div class="imgContainer"> <img class="" style="width: 100%" src= ' + encodeURI(o.activeProfileImage.url) + '  ></div></div>';
     this.footer = "<div class='row screenFooter'>  <b>" + o.location.city + ", " + o.location.country +  "</b></div>";
     this.wrapperCloser = "</div></a>";
    // this.screenHtml = this.wrapperOpener + this.topBar + this.secondaryBar + this.body + this.footer; + this.wrapperCloser;
@@ -95,7 +96,7 @@ var forms = {};
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
         ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
     forms.submitMyphotoComment =  function( dataId, dataType){
-        var f = '<div > <div><h4 style="color: #e1e1e1">Comments:</h4></div> <div class="width-100"> ' +
+        var f = '<div ><div class="width-100"> ' +
                 '<textarea id="comment-text-area" style="width: 100%" rows="2" cols="30"></textarea> </div> <div>' +
                 '<input id="do-comment" data-type="' + dataType + '" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
         return f ;

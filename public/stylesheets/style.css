@@ -18,7 +18,6 @@ body{
 #media-wrapper{
     position: fixed;
     top: 10px;
-    bottom: 0px;
     left: 0;
     right: 0;
     height: 0;
@@ -592,8 +591,7 @@ input[type="text"],input[type="password"], select{
     left: 0px;
     right: 0px;
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
     width: 100%;
 
@@ -621,10 +619,9 @@ input[type="text"],input[type="password"], select{
 }
 #comments-Container{
     width: 100%;
-    max-height: 600px;
-    overflow-y: auto;
+    max-height: 200px;
+    overflow: auto;
     margin: auto;
-    border-radius: 0px 0px 5px 5px;
     background-image: url("../images/noise-2.png");
     background-color: rgb(243, 243, 243);
 }
@@ -663,6 +660,8 @@ div#comments-Container .comment-row:first-child {
 }
 #comment-text-area{
     padding: 4px 0px;
+    height: 25px;
+    border-radius: 0px 0px 5px 5px;
 }
 .width-100{
     width: 100%;
@@ -673,7 +672,8 @@ div#comments-Container .comment-row:first-child {
 }
 .div-img-top-curves{
     border-radius: 5px 5px 0px 0px ;
-    overflow: hidden;
+    overflow: auto;
+    max-height: 425px;
 }
 .close-icon{
     background-image: url("/images/icons/close_button.png");
@@ -829,7 +829,6 @@ div#comments-Container .comment-row:first-child {
 .boundery-bottom-bar{
     background-color: rgba(97, 97, 97, 0.55);
     padding: 5px 0px;
-    position: absolute;
     bottom: 0;
     width: 100%;
     border-radius: 0px 0px 5px 5px;
