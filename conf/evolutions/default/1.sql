@@ -105,7 +105,6 @@ create table artistas (
   constraint pk_artistas primary key (id))
 ;
 
-
 create table usertype (
   id                        varchar(255) not null,
   create_time               datetime,
