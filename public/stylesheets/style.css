@@ -16,17 +16,17 @@ body{
     background-image: url("../images/noise-2.png");
 }
 #media-wrapper{
-    position: fixed;
-    top: 10px;
+    top: 29px;
     left: 0;
     right: 0;
     height: 0;
     max-width: 600px;
     width: 100%;
     margin: auto;
-    padding-bottom: 60px;
     display: none;
+    position: relative;
 }
+
 .center:first-child{
     text-align: center;
     margin: 0 auto;
@@ -590,8 +590,6 @@ input[type="text"],input[type="password"], select{
     margin: auto;
     left: 0px;
     right: 0px;
-    height: 100%;
-    overflow: hidden;
     position: relative;
     width: 100%;
 
@@ -619,8 +617,6 @@ input[type="text"],input[type="password"], select{
 }
 #comments-Container{
     width: 100%;
-    max-height: 200px;
-    overflow: auto;
     margin: auto;
     background-image: url("../images/noise-2.png");
     background-color: rgb(243, 243, 243);
@@ -672,8 +668,6 @@ div#comments-Container .comment-row:first-child {
 }
 .div-img-top-curves{
     border-radius: 5px 5px 0px 0px ;
-    overflow: auto;
-    max-height: 425px;
 }
 .close-icon{
     background-image: url("/images/icons/close_button.png");
@@ -683,6 +677,9 @@ div#comments-Container .comment-row:first-child {
     height: 50px;
     border: none;
     background-color: transparent;
+}
+.close-icon:hover{
+    background-color: red;
 }
 .top{
     background-color: transparent;
@@ -819,11 +816,16 @@ div#comments-Container .comment-row:first-child {
 }
 
 .boundery-top-bar{
-    background-color: rgba(97, 97, 97, 0.55);
-    padding: 5px;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 5px 0px;
     border-radius: 5px 5px 0px 0px;
-    color: white;
+    color: rgb(44, 42, 42);
     text-shadow: 0px 1px 15px #e1e1e1;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    margin: auto;
+    max-width: 600px;
 }
 
 .boundery-bottom-bar{
@@ -835,6 +837,9 @@ div#comments-Container .comment-row:first-child {
     text-align: center;
     color: #B6B6B6;
     text-shadow: 0px 1px 6px black;
+}
+.overflow-hidden{
+    overflow: hidden;
 }
 
 
