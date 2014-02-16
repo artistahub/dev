@@ -71,7 +71,7 @@ function ajaxAppendHtml(uri, containerToFillIn, o , fObject) {
         type:'POST',
         data:o,
         success:function (data, textStatus, jqXHR) {
-            $(containerToFillIn).append( $(new  fObject( data ).render()).fadeIn(500)   );
+            containerToFillIn.append( $(new  fObject( data ).render()).fadeIn(500)   );
 
         },
         error:function (data, textStatus, jqXHR) {

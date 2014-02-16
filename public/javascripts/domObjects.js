@@ -167,6 +167,8 @@ var showShadow = function(){
 
     });
 }
+
+
 var showVideoShadow = function(){
     var $document = $(document);
     var documentHeight = $document.height();

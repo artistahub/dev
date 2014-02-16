@@ -656,7 +656,6 @@ div#comments-Container .comment-row:first-child {
 }
 #comment-text-area{
     padding: 4px 0px;
-    height: 25px;
     border-radius: 0px 0px 5px 5px;
 }
 .width-100{
@@ -816,7 +815,7 @@ div#comments-Container .comment-row:first-child {
 }
 
 .boundery-top-bar{
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgb(229, 229, 229);
     padding: 5px 0px;
     border-radius: 5px 5px 0px 0px;
     color: rgb(44, 42, 42);
@@ -826,10 +825,11 @@ div#comments-Container .comment-row:first-child {
     width: 100%;
     margin: auto;
     max-width: 600px;
+    min-height: 20px;
 }
 
 .boundery-bottom-bar{
-    background-color: rgba(97, 97, 97, 0.55);
+    background-color: rgb(229, 229, 229);
     padding: 5px 0px;
     bottom: 0;
     width: 100%;
@@ -837,6 +837,8 @@ div#comments-Container .comment-row:first-child {
     text-align: center;
     color: #B6B6B6;
     text-shadow: 0px 1px 6px black;
+    min-height: 20px;
+
 }
 .overflow-hidden{
     overflow: hidden;
