@@ -5,7 +5,7 @@
     <title> video app</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" >
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <meta name="viewport" content="systemUser-scalable=no, initial-scale = 1.0,maximum-scale = 0.8,width=device-width" />
+    <meta name="viewport" content="user-scalable=no, initial-scale = 1.0,maximum-scale = 0.8,width=device-width" />
     <script src="http://code.jquery.com/jquery.js"></script>
     <script type="text/javascript" src="/javascripts/domObjects.js"></script>
     <script type="text/javascript" src="/javascripts/jquery.masonry.js"></script>
@@ -19,7 +19,7 @@
             var img = o.url || "walo";
             var imgId = o.id;
             this.header = " <div class='widget-v-center'>";
-            this.body = "<img alt='Thumbnail' src='" + o.url + "' width='100%'> <div class=' order-btn'></div>";
+            this.body = '<img alt="Thumbnail" src="' + o.url +'" width="100%"> <div class="order-btn"></div>';
             this.footer= "<div class='img-footer'></div></div>";
             this.html = function(){
                 return this.header + this.body + this.footer;
@@ -31,9 +31,9 @@
 
         $( document).ready( function(){
             var profileData = @Html(profileData);
-            var userFullName = profileData.user.firstName + ' ' + profileData.user.lastName;
-            var userName = profileData.user.userName;
-            var userProfileImgUrl = profileData.user.activeProfileImage.url;
+            var userFullName = profileData.systemUser.firstName + ' ' + profileData.systemUser.lastName;
+            var userName = profileData.systemUser.userName;
+            var userProfileImgUrl = profileData.systemUser.activeProfileImage.url;
             var myPhotos = profileData.myphotos;
             var myVideos = profileData.myvideos;
             $('#profile-user-name').html( userFullName );
