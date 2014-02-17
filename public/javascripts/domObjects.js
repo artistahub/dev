@@ -97,7 +97,7 @@ var forms = {};
         ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
     forms.submitMyphotoComment =  function( dataId, dataType){
         var f = '<div ><div class="width-100"> ' +
-                '<textarea id="comment-text-area" style="width: 100%" rows="2" cols="30"></textarea> </div> <div>' +
+                '<textarea id="comment-text-area" style="width: 100%" rows="2" cols="30"> Comment goes here ...</textarea>  </div> <div>' +
                 '<input id="do-comment" data-type="' + dataType + '" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
         return f ;
     }

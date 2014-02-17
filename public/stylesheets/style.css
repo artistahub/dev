@@ -650,13 +650,18 @@ div#comments-Container .comment-row:first-child {
     width: 100%;
     margin: auto;
 }
+#do-comment {
+    padding: 0px 5px;
+    margin-bottom: 5px;
+    height: 26px;
+}
 .commenter-name{
     margin: -3px 0px;
     display: inline-block;
 }
 #comment-text-area{
-    padding: 4px 0px;
     border-radius: 0px 0px 5px 5px;
+    margin: 0px 0px 4px 0px;
 }
 .width-100{
     width: 100%;
