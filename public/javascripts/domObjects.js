@@ -127,7 +127,7 @@ function CommentObject( o ){
    // alert(timeAgo(dateCreated));
 
     this.wrapper = '<div class="row-fluid comment-row"> <div class="padding5px">';
-    this.commenter = '<div class="commenterAvatar"><a href="/profile/' + commenterUserName + '"> <img class="v-center" src="' + commenterImg + '"></div> ';
+    this.commenter = '<div class="commenterAvatar"><a target="_parent" href="/profile/' + commenterUserName + '"> <img class="v-center" src="' + commenterImg + '"></div> ';
     this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterObject.firstName + ' ' + commenterObject.lastName + '</h5></a><p>' + comment  + ' </p> </div>';
     this.commnetDate = '<div class="comment-date"> ' + timeAgo(dateCreated) + '</div>';
     this.wrapperCloser = '</div></div>';
