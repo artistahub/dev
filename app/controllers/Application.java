@@ -109,7 +109,8 @@ public class Application extends Controller {
 
         if ( session("sessionUser") != null){
 
-           return  ok( session("user"));
+           //return  ok( session("user"));
+           return  ok( views.html.profile.editProfile.render() );
         }
         else {
            return  ok(" no session -  not logged in");

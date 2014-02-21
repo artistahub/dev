@@ -56,7 +56,11 @@ var toolBarObjects = { myphotosToolBar : [{ name: "Photos", id : "myvideos-btn",
                      {name: "upload Photos", id : "myphotos-upload", link : "",class: "btn btn-success"}],
                       myvideosToolBar:  [{ name: "Videos", id : "myvideos-btn", link : "", class: "btn"},
                      {name: "Albums", id : "", link : "",class: "btn"},
-                     {name: "upload Videos", id : "myvideos-upload", link : "",class: "btn btn-success"}]};
+                     {name: "upload Videos", id : "myvideos-upload", link : "",class: "btn btn-success"}],
+                      editProfileToolBar: [{ name: "Profile", id : "edit-myprofile-btn",link : "",class: "btn btn-success" },
+                      { name: "Profession", id : "edit-profession-btn",link : "",class: "btn" },
+                      { name: "Preference", id : "edit-profession-btn",link : "",class: "btn" },
+                      {name: "Availability", id : "edit-availability-btn",link : "",class: "btn"}]};
 
 var widgetMenuIcons = function( userName ){
        var iconItems = [{ name: 'myphotos',id:'widget-myphotos-btn', icon:'image-icon my-profile-icon', action: '/widget/' + userName, cssClass: 'widget-menu-icon '},

@@ -1,0 +1,35 @@
+
+@headerIn()
+
+
+<script>
+    $(document).ready(function () {
+        //alert(" hi " + new ToolBar().render());
+        $('#tool-bar').html(new ToolBar(toolBarObjects.editProfileToolBar).render());
+
+    });
+</script>
+
+<div class="container-fluid" id="content-container">
+
+    <div class="row-fluid">
+        @sidemenu.sidemenu()
+        <div class="span11">
+
+            <div class="container-fluid">
+               Content Goes here ...
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

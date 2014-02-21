@@ -473,7 +473,9 @@ input[type="text"],input[type="password"], select{
 }
 .image-icon{
     background-image: url( "/images/icons/image.png");
-
+}
+.edit-icon{
+    background-image: url( "/images/icons/edit-btn.png");
 }
 .my-profile-icon{
     width: 40px;
