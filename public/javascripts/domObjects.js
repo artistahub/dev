@@ -93,16 +93,17 @@ ToolBar.prototype.render = function(){
     return this.html();
 }
 var forms = {};
-    forms.uploadMyphotos = "<form method='post' action='/addMyPhotos' enctype='multipart/form-data'><input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form>";
+    forms.uploadMyphotos = "<form method='post' action='/addMyPhotos' enctype='multipart/form-data'>" +
+                         "<input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form>";
     forms.uploadMyvideos = '<form action="/addVideo" method="post"> <div class="frow"> <label class="flabel" for="videoLink" > Youtube video</label>' +
         ' <input type="text" class="finputText" id="videoLink" name="videoLink"> </div> <div class="frow"> ' +
         '<label class="flabel" for="videoDescription" > Video Description</label>' +
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
         ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
     forms.submitMyphotoComment =  function( dataId, dataType){
-        var f = '<div ><div class="width-100"> ' +
-                '<textarea id="comment-text-area" style="width: 100%" rows="2" cols="30"> Comment goes here ...</textarea>  </div> <div>' +
-                '<input id="do-comment" data-type="' + dataType + '" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div> </div>';
+        var f = '<div class="row-fluid relative"> ' +
+                '<label class="flabel" for="t" > Comments goes here</label><textarea name="t" id="comment-text-area" class="span12" rows="2" cols="30"></textarea>  </div> <div>' +
+                '<input id="do-comment" data-type="' + dataType + '" data-id="'+ dataId +'" type="button" class="btn btn-primary" value="Comment"> </div>';
         return f ;
     }
 
@@ -159,18 +160,17 @@ SearchResultObject.prototype.render = function(){
 
 var showShadow = function(){
     var $document = $(document);
-    var $mediaFrame = $('#media-frame');
+    var $photoMediaFrame = $('#photo-media-frame');
+    var $videoMediaFrame = $('#video-media-frame');
     var documentHeight = $document.height();
     var div =  $('<div>').attr('id', 'shadow-box').css({ right: '13px',opacity:.7,'background-color': '#000', width: '100%', height: '100%', position:'fixed',top:0, bottom: 0,'z-index': 2});
-    $mediaFrame.append( div );
+    $photoMediaFrame.append( div );
+    $videoMediaFrame.append( div );
     $('#shadow-box').click( function(){
         $( this).remove();
         $('body').removeClass('.overflow-hidden');
-        $mediaFrame.remove();
-        //$( "#media-wrapper, #media-preview, #img-preview").hide();
-      //  var $mediaWrapper = $('#media-wrapper');
-      //  $mediaWrapper.css( "display", "none");
-
+        $photoMediaFrame.remove();
+        $videoMediaFrame.remove();
     });
 }
 

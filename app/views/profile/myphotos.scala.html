@@ -43,6 +43,7 @@
             $dropDownContainer.animate({
                 top:0
             }, "slow");
+
             $dropDownContainer.on('click', '.close-dropDown', function () {
                 //alert( 'hi' );
                 $dropDownContainer.animate({
@@ -54,85 +55,31 @@
             });
         });
 
-        $('body').on('click', '#media-wrapper .close-img-preview', function () {
-            $(this).hide();
-
-            var $mediaWrapper = $('#media-wrapper');
-            $mediaWrapper.animate({
-                height:"0px",
-                padding:'0px'
-            }, 50, function () {
-                $("#shadow-box").remove();
-                $( this ).hide();
-                //   $mediaWrapper.html("");
-                //$(this).height('auto');
-            });
-
+        $('body').on('click', '.close-img-preview', function () {
+            var $mediaFrame =  $( "#media-frame");
+            $mediaFrame.remove();
+            $('#shadow-box').remove();
         });
+
 
         $('body').on('click', '.artista-img', function () {
-            showShadow();
-            var $commentsContainer = $('<div>');
-            $commentsContainer.attr('id', 'comments-Container');
-
-            var $imgPreview = $("#media-preview");
-            var $imgWrapper = $("#media-wrapper");
-            $imgWrapper.css({ 'z-index' : 5, height: 'auto', display: 'block'});
-            $imgPreview.html("");
-            var $thisChild = $(this).children(":first");
-            var dataId = $thisChild.attr('data-id');
-            var dataType = $thisChild.attr('data-type');
-            var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';
-            // alert( getCommentsUrl );
-
-            ajaxReturnJson(getCommentsUrl + dataId, function (data) {
-                //alert ( JSON.stringify(data) );
-                $.each(data, function (i, e) {
-                    $commentsContainer.append(new CommentObject(e).render());
-
-                });
-            });
-            var $img = $('<img>');
-            $img.attr({'src':$thisChild.attr('src'), 'data-id':dataId});
-            $img.css({height:'auto'});
-            var $imgContainer = $('<div>');
-            $imgContainer.attr('class', 'div-img-top-curves');
-            $imgContainer.css({ 'text-align':'center', margin:'auto', 'background-color':'#222'});
-            $imgContainer.append($img);
-
-            $imgPreview.html($imgContainer);
-            $imgPreview.append($commentsContainer);
-                @if(session.get("sessionUser")) {
-                $imgPreview.append(forms.submitMyphotoComment(dataId, dataType));
-            } else {
-                var $signInBtn = $('<div>');
-                $signInBtn.attr({'class':'btn btn-primary' });
-                $signInBtn.css({'position':'absolute', 'left':0, 'right':0 });
-                $signInBtn.text(" Please sign in to leave a comment");
-                $imgPreview.append($signInBtn);
-            }
-
-            $imgPreview.css('backgroundColor', '');
-            $imgPreview.animate({
-                height:"auto",
-                padding:'0px'
-            }, 'slow', function () {
-                // alert( "DONE" );
-                $imgWrapper.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: 6px; right: -21px"></button></div>').fadeIn();
-            });
+            var loggedIn = 0;
+             @if(session.get("sessionUser")){ loggedIn = 1};
+            displayPhotoMediaFrame( $( this ), loggedIn  );
 
         });
-
 
 
         $('body').on('click', '#do-comment', function () {
-            var comment = stripTagsFromHtml($('#comment-text-area').val());
-            $('#comment-text-area').val('');
+            var $commentTextArea = $('#comment-text-area') ;
+            var $commentContainer = $('#comments-Container');
+            var comment = stripTagsFromHtml($commentTextArea.val());
+            $commentTextArea.val('');
             var dataId = $(this).attr('data-id');
             var dataType = $(this).attr('data-type');
             var o = {dataType:dataType, dataId:dataId, comment:comment};
             if (comment) {
-                ajaxAppendHtml('/addComment', "#comments-Container", o, CommentObject);
+                ajaxAppendHtml('/addComment', $commentContainer, o, CommentObject);
             }
         });
     });

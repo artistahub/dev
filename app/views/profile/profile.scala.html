@@ -79,99 +79,41 @@
 
 
         $('body').on('click', '.artista-video', function () {
-            showShadow();
-            var $videoPreview = $("#media-preview");
-            $videoPreview.html("");
-            var $thisChild = $(this).children(":first");
-            // $videoPreview.append( $thisChild );
-            var $iframe = $('<iframe>');
-            $iframe.css({ width:'100%', height:'600px', border:0});
-            var youtubeQuery = "?wmode=opaque&rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&modestbranding=0";
-            var videoUrl = "//www.youtube.com/embed/" + $thisChild.attr('id') + youtubeQuery;
-            $iframe.attr('src', videoUrl);
-            $videoPreview.html($iframe);
-            $videoPreview.css('backgroundColor', '');
-            $videoPreview.animate({
-                height:"600px",
-                padding:'25px 0px'
-            }, 'slow', function () {
-                $videoPreview.append('<div><button class="close-icon close-img-preview " style="position: absolute;top: -40px; right: -11px"></button></div>').fadeIn();
-            });
+              displayVideoMediaFrame( $( this ) );
         });
 
 
 
 
         $('body').on('click', '.artista-img', function () {
-            showShadow();
-            $('body').addClass('overflow-hidden');
-            var $commentsContainer = $('<div>');
-            $commentsContainer.attr('id', 'comments-Container');
-        //    var $mediaFrame = $("<iframe id='media-frame' name='media-frame'>");
-            var $mediaFrame = $("<div id='media-frame' name='media-frame'>");
-            $mediaFrame.css({ width:'100%', height:'100%', border:"solid 1px red", position: "absolute", top: "0", bottom : "0", 'z-index':"999"});
-
-
-            var $imgWrapper = $("<div id='media-wrapper'>");
-            var $bounderTopBar = $("<div class='container-fluid boundery-top-bar' > Top Bar</div>");
-            var $bounderBottomBar = $("<div class='container-fluid boundery-bottom-bar' >");
-            var $imgPreview = $("<div id='media-preview'>");
-            $imgWrapper.append( $bounderTopBar, $imgPreview );
-            $imgWrapper.css({ 'max-width': '600px','z-index' : 5, height: 'auto', display: 'block'});
-            //$imgPreview.html("");
-            var $thisChild = $(this).children(":first");
-            var dataId = $thisChild.attr('data-id');
-            var dataType = $thisChild.attr('data-type');
-            var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';
-            // alert( getCommentsUrl );
-
-            ajaxReturnJson(getCommentsUrl + dataId, function (data) {
-                //alert ( JSON.stringify(data) );
-                $.each(data, function (i, e) {
-                    $commentsContainer.append(new CommentObject(e).render());
-
-                });
-            });
-            var $img = $('<img>');
-            $img.attr({'src':$thisChild.attr('src'), 'data-id':dataId});
-            $img.css({height:'auto'});
-            var $imgContainer = $('<div>');
-            $imgContainer.attr('class', 'div-img-top-curves');
-            $imgContainer.css({ 'text-align':'center', margin:'auto', 'background-color':'#222'});
-            $imgContainer.append($img);
-
-            $imgPreview.html($imgContainer);
-            $imgPreview.append($commentsContainer);
-                @if(session.get("sessionUser")) {
-                $imgPreview.append(forms.submitMyphotoComment(dataId, dataType));
-            } else {
-                var $signInBtn = $('<div>');
-                $signInBtn.attr({'class':'btn btn-primary' });
-                $signInBtn.css({'position':'absolute', 'left':0, 'right':0 });
-                $signInBtn.text(" Please sign in to leave a comment");
-                $imgPreview.append($signInBtn);
-            }
-
-
-            $imgPreview.append( $bounderBottomBar );
-            $imgWrapper.append('<button id="c" class="close-icon close-img-preview" style="z-index:5; position: absolute;top: -40px; right: -11px"></button>');//.fadeIn();
-
-
-
-           // $mediaFrame.contents().find('body').append( $imgWrapper );
-            $mediaFrame.append( $imgWrapper );
-            $( 'body' ).append( $mediaFrame );
-            showShadow();
-            //$mediaFrame.contents().find('body').css({ 'background-color': 'transparent'});
-
-           // var $head = $mediaFrame.contents().find("head");
-          //  $head.append($("<link/>",{ rel: "stylesheet", href: "/bootstrap/css/bootstrap.css", type: "text/css" }));
-         //   $head.append($("<link/>",{ rel: "stylesheet", href: "/stylesheets/style.css", type: "text/css" }));
-          //  $head.append($("<script/>",{src: "http://code.jquery.com/jquery-latest.js", type: "text/javascript" }));
-          //  $head.append($("<script/>",{src: "/javascripts/iframe-actions/fr-media-wrapper.js", type: "text/javascript" }));
+             var loggedIn = 0;
+             @if(session.get("sessionUser")){ loggedIn = 1};
+             displayPhotoMediaFrame( $( this ), loggedIn  );
 
         });
 
+        $('body').on('click', '#do-comment', function () {
+            var $commentTextArea = $('#comment-text-area') ;
+            var $commentContainer = $('#comments-Container');
+            var comment = stripTagsFromHtml($commentTextArea.val());
+            $commentTextArea.val('');
+            var dataId = $(this).attr('data-id');
+            var dataType = $(this).attr('data-type');
+            var o = {dataType:dataType, dataId:dataId, comment:comment};
+            if (comment) {
+                ajaxAppendHtml('/addComment', $commentContainer, o, CommentObject);
+            }
+        });
+
+
+        $('body').on('click', '.close-img-preview', function () {
+            var $photoMediaFrame =  $( "#photo-media-frame");
+            var $videoMediaFrame =  $( "#video-media-frame");
+
+            $photoMediaFrame.remove();
+            $videoMediaFrame.remove();
+            $('#shadow-box').remove();
+        });
 
 
         });

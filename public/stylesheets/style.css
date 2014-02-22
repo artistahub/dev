@@ -657,6 +657,7 @@ div#comments-Container .comment-row:first-child {
 .commenter-name{
     margin: -3px 0px;
     display: inline-block;
+    text-shadow: 0px 1px 0px rgb(146, 141, 141);
 }
 #comment-text-area{
     border-radius: 0px 0px 5px 5px;
@@ -849,6 +850,9 @@ div#comments-Container .comment-row:first-child {
 }
 #media-frame{
     overflow: auto;
+}
+.relative{
+    position: relative;
 }
 
 

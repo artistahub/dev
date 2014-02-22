@@ -175,3 +175,76 @@ function stripTagsFromHtml( input ){
    return $d.text();
 }
 
+function displayPhotoMediaFrame( $this, loggedIn ){
+    $('body').addClass('overflow-hidden');
+    var $commentsContainer = $('<div>');
+    $commentsContainer.attr('id', 'comments-Container');
+    var $mediaFrame = $("<div id='photo-media-frame'>");
+    $mediaFrame.css({ width:'100%', height:'100%', border:"solid 1px red", position: "absolute", top: "0", bottom : "0", 'z-index':"999"});
+    var $imgWrapper = $("<div id='media-wrapper'>");
+    var $bounderTopBar = $("<div class='container-fluid boundery-top-bar' > Top Bar</div>");
+    var $bounderBottomBar = $("<div class='container-fluid boundery-bottom-bar' >");
+    var $imgPreview = $("<div id='media-preview'>");
+    $imgWrapper.append( $bounderTopBar, $imgPreview );
+    $imgWrapper.css({ 'max-width': '600px','z-index' : 5, height: 'auto', display: 'block'});
+    //$imgPreview.html("");
+    var $thisChild = $this.children(":first");
+    var dataId = $thisChild.attr('data-id');
+    var dataType = $thisChild.attr('data-type');
+    var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';
+
+    ajaxReturnJson(getCommentsUrl + dataId, function (data) {
+        //alert ( JSON.stringify(data) );
+        $.each(data, function (i, e) {
+           $commentsContainer.append(new CommentObject(e).render());
+
+        });
+    });
+    var $img = $('<img>');
+    $img.attr({'src':"/images/loader.gif", 'data-id':dataId});
+    $img.attr({'src':$thisChild.attr('src'), 'data-id':dataId});
+    $img.css({height:'auto'});
+    var $imgContainer = $('<div>');
+    $imgContainer.attr('class', 'div-img-top-curves');
+    $imgContainer.css({ 'text-align':'center', margin:'auto', 'background-color':'#222'});
+    $imgContainer.append($img);
+
+    $imgPreview.html($imgContainer);
+    $imgPreview.append($commentsContainer);
+    if ( loggedIn ) {
+        $imgPreview.append(forms.submitMyphotoComment(dataId, dataType));
+    } else {
+        var $signInBtn = $('<div>');
+        $signInBtn.attr({'class':'btn btn-primary' });
+        $signInBtn.css({'position':'absolute', 'left':0, 'right':0 });
+        $signInBtn.text(" Please sign in to leave a comment");
+        $imgPreview.append($signInBtn);
+    }
+    $imgPreview.append( $bounderBottomBar );
+    $imgWrapper.append('<button id="c" class="close-icon close-img-preview" style="z-index:5; position: absolute;top: -40px; right: -11px"></button>');//.fadeIn();
+
+    $mediaFrame.append( $imgWrapper );
+    $( 'body' ).append( $mediaFrame );
+    showShadow();
+
+
+}
+
+function displayVideoMediaFrame( $this ){
+    var $videoMediaFrame = $("<div id='video-media-frame'>");
+    $videoMediaFrame.css({ width:'100%', height:'100%', border:"solid 1px red", position: "absolute", top: "0", bottom : "0", 'z-index':"999"});
+
+    var $thisChild = $this.children(":first");
+    // $videoPreview.append( $thisChild );
+    var $iframe = $('<iframe>');
+    $iframe.css({ width:'100%', height:'600px', border:0, position: "relative",'margin-top': '40px' , 'z-index':"999"});
+    var youtubeQuery = "?wmode=opaque&rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&modestbranding=0";
+    var videoUrl = "//www.youtube.com/embed/" + $thisChild.attr('id') + youtubeQuery;
+    $iframe.attr('src', videoUrl);
+    $videoMediaFrame.html($iframe);
+    $videoMediaFrame.append('<div><button class="close-icon close-img-preview " style="z-index:10; position: absolute;top: -5px; right: 0px"></button></div>');
+    $( 'body').append( $videoMediaFrame );
+    showShadow();
+
+}
+
