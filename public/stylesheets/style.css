@@ -847,5 +847,8 @@ div#comments-Container .comment-row:first-child {
 .overflow-hidden{
     overflow: hidden;
 }
+#media-frame{
+    overflow: auto;
+}
 
 

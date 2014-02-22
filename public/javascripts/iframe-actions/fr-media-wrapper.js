@@ -1,5 +1,6 @@
 var iframeDocument = frames['media-frame'].document;
 
+
 $( iframeDocument ).ready(function(){
     var $iframe =  $( "#media-frame");
 

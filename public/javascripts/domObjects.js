@@ -159,15 +159,17 @@ SearchResultObject.prototype.render = function(){
 
 var showShadow = function(){
     var $document = $(document);
+    var $mediaFrame = $('#media-frame');
     var documentHeight = $document.height();
-    var div =  $('<div>').attr('id', 'shadow-box').css({ opacity:.7,'background-color': '#000', width: '100%', height: '100%', position:'fixed',top:0, bottom: 0,'z-index': 2});
-    $('body').append( div );
+    var div =  $('<div>').attr('id', 'shadow-box').css({ right: '13px',opacity:.7,'background-color': '#000', width: '100%', height: '100%', position:'fixed',top:0, bottom: 0,'z-index': 2});
+    $mediaFrame.append( div );
     $('#shadow-box').click( function(){
         $( this).remove();
         $('body').removeClass('.overflow-hidden');
+        $mediaFrame.remove();
         //$( "#media-wrapper, #media-preview, #img-preview").hide();
-        var $mediaWrapper = $('#media-wrapper');
-        $mediaWrapper.css( "display", "none");
+      //  var $mediaWrapper = $('#media-wrapper');
+      //  $mediaWrapper.css( "display", "none");
 
     });
 }
