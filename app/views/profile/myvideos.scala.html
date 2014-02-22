@@ -57,6 +57,7 @@
             });
 
             $('body').on('click', '.close-img-preview', function () {
+                $('body').removeClass('overflow-hidden');
                 var $photoMediaFrame =  $( "#photo-media-frame");
                 var $videoMediaFrame =  $( "#video-media-frame");
 

@@ -324,24 +324,22 @@ ul{
 }
 .row.topBar{
     display: none;
-    opacity: 0.6;
     position: absolute;
     z-index: 1;
     right: 0px;
     left: 0px;
-    background-color: rgb(31, 30, 30);
+    background-color:rgba(78, 75, 75, 0.27);
     color: white;
     text-shadow: none;
     font-size: 13pt;
 }
 .row.screenFooter{
     display: none;
-    opacity: 0.6;
     position: absolute;
     bottom: 0;
     right: 0;
     left: 0;
-    background-color:rgb(31, 30, 30);
+    background-color:rgba(78, 75, 75, 0.27);
     color: white;
     text-shadow: none;
     font-size: 13pt;

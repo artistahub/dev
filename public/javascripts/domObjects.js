@@ -168,7 +168,7 @@ var showShadow = function(){
     $videoMediaFrame.append( div );
     $('#shadow-box').click( function(){
         $( this).remove();
-        $('body').removeClass('.overflow-hidden');
+        $('body').removeClass('overflow-hidden');
         $photoMediaFrame.remove();
         $videoMediaFrame.remove();
     });
