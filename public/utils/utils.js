@@ -179,7 +179,7 @@ function displayPhotoMediaFrame( $this, loggedIn ){
     $('body').addClass('overflow-hidden');
     var $commentsContainer = $('<div>');
     $commentsContainer.attr('id', 'comments-Container');
-    var $mediaFrame = $("<div id='photo-media-frame'>");
+    var $mediaFrame = $("<div id='photo-media-frame' class='overflow-auto'>");
     $mediaFrame.css({ width:'100%', height:'100%', border:"solid 1px red", position: "absolute", top: "0", bottom : "0", 'z-index':"999"});
     var $imgWrapper = $("<div id='media-wrapper'>");
     var $bounderTopBar = $("<div class='container-fluid boundery-top-bar' > Top Bar</div>");
@@ -231,7 +231,7 @@ function displayPhotoMediaFrame( $this, loggedIn ){
 }
 
 function displayVideoMediaFrame( $this ){
-    var $videoMediaFrame = $("<div id='video-media-frame'>");
+    var $videoMediaFrame = $("<div id='video-media-frame' class='overflow-auto'>");
     $videoMediaFrame.css({ width:'100%', height:'100%', border:"solid 1px red", position: "absolute", top: "0", bottom : "0", 'z-index':"999"});
 
     var $thisChild = $this.children(":first");
