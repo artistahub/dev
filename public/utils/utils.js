@@ -20,6 +20,7 @@ $(function () {
     });
 
     $body.on('click', '.flabel', function () {
+        $finputText = $('.finputText');
         $.each($finputText, function (i, element) {
             $(element).val().length > 0 ? "" : $(element).siblings().fadeIn();
         });
@@ -27,14 +28,23 @@ $(function () {
     });
 
     $body.on('click', '.finputText', function () {
+        $finputText = $('.finputText');
+        console.log('cliecke');
         $.each($finputText, function (i, element) {
+            console.log( 'test' );
             $(element).val().length > 0 ? "" : $(element).siblings().fadeIn();
         });
         $(this).focus().siblings().hide();
     });
 
-    $body.on('focus', '.finputText', function () {
+    $body.on('focus', '.finputText, #comment-text-area', function () {
         $(this).siblings().hide();
+    });
+
+    $body.on('blur', '.finputText, #comment-text-area', function () {
+        if ( $( this).val().length == 0 ){
+            $(this).siblings().show();
+        }
     });
 
     //   @videos

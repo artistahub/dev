@@ -51,13 +51,10 @@ h1{
 }
 
 .f{
-    position: absolute;
-    top: 0;
-    right: 0;
+
     padding: 5px 0px;
     margin: auto;
     width: 335px;
-    height: 235px;
     border-radius: 5px;
     left: 0;
 }
@@ -201,7 +198,6 @@ input {
     text-align: center;
     overflow: hidden;
     height: 280px;
-    padding-top: 20px;
 }
 
 .pheader{
@@ -459,6 +455,10 @@ input[type="text"],input[type="password"], select{
 #personalInfoContainer{
     margin: 10px auto;
     position: relative;
+    max-width: 930px;
+}
+#personalInfoContainer > div.span4 {
+    min-width: 178px;
 }
 
 #profile-image-icon-btn{

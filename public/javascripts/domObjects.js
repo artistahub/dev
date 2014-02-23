@@ -196,3 +196,36 @@ function ucFirstAllWords( str )
     }
     return pieces.join(" ");
 }
+
+function ArtistaForm(){
+    this.formFields = { firstName: "First Name", lastName : "Last Name", email : "Email"};
+    this.htmlForm = function(){
+        var $container = $("<div id='dynamic-create-form'></div>");
+        $.each( this.formFields , function( i, item){
+            var $frow = $("<div class='frow'></div>");
+            var $label = $("<div class='flabel'></div>").text( item );
+            var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
+            $frow.append( $label, $input);
+            $container.append( $frow );
+         });
+      return $container;
+     }
+    this.renderHtml = function(){ return this.htmlForm()};
+}
+function PerformanceForm( type ){
+    this.formFields = { businessName: type + "'s Name" , email : "Email"};
+    this.htmlForm = function(){
+        var $container = $("<div id='dynamic-create-form'></div>");
+        $.each( this.formFields , function( i, item){
+            var $frow = $("<div class='frow'></div>");
+            var $label = $("<div class='flabel'></div>").text( ucFirstAllWords( item ) );
+            var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
+            $frow.append( $label, $input);
+            $container.append( $frow );
+         });
+      return $container;
+     }
+    this.renderHtml = function(){ return this.htmlForm()};
+}
+
+
