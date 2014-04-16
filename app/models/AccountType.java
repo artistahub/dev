@@ -12,18 +12,19 @@ import java.util.UUID;
 @Entity
 @Table(name = "accounttype")
 public class AccountType extends Model {
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-", "");
     private String reference;
     private String name;
     private String label;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;
 
     public AccountType( String name , String ref , String label){
          setName( name );
          setReference( ref );
-        setLabel( label );
+         setLabel( label );
          setCreateTime( new Date());
     }
     private static Finder<Long, AccountType> find = new Finder<Long, AccountType>(Long.class, AccountType.class);

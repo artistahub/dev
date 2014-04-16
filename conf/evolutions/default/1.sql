@@ -5,10 +5,10 @@
 
 create table accounttype (
   id                        varchar(255) not null,
-  create_time               datetime,
   reference                 varchar(255),
   name                      varchar(255),
   label                     varchar(255),
+  create_time               datetime,
   constraint pk_accounttype primary key (id))
 ;
 
