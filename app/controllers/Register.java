@@ -1,5 +1,4 @@
 package controllers;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
 import dataHelpers.SessionUser;
 import play.data.DynamicForm;
@@ -30,11 +29,11 @@ public class Register extends Controller {
 
     public static Result addVideo() {
         DynamicForm requestData = form().bindFromRequest();
-        SystemUser u = SystemUser.findUserById(session("currentUserId"));
+        SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
         String videoLink = requestData.get("videoLink");
         String videoDescription = requestData.get("videoDescription");
         Video video = new Video(videoLink, videoDescription);
-        video.setSystemUser(u);
+        video.setSystemUser1(u);
         video.save();
        return redirect( routes.Application.myVideos());
 
@@ -50,8 +49,8 @@ public class Register extends Controller {
         String userName = requestData.get("userName");
         String userType = requestData.get( "userType" );
         UserType systemUsertype = UserType.findUserTypeByName( userType );
-        SystemUser u = new SystemUser(firstName, lastName, email,  password, systemUsertype);
-       // u.setUserType(SystemUser.UserType.ARTIST);
+        SystemUser1 u = new SystemUser1(firstName, lastName, email,  password, systemUsertype);
+       // u.setUserType(SystemUser1.UserType.ARTIST);
         u.setUserName( firstName + "." + lastName );
         u.setLocation(Address.createAddress());
         u.save();
@@ -69,7 +68,7 @@ public class Register extends Controller {
             ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
             Feed f = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
             f.save();
-            //profileImage.setSystemUser( u );
+            //profileImage.setSystemUser1( u );
             profileImage.save();
             //System.out.println( "-----------++++++++++--------- " + profileImage.getId());
             u.setActiveProfileImage(profileImage);

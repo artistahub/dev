@@ -15,7 +15,7 @@ public class Video extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private SystemUser systemUser;
+    private SystemUser1 systemUser1;
     private String url;
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
@@ -66,11 +66,11 @@ public class Video extends Model {
         this.dateCreated = dateCreated;
     }
 
-    public SystemUser getSystemUser() {
-        return systemUser;
+    public SystemUser1 getSystemUser1() {
+        return systemUser1;
     }
 
-    public void setSystemUser(SystemUser systemUser) {
-        this.systemUser = systemUser;
+    public void setSystemUser1(SystemUser1 systemUser1) {
+        this.systemUser1 = systemUser1;
     }
 }

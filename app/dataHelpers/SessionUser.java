@@ -2,11 +2,11 @@ package dataHelpers;
 
 import models.Address;
 import models.ProfileImage;
-import models.SystemUser;
+import models.SystemUser1;
 
 /**
  * Created with IntelliJ IDEA.
- * SystemUser: derectionfree
+ * SystemUser1: derectionfree
  * Date: 8/18/13
  * Time: 12:43 AM
  * To change this template use File | Settings | File Templates.
@@ -21,14 +21,14 @@ public class SessionUser {
     private ProfileImage activeProfileImage;
     private Address location;
 
-    public SessionUser( SystemUser systemUser){
-       setUserName( systemUser.getUserName());
-       setFirstName( systemUser.getFirstName());
-       setLastName( systemUser.getLastName());
+    public SessionUser( SystemUser1 systemUser1){
+       setUserName( systemUser1.getUserName());
+       setFirstName( systemUser1.getFirstName());
+       setLastName( systemUser1.getLastName());
        setFullName( getFirstName() + " " + getLastName());
-       setEmail( systemUser.getEmail());
-       setActiveProfileImage( systemUser.getActiveProfileImage());
-       setLocation( systemUser.getLocation());
+       setEmail( systemUser1.getEmail());
+       setActiveProfileImage( systemUser1.getActiveProfileImage());
+       setLocation( systemUser1.getLocation());
     }
 
 

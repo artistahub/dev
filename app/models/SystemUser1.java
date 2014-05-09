@@ -5,13 +5,12 @@ import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
-import com.avaje.ebean.annotation.EnumMapping;
 import play.db.ebean.*;
 
 
 @Entity
 @Table(name = "artistas")
-public class SystemUser extends Model {
+public class SystemUser1 extends Model {
 
     @Id
     //private Long id;
@@ -42,7 +41,7 @@ public class SystemUser extends Model {
     }
 
 
-    public SystemUser(String fName, String lName, String email, String pass, UserType userType){
+    public SystemUser1(String fName, String lName, String email, String pass, UserType userType){
         setFirstName( fName );
         setLastName( lName );
         setEmail( email );
@@ -59,55 +58,55 @@ public class SystemUser extends Model {
         this.activeProfileImage = activeProfileImage;
     }
 
-    private static Finder<Long, SystemUser> find = new Finder<Long, SystemUser>(Long.class, SystemUser.class);
+    private static Finder<Long, SystemUser1> find = new Finder<Long, SystemUser1>(Long.class, SystemUser1.class);
 
-    public static List<SystemUser> getArtistas() {
-        List<SystemUser> artistas = Ebean.find(SystemUser.class).findList();
+    public static List<SystemUser1> getArtistas() {
+        List<SystemUser1> artistas = Ebean.find(SystemUser1.class).findList();
         System.out.print(">>>>>>> " + artistas);
         return artistas;
     }
 
     public static void deleteArtista(Long id) {
-        SystemUser.getFind().ref(id).delete();
+        SystemUser1.getFind().ref(id).delete();
     }
 
-    public static SystemUser findUserById( String id){
-        return  Ebean.find( SystemUser.class).where().like( "id", id).findUnique();
+    public static SystemUser1 findUserById( String id){
+        return  Ebean.find( SystemUser1.class).where().like( "id", id).findUnique();
     }
 
-    public static List<SystemUser> findByName(String name) {
-      //  List<SystemUser> artistas = Ebean.find(SystemUser.class).where().ilike("lastName", "%" + name + "%").findList();
-        List<SystemUser> artistas = Ebean.find(SystemUser.class).where(Expr.or( Expr.ilike("firstName", "%" + name + "%"), Expr.ilike("lastName", "%" + name + "%"))).findList();
+    public static List<SystemUser1> findByName(String name) {
+      //  List<SystemUser1> artistas = Ebean.find(SystemUser1.class).where().ilike("lastName", "%" + name + "%").findList();
+        List<SystemUser1> artistas = Ebean.find(SystemUser1.class).where(Expr.or( Expr.ilike("firstName", "%" + name + "%"), Expr.ilike("lastName", "%" + name + "%"))).findList();
         return artistas;
     }
 
-    public static SystemUser findUserByEmailAndPass( String email, String pass ){
-        return  Ebean.find( SystemUser.class ).where().like( "email", email).eq("password", pass).findUnique();
+    public static SystemUser1 findUserByEmailAndPass( String email, String pass ){
+        return  Ebean.find( SystemUser1.class ).where().like( "email", email).eq("password", pass).findUnique();
 
     }
 
-    public static SystemUser findUerByUserName ( String userName){
-        return  Ebean.find( SystemUser.class ).where().like( "userName", userName).findUnique();
+    public static SystemUser1 findUerByUserName ( String userName){
+        return  Ebean.find( SystemUser1.class ).where().like( "userName", userName).findUnique();
     }
 
    // public static void createArtista() {
-        //SystemUser u = new SystemUser("hassan", "Rais", "email@email.com","1234", "artist");
-        //System.out.println("\n UserId: **** " + Ebean.nextId(SystemUser.class) + "\n");
+        //SystemUser1 u = new SystemUser1("hassan", "Rais", "email@email.com","1234", "artist");
+        //System.out.println("\n UserId: **** " + Ebean.nextId(SystemUser1.class) + "\n");
        // u.setLastName("Rais");
       //  u.setFirstName("Hassan");
       //  u.setAge(33);
-      //  System.out.print(" new user Id: " + Ebean.nextId(SystemUser.class));
+      //  System.out.print(" new user Id: " + Ebean.nextId(SystemUser1.class));
       //  u.setMailingAddress(Address.createAddress());
        // u.setBillingAddress(Address.createAddress());
        // u.save();
     //}
 
-    public static Finder<Long, SystemUser> getFind() {
+    public static Finder<Long, SystemUser1> getFind() {
         return find;
     }
 
-    public static void setFind(Finder<Long, SystemUser> find) {
-        SystemUser.find = find;
+    public static void setFind(Finder<Long, SystemUser1> find) {
+        SystemUser1.find = find;
     }
 
     public String getFirstName() {
@@ -211,7 +210,7 @@ public class SystemUser extends Model {
 
     public String toString(){
 
-        return " SystemUser: " + getId() + " Name: " + getLastName() + " " + getFirstName() + " Email: " + getEmail();
+        return " SystemUser1: " + getId() + " Name: " + getLastName() + " " + getFirstName() + " Email: " + getEmail();
 
     }
 

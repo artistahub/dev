@@ -17,7 +17,7 @@ public class ProfileImage extends Model {
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     private String url;
    // @OneToOne(cascade = CascadeType.ALL)
-    //private SystemUser user;
+    //private SystemUser1 user;
     private String description;
     private List<ProfileImageComment> comments;
     @Temporal(TemporalType.TIMESTAMP)
