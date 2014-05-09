@@ -18,7 +18,7 @@ public class OrganizationCategory extends Model {
     private String label;
     @ManyToMany( mappedBy = "categories", cascade = CascadeType.ALL )
     public List< Organization > organizations;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "timestamp")
     private Date createTime;
     public static int count = 0;
 

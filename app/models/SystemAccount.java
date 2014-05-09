@@ -1,12 +1,14 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Table(name = "systemaccount")
-public class SystemAccount {
+public class SystemAccount extends Model {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Id

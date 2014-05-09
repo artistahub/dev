@@ -8,7 +8,7 @@ create table accounttype (
   reference                 varchar(255),
   name                      varchar(255),
   label                     varchar(255),
-  create_time               datetime,
+  create_time               timestamp,
   constraint pk_accounttype primary key (id))
 ;
 
@@ -19,7 +19,7 @@ create table address (
   state                     varchar(255),
   zip                       varchar(255),
   country                   varchar(255),
-  date_created              datetime,
+  date_created              timestamp,
   constraint pk_address primary key (id))
 ;
 
@@ -28,7 +28,7 @@ create table comments (
   commenter_id              varchar(255),
   description               varchar(255),
   myphoto_id                varchar(255),
-  date_created              datetime,
+  date_created              timestamp,
   constraint pk_comments primary key (id))
 ;
 
@@ -37,7 +37,7 @@ create table feeds (
   system_user1_id           varchar(255),
   url                       varchar(255),
   description               varchar(255),
-  date_created              datetime,
+  date_created              timestamp,
   constraint pk_feeds primary key (id))
 ;
 
@@ -61,7 +61,7 @@ create table organizations (
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
   create_time               datetime,
-  update_time               datetime,
+  update_time               timestamp,
   constraint pk_organizations primary key (id))
 ;
 
@@ -70,7 +70,7 @@ create table organizationcategories (
   reference                 varchar(255),
   name                      varchar(255),
   label                     varchar(255),
-  create_time               datetime,
+  create_time               timestamp,
   constraint pk_organizationcategories primary key (id))
 ;
 
@@ -88,7 +88,7 @@ create table persons (
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
   create_time               datetime,
-  update_time               datetime not null,
+  update_time               timestamp,
   constraint ck_persons_gender check (gender in ('Male','Female','Other')),
   constraint pk_persons primary key (id))
 ;
@@ -99,6 +99,7 @@ create table personcategories (
   name                      varchar(255),
   label                     varchar(255),
   create_time               datetime,
+  update_time               timestamp,
   constraint pk_personcategories primary key (id))
 ;
 

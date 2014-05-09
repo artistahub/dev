@@ -31,8 +31,8 @@ public class Organization extends Model {
     private Address billingAddress;
     @OneToOne(cascade = CascadeType.ALL)
     private Address shippingAddress;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
+    @Column(columnDefinition = "timestamp")
     private Date updateTime;
 
     private static Finder<String , Organization> find = new Finder<String, Organization>(String.class, Organization.class);

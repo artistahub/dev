@@ -18,7 +18,7 @@ public class Feed extends Model {
     private SystemUser1 systemUser1;
     private String url;
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "timestamp")
     private Date dateCreated;
 
     public Feed( SystemUser1 systemUser1, String url, String description){

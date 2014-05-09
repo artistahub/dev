@@ -17,7 +17,7 @@ public class Address extends Model {
     private String state;
     private String zip;
     private String country;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "timestamp")
     private Date dateCreated;
 
     public Address ( String city, String state, String zip, String country){

@@ -1,14 +1,13 @@
 package models;
 
-import java.util.*;
-import javax.persistence.*;
-
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
-import com.avaje.ebean.annotation.EnumMapping;
-import com.avaje.ebean.annotation.UpdatedTimestamp;
-import play.data.format.Formats;
-import play.db.ebean.*;
+import play.db.ebean.Model;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 
 @Entity
@@ -37,9 +36,7 @@ public class Person extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     private Address shippingAddress;
     private Date createTime;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Formats.DateTime(pattern="yyyy-MM-dd HH:mm:ss")
-    @UpdatedTimestamp
+    @Column(columnDefinition = "timestamp")
     private Date updateTime;
 
     public List<Organization> getOrganizations() {

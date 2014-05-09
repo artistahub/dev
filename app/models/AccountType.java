@@ -18,7 +18,7 @@ public class AccountType extends Model {
     private String reference;
     private String name;
     private String label;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "timestamp")
     private Date createTime;
 
     public AccountType( String name , String ref , String label){

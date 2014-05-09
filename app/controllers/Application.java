@@ -21,6 +21,14 @@ public class Application extends Controller {
         PersonCategory pc  = new PersonCategory();
         pc.setName("Artist");
         pc.save();
+
+        List<Person> people =  Person.findByName("hassan");
+        for ( Person ps : people){
+            ps.setCell("xx5555555");
+            ps.save();
+
+        }
+
        // Organization o = new Organization( " ARtista Plus ");
        // List<Organization> os = p.getOrganizations();
        // os.add( o );
@@ -126,6 +134,7 @@ public class Application extends Controller {
        SystemUser1 systemUser1 = SystemUser1.findUerByUserName(userName);
        ProfileData profileData = new ProfileData(systemUser1);
        //return ok( views.html.profile.profile.render( profileData.toString() ));
+      // return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
        return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
    }
 

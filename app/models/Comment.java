@@ -19,7 +19,7 @@ public class Comment extends Model {
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     private MyPhoto myphoto;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "timestamp")
     private Date dateCreated;
 
 

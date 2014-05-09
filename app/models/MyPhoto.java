@@ -20,7 +20,6 @@ public class MyPhoto extends Model {
     private String url;
     private String description;
     private List<Comment> comments;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     private String tag;
 

@@ -20,8 +20,9 @@ public class PersonCategory extends Model {
     private String label;
     @ManyToMany( mappedBy = "categories", cascade = CascadeType.ALL )
     public List< Person > persons;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
+    @Column(columnDefinition = "timestamp")
+    private Date updateTime;
     public static int count = 0;
 
     public PersonCategory(){
@@ -62,5 +63,13 @@ public class PersonCategory extends Model {
     }
     public String toString(){
         return "Person Category: " + getName() + " " + getLabel() + " " + getReference() ;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
