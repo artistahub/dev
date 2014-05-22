@@ -22,6 +22,15 @@ public class Application extends Controller {
         pc.setName("Artist");
         pc.save();
 
+        SystemUser u = new SystemUser( p );
+        u.save();
+        if( u.isPerson() ){
+           System.out.println( " He is a Person *********" );
+        }
+        else{
+            System.out.println( " He is not a person ******************");
+        }
+
         List<Person> people =  Person.findByName("hassan");
         for ( Person ps : people){
             ps.setCell("xx5555555");
@@ -152,8 +161,8 @@ public class Application extends Controller {
     }
     //
     public static Result myPhotos(){
-        SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
-        if ( session("sessionUser") != null){
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
+        if ( session("sessionUser") != null && u != null ){
             List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
             return  ok( views.html.profile.myphotos.render( Json.toJson( myphotos ).toString() ));
             //return  ok( session("user"));

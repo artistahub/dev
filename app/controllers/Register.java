@@ -48,11 +48,10 @@ public class Register extends Controller {
         String password = requestData.get("password");
         String userName = requestData.get("userName");
         String userType = requestData.get( "userType" );
+        Person p = new Person(  firstName, lastName, email );
         UserType systemUsertype = UserType.findUserTypeByName( userType );
-        SystemUser1 u = new SystemUser1(firstName, lastName, email,  password, systemUsertype);
+        SystemUser u = new SystemUser( p );
        // u.setUserType(SystemUser1.UserType.ARTIST);
-        u.setUserName( firstName + "." + lastName );
-        u.setLocation(Address.createAddress());
         u.save();
 
         // Save the file in AWS
@@ -71,7 +70,7 @@ public class Register extends Controller {
             //profileImage.setSystemUser1( u );
             profileImage.save();
             //System.out.println( "-----------++++++++++--------- " + profileImage.getId());
-            u.setActiveProfileImage(profileImage);
+           // u.setActiveProfileImage(profileImage);
             u.update();
             SessionUser sessionUser = new SessionUser( u );
             String s = play.libs.Json.toJson( sessionUser).toString();

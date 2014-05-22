@@ -16,8 +16,11 @@ object ApplicationBuild extends Build {
     javaEbean
   )
 
-  val main = play.Project(appName, appVersion, appDependencies).settings(
-    // Add your own project settings here      
+  val main = play.Project(appName, appVersion, appDependencies ).settings(
+    // Add your own project settings here
+
   )
+
+
 
 }
