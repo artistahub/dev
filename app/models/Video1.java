@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "videos")
-public class Video extends Model {
+@Table(name = "Video1s")
+public class Video1 extends Model {
 
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
@@ -21,17 +21,17 @@ public class Video extends Model {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
 
-    public  Video( String url, String description){
+    public  Video1( String url, String description){
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
     }
 
-    private static Finder<Long, Video> find = new Finder<Long, Video>(Long.class, Video.class);
+    private static Finder<Long, Video1> find = new Finder<Long, Video1>(Long.class, Video1.class);
 
-    public static List<Video> getMyVideos( String id) {
-        List<Video> myvideos = Ebean.find(Video.class).where().ilike("system_user_id", id).findList();
-        return myvideos;
+    public static List<Video1> getMyVideo1s( String id) {
+        List<Video1> myVideo1s = Ebean.find(Video1.class).where().ilike("system_user_id", id).findList();
+        return myVideo1s;
     }
 
     public String getId() {

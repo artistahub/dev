@@ -15,6 +15,7 @@ public class SystemUser extends Model {
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
     private Person person;
+    private String userName;
     @OneToOne(cascade = CascadeType.ALL)
     private Organization organization;
     private Date createTime;
@@ -41,9 +42,22 @@ public class SystemUser extends Model {
         return artistas;
     }
 
+    public static SystemUser findSystemUserByUserName ( String userName){
+        return  Ebean.find( SystemUser.class ).where().like( "userName", userName).findUnique();
+    }
+
     public static SystemUser findUserById( String id){
         return  Ebean.find( SystemUser.class).where().like( "id", id).findUnique();
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 
 
     public String getId() {

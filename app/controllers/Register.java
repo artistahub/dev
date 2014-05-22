@@ -29,11 +29,11 @@ public class Register extends Controller {
 
     public static Result addVideo() {
         DynamicForm requestData = form().bindFromRequest();
-        SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
         String videoLink = requestData.get("videoLink");
-        String videoDescription = requestData.get("videoDescription");
-        Video video = new Video(videoLink, videoDescription);
-        video.setSystemUser1(u);
+        String videoTitle= requestData.get("videoDescription");
+        Video video = new Video( u, videoTitle, videoLink );
+        video.setOwner(u);
         video.save();
        return redirect( routes.Application.myVideos());
 
