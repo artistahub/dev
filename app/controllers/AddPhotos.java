@@ -3,7 +3,7 @@ package controllers;
 
 import models.MyPhoto;
 import models.S3File;
-import models.SystemUser;
+import models.SystemUser1;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -16,7 +16,7 @@ public class AddPhotos extends Controller {
 
     public static Result addMyPhotos() throws IOException {
 
-        SystemUser u = SystemUser.findUserById(session("currentUserId"));
+        SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
         String fileName = "";
         Http.MultipartFormData b = request().body().asMultipartFormData();
         FilePart picture = b.getFile("myphotos-upload");

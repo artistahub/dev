@@ -15,15 +15,15 @@ public class Comment extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private SystemUser commenter;
+    private SystemUser1 commenter;
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     private MyPhoto myphoto;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "timestamp")
     private Date dateCreated;
 
 
-    public Comment( SystemUser commenter, String comment){
+    public Comment( SystemUser1 commenter, String comment){
        setCommenter( commenter );
        setDescription( comment );
        setDateCreated( new Date());
@@ -46,11 +46,11 @@ public class Comment extends Model {
         this.id = id;
     }
 
-    public SystemUser getCommenter() {
+    public SystemUser1 getCommenter() {
         return commenter;
     }
 
-    public void setCommenter(SystemUser commenter) {
+    public void setCommenter(SystemUser1 commenter) {
         this.commenter = commenter;
     }
 

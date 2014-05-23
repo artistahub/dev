@@ -165,7 +165,7 @@ function unGrayScale( ){
 function slideDownMainContent(){
     var $topHeaderBar = $('#header-top-bar');
     var $contentWrapper = $('#content-container');
-    var marginTop =  $topHeaderBar.height() + 10;
+    var marginTop =  $topHeaderBar.height() + 3;
     //alert( marginTop)
 
     //console.log( $contentWrapper );

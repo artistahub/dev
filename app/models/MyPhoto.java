@@ -16,17 +16,16 @@ public class MyPhoto extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private SystemUser systemUser;
+    private SystemUser1 systemUser1;
     private String url;
     private String description;
     private List<Comment> comments;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     private String tag;
 
 
-    public MyPhoto(String url, String description, SystemUser u){
-        this.setSystemUser(u);
+    public MyPhoto(String url, String description, SystemUser1 u){
+        this.setSystemUser1(u);
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
@@ -81,12 +80,12 @@ public class MyPhoto extends Model {
         return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription() + "\n";
     }
 
-    public SystemUser getSystemUser() {
-        return systemUser;
+    public SystemUser1 getSystemUser1() {
+        return systemUser1;
     }
 
-    public void setSystemUser(SystemUser systemUser) {
-        this.systemUser = systemUser;
+    public void setSystemUser1(SystemUser1 systemUser1) {
+        this.systemUser1 = systemUser1;
     }
 
     public List<Comment> getComments(  ) {
