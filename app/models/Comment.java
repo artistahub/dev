@@ -48,7 +48,7 @@ public class Comment extends Model {
         List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", myphotoId).orderBy(" dateCreated asc").findList();
         return comments;
     }
-     public static List<Comment> getCommentsByPhoto( String photoId ) {
+     public static List<Comment> getCommentsByPhotoId( String photoId ) {
         List<Comment> comments = Ebean.find(Comment.class).where().ilike("photo_id", photoId).orderBy(" dateCreated asc").findList();
         return comments;
     }
@@ -107,5 +107,9 @@ public class Comment extends Model {
 
     public void setVideo(Video video) {
         this.video = video;
+    }
+
+    public String toString(){
+        return "Comment: " + getDescription() + " " +  getCommenter() + ""  + getDateCreated();
     }
 }

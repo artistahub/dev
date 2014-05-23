@@ -103,4 +103,10 @@ public class SystemUser extends Model {
     public boolean isOrganization(){
         return this.getPerson() == null && this.getOrganization() != null;
     }
+
+
+
+    public String toString(){
+        return " SystemUser: " + getId() + " Name: " + getPerson() + " " + getUserName() + " Email: " ;
+    }
 }

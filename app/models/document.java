@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 @MappedSuperclass
 public class Document extends Model {
     @Id
@@ -26,9 +27,10 @@ public class Document extends Model {
     private SystemUser owner;
     private Date createTime;
     @Column(columnDefinition = "timestamp")
-    public Date updateTime;
+    private Date updateTime;
     @Enumerated(value=EnumType.ORDINAL)
     Status status = Status.active;
+
 
 
     @EnumMapping(nameValuePairs="active = a, inactive = i")
@@ -164,10 +166,15 @@ public class Document extends Model {
     }
 
     public List<Comment> getComments() {
+        List <Comment> comments = Comment.getCommentsByPhotoId(this.getId());
         return comments;
     }
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
     }
 }

@@ -15,28 +15,24 @@ import static play.data.Form.*;
 public class Application extends Controller {
 
     public static Result index() {
-        Person p = new Person( "HAssan", "rais", "a@a.com" );
+        Person p = new Person( "Hassan", "rais", "allllc@akk.com" );
         p.setGender( Person.Sex.Male );
         p.save();
         PersonCategory pc  = new PersonCategory();
         pc.setName("Artist");
         pc.save();
 
+
         SystemUser u = new SystemUser( p );
         u.save();
-        if( u.isPerson() ){
-           System.out.println( " He is a Person *********" );
-        }
-        else{
-            System.out.println( " He is not a person ******************");
-        }
 
-        List<Person> people =  Person.findByName("hassan");
-        for ( Person ps : people){
-            ps.setCell("xx5555555");
-            ps.save();
+        SystemAccount sa = new SystemAccount( u, p.getEmail(), "123455");
+        sa.save();
 
-        }
+        SystemAccount s = SystemAccount.findSystemAccountBySystemUserId( u.getId() );
+        System.out.println( " System account found: " + s);
+
+
 
        // Organization o = new Organization( " ARtista Plus ");
        // List<Organization> os = p.getOrganizations();
@@ -86,6 +82,22 @@ public class Application extends Controller {
         return ok(views.html.index.render( artistasAsJson, userTypesAsJson));
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static Result home(){
         if ( session("sessionUser") == null){
 
@@ -119,12 +131,9 @@ public class Application extends Controller {
         return redirect( routes.Application.artistas() );
     }
 
-    /*
-    public static Result newArtista() {
-        SystemUser1.createArtista();
-        return redirect( routes.Application.artistas() );
-    }
-    */
+
+
+
     public static Result byName( String name){
         List<SystemUser1> artistas = SystemUser1.findByName(name);
         ObjectNode allArtistas = Json.newObject();
@@ -222,9 +231,9 @@ public class Application extends Controller {
         //return ok( Json.toJson( myComment));
     }
 
-    public static Result getComments( String myphotoId){
-        MyPhoto myphoto = MyPhoto.findMyPhotoById( myphotoId );
-        List <Comment> comments = Comment.getCommentsByMyPhoto( myphotoId);
+    public static Result getComments( String photoId){
+        Photo photo = Photo.findPhotoById( photoId );
+        List <Comment> comments = Comment.getCommentsByPhotoId( photoId );
         return ok( Json.toJson( comments ));
 
     }
@@ -235,6 +244,8 @@ public class Application extends Controller {
         return ok( Json.toJson( comments ));
 
     }
+
+
 
     public static void createAccountTypeIfNotExist(){
         new AccountType( "free", "at-00001", "free" ).save();

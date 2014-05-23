@@ -163,13 +163,16 @@ create table s3file (
   constraint pk_s3file primary key (id))
 ;
 
-create table systemaccount (
+create table systemaccounts (
   id                        varchar(255) not null,
-  create_time               datetime,
-  system_user1_id           varchar(255),
+  system_user_id            varchar(255),
+  account_email             varchar(255),
+  account_password          varchar(255),
   account_type              varchar(8),
-  constraint ck_systemaccount_account_type check (account_type in ('free','gold','platinum')),
-  constraint pk_systemaccount primary key (id))
+  create_time               datetime,
+  update_time               timestamp,
+  constraint ck_systemaccounts_account_type check (account_type in ('free','gold','platinum')),
+  constraint pk_systemaccounts primary key (id))
 ;
 
 create table systemusers (
@@ -290,8 +293,8 @@ alter table profileimagecomments add constraint fk_profileimagecomments_commente
 create index ix_profileimagecomments_commenter_16 on profileimagecomments (commenter_id);
 alter table profileimagecomments add constraint fk_profileimagecomments_myProfilePhoto_17 foreign key (my_profile_photo_id) references profileImages (id) on delete restrict on update restrict;
 create index ix_profileimagecomments_myProfilePhoto_17 on profileimagecomments (my_profile_photo_id);
-alter table systemaccount add constraint fk_systemaccount_systemUser1_18 foreign key (system_user1_id) references artistas (id) on delete restrict on update restrict;
-create index ix_systemaccount_systemUser1_18 on systemaccount (system_user1_id);
+alter table systemaccounts add constraint fk_systemaccounts_systemUser_18 foreign key (system_user_id) references systemusers (id) on delete restrict on update restrict;
+create index ix_systemaccounts_systemUser_18 on systemaccounts (system_user_id);
 alter table systemusers add constraint fk_systemusers_person_19 foreign key (person_id) references persons (id) on delete restrict on update restrict;
 create index ix_systemusers_person_19 on systemusers (person_id);
 alter table systemusers add constraint fk_systemusers_organization_20 foreign key (organization_id) references organizations (id) on delete restrict on update restrict;
@@ -365,7 +368,7 @@ drop table profileimagecomments;
 
 drop table s3file;
 
-drop table systemaccount;
+drop table systemaccounts;
 
 drop table systemusers;
 
