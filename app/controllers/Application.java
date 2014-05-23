@@ -22,6 +22,15 @@ public class Application extends Controller {
         pc.setName("Artist");
         pc.save();
 
+        SystemUser u = new SystemUser( p );
+        u.save();
+        if( u.isPerson() ){
+           System.out.println( " He is a Person *********" );
+        }
+        else{
+            System.out.println( " He is not a person ******************");
+        }
+
         List<Person> people =  Person.findByName("hassan");
         for ( Person ps : people){
             ps.setCell("xx5555555");
@@ -131,8 +140,8 @@ public class Application extends Controller {
     }
 
    public static Result profile( String userName ){
-       SystemUser1 systemUser1 = SystemUser1.findUerByUserName(userName);
-       ProfileData profileData = new ProfileData(systemUser1);
+       SystemUser systemUser = SystemUser.findSystemUserByUserName( userName );
+       ProfileData profileData = new ProfileData(systemUser);
        //return ok( views.html.profile.profile.render( profileData.toString() ));
       // return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
        return ok( views.html.profile.profile.render( Json.toJson( profileData ).toString() ));
@@ -152,8 +161,8 @@ public class Application extends Controller {
     }
     //
     public static Result myPhotos(){
-        SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
-        if ( session("sessionUser") != null){
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
+        if ( session("sessionUser") != null && u != null ){
             List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
             return  ok( views.html.profile.myphotos.render( Json.toJson( myphotos ).toString() ));
             //return  ok( session("user"));
@@ -164,7 +173,7 @@ public class Application extends Controller {
     }
 
     public static Result myWidget( String userName){
-        SystemUser1 u = SystemUser1.findUerByUserName(userName);
+        SystemUser u = SystemUser.findSystemUserByUserName( userName );
         ProfileData profileData = new ProfileData( u );
         //return ok( views.html.profile.profile.render( profileData.toString() ));
 
@@ -175,7 +184,7 @@ public class Application extends Controller {
     public static Result myVideos(){
         SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
         if ( session("sessionUser") != null){
-            List<Video> myvideos = Video.getMyVideos( u.getId());
+            List<Video> myvideos = Video.getVideosByOwnerId( u.getId());
             return  ok( views.html.profile.myvideos.render( Json.toJson( myvideos ).toString() ));
             //return  ok( session("user"));
         }
@@ -186,7 +195,7 @@ public class Application extends Controller {
 
     public static Result addComment(){
         DynamicForm requestData = form().bindFromRequest();
-        SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
         String dataType = requestData.get("dataType");
         String photoId = requestData.get( "dataId");
         String comment = requestData.get("comment");
@@ -201,9 +210,10 @@ public class Application extends Controller {
             return ok( Json.toJson( profileImagecomment ));
         }
         else {
-             Comment myPhotoComment = new Comment( u, comment );
-             MyPhoto myphoto = MyPhoto.findMyPhotoById( photoId );
-             myPhotoComment.setMyphoto( myphoto );
+
+             Photo photo = Photo.findPhotoById( photoId );
+             Comment myPhotoComment = new Comment( photo,  u, comment );
+             myPhotoComment.setPhoto( photo );
              myPhotoComment.save();
              return ok( Json.toJson( myPhotoComment));
         }

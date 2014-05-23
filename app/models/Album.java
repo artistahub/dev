@@ -1,0 +1,98 @@
+package models;
+
+
+import com.avaje.ebean.Ebean;
+import play.db.ebean.Model;
+import play.libs.Json;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "albums")
+public class Album extends Model {
+    @Id
+    private String id = UUID.randomUUID().toString().replaceAll("-","");
+    private String reference;
+    private String title;
+    private String description;
+    @OneToOne(cascade = CascadeType.ALL)
+    private SystemUser owner;
+    private Date createTime;
+    @Column(columnDefinition = "timestamp")
+    private Date updateTime;
+
+    public Album( SystemUser owner, String name, String description ){
+        setOwner( owner );
+        setTitle( title );
+        setDescription( description );
+        setCreateTime( new Date() );
+    }
+
+    private static Finder<Long, Album> find = new Finder<Long, Album>(Long.class, Album.class);
+
+    public static Album findAlbumById( String id){
+        return  Ebean.find(Album.class).where().like( "id", id).findUnique();
+    }
+
+    public static List<Album> getMyAlbums( String id ) {
+        List<Album> albums = Ebean.find(Album.class).where().ilike("owner_id", id).findList();
+        System.out.print("My albums >>>>>>> " + Json.toJson( albums ).toString());
+        return albums;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public SystemUser getOwner() {
+        return owner;
+    }
+
+    public void setOwner(SystemUser owner) {
+        this.owner = owner;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+}

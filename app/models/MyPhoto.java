@@ -16,7 +16,7 @@ public class MyPhoto extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private SystemUser1 systemUser1;
+    private SystemUser systemUser;
     private String url;
     private String description;
     private List<Comment> comments;
@@ -24,8 +24,8 @@ public class MyPhoto extends Model {
     private String tag;
 
 
-    public MyPhoto(String url, String description, SystemUser1 u){
-        this.setSystemUser1(u);
+    public MyPhoto(String url, String description, SystemUser u){
+        this.setSystemUser(u);
         this.setUrl(url);
         this.setDescription(description);
         this.setDateCreated(new Date());
@@ -80,12 +80,12 @@ public class MyPhoto extends Model {
         return "myphoto: " + " Url : " + getUrl() + " Description: " + getDescription() + "\n";
     }
 
-    public SystemUser1 getSystemUser1() {
-        return systemUser1;
+    public SystemUser getSystemUser() {
+        return systemUser;
     }
 
-    public void setSystemUser1(SystemUser1 systemUser1) {
-        this.systemUser1 = systemUser1;
+    public void setSystemUser(SystemUser systemUser1) {
+        this.systemUser = systemUser;
     }
 
     public List<Comment> getComments(  ) {
