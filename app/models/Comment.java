@@ -15,18 +15,31 @@ public class Comment extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private SystemUser1 commenter;
+    private SystemUser commenter;
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     private MyPhoto myphoto;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Photo photo;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Video video;
     @Column(columnDefinition = "timestamp")
     private Date dateCreated;
 
 
-    public Comment( SystemUser1 commenter, String comment){
+    public Comment( Photo photo,  SystemUser commenter, String comment){
+       setPhoto( photo );
+        setVideo( null );
        setCommenter( commenter );
        setDescription( comment );
-       setDateCreated( new Date());
+       setDateCreated( new Date() );
+    }
+    public Comment( Video video ,  SystemUser commenter, String comment){
+       setVideo( video );
+       setPhoto( null );
+       setCommenter( commenter );
+       setDescription( comment );
+       setDateCreated( new Date() );
     }
 
     private static Finder<Long, Comment> find = new Finder<Long, Comment>(Long.class, Comment.class);
@@ -35,8 +48,10 @@ public class Comment extends Model {
         List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", myphotoId).orderBy(" dateCreated asc").findList();
         return comments;
     }
-
-
+     public static List<Comment> getCommentsByPhotoId( String photoId ) {
+        List<Comment> comments = Ebean.find(Comment.class).where().ilike("photo_id", photoId).orderBy(" dateCreated asc").findList();
+        return comments;
+    }
 
     public String getId() {
         return id;
@@ -46,11 +61,11 @@ public class Comment extends Model {
         this.id = id;
     }
 
-    public SystemUser1 getCommenter() {
+    public SystemUser getCommenter() {
         return commenter;
     }
 
-    public void setCommenter(SystemUser1 commenter) {
+    public void setCommenter(SystemUser commenter) {
         this.commenter = commenter;
     }
 
@@ -76,5 +91,25 @@ public class Comment extends Model {
 
     public void setMyphoto(MyPhoto myphoto) {
         this.myphoto = myphoto;
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
+    }
+
+    public Video getVideo() {
+        return video;
+    }
+
+    public void setVideo(Video video) {
+        this.video = video;
+    }
+
+    public String toString(){
+        return "Comment: " + getDescription() + " " +  getCommenter() + ""  + getDateCreated();
     }
 }

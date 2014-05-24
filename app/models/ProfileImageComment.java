@@ -15,7 +15,7 @@ public class ProfileImageComment extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
-    private SystemUser1 commenter;
+    private SystemUser commenter;
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileImage myProfilePhoto;
@@ -23,7 +23,7 @@ public class ProfileImageComment extends Model {
     private Date dateCreated;
 
 
-    public ProfileImageComment(SystemUser1 commenter, String comment){
+    public ProfileImageComment(SystemUser commenter, String comment){
        setCommenter( commenter );
        setDescription( comment );
        setDateCreated( new Date());
@@ -46,11 +46,11 @@ public class ProfileImageComment extends Model {
         this.id = id;
     }
 
-    public SystemUser1 getCommenter() {
+    public SystemUser getCommenter() {
         return commenter;
     }
 
-    public void setCommenter(SystemUser1 commenter) {
+    public void setCommenter(SystemUser commenter) {
         this.commenter = commenter;
     }
 
