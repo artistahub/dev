@@ -24,12 +24,12 @@ public class Comment extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     private Video video;
     @Column(columnDefinition = "timestamp")
-    private Date dateCreated;
+    private Date createTime;
 
 
     public Comment( Photo photo,  SystemUser commenter, String comment){
        setPhoto( photo );
-        setVideo( null );
+       setVideo( null );
        setCommenter( commenter );
        setDescription( comment );
        setDateCreated( new Date() );
@@ -45,11 +45,11 @@ public class Comment extends Model {
     private static Finder<Long, Comment> find = new Finder<Long, Comment>(Long.class, Comment.class);
 
      public static List<Comment> getCommentsByMyPhoto( String myphotoId ) {
-        List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", myphotoId).orderBy(" dateCreated asc").findList();
+        List<Comment> comments = Ebean.find(Comment.class).where().ilike("myphoto_id", myphotoId).orderBy(" createTime asc").findList();
         return comments;
     }
      public static List<Comment> getCommentsByPhotoId( String photoId ) {
-        List<Comment> comments = Ebean.find(Comment.class).where().ilike("photo_id", photoId).orderBy(" dateCreated asc").findList();
+        List<Comment> comments = Ebean.find(Comment.class).where().ilike("photo_id", photoId).orderBy(" createTime asc").findList();
         return comments;
     }
 
@@ -78,11 +78,11 @@ public class Comment extends Model {
     }
 
     public Date getDateCreated() {
-        return dateCreated;
+        return createTime;
     }
 
     public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+        this.createTime = dateCreated;
     }
 
     public MyPhoto getMyphoto() {

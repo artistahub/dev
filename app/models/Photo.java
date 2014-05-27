@@ -12,8 +12,9 @@ import java.util.List;
 @Table(name = "photos")
 public class Photo extends Document {
 
-    public Photo(SystemUser owner, String title, String url) {
+    public Photo(SystemUser owner, String title, String url, Album a ) {
         super(owner, title, url);
+        setAlbum( a );
     }
 
     private static Finder<Long, Photo> find = new Finder<Long, Photo>(Long.class, Photo.class);
@@ -26,6 +27,11 @@ public class Photo extends Document {
         // List<MyPhoto> myphotos = Ebean.find(MyPhoto.class).findList();
         List<Photo> photos = Ebean.find(Photo.class).where().ilike("system_user_id", id).findList();
         System.out.print(">>>>>>> " + Json.toJson(photos).toString());
+        return photos;
+    }
+
+    public static List<Photo> getPhotosByAlbumId( String albumId  ) {
+        List<Photo> photos= Ebean.find(Photo.class).where().ilike("album_id", albumId ).orderBy(" createTime asc").findList();
         return photos;
     }
 }

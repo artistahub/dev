@@ -2,6 +2,7 @@ package models;
 
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.annotation.EnumMapping;
 import play.db.ebean.Model;
 import play.libs.Json;
 
@@ -20,15 +21,37 @@ public class Album extends Model {
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     private SystemUser owner;
+    @OneToMany( targetEntity= Photo.class,mappedBy = "album" )
+    private List<Photo> photos;
     private Date createTime;
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
+    @Enumerated(value=EnumType.ORDINAL)
+    private AlbumType albumType;
+    @EnumMapping(nameValuePairs="profile = p, other = o")
+    public enum AlbumType {
+        profile, other
+    }
 
-    public Album( SystemUser owner, String name, String description ){
+    public Album( SystemUser owner, String title, String description ){
         setOwner( owner );
         setTitle( title );
         setDescription( description );
         setCreateTime( new Date() );
+    }
+
+    /**
+     * Return Album Type.
+     */
+    public AlbumType getAlbumType() {
+        return albumType;
+    }
+
+    /**
+     * Set Album Type.
+     */
+    public void setAlbumType(AlbumType albumType) {
+        this.albumType = albumType;
     }
 
     private static Finder<Long, Album> find = new Finder<Long, Album>(Long.class, Album.class);
@@ -94,5 +117,20 @@ public class Album extends Model {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<Photo> getPhotos(  ) {
+         List<Photo> photos  = Photo.getPhotosByAlbumId( this.getId() );
+        // System.out.print("Album photos >>>>>>> " + Json.toJson(photos).toString());
+
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public String toString(){
+        return "Album " + getTitle() + " " + getDescription() + " " + getClass();
     }
 }

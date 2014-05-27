@@ -23,20 +23,26 @@ public class Application extends Controller {
         pc.setName("Artist");
         pc.save();
 
-
         SystemUser u = new SystemUser( p , "XXXXXXXXXXX");
         u.save();
 
-
+        Album pa = new Album( u, "Profile album test", " Test description " );
+        pa.setAlbumType( Album.AlbumType.profile );
         SystemAccount s = SystemAccount.findSystemAccountBySystemUserId( u.getId() );
         System.out.println( " System account found: " + s);
 
-        Photo f = new Photo( u, "photo 1", "wwww.phoyto.com");
-        Comment c1 = new Comment( f, u, "comment 1");
-        c1.save();
+        Photo f = new Photo( u, "photo 1", "wwww.999com", pa );
 
-        List<Comment> comments = f.getComments();
-        System.out.println("Comments: " + comments);
+        f.save();
+
+        List<Photo> photos = pa.getPhotos( );
+        System.out.println("Profile Photos: --------> " + photos);
+
+       // Comment c1 = new Comment( f, u, "comment 1");
+       // c1.save();
+
+        //List<Comment> comments = f.getComments();
+        //System.out.println("Comments: " + comments);
 
 
 
