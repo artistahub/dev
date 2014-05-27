@@ -22,16 +22,18 @@ public class SystemUser extends Model {
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
 
-    public SystemUser( Person person ){
+    public SystemUser( Person person, String password ){
           setOrganization( null );
           setPerson( person );
           setCreateTime( new Date());
+          createSystemAccount( person.getEmail(), password);
     }
 
-    public SystemUser( Organization organization ){
+    public SystemUser( Organization organization, String password ){
           setPerson( null );
           setOrganization( organization );
           setCreateTime( new Date() );
+          createSystemAccount( organization.getEmail(), password );
     }
 
     private static Finder<Long, SystemUser> find = new Finder<Long, SystemUser>(Long.class, SystemUser.class);
@@ -102,6 +104,12 @@ public class SystemUser extends Model {
 
     public boolean isOrganization(){
         return this.getPerson() == null && this.getOrganization() != null;
+    }
+
+    private SystemAccount createSystemAccount( String email, String password ){
+        SystemAccount systemAccount = new SystemAccount( this, email, password );
+        systemAccount.save();
+        return systemAccount;
     }
 
 

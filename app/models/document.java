@@ -22,6 +22,7 @@ public class Document extends Model {
     private String extension;
     @OneToOne(cascade = CascadeType.ALL)
     private Album album;
+    @OneToMany ( targetEntity= Comment.class,mappedBy = "photo")
     private List<Comment> comments;
     @OneToOne(cascade = CascadeType.ALL)
     private SystemUser owner;
@@ -48,6 +49,9 @@ public class Document extends Model {
         setCreateTime( new Date());
         setStatus( Status.active );
     }
+
+    public static Model.Finder<String, Document> find = new Model.Finder<String, Document>(String.class, Document.class);
+
 
     public Album getAlbum() {
         return album;

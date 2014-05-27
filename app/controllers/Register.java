@@ -50,7 +50,7 @@ public class Register extends Controller {
         String userType = requestData.get( "userType" );
         Person p = new Person(  firstName, lastName, email );
         UserType systemUsertype = UserType.findUserTypeByName( userType );
-        SystemUser u = new SystemUser( p );
+        SystemUser u = new SystemUser( p, password );
        // u.setUserType(SystemUser1.UserType.ARTIST);
         u.save();
 

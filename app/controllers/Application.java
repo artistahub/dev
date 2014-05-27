@@ -16,7 +16,7 @@ import static play.data.Form.*;
 public class Application extends Controller {
 
     public static Result index() {
-        Person p = new Person( "Hassan", "rais", "allllc@akk.com" );
+        Person p = new Person( "Jamal", "rais", "allllc@akk.com" );
         p.setGender( Person.Sex.Male );
         p.save();
         PersonCategory pc  = new PersonCategory();
@@ -24,14 +24,19 @@ public class Application extends Controller {
         pc.save();
 
 
-        SystemUser u = new SystemUser( p );
+        SystemUser u = new SystemUser( p , "XXXXXXXXXXX");
         u.save();
 
-        SystemAccount sa = new SystemAccount( u, p.getEmail(), "123455");
-        sa.save();
 
         SystemAccount s = SystemAccount.findSystemAccountBySystemUserId( u.getId() );
         System.out.println( " System account found: " + s);
+
+        Photo f = new Photo( u, "photo 1", "wwww.phoyto.com");
+        Comment c1 = new Comment( f, u, "comment 1");
+        c1.save();
+
+        List<Comment> comments = f.getComments();
+        System.out.println("Comments: " + comments);
 
 
 

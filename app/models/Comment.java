@@ -19,7 +19,7 @@ public class Comment extends Model {
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     private MyPhoto myphoto;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.ALL  )
     private Photo photo;
     @OneToOne(cascade = CascadeType.ALL)
     private Video video;
