@@ -35,11 +35,14 @@ public class Application extends Controller {
 
         f.save();
 
-        List<Photo> photos = pa.getPhotos( );
-        System.out.println("Profile Photos: --------> " + photos);
+       // List<Photo> photos = pa.getPhotos( );
+       // System.out.println("First : Profile Photos: --------> " + photos);
+       List<Photo> photos = SystemUser.getProfilePhotos( u.getId() );
+        System.out.println("First : Profile Photos: --------> " + photos);
 
-       // Comment c1 = new Comment( f, u, "comment 1");
-       // c1.save();
+
+        //Comment c1 = new Comment( f, u, "comment 1");
+      //  c1.save();
 
         //List<Comment> comments = f.getComments();
         //System.out.println("Comments: " + comments);

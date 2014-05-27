@@ -59,6 +59,9 @@ public class Album extends Model {
     public static Album findAlbumById( String id){
         return  Ebean.find(Album.class).where().like( "id", id).findUnique();
     }
+    public static Album findAlbumByOwner( String ownerId){
+        return  Ebean.find(Album.class).where().like( "owner_id", ownerId).findUnique();
+    }
 
     public static List<Album> getMyAlbums( String id ) {
         List<Album> albums = Ebean.find(Album.class).where().ilike("owner_id", id).findList();

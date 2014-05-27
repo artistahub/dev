@@ -112,6 +112,14 @@ public class SystemUser extends Model {
         return systemAccount;
     }
 
+    public static List<Photo> getProfilePhotos( String ownerId ){
+        Album profileAlbum = Album.findAlbumByOwner( ownerId );
+       // System.out.println( "Profile album:  --------- " + profileAlbum);
+        List<Photo> photos = profileAlbum.getPhotos();
+       // System.out.println( "Photos Profile album:  --------- " + photos );
+        return photos;
+        }
+
 
 
     public String toString(){
