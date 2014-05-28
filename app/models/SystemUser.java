@@ -11,6 +11,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "systemusers")
 public class SystemUser extends Model {
+
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
     @OneToOne(cascade = CascadeType.ALL)
@@ -18,27 +19,32 @@ public class SystemUser extends Model {
     private String userName;
     @OneToOne(cascade = CascadeType.ALL)
     private Organization organization;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserType userType;
     private Date createTime;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
 
-    public SystemUser( Person person, String password ){
+    public SystemUser( Person person, String password, UserType userType ){
           setOrganization( null );
           setPerson( person );
+          setUserType( userType );
           setCreateTime( new Date());
           createSystemAccount( person.getEmail(), password);
     }
 
-    public SystemUser( Organization organization, String password ){
+    public SystemUser( Organization organization, String password, UserType userType ){
           setPerson( null );
           setOrganization( organization );
+          setUserType( userType );
           setCreateTime( new Date() );
           createSystemAccount( organization.getEmail(), password );
     }
 
     private static Finder<Long, SystemUser> find = new Finder<Long, SystemUser>(Long.class, SystemUser.class);
 
-    public static List<SystemUser> getArtistas() {
+    public static List<SystemUser> getSystemUsers() {
         List<SystemUser> artistas = Ebean.find(SystemUser.class).findList();
         System.out.print(">>>>>>> " + artistas);
         return artistas;
@@ -98,11 +104,11 @@ public class SystemUser extends Model {
         this.updateTime = updateTime;
     }
 
-    public boolean isPerson(){
+    public boolean isItAPerson(){
         return this.getOrganization() == null && this.getPerson() != null;
     }
 
-    public boolean isOrganization(){
+    public boolean isItAOrganization(){
         return this.getPerson() == null && this.getOrganization() != null;
     }
 
@@ -113,16 +119,38 @@ public class SystemUser extends Model {
     }
 
     public static List<Photo> getProfilePhotos( String ownerId ){
-        Album profileAlbum = Album.findAlbumByOwner( ownerId );
+        Album profileAlbum = Album.findProfileAlbumByOwner( ownerId );
        // System.out.println( "Profile album:  --------- " + profileAlbum);
         List<Photo> photos = profileAlbum.getPhotos();
        // System.out.println( "Photos Profile album:  --------- " + photos );
         return photos;
         }
 
-
+    public static Photo getActiveProfilePhoto( String ownerId ){
+        Photo profilePhoto = null;
+        List<Photo> photos = getProfilePhotos( ownerId );
+        for ( Photo photo : photos ){
+            System.out.println( "Photo: " + photo);
+            if ( photo.getStatus() == Photo.Status.active ){
+                System.out.println( "profile photo has been set .............." );
+                profilePhoto = photo;
+            }
+        }
+        return profilePhoto;
+    }
 
     public String toString(){
         return " SystemUser: " + getId() + " Name: " + getPerson() + " " + getUserName() + " Email: " ;
     }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+
+
 }

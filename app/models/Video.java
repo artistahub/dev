@@ -22,8 +22,13 @@ public class Video extends Document {
 
     public static List<Video> getVideosByOwnerId( String id ) {
         // List<MyVideo> myVideos = Ebean.find(MyVideo.class).findList();
-        List<Video> Videos = Ebean.find(Video.class).where().ilike("system_user_id", id).findList();
+        List<Video> Videos = Ebean.find(Video.class).where().ilike("owner_id", id).findList();
         System.out.print(">>>>>>> " + Json.toJson(Videos).toString());
         return Videos;
+    }
+
+    public static List<Video> getVideosByAlbumId( String albumId  ) {
+        List<Video> videos= Ebean.find(Video.class).where().ilike("album_id", albumId ).orderBy(" createTime asc").findList();
+        return videos;
     }
 }

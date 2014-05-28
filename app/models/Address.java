@@ -17,15 +17,16 @@ public class Address extends Model {
     private String state;
     private String zip;
     private String country;
+    @Version
     @Column(columnDefinition = "timestamp")
-    private Date dateCreated;
+    private Date createTime;
 
     public Address ( String city, String state, String zip, String country){
         this.city = city;
         this.state = state;
         this.zip = zip;
         this.country = country;
-        this.dateCreated = new Date();
+        setCreateTime( new Date(0) );
     }
 
    private static Model.Finder<Long, Address> find = new Model.Finder<Long, Address>(Long.class, Address.class);
@@ -59,12 +60,12 @@ public class Address extends Model {
         this.id = id;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getCity() {

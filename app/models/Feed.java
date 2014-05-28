@@ -18,14 +18,15 @@ public class Feed extends Model {
     private SystemUser systemUser;
     private String url;
     private String description;
+    @Version
     @Column(columnDefinition = "timestamp")
-    private Date dateCreated;
+    private Date createTime;
 
     public Feed( SystemUser systemUser, String url, String description){
-        this.setUrl(url);
-        this.setDescription(description);
-        this.setDateCreated(new Date());
-        this.setSystemUser(systemUser);
+        setUrl(url);
+        setDescription(description);
+        setCreateTime(new Date());
+        setSystemUser(systemUser);
     }
 
     private static Finder<Long, Feed> find = new Finder<Long, Feed>(Long.class, Feed.class);
@@ -60,19 +61,20 @@ public class Feed extends Model {
         this.description = description;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
+
 
     public SystemUser getSystemUser() {
         return systemUser;
     }
 
-    public void setSystemUser(SystemUser systemUser1) {
+    public void setSystemUser(SystemUser systemUser) {
         this.systemUser = systemUser;
     }
 }

@@ -3,6 +3,9 @@ package models;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.annotation.EnumMapping;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import play.db.ebean.Model;
 import play.libs.Json;
 
@@ -12,7 +15,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Table(name = "albums")
+
 public class Album extends Model {
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-","");
@@ -22,8 +27,10 @@ public class Album extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     private SystemUser owner;
     @OneToMany( targetEntity= Photo.class,mappedBy = "album" )
+    @JsonIgnore
     private List<Photo> photos;
     private Date createTime;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
     @Enumerated(value=EnumType.ORDINAL)
@@ -33,11 +40,12 @@ public class Album extends Model {
         profile, other
     }
 
-    public Album( SystemUser owner, String title, String description ){
+    public Album( SystemUser owner, String title, String description, AlbumType albumType ){
         setOwner( owner );
         setTitle( title );
         setDescription( description );
         setCreateTime( new Date() );
+        setAlbumType( albumType );
     }
 
     /**
@@ -59,11 +67,11 @@ public class Album extends Model {
     public static Album findAlbumById( String id){
         return  Ebean.find(Album.class).where().like( "id", id).findUnique();
     }
-    public static Album findAlbumByOwner( String ownerId){
-        return  Ebean.find(Album.class).where().like( "owner_id", ownerId).findUnique();
+    public static Album findProfileAlbumByOwner( String ownerId ){
+        return  Ebean.find(Album.class).where().like("owner_id", ownerId).eq("album_type", AlbumType.profile).findUnique();
     }
 
-    public static List<Album> getMyAlbums( String id ) {
+    public static List<Album> getAlbumsByOwnerId( String id ) {
         List<Album> albums = Ebean.find(Album.class).where().ilike("owner_id", id).findList();
         System.out.print("My albums >>>>>>> " + Json.toJson( albums ).toString());
         return albums;
@@ -125,7 +133,6 @@ public class Album extends Model {
     public List<Photo> getPhotos(  ) {
          List<Photo> photos  = Photo.getPhotosByAlbumId( this.getId() );
         // System.out.print("Album photos >>>>>>> " + Json.toJson(photos).toString());
-
         return photos;
     }
 

@@ -23,6 +23,7 @@ public class Comment extends Model {
     private Photo photo;
     @OneToOne(cascade = CascadeType.ALL)
     private Video video;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date createTime;
 

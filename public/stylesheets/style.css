@@ -49,6 +49,7 @@ h1{
 #c{
     position: relative;
     border-radius: 4px;
+    background-color: #222;
 }
 
 .f{
@@ -191,9 +192,10 @@ input {
 }
 #forms{
     position: relative;
+    max-width: 400px;
+    margin: auto;
 }
 #homeImage{
-    background-color: #222;
     margin: auto;
     text-align: center;
     overflow: hidden;

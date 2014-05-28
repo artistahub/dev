@@ -8,7 +8,7 @@ create table accounttype (
   reference                 varchar(255),
   name                      varchar(255),
   label                     varchar(255),
-  create_time               timestamp,
+  create_time               timestamp not null,
   constraint pk_accounttype primary key (id))
 ;
 
@@ -19,7 +19,7 @@ create table address (
   state                     varchar(255),
   zip                       varchar(255),
   country                   varchar(255),
-  date_created              timestamp,
+  create_time               timestamp not null,
   constraint pk_address primary key (id))
 ;
 
@@ -30,8 +30,8 @@ create table albums (
   description               varchar(255),
   owner_id                  varchar(255),
   create_time               datetime,
-  update_time               timestamp,
   album_type                varchar(2),
+  update_time               timestamp not null,
   constraint ck_albums_album_type check (album_type in ('o','p')),
   constraint pk_albums primary key (id))
 ;
@@ -43,7 +43,7 @@ create table comments (
   myphoto_id                varchar(255),
   photo_id                  varchar(255),
   video_id                  varchar(255),
-  create_time               timestamp,
+  create_time               timestamp not null,
   constraint pk_comments primary key (id))
 ;
 
@@ -52,7 +52,7 @@ create table feeds (
   system_user_id            varchar(255),
   url                       varchar(255),
   description               varchar(255),
-  date_created              timestamp,
+  create_time               timestamp not null,
   constraint pk_feeds primary key (id))
 ;
 
@@ -76,7 +76,7 @@ create table organizations (
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
   create_time               datetime,
-  update_time               timestamp,
+  update_time               timestamp not null,
   constraint pk_organizations primary key (id))
 ;
 
@@ -85,7 +85,7 @@ create table organizationcategories (
   reference                 varchar(255),
   name                      varchar(255),
   label                     varchar(255),
-  create_time               timestamp,
+  create_time               timestamp not null,
   constraint pk_organizationcategories primary key (id))
 ;
 
@@ -103,7 +103,7 @@ create table persons (
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
   create_time               datetime,
-  update_time               timestamp,
+  update_time               timestamp not null,
   constraint ck_persons_gender check (gender in ('Male','Female','Other')),
   constraint pk_persons primary key (id))
 ;
@@ -114,7 +114,7 @@ create table personcategories (
   name                      varchar(255),
   label                     varchar(255),
   create_time               datetime,
-  update_time               timestamp,
+  update_time               timestamp not null,
   constraint pk_personcategories primary key (id))
 ;
 
@@ -132,23 +132,10 @@ create table photos (
   album_id                  varchar(255),
   owner_id                  varchar(255),
   create_time               datetime,
-  update_time               timestamp,
   status                    varchar(2),
+  update_time               timestamp not null,
   constraint ck_photos_status check (status in ('i','a')),
   constraint pk_photos primary key (id))
-;
-
-create table profilealbum (
-  id                        varchar(255) not null,
-  reference                 varchar(255),
-  title                     varchar(255),
-  description               varchar(255),
-  owner_id                  varchar(255),
-  create_time               datetime,
-  update_time               timestamp,
-  album_type                varchar(2),
-  constraint ck_profilealbum_album_type check (album_type in ('o','p')),
-  constraint pk_profilealbum primary key (id))
 ;
 
 create table profileImages (
@@ -185,7 +172,7 @@ create table systemaccounts (
   account_password          varchar(255),
   account_type              varchar(8),
   create_time               datetime,
-  update_time               timestamp,
+  update_time               timestamp not null,
   constraint ck_systemaccounts_account_type check (account_type in ('free','gold','platinum')),
   constraint pk_systemaccounts primary key (id))
 ;
@@ -195,8 +182,9 @@ create table systemusers (
   person_id                 varchar(255),
   user_name                 varchar(255),
   organization_id           varchar(255),
+  user_type_id              varchar(255),
   create_time               datetime,
-  update_time               timestamp,
+  update_time               timestamp not null,
   constraint pk_systemusers primary key (id))
 ;
 
@@ -218,13 +206,13 @@ create table artistas (
   constraint pk_artistas primary key (id))
 ;
 
-create table usertype (
+create table usertypes (
   id                        varchar(255) not null,
-  create_time               datetime,
   reference                 varchar(255),
   name                      varchar(255),
   label                     varchar(255),
-  constraint pk_usertype primary key (id))
+  create_time               timestamp not null,
+  constraint pk_usertypes primary key (id))
 ;
 
 create table videos (
@@ -241,8 +229,8 @@ create table videos (
   album_id                  varchar(255),
   owner_id                  varchar(255),
   create_time               datetime,
-  update_time               timestamp,
   status                    varchar(2),
+  update_time               timestamp not null,
   constraint ck_videos_status check (status in ('i','a')),
   constraint pk_videos primary key (id))
 ;
@@ -304,18 +292,18 @@ alter table photos add constraint fk_photos_album_14 foreign key (album_id) refe
 create index ix_photos_album_14 on photos (album_id);
 alter table photos add constraint fk_photos_owner_15 foreign key (owner_id) references systemusers (id) on delete restrict on update restrict;
 create index ix_photos_owner_15 on photos (owner_id);
-alter table profilealbum add constraint fk_profilealbum_owner_16 foreign key (owner_id) references systemusers (id) on delete restrict on update restrict;
-create index ix_profilealbum_owner_16 on profilealbum (owner_id);
-alter table profileimagecomments add constraint fk_profileimagecomments_commenter_17 foreign key (commenter_id) references systemusers (id) on delete restrict on update restrict;
-create index ix_profileimagecomments_commenter_17 on profileimagecomments (commenter_id);
-alter table profileimagecomments add constraint fk_profileimagecomments_myProfilePhoto_18 foreign key (my_profile_photo_id) references profileImages (id) on delete restrict on update restrict;
-create index ix_profileimagecomments_myProfilePhoto_18 on profileimagecomments (my_profile_photo_id);
-alter table systemaccounts add constraint fk_systemaccounts_systemUser_19 foreign key (system_user_id) references systemusers (id) on delete restrict on update restrict;
-create index ix_systemaccounts_systemUser_19 on systemaccounts (system_user_id);
-alter table systemusers add constraint fk_systemusers_person_20 foreign key (person_id) references persons (id) on delete restrict on update restrict;
-create index ix_systemusers_person_20 on systemusers (person_id);
-alter table systemusers add constraint fk_systemusers_organization_21 foreign key (organization_id) references organizations (id) on delete restrict on update restrict;
-create index ix_systemusers_organization_21 on systemusers (organization_id);
+alter table profileimagecomments add constraint fk_profileimagecomments_commenter_16 foreign key (commenter_id) references systemusers (id) on delete restrict on update restrict;
+create index ix_profileimagecomments_commenter_16 on profileimagecomments (commenter_id);
+alter table profileimagecomments add constraint fk_profileimagecomments_myProfilePhoto_17 foreign key (my_profile_photo_id) references profileImages (id) on delete restrict on update restrict;
+create index ix_profileimagecomments_myProfilePhoto_17 on profileimagecomments (my_profile_photo_id);
+alter table systemaccounts add constraint fk_systemaccounts_systemUser_18 foreign key (system_user_id) references systemusers (id) on delete restrict on update restrict;
+create index ix_systemaccounts_systemUser_18 on systemaccounts (system_user_id);
+alter table systemusers add constraint fk_systemusers_person_19 foreign key (person_id) references persons (id) on delete restrict on update restrict;
+create index ix_systemusers_person_19 on systemusers (person_id);
+alter table systemusers add constraint fk_systemusers_organization_20 foreign key (organization_id) references organizations (id) on delete restrict on update restrict;
+create index ix_systemusers_organization_20 on systemusers (organization_id);
+alter table systemusers add constraint fk_systemusers_userType_21 foreign key (user_type_id) references usertypes (id) on delete restrict on update restrict;
+create index ix_systemusers_userType_21 on systemusers (user_type_id);
 alter table artistas add constraint fk_artistas_activeProfileImage_22 foreign key (active_profile_image_id) references profileImages (id) on delete restrict on update restrict;
 create index ix_artistas_activeProfileImage_22 on artistas (active_profile_image_id);
 alter table artistas add constraint fk_artistas_location_23 foreign key (location_id) references address (id) on delete restrict on update restrict;
@@ -324,7 +312,7 @@ alter table artistas add constraint fk_artistas_BillingAddress_24 foreign key (b
 create index ix_artistas_BillingAddress_24 on artistas (billing_address_id);
 alter table artistas add constraint fk_artistas_MailingAddress_25 foreign key (mailing_address_id) references address (id) on delete restrict on update restrict;
 create index ix_artistas_MailingAddress_25 on artistas (mailing_address_id);
-alter table artistas add constraint fk_artistas_userType_26 foreign key (user_type_id) references usertype (id) on delete restrict on update restrict;
+alter table artistas add constraint fk_artistas_userType_26 foreign key (user_type_id) references usertypes (id) on delete restrict on update restrict;
 create index ix_artistas_userType_26 on artistas (user_type_id);
 alter table videos add constraint fk_videos_album_27 foreign key (album_id) references albums (id) on delete restrict on update restrict;
 create index ix_videos_album_27 on videos (album_id);
@@ -379,8 +367,6 @@ drop table personcategories;
 
 drop table photos;
 
-drop table profilealbum;
-
 drop table profileImages;
 
 drop table profileimagecomments;
@@ -393,7 +379,7 @@ drop table systemusers;
 
 drop table artistas;
 
-drop table usertype;
+drop table usertypes;
 
 drop table videos;
 
