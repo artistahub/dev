@@ -18,6 +18,7 @@ public class AccountType extends Model {
     private String reference;
     private String name;
     private String label;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date createTime;
 
@@ -31,7 +32,7 @@ public class AccountType extends Model {
 
     public static List<AccountType> getAccountTypes() {
         List<AccountType> accountTypes = Ebean.find(AccountType.class).findList();
-        System.out.print(">>>>>>> " + accountTypes);
+        //System.out.print(">>>>>>> " + accountTypes);
         return accountTypes;
     }
 

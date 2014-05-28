@@ -1,6 +1,10 @@
 package models;
 
 import com.avaje.ebean.annotation.EnumMapping;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -21,6 +25,7 @@ public class Document extends Model {
     private Long fileSize;
     private String keyWords;
     private String extension;
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Album album;
     @OneToMany ( targetEntity= Comment.class,mappedBy = "photo")
@@ -28,6 +33,7 @@ public class Document extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     private SystemUser owner;
     private Date createTime;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
     @Enumerated(value=EnumType.ORDINAL)
@@ -52,7 +58,6 @@ public class Document extends Model {
     }
 
     public static Model.Finder<String, Document> find = new Model.Finder<String, Document>(String.class, Document.class);
-
 
     public Album getAlbum() {
         return album;

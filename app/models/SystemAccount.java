@@ -20,6 +20,7 @@ public class SystemAccount extends Model {
     @Enumerated(EnumType.STRING)
     private AccountType accountType = AccountType.free;
     private Date createTime;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
 

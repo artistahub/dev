@@ -16,63 +16,9 @@ import static play.data.Form.*;
 public class Application extends Controller {
 
     public static Result index() {
-        Person p = new Person( "Jamal", "rais", "allllc@akk.com" );
-        p.setGender( Person.Sex.Male );
-        p.save();
-        PersonCategory pc  = new PersonCategory();
-        pc.setName("Artist");
-        pc.save();
-
-        SystemUser u = new SystemUser( p , "XXXXXXXXXXX");
-        u.save();
-
-        Album pa = new Album( u, "Profile album test", " Test description " );
-        pa.setAlbumType( Album.AlbumType.profile );
-        SystemAccount s = SystemAccount.findSystemAccountBySystemUserId( u.getId() );
-        System.out.println( " System account found: " + s);
-
-        Photo f = new Photo( u, "photo 1", "wwww.999com", pa );
-
-        f.save();
-
-       // List<Photo> photos = pa.getPhotos( );
-       // System.out.println("First : Profile Photos: --------> " + photos);
-       List<Photo> photos = SystemUser.getProfilePhotos( u.getId() );
-        System.out.println("First : Profile Photos: --------> " + photos);
-
-
-        //Comment c1 = new Comment( f, u, "comment 1");
-      //  c1.save();
-
-        //List<Comment> comments = f.getComments();
-        //System.out.println("Comments: " + comments);
-
-
-
-       // Organization o = new Organization( " ARtista Plus ");
-       // List<Organization> os = p.getOrganizations();
-       // os.add( o );
-        //p.save();
-        OrganizationCategory oc = new OrganizationCategory();
-        oc.setName(" Software consulting ");
-        Organization o = new Organization( "Axxerion", " me@me.com", "5103254568" );
-        //Organization o = Organization.findOrganizationById("fe2c3d8894b74becb8a23794231fb2d7");
-        List<OrganizationCategory> orgCats = o.getCategories();
-        orgCats.add( oc );
-        o.save();
-
-
-        List< PersonCategory > cats = p.getCategories();
-        cats.add( pc );
-        p.save();
-        System.out.println( "Organization: " );
-        System.out.println( Person.findPersonByOrganization( o.getId()) );
-
-
         if ( session("sessionUser") != null){
             return redirect( controllers.routes.Application.home() );
         }
-
         List< UserType > userTypes = UserType.getUserTypes();
         List< AccountType > accountTypes = AccountType.getAccountTypes();
         if ( userTypes.size() <=0 ){
@@ -84,33 +30,18 @@ public class Application extends Controller {
             accountTypes = AccountType.getAccountTypes();
         }
 
-        //System.out.println( " User Types ------ " + Json.toJson( UserType.getUserTypes()).toString() );
-        //System.out.println(" Account Types ------ " + Json.toJson(AccountType.getAccountTypes()).toString());
-
-        List<SystemUser1> artistas = SystemUser1.getArtistas();
+      //  List<SystemUser1> artistas = SystemUser1.getArtistas();
+      //  SystemUser u = new SystemUser( new Person("hassan", "Rais", "me@me.com"), "1234" );
+        List<SystemUser> artistas = SystemUser.getSystemUsers();
         ObjectNode allArtistas = Json.newObject();
         allArtistas.put("allArtistas", Json.toJson( artistas ));
         String userTypesAsJson = Json.toJson( userTypes ).toString();
         //System.out.print(allArtistas);
         String artistasAsJson = allArtistas.toString();
-       // return ok(views.html.index.render( artistasAsJson, userTypes ));
+        // return ok(views.html.index.render( artistasAsJson, userTypes ));
         return ok(views.html.index.render( artistasAsJson, userTypesAsJson));
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public static Result home(){
@@ -274,6 +205,7 @@ public class Application extends Controller {
         new UserType( "performance", "ut-00002", " a performance / show" ).save();
         new UserType( "festival", "ut-00003", "a festival" ).save();
         new UserType( "theater", "ut-00004", "a theater" ).save();
+        new UserType( "Gym", "ut-00004", "a gym" ).save();
 
     }
 

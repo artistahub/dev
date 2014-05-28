@@ -1,4 +1,6 @@
 package controllers;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
 import dataHelpers.SessionUser;
 import play.data.DynamicForm;
@@ -27,17 +29,6 @@ public class Register extends Controller {
     }
 
 
-    public static Result addVideo() {
-        DynamicForm requestData = form().bindFromRequest();
-        SystemUser u = SystemUser.findUserById(session("currentUserId"));
-        String videoLink = requestData.get("videoLink");
-        String videoTitle= requestData.get("videoDescription");
-        Video video = new Video( u, videoTitle, videoLink );
-        video.setOwner(u);
-        video.save();
-       return redirect( routes.Application.myVideos());
-
-    }
 
 
     public static Result completeRegistration() throws IOException {
@@ -49,9 +40,9 @@ public class Register extends Controller {
         String userName = requestData.get("userName");
         String userType = requestData.get( "userType" );
         Person p = new Person(  firstName, lastName, email );
-        UserType systemUsertype = UserType.findUserTypeByName( userType );
-        SystemUser u = new SystemUser( p, password );
-       // u.setUserType(SystemUser1.UserType.ARTIST);
+        UserType systemUserType = UserType.findUserTypeByName( userType );
+        SystemUser u = new SystemUser( p, password, systemUserType );
+        u.setUserName( userName );
         u.save();
 
         // Save the file in AWS
@@ -64,24 +55,43 @@ public class Register extends Controller {
             s3File.file = picture.getFile();
             s3File.save();
 
-            ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
-            Feed f = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
-            f.save();
-            //profileImage.setSystemUser1( u );
-            profileImage.save();
+            //ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
+            Album profileAlbum = new Album( u, "Profile album ", " Profile album description ", Album.AlbumType.profile );
+            Photo profilePhoto = new Photo( u, "profile photo", s3File.getUrl().toString(), profileAlbum );
+            Feed feed = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
+            feed.save();
+            profilePhoto.save();
+            //u.setProfileImage( profilePhoto );
             //System.out.println( "-----------++++++++++--------- " + profileImage.getId());
            // u.setActiveProfileImage(profileImage);
-            u.update();
+            //u.update();
             SessionUser sessionUser = new SessionUser( u );
-            String s = play.libs.Json.toJson( sessionUser).toString();
-           // System.out.println( " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: " +  s );
-            session("sessionUser" , s);
+            //ObjectMapper om = new ObjectMapper();
+            //String json = om.writeValueAsString( sessionUser );
+            ObjectNode su = Json.newObject();
+           // su.put("sessionUsr", Json.toJson( sessionUser ));
+            String s = Json.toJson( sessionUser ).toString();
+            System.out.println( "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: \n" + s );
+            session("sessionUser" , Json.toJson( sessionUser ).toString());
             session("currentUserId" , u.getId());
-            return redirect(routes.Application.index());
+            return redirect(routes.Application.home());
         } else {
             System.out.print("Missing file");
             flash("error", "Missing file");
             return redirect(routes.Application.index());
         }
     }
+
+    public static Result addVideo() {
+        DynamicForm requestData = form().bindFromRequest();
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
+        String videoLink = requestData.get("videoLink");
+        String videoTitle= requestData.get("videoDescription");
+        Video video = new Video( u, videoTitle, videoLink );
+        video.setOwner(u);
+        video.save();
+        return redirect( routes.Application.myVideos());
+
+    }
+
 }

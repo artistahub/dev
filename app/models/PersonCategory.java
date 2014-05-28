@@ -21,6 +21,7 @@ public class PersonCategory extends Model {
     @ManyToMany( mappedBy = "categories", cascade = CascadeType.ALL )
     public List< Person > persons;
     private Date createTime;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
     public static int count = 0;

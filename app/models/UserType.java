@@ -9,15 +9,17 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="usertype")
+@Table(name="usertypes")
 public class UserType extends Model {
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime;
+
     @Id
     private String id = UUID.randomUUID().toString().replaceAll("-", "");
     private String reference;
     private String name;
     private String label;
+    @Version
+    @Column(columnDefinition = "timestamp")
+    private Date createTime;
 
     public UserType(String name,  String ref, String label){
         setName( name );
@@ -29,7 +31,7 @@ public class UserType extends Model {
 
     public static List<UserType> getUserTypes() {
         List<UserType> userTypes = Ebean.find(UserType.class).findList();
-        System.out.print(" USer Types >>>>>>> " + userTypes);
+        ///System.out.print(" USer Types >>>>>>> " + userTypes);
         return userTypes;
     }
 

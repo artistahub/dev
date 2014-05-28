@@ -36,6 +36,7 @@ public class Person extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     private Address shippingAddress;
     private Date createTime;
+    @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
 

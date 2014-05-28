@@ -1,6 +1,7 @@
 package dataHelpers;
 
 import models.Address;
+import models.Photo;
 import models.ProfileImage;
 import models.SystemUser;
 
@@ -12,17 +13,17 @@ public class SessionUser {
     private String lastName;
     private String fullName;
     private String email;
-    private ProfileImage activeProfileImage;
+    private Photo activeProfileImage;
     private Address location;
 
     public SessionUser( SystemUser systemUser){
-       //setUserName( systemUser1.getUserName());
-       //setFirstName( systemUser1.getFirstName());
-       //setLastName( systemUser1.getLastName());
-       //setFullName( getFirstName() + " " + getLastName());
-       //setEmail( systemUser1.getEmail());
-      // setActiveProfileImage( systemUser1.getActiveProfileImage());
-      // setLocation( systemUser1.getLocation());
+       setUserName( systemUser.getUserName());
+       setFirstName( systemUser.getPerson().getFirstName() );
+       setLastName( systemUser.getPerson().getLastName() );
+       setFullName( getFirstName() + " " + getLastName());
+       setEmail( systemUser.getPerson().getEmail() );
+       setActiveProfileImage( SystemUser.getActiveProfilePhoto( systemUser.getId() ) );
+      // setLocation( systemUser.getLocation());
     }
 
 
@@ -66,11 +67,11 @@ public class SessionUser {
         this.email = email;
     }
 
-    public ProfileImage getActiveProfileImage() {
+    public Photo getActiveProfileImage() {
         return activeProfileImage;
     }
 
-    public void setActiveProfileImage(ProfileImage activeProfileImage) {
+    public void setActiveProfileImage(Photo activeProfileImage) {
         this.activeProfileImage = activeProfileImage;
     }
 
@@ -80,5 +81,9 @@ public class SessionUser {
 
     public void setLocation(Address location) {
         this.location = location;
+    }
+
+    public String toString(){
+        return "SessionUser: " + getFirstName() + getLastName() + getActiveProfileImage();
     }
 }
