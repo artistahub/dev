@@ -76,11 +76,11 @@ public class Application extends Controller {
         List< UserType > userTypes = UserType.getUserTypes();
         List< AccountType > accountTypes = AccountType.getAccountTypes();
         if ( userTypes.size() <=0 ){
-          createUserTypeIfNotExist();
+            createUserTypeIfNotExist();
             userTypes = UserType.getUserTypes();
         }
         if ( accountTypes.size() <= 0 ){
-           createAccountTypeIfNotExist();
+            createAccountTypeIfNotExist();
             accountTypes = AccountType.getAccountTypes();
         }
 
