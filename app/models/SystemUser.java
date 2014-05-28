@@ -21,10 +21,13 @@ public class SystemUser extends Model {
     private Organization organization;
     @OneToOne(cascade = CascadeType.ALL)
     private UserType userType;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Photo profilePhoto;
     private Date createTime;
     @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
+    private String test;
 
     public SystemUser( Person person, String password, UserType userType ){
           setOrganization( null );
@@ -152,5 +155,19 @@ public class SystemUser extends Model {
     }
 
 
+    public Photo getProfilePhoto() {
+        return profilePhoto;
+    }
 
+    public void setProfilePhoto(Photo profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
+    }
 }

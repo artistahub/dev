@@ -5,8 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /home                       controllers.Application.home()
-GET     /artistas                   controllers.Application.artistas()
-GET     /deleteArtista/:id          controllers.Application.deleteArtista( id: Long )
+#GET     /artistas                   controllers.Application.artistas()
+#GET     /deleteArtista/:id          controllers.Application.deleteArtista( id: Long )
 GET     /byName/:name               controllers.Application.byName( name: String )
 GET     /signOut                    controllers.Application.signOut()
 GET     /profile/:userName          controllers.Application.profile( userName: String )

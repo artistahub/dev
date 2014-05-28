@@ -58,6 +58,7 @@ public class Register extends Controller {
             //ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
             Album profileAlbum = new Album( u, "Profile album ", " Profile album description ", Album.AlbumType.profile );
             Photo profilePhoto = new Photo( u, "profile photo", s3File.getUrl().toString(), profileAlbum );
+            u.setProfilePhoto( profilePhoto );
             Feed feed = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
             feed.save();
             profilePhoto.save();
@@ -68,11 +69,11 @@ public class Register extends Controller {
             SessionUser sessionUser = new SessionUser( u );
             //ObjectMapper om = new ObjectMapper();
             //String json = om.writeValueAsString( sessionUser );
-            ObjectNode su = Json.newObject();
+            //ObjectNode artistas = Json.newObject();
            // su.put("sessionUsr", Json.toJson( sessionUser ));
-            String s = Json.toJson( sessionUser ).toString();
-            System.out.println( "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: \n" + s );
-            session("sessionUser" , Json.toJson( sessionUser ).toString());
+            String currentUser = Json.toJson( sessionUser ).toString();
+            System.out.println( "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: \n" + currentUser );
+            session("sessionUser" , currentUser);
             session("currentUserId" , u.getId());
             return redirect(routes.Application.home());
         } else {

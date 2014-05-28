@@ -2,7 +2,6 @@ package dataHelpers;
 
 import models.Address;
 import models.Photo;
-import models.ProfileImage;
 import models.SystemUser;
 
 

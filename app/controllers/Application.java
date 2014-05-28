@@ -30,15 +30,14 @@ public class Application extends Controller {
             accountTypes = AccountType.getAccountTypes();
         }
 
-      //  List<SystemUser1> artistas = SystemUser1.getArtistas();
-      //  SystemUser u = new SystemUser( new Person("hassan", "Rais", "me@me.com"), "1234" );
+
         List<SystemUser> artistas = SystemUser.getSystemUsers();
         ObjectNode allArtistas = Json.newObject();
-        allArtistas.put("allArtistas", Json.toJson( artistas ));
+        allArtistas.put("allArtistas", Json.toJson( artistas ) );
+
         String userTypesAsJson = Json.toJson( userTypes ).toString();
-        //System.out.print(allArtistas);
         String artistasAsJson = allArtistas.toString();
-        // return ok(views.html.index.render( artistasAsJson, userTypes ));
+        System.out.print( allArtistas );
         return ok(views.html.index.render( artistasAsJson, userTypesAsJson));
 
     }
@@ -60,6 +59,7 @@ public class Application extends Controller {
         return redirect("/");
 
     }
+    /*
    public static Result artistas() {
        List<SystemUser1> artistas = SystemUser1.getArtistas();
        ObjectNode allArtistas = Json.newObject();
@@ -71,11 +71,14 @@ public class Application extends Controller {
        return ok( views.html.artistas.render( artistasAsJson ) );
     }
 
+
+
     public static Result deleteArtista( Long id){
         System.out.println( "SystemUser1 Id: " + id);
          SystemUser1.deleteArtista(id);
         return redirect( routes.Application.artistas() );
     }
+     **/
 
 
 
