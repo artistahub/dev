@@ -39,7 +39,6 @@ public class Document extends Model {
     Status status = Status.active;
 
 
-
     @EnumMapping(nameValuePairs="active = a, inactive = i")
     public enum Status {
         active, inactive

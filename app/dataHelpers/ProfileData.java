@@ -1,6 +1,9 @@
 package dataHelpers;
 
-import models.*;
+import models.Address;
+import models.Photo;
+import models.SystemUser;
+import models.Video;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class ProfileData {
 
         //return  getSystemUser().getActiveProfileImage();
   //  }
+
     public SystemUser getSystemUser() {
         return systemUser;
     }
@@ -29,6 +33,7 @@ public class ProfileData {
     public void setSystemUser(SystemUser systemUser) {
         this.systemUser = systemUser;
     }
+
 
     public Photo getProfileImage() {
         return profileImage;

@@ -125,8 +125,8 @@ public class Application extends Controller {
     public static Result myPhotos(){
         SystemUser u = SystemUser.findUserById(session("currentUserId"));
         if ( session("sessionUser") != null && u != null ){
-            List<MyPhoto> myphotos = MyPhoto.getMyPhotos( u.getId());
-            return  ok( views.html.profile.myphotos.render( Json.toJson( myphotos ).toString() ));
+            List<Photo> photos = Photo.getPhotosByOwnerId( u.getId());
+            return  ok( views.html.profile.myphotos.render( Json.toJson( photos ).toString() ));
             //return  ok( session("user"));
         }
         else {
@@ -144,7 +144,7 @@ public class Application extends Controller {
     }
 
     public static Result myVideos(){
-        SystemUser1 u = SystemUser1.findUserById(session("currentUserId"));
+        SystemUser u = SystemUser.findUserById(session("currentUserId"));
         if ( session("sessionUser") != null){
             List<Video> myvideos = Video.getVideosByOwnerId( u.getId());
             return  ok( views.html.profile.myvideos.render( Json.toJson( myvideos ).toString() ));
