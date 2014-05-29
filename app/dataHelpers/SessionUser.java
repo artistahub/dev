@@ -22,7 +22,7 @@ public class SessionUser {
        setFullName( getFirstName() + " " + getLastName());
        setEmail( systemUser.getPerson().getEmail() );
        setActiveProfileImage( SystemUser.getActiveProfilePhoto( systemUser.getId() ) );
-      // setLocation( systemUser.getLocation());
+       setLocation( systemUser.getLocation());
     }
 
 

@@ -16,6 +16,10 @@ import static play.data.Form.*;
 public class Application extends Controller {
 
     public static Result index() {
+       // String sessionUser =  session("sessionUser");
+        //System.out.println( "\n session User: \n" + sessionUser);
+
+
         if ( session("sessionUser") != null){
             return redirect( controllers.routes.Application.home() );
         }
@@ -37,7 +41,7 @@ public class Application extends Controller {
 
         String userTypesAsJson = Json.toJson( userTypes ).toString();
         String artistasAsJson = allArtistas.toString();
-        System.out.print( allArtistas );
+        //System.out.print( allArtistas );
         return ok(views.html.index.render( artistasAsJson, userTypesAsJson));
 
     }
@@ -159,7 +163,7 @@ public class Application extends Controller {
         String comment = requestData.get("comment");
         System.out.println(" *******  Add Coment");
 
-        if ( dataType.equals("profileImage")){
+        /*if ( dataType.equals("profileImage")){
              System.out.println(" It is profile Image ");
              ProfileImageComment profileImagecomment = new ProfileImageComment( u, comment);
              ProfileImage profileImage = ProfileImage.findMyProfilePhotoById( photoId );
@@ -168,13 +172,13 @@ public class Application extends Controller {
             return ok( Json.toJson( profileImagecomment ));
         }
         else {
-
+*/
              Photo photo = Photo.findPhotoById( photoId );
-             Comment myPhotoComment = new Comment( photo,  u, comment );
-             myPhotoComment.setPhoto( photo );
-             myPhotoComment.save();
-             return ok( Json.toJson( myPhotoComment));
-        }
+             Comment photoComment = new Comment( photo,  u, comment );
+             photoComment.setPhoto( photo );
+             photoComment.save();
+             return ok( Json.toJson(photoComment));
+       // }
 
         //return ok( Json.toJson( Comment.getCommentsByMyPhoto( myphotoId )));
         //return ok( Json.toJson( myComment));

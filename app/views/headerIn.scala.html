@@ -21,7 +21,7 @@
 
 
     function UserProfile( u ){
-        console.log( u );
+        //console.log( u );
         var userProfileImg =  u.activeProfileImage.url || "/images/clown.jpg";
         var userFullName = u.fullName;
         this.wrapper = "";
@@ -43,8 +43,6 @@
         // Slide down main content
         slideDownMainContent();
         var u = @Html(session.get("sessionUser"));
-        console.log("u:");
-        console.log( u );
         var $profileContainer = $("#profile-ul");
             $profileContainer.html( new UserProfile( u ).render() );
 

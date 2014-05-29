@@ -29,7 +29,8 @@ $( iframeDocument ).ready(function(){
 
     showShadow2();
 
-    $iframe.contents().find('#do-comment').on('click', function () {
+    /*$iframe.contents().find('#do-comment').on('click', function () {
+        alert("click");
         var $commentTextArea = $iframe.contents().find('#comment-text-area') ;
         var $commentContainer = $iframe.contents().find('#comments-Container');
         var comment = stripTagsFromHtml($commentTextArea.val());
@@ -37,9 +38,10 @@ $( iframeDocument ).ready(function(){
         var dataId = $(this).attr('data-id');
         var dataType = $(this).attr('data-type');
         var o = {dataType:dataType, dataId:dataId, comment:comment};
+        alert( o );
         if (comment) {
             ajaxAppendHtml('/addComment', $commentContainer, o, CommentObject);
         }
-    });
+    });*/
 
 });

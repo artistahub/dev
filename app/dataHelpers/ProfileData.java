@@ -6,13 +6,15 @@ import java.util.List;
 
 public class ProfileData {
     private SystemUser systemUser;
-    private ProfileImage profileImage;
-    private List<MyPhoto> myphotos;
-    private List<Video> myvideos;
+    private Photo profileImage;
+    private List<Photo> photos;
+    private List<Video> videos;
+    private Address location;
 
     public ProfileData( SystemUser systemUser){
-          setSystemUser(systemUser);
-          //setProfileImage( systemUser.getActiveProfileImage() );
+        setSystemUser(systemUser);
+        setProfileImage( systemUser.getActiveProfileImage() );
+        setLocation( systemUser.getLocation() );
     }
 
 
@@ -20,7 +22,7 @@ public class ProfileData {
 
         //return  getSystemUser().getActiveProfileImage();
   //  }
-    public SystemUser getSystemUser1() {
+    public SystemUser getSystemUser() {
         return systemUser;
     }
 
@@ -28,33 +30,41 @@ public class ProfileData {
         this.systemUser = systemUser;
     }
 
-    public ProfileImage getProfileImage() {
+    public Photo getProfileImage() {
         return profileImage;
     }
 
-    public void setProfileImage(ProfileImage profileImage) {
+    public void setProfileImage(Photo profileImage) {
         this.profileImage = profileImage;
     }
 
     public String toString(){
-        return "Profile Data: " + getSystemUser1() + getProfileImage();
+        return "Profile Data: " + getSystemUser() + " - "+ getProfileImage();
     }
 
-    public List<MyPhoto> getMyphotos() {
-        this.myphotos = MyPhoto.getMyPhotos( this.systemUser.getId());
-        return myphotos;
+    public List<Photo> getPhotos() {
+        this.photos = Photo.getPhotosByOwnerId(this.systemUser.getId());
+        return photos;
     }
 
-    public void setMyphotos(List<MyPhoto> myphotos) {
-        this.myphotos = myphotos;
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 
-    public List<Video> getMyvideos() {
-        this.myvideos = Video.getVideosByOwnerId( this.systemUser.getId());
-        return myvideos;
+    public List<Video> getVideos() {
+        this.videos = Video.getVideosByOwnerId( this.systemUser.getId());
+        return videos;
     }
 
-    public void setMyvideos(List<Video> myvideos) {
-        this.myvideos = myvideos;
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
+
+    public Address getLocation() {
+        return location;
+    }
+
+    public void setLocation(Address location) {
+        this.location = location;
     }
 }

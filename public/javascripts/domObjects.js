@@ -1,5 +1,6 @@
 function Screen( o ){
     var userName = o.userName || "artista";
+    var fullName = o.fullName || "artista";
     if (o.activeProfileImage== null ){
         o.activeProfileImage = {};
         o.activeProfileImage.url = "images/clown.jpg";
@@ -11,7 +12,7 @@ function Screen( o ){
     }
    // this.wrapperOpener = "<a href='/profile/" +  userName +"'> <div class=' item wrapper'>";
     this.wrapperOpener = '<a href=' + "/profile/" + encodeURI( userName )  +'> <div class="item wrapper">';
-    this.topBar = "<div class='row topBar'> <b>" + o.firstName + " " + o.lastName +"</b></div>";
+    this.topBar = "<div class='row topBar'> <b>" +fullName +"</b></div>";
     this.secondaryBar = "<div class='row secondaryBar'> Secondary Bar</div>";
     this.body = '<div class="row screenBody"><div class="imgContainer"> <img class="" style="width: 100%" src= ' + encodeURI(o.activeProfileImage.url) + '  ></div></div>';
     this.footer = "<div class='row screenFooter'>  <b>" + o.location.city + ", " + o.location.country +  "</b></div>";
@@ -25,9 +26,13 @@ Screen.prototype.render = function(){
 
 function ProfilePersonalInfo( systemUser ){
    // alert( " from profile p i function" );
-     this.userFullName = "<div> <h2 class='h'> " + systemUser.firstName + " " + systemUser.lastName + "</h2></div>";
-     this.userTitle = " <div> <h4 class='h'> Professional Acrobat</h4></div>";
-     this.userLocation = " <div> <h5 class='h'> " +  systemUser.location.city + ", " + systemUser.location.state + "</h5></div>";
+    if ( systemUser.location == null ){
+        systemUser.location = {};
+        systemUser.location.addressText = " not provided";
+    }
+     this.userFullName = "<div> <h2 class='h'> " + systemUser.fullName + "</h2></div>";
+     this.userTitle = " <div> <h4 class='h'> " + systemUser.userType.label + "</h4></div>";
+     this.userLocation = " <div> <h5 class='h'> " +  systemUser.location.addressText + "</h5></div>";
      this.html = this.userFullName;
      this.html += this.userTitle;
      this.html += this.userLocation;
@@ -39,7 +44,7 @@ function ProfilePersonalInfo( systemUser ){
 // Feeds screen
   function FeedsScreen( feed ){
      this.wrapperOpener = '<a class="feed-item" href="/profile/' + feed.systemUser.userName + '" >';
-     this.topBar = ' <div class="fc"><div class="padding5px"><div class="row-fluid"><h2 class="h1"> ' + feed.systemUser.firstName + " " + feed.systemUser.lastName + '</h2></div>';
+     this.topBar = ' <div class="fc"><div class="padding5px"><div class="row-fluid"><h2 class="h1"> ' + feed.systemUser.fullName + '</h2></div>';
      this.body = '<div class="row-fluid"> <div class="span12"><img style="width: 100%" src="' + feed.url  +'"></div></div></div>';
      this.footer ='<div class="fc-fotter padding5px"> Fotter</div> ';
      this.comment='<div class="fc-comments padding5px"> Comments</div>';
@@ -123,6 +128,7 @@ DropDownWindow.prototype.render = function(){
 function CommentObject( o ){
     var commenterObject = o.commenter;
     var commenterUserName = o.commenter.userName;
+    var commenterFullName = o.commenter.fullName;
     var comment = o.description;
     var commenterImg = commenterObject.activeProfileImage.url;
    // alert(o.dateCreated);
@@ -133,7 +139,7 @@ function CommentObject( o ){
 
     this.wrapper = '<div class="row-fluid comment-row"> <div class="padding5px">';
     this.commenter = '<div class="commenterAvatar"><a target="_parent" href="/profile/' + commenterUserName + '"> <img class="v-center" src="' + commenterImg + '"></div> ';
-    this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterObject.firstName + ' ' + commenterObject.lastName + '</h5></a><p>' + comment  + ' </p> </div>';
+    this.comment = '<div class="comment span10 "><h5 class="commenter-name">' + commenterFullName + '</h5></a><p>' + comment  + ' </p> </div>';
     this.commnetDate = '<div class="comment-date"> ' + timeAgo(dateCreated) + '</div>';
     this.wrapperCloser = '</div></div>';
     this.html = function(){

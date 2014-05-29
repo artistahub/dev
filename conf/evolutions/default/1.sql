@@ -103,6 +103,7 @@ create table persons (
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
   create_time               datetime,
+  test                      varchar(255),
   update_time               timestamp not null,
   constraint ck_persons_gender check (gender in ('Male','Female','Other')),
   constraint pk_persons primary key (id))
@@ -183,7 +184,7 @@ create table systemusers (
   user_name                 varchar(255),
   organization_id           varchar(255),
   user_type_id              varchar(255),
-  profile_photo_id          varchar(255),
+  active_profile_image_id   varchar(255),
   create_time               datetime,
   update_time               timestamp not null,
   constraint pk_systemusers primary key (id))
@@ -305,8 +306,8 @@ alter table systemusers add constraint fk_systemusers_organization_20 foreign ke
 create index ix_systemusers_organization_20 on systemusers (organization_id);
 alter table systemusers add constraint fk_systemusers_userType_21 foreign key (user_type_id) references usertypes (id) on delete restrict on update restrict;
 create index ix_systemusers_userType_21 on systemusers (user_type_id);
-alter table systemusers add constraint fk_systemusers_profilePhoto_22 foreign key (profile_photo_id) references photos (id) on delete restrict on update restrict;
-create index ix_systemusers_profilePhoto_22 on systemusers (profile_photo_id);
+alter table systemusers add constraint fk_systemusers_activeProfileImage_22 foreign key (active_profile_image_id) references photos (id) on delete restrict on update restrict;
+create index ix_systemusers_activeProfileImage_22 on systemusers (active_profile_image_id);
 alter table artistas add constraint fk_artistas_activeProfileImage_23 foreign key (active_profile_image_id) references profileImages (id) on delete restrict on update restrict;
 create index ix_artistas_activeProfileImage_23 on artistas (active_profile_image_id);
 alter table artistas add constraint fk_artistas_location_24 foreign key (location_id) references address (id) on delete restrict on update restrict;

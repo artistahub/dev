@@ -1,10 +1,7 @@
 package models;
 
 import com.avaje.ebean.annotation.EnumMapping;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.codehaus.jackson.annotate.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -25,10 +22,12 @@ public class Document extends Model {
     private Long fileSize;
     private String keyWords;
     private String extension;
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Album album;
     @OneToMany ( targetEntity= Comment.class,mappedBy = "photo")
+    @JsonBackReference
     private List<Comment> comments;
     @OneToOne(cascade = CascadeType.ALL)
     private SystemUser owner;
@@ -174,6 +173,7 @@ public class Document extends Model {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
 
     public List<Comment> getComments() {
         List <Comment> comments = Comment.getCommentsByPhotoId(this.getId());

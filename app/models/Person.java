@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Ebean;
+
 import com.avaje.ebean.Expr;
 import play.db.ebean.Model;
 
@@ -39,6 +40,7 @@ public class Person extends Model {
     @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
+    private String test;
 
     public List<Organization> getOrganizations() {
         return organizations;
@@ -54,6 +56,14 @@ public class Person extends Model {
 
     public void setCategories(List<PersonCategory> categories) {
         this.categories = categories;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 
 
@@ -84,7 +94,7 @@ public class Person extends Model {
         this.gender = gender;
     }
 
-    private static Finder< Long, Person > find = new Finder<Long, Person>( Long.class, Person.class );
+    private static Finder< String, Person > find = new Finder<String, Person>( String.class, Person.class );
 
     public static List<Person> findPersonByOrganization( String organizationId ){
         List<Person> os = Ebean.find(Person.class).where().eq("organizations.id", organizationId).findList();
@@ -108,7 +118,7 @@ public class Person extends Model {
 
     public static List<Person> findByName(String name) {
         //  List<SystemUser1> artistas = Ebean.find(SystemUser1.class).where().ilike("lastName", "%" + name + "%").findList();
-        List<Person> persons = Ebean.find(Person.class).where(Expr.or( Expr.ilike("firstName", "%" + name + "%"), Expr.ilike("lastName", "%" + name + "%"))).findList();
+        List<Person> persons = Ebean.find(Person.class).where(Expr.or(Expr.ilike("firstName", "%" + name + "%"), Expr.ilike("lastName", "%" + name + "%"))).findList();
         return persons;
     }
 
@@ -117,11 +127,11 @@ public class Person extends Model {
 
     }
 
-    public static Finder<Long, Person > getFind() {
+    public static Finder<String, Person > getFind() {
         return find;
     }
 
-    public static void setFind(Finder<Long, Person > find) {
+    public static void setFind(Finder<String, Person> find) {
         Person.find = find;
     }
 
@@ -217,6 +227,11 @@ public class Person extends Model {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    public String getFullName(){
+        return this.getFirstName() + " " + this.getLastName();
+    }
+
 
     public String toString(){
 

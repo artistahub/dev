@@ -3,6 +3,7 @@ package models;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.annotation.EnumMapping;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Table(name = "albums")
 
 public class Album extends Model {
@@ -25,6 +25,7 @@ public class Album extends Model {
     private String title;
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private SystemUser owner;
     @OneToMany( targetEntity= Photo.class,mappedBy = "album" )
     @JsonIgnore
@@ -37,7 +38,7 @@ public class Album extends Model {
     private AlbumType albumType;
     @EnumMapping(nameValuePairs="profile = p, other = o")
     public enum AlbumType {
-        profile, other
+        profile, other;
     }
 
     public Album( SystemUser owner, String title, String description, AlbumType albumType ){

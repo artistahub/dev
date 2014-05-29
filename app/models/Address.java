@@ -99,4 +99,8 @@ public class Address extends Model {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    public String getAddressText(){
+        return getCity() + ", " + getState() + " " + getCountry();
+    }
 }

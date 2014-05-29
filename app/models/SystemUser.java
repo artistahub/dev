@@ -22,12 +22,11 @@ public class SystemUser extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     private UserType userType;
     @OneToOne(cascade = CascadeType.ALL)
-    private Photo profilePhoto;
+    private Photo activeProfileImage;
     private Date createTime;
     @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
-    private String test;
 
     public SystemUser( Person person, String password, UserType userType ){
           setOrganization( null );
@@ -49,7 +48,7 @@ public class SystemUser extends Model {
 
     public static List<SystemUser> getSystemUsers() {
         List<SystemUser> artistas = Ebean.find(SystemUser.class).findList();
-        System.out.print(">>>>>>> " + artistas);
+       // System.out.print(">>>>>>> " + artistas);
         return artistas;
     }
 
@@ -115,6 +114,21 @@ public class SystemUser extends Model {
         return this.getPerson() == null && this.getOrganization() != null;
     }
 
+    public String getFullName(){
+        if ( this.isItAPerson()){
+            return this.getPerson().getFullName() ;
+        }
+        return this.getOrganization().getName();
+
+    }
+    public Address getLocation(){
+        if ( this.isItAPerson()){
+            return this.getPerson().getAddressId() ;
+        }
+        return this.getOrganization().getAddress();
+
+    }
+
     private SystemAccount createSystemAccount( String email, String password ){
         SystemAccount systemAccount = new SystemAccount( this, email, password );
         systemAccount.save();
@@ -155,19 +169,12 @@ public class SystemUser extends Model {
     }
 
 
-    public Photo getProfilePhoto() {
-        return profilePhoto;
+    public Photo getActiveProfileImage() {
+        return activeProfileImage;
     }
 
-    public void setProfilePhoto(Photo profilePhoto) {
-        this.profilePhoto = profilePhoto;
+    public void setActiveProfileImage(Photo activeProfileImage) {
+        this.activeProfileImage = activeProfileImage;
     }
 
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
-    }
 }

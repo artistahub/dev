@@ -1,6 +1,5 @@
 package controllers;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import models.*;
 import dataHelpers.SessionUser;
 import play.data.DynamicForm;
@@ -11,6 +10,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import java.io.IOException;
 import java.util.List;
+
 
 import views.html.*;
 
@@ -39,11 +39,16 @@ public class Register extends Controller {
         String password = requestData.get("password");
         String userName = requestData.get("userName");
         String userType = requestData.get( "userType" );
+        Address ad = new Address( "Las Vegas","NV", "98564", "USA" );
         Person p = new Person(  firstName, lastName, email );
+        p.setAddressId( ad );
         UserType systemUserType = UserType.findUserTypeByName( userType );
         SystemUser u = new SystemUser( p, password, systemUserType );
+
         u.setUserName( userName );
         u.save();
+
+
 
         // Save the file in AWS
         MultipartFormData b = request().body().asMultipartFormData();
@@ -58,22 +63,20 @@ public class Register extends Controller {
             //ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
             Album profileAlbum = new Album( u, "Profile album ", " Profile album description ", Album.AlbumType.profile );
             Photo profilePhoto = new Photo( u, "profile photo", s3File.getUrl().toString(), profileAlbum );
-            u.setProfilePhoto( profilePhoto );
+            u.setActiveProfileImage(profilePhoto);
             Feed feed = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
             feed.save();
             profilePhoto.save();
-            //u.setProfileImage( profilePhoto );
-            //System.out.println( "-----------++++++++++--------- " + profileImage.getId());
-           // u.setActiveProfileImage(profileImage);
-            //u.update();
+
             SessionUser sessionUser = new SessionUser( u );
             //ObjectMapper om = new ObjectMapper();
             //String json = om.writeValueAsString( sessionUser );
             //ObjectNode artistas = Json.newObject();
            // su.put("sessionUsr", Json.toJson( sessionUser ));
-            String currentUser = Json.toJson( sessionUser ).toString();
-            System.out.println( "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: \n" + currentUser );
-            session("sessionUser" , currentUser);
+           // String connectedUser = Json.toJson( sessionUser );
+            System.out.println( "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: \n" + Json.toJson( sessionUser ).toString() );
+           // session("sessionUser" , Json.toJson( sessionUser ).toString());
+            session("sessionUser",Json.toJson( sessionUser ).toString());
             session("currentUserId" , u.getId());
             return redirect(routes.Application.home());
         } else {

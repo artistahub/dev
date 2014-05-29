@@ -201,7 +201,8 @@ function displayPhotoMediaFrame( $this, loggedIn ){
     var $thisChild = $this.children(":first");
     var dataId = $thisChild.attr('data-id');
     var dataType = $thisChild.attr('data-type');
-    var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';
+   // var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';
+    var getCommentsUrl = '/getComments/';
 
     ajaxReturnJson(getCommentsUrl + dataId, function (data) {
         //alert ( JSON.stringify(data) );

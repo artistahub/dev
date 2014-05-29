@@ -30,12 +30,11 @@
         // alert( $( document).width());
         $(function(){
             // create some screens
-            var artistas = @Html(artistas);
-            console.log(  artistas );
-            alert(  artistas );
+            var a = @Html(artistas);
+            //console.log(  a );
             var userTypes = @Html(userTypes);
             $.each( userTypes, function( i, ut ){
-                console.log( ut );
+               // console.log( ut );
                 var $e = $('<option>');
                 $e.attr({ 'value' : ut.name , 'data-ref' : ut.reference});
                 $e.text( ucFirstAllWords(ut.label) );
@@ -44,8 +43,8 @@
             });
             var $container = $(' #artistas-container ');
             $container.css( 'visibility', 'hidden');
-            $.each( artistas.allArtistas , function ( i, element){
-                //console.log( element );
+            $.each( a.allArtistas , function ( i, element){
+                console.log( element );
                 var s1 = new Screen( element ).render();
                 $container.append( s1 );
             });
