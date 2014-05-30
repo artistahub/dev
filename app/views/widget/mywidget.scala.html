@@ -15,7 +15,6 @@
     <script type="text/javascript">
 
         function WidgetMyPhoto( o ){
-           // alert( JSON.stringify( o ));
             var img = o.url || "walo";
             var imgId = o.id;
             this.header = " <div class='widget-v-center'>";
@@ -30,12 +29,14 @@
         }
 
         $( document).ready( function(){
+
+
             var profileData = @Html(profileData);
-            var userFullName = profileData.systemUser.firstName + ' ' + profileData.systemUser.lastName;
+            var userFullName = profileData.systemUser.fullName;
             var userName = profileData.systemUser.userName;
             var userProfileImgUrl = profileData.systemUser.activeProfileImage.url;
-            var myPhotos = profileData.myphotos;
-            var myVideos = profileData.myvideos;
+            var myPhotos = profileData.photos;
+            var myVideos = profileData.videos;
             $('#profile-user-name').html( userFullName );
             var  $mediaContainer  = $('#body');
             var $sideMenu = $("#widget-side-menu");

@@ -26,13 +26,13 @@
         var userFullName = u.fullName;
         this.wrapper = "";
        // this.profileImage = "<li><span style='width: 75px;overflow: hidden;height: 55px; display: inline-block;border: solid 1px'> <img width='100%'  src= " + userProfileImg +"></span></li>";
-        this.profileImage = '<li> <div id="user-profile-div"><img class="v-center" width="100%" src="' + userProfileImg + '"></div></li>';
+        this.profileImage = '<li> <div id="user-profile-div"><img id="drop-down-account" title="'+ userFullName +'" class="v-center" width="100%" src="' + userProfileImg + '"></div></li>';
        // this.fullName = "<li> <span style='height: 55px; border: solid 1px'> <strong> " + userFullName + " </strong></span> </li>";
-        this.fullName = "  <li id='drop-down-account' class='profile-li-height'><strong> " + userFullName + "<span class='caret'></span></strong></li>";
+       // this.fullName = "  <li id='drop-down-account' class='profile-li-height'><strong> " + userFullName + "<span class='caret'></span></strong></li>";
         this.dropDown = "   <div class='dropdown'><ul id='d' class='dropdown-menu'> <li><a tabindex='-1' href='/signOut'>Sign Out </a></li>" +
                 "<li class='divider'></li> <li><a tabindex='-1' href='#'>Setting</a></li> </ul><div>";
         this.html = function(){
-            return this.wrapper + this.profileImage + this.fullName + this.dropDown ;
+            return this.wrapper + this.profileImage + this.dropDown ;
         }
     }
     UserProfile.prototype.render = function(){
