@@ -41,7 +41,7 @@ public class SystemAccount extends Model {
 
     private static Finder<Long, SystemAccount> find = new Finder<Long, SystemAccount>(Long.class, SystemAccount.class);
 
-    public static SystemAccount findSystemAccountId( String id ){
+    public static SystemAccount findSystemAccountById( String id ){
         return Ebean.find(SystemAccount.class).where().like( "id" , id).findUnique();
     }
 

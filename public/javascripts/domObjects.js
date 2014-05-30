@@ -153,7 +153,7 @@ function SearchResultObject( o ){
     var profileLink = "/profile/" + o.userName;
     this.rowWrapper = "<div class='row-fluid search-result-row'>";
     this.rowContent = " <a href='" + profileLink + "'><div class='search-result-img-div' > <img class='v-center' width='100%' src='" + profileImg + "'></div>" +
-                    "<div class='span10'> <p class='title'> " +  o.firstName + " " + o.lastName + "</p></div></a>";
+                    "<div class='span10'> <p class='title'> " +  o.fullName + "</p></div></a>";
     this.rowWrapperCloser = "</div>";
     this.html = function(){
         return this.rowWrapper + this.rowContent + this.rowWrapperCloser;

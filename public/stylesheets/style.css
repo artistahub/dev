@@ -758,7 +758,10 @@ div#comments-Container .comment-row:first-child {
 }
 .search-result-row{
     border-bottom: solid 1px #F8EAEA;
-
+}
+.search-result-row:hover{
+    opacity: .8;
+    background-color: rgba(229, 229, 229, 0.77);
 }
 .search-result-img-div{
     width: 40px;

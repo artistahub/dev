@@ -22,10 +22,17 @@ public class Address extends Model {
     private Date createTime;
 
     public Address ( String city, String state, String zip, String country){
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.country = country;
+        setCity( city );
+        setState( state );
+        setCountry( country );
+        setZip( zip );
+        setCreateTime( new Date(0) );
+    }
+
+    public Address ( String city, String state, String country){
+        setCity( city );
+        setState( state );
+        setCountry( country );
         setCreateTime( new Date(0) );
     }
 

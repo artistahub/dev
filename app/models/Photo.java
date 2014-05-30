@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+
 @Table(name = "photos")
 public class Photo extends Document {
 

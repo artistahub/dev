@@ -39,7 +39,11 @@ public class Register extends Controller {
         String password = requestData.get("password");
         String userName = requestData.get("userName");
         String userType = requestData.get( "userType" );
-        Address ad = new Address( "Las Vegas","NV", "98564", "USA" );
+        String city = requestData.get( "city" );
+        String state = requestData.get( "state" );
+        String country = requestData.get( "country" );
+
+        Address ad = new Address( city ,state, country );
         Person p = new Person(  firstName, lastName, email );
         p.setAddressId( ad );
         UserType systemUserType = UserType.findUserTypeByName( userType );

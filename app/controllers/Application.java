@@ -95,7 +95,7 @@ public class Application extends Controller {
     }
 
     public static Result searchArtistas( String q ){
-        List<SystemUser1> artistas = SystemUser1.findByName(q);
+        List<SystemUser> artistas = SystemUser.findByQuery( q );
         ObjectNode searchResult = Json.newObject();
         searchResult.put( "searchResult", Json.toJson( artistas ));
         return ok( Json.toJson( searchResult ));

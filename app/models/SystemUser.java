@@ -1,6 +1,12 @@
 package models;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Expr;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -54,6 +60,23 @@ public class SystemUser extends Model {
 
     public static SystemUser findSystemUserByUserName ( String userName){
         return  Ebean.find( SystemUser.class ).where().like( "userName", userName).findUnique();
+    }
+
+    public static List<SystemUser> findByName( String q){
+        //List<SystemUser> artistas = Ebean.find(SystemUser.class).where(Expr.or(Expr.ilike("firstName", "%" + q + "%"), Expr.ilike("lastName", "%" + q+ "%"))).findList();
+        List<SystemUser> artistas = Ebean.find(SystemUser.class).where().ilike("userName", "%" + q+ "%").findList();
+        return artistas;
+    }
+
+    public static List<SystemUser> findByQuery( String q){
+        //List<SystemUser> artistas = Ebean.find(SystemUser.class).where(Expr.or(Expr.ilike("firstName", "%" + q + "%"), Expr.ilike("lastName", "%" + q+ "%"))).findList();
+       // List<SystemUser> artistas = Ebean.find(SystemUser.class).where().ilike("userName", "%" + q+ "%").findList();
+        List<SystemUser> artistas =Ebean.find(SystemUser.class)
+                        .where(Expr.or( Expr.or(Expr.ilike("person.firstName","%" + q + "%"),Expr.ilike("person.lastName", "%" + q+ "%")),
+                        Expr.or(Expr.ilike("userType.label","%" + q + "%"),Expr.ilike("organization.name", "%" + q+ "%")))).where().ilike("person.address.city","%")
+                        .findList();
+        System.out.println( "\n artista foubd : \n " + artistas);
+        return artistas;
     }
 
     public static SystemUser findUserById( String id){

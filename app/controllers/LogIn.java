@@ -1,6 +1,7 @@
 package controllers;
 
 import dataHelpers.SessionUser;
+import models.SystemAccount;
 import models.SystemUser;
 import play.data.DynamicForm;
 import play.mvc.Result;
@@ -15,20 +16,22 @@ public class LogIn extends Controller {
         DynamicForm requestData = form().bindFromRequest();
         String email = requestData.get("email");
         String password = requestData.get( "password" );
-        if ( session("currentUserId") == null ){
+        if ( session("sessionUser") == null ){
             if ( email == null || email.isEmpty() || password == null || password.isEmpty() ){
                 return  ok( views.html.login.render( "test" ));
             }
             else{
                // SystemUser systemUser = SystemUser.findUserByEmailAndPass(email, password);
-                SystemUser systemUser = SystemUser.findUserById( "" );
-                if ( systemUser == null ){
-                    return ok( views.html.login.render( " Wrong systemUser1 name or password" ));
+                SystemAccount systemAccount = SystemAccount.findSystemAccountByEmailAndPass( email, password );
+                System.out.println("\nSystem account :\n " + systemAccount);
+                if ( systemAccount == null ){
+                    return ok( views.html.login.render( " No account found " ));
                 }
                 else {
+                    SystemUser systemUser = systemAccount.getSystemUser();
                     SessionUser sessionUser = new SessionUser(systemUser);
-                    String s = play.libs.Json.toJson( sessionUser).toString();
-                    session("sessionUser" , s);
+                    String sessionUserAsJson = play.libs.Json.toJson( sessionUser).toString();
+                    session("sessionUser" , sessionUserAsJson );
                     session("currentUserId", systemUser.getId());
                     return redirect( routes.Application.home() );
                 }

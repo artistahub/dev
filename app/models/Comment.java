@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Ebean;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.db.ebean.Model;
 
@@ -21,11 +22,10 @@ public class Comment extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     private MyPhoto myphoto;
     @ManyToOne( cascade = CascadeType.ALL  )
-    @JsonManagedReference
     private Photo photo;
     @OneToOne(cascade = CascadeType.ALL)
     private Video video;
-    @Version
+  //  @Version
     @Column(columnDefinition = "timestamp")
     private Date createTime;
 

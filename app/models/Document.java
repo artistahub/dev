@@ -30,6 +30,7 @@ public class Document extends Model {
     @JsonBackReference
     private List<Comment> comments;
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private SystemUser owner;
     private Date createTime;
     @Version

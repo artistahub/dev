@@ -1,5 +1,7 @@
 package dataHelpers;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.Address;
 import models.Photo;
 import models.SystemUser;
@@ -8,15 +10,16 @@ import models.Video;
 import java.util.List;
 
 public class ProfileData {
+
     private SystemUser systemUser;
-    private Photo profileImage;
+   // private Photo profileImage;
     private List<Photo> photos;
     private List<Video> videos;
     private Address location;
 
     public ProfileData( SystemUser systemUser){
         setSystemUser(systemUser);
-        setProfileImage( systemUser.getActiveProfileImage() );
+      //  setProfileImage( systemUser.getActiveProfileImage() );
         setLocation( systemUser.getLocation() );
     }
 
@@ -35,16 +38,16 @@ public class ProfileData {
     }
 
 
-    public Photo getProfileImage() {
-        return profileImage;
-    }
+    //public Photo getProfileImage() {
+       // return profileImage;
+    //}
 
-    public void setProfileImage(Photo profileImage) {
-        this.profileImage = profileImage;
-    }
+   // public void setProfileImage(Photo profileImage) {
+        //this.profileImage = profileImage;
+   // }
 
     public String toString(){
-        return "Profile Data: " + getSystemUser() + " - "+ getProfileImage();
+        return "Profile Data: " + getSystemUser() + " - ";//+ getProfileImage();
     }
 
     public List<Photo> getPhotos() {

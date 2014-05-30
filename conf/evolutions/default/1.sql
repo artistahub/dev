@@ -43,7 +43,7 @@ create table comments (
   myphoto_id                varchar(255),
   photo_id                  varchar(255),
   video_id                  varchar(255),
-  create_time               timestamp not null,
+  create_time               timestamp,
   constraint pk_comments primary key (id))
 ;
 
