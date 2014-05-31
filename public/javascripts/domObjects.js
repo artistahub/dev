@@ -218,6 +218,46 @@ function ArtistaForm(){
      }
     this.renderHtml = function(){ return this.htmlForm()};
 }
+
+function SignUpPersonForm( firstName, lastName, email  ){
+    this.formFields = { firstName: { label: "First Name", value : firstName || "", tag : "input", type: "text", name : "firstName" },
+                    lastName : { label: "Last Name", value : lastName || "", tag : "input", type: "text", name: "lastName" },
+                    email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email" },
+                    userName : { label: "User Name", value : firstName && lastName ? firstName + "." + lastName : "", tag : "input", type: "text",  name : "userName" },
+                    password: { label: "Password", value : "", tag : "input", type: "password" },
+                    city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
+                    state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
+                    country : { label: "Country", value : "", tag : "input", type: "text", name: "country" },
+                    sex : { label: "Female", value : "female", tag : "input", type: "radio", name: "sex"},
+                    sex2 : { label: "Male", value : "male", tag : "input", type: "radio", name: "sex"},
+                    profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage"}
+                   };
+    this.htmlForm = function(){
+        var $container = $("<div id='person-signup-form'></div>");
+        $.each( this.formFields , function( i, item){
+            console.log( "i: " + i);
+            console.log( "item: " + item.label);
+            var $frow = $("<div class='frow'></div>");
+            var $label = $("<div class='flabel'></div>").text( item.label );
+            if ( item.value ){ $label.css("display","none")};
+          //  var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
+            if ( item.tag == "input" && item.type != "radio" ){
+                var $input = $("<input class='finputText' value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
+            }
+            else if (  item.type == "radio" ){
+                var $input = $("<label class='radio inline'><input class='finputText' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
+                $label = "";
+            }
+            $frow.append( $label, $input);
+            $container.append( $frow );
+        });
+        return $container;
+       }
+     this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="submit" value="Complete Registration" id="uploadProfileImage"></div>');
+     this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
+}
+
+
 function PerformanceForm( type ){
     this.formFields = { businessName: type + "'s Name" , email : "Email"};
     this.htmlForm = function(){

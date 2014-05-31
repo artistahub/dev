@@ -6,6 +6,9 @@
     $( document).ready( function(){
         var userTypes = @Html(userTypes);
         var selectedUserType = "@{ userType }";
+        var firstName = "@{ firstName }";
+        var lastName = "@{ lastName }";
+        var email = "@{ email }";
         $.each( userTypes, function( i, ut ){
             console.log( ut );
             var $e = $('<option>');
@@ -16,8 +19,37 @@
         });
         if ( selectedUserType.length > 0  ){
             $("#registration-form .flabel").first().hide();
-            $("#user-types-select").val( selectedUserType )
+            $("#user-types-select").val( selectedUserType );
+            if ( selectedUserType == "artist"){
+                // $('#who-are-you-container').after( new ArtistaForm().renderHtml().fadeIn( 'slow' ));
+                $("#registration-form").append( new SignUpPersonForm( firstName, lastName, email ).renderHtml());
+            }
+
         }
+
+        $('#user-types-select').change( function(){
+            var $this = $(this);
+           // $('#dynamic-create-form').remove();
+            $( "select option:selected" ).each(function() {
+                var $selectionVal = $( this ).val();
+                if ( $selectionVal == "artist"){
+                   // $('#who-are-you-container').after( new ArtistaForm().renderHtml().fadeIn( 'slow' ));
+                    $("#registration-form").append( new SignUpPersonForm().renderHtml());
+                }
+                else {
+                    if ( $selectionVal != ""){
+                        $('#who-are-you-container').after( new PerformanceForm( $selectionVal ).renderHtml().fadeIn( 'slow' ));
+                    }
+                    else {
+                        $this.siblings().fadeIn();
+                    }
+
+                }
+            });
+
+        });
+
+
     });
 
 
@@ -33,13 +65,15 @@
                 <h4> Personal Info</h4>
                 <div>
                     <form id="registration-form" action="completeRegistration" method="post" enctype="multipart/form-data">
-                        <div class="frow">
+                       <div class="frow">
                             <div class="flabel " style="display: none;"> Who are you?</div>
                             <select class="finputText" name="userType" id="user-types-select">
                                 <option></option>
 
                             </select>
                         </div>
+
+                <!--
 
                         <div class="frow" >
                              <div class="flabel "> First Name:</div>
@@ -108,6 +142,7 @@
                         <div class="frow" >
                             <input class="btn signup-btn span12" type="submit" value="Complete Registration" id="uploadProfileImage">
                         </div>
+                        !-->
 
                     </form>
                 </div>

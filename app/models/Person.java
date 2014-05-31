@@ -197,6 +197,10 @@ public class Person extends Model {
     }
 
     public Address getAddressId() {
+        if ( this.address == null ){
+              System.out.println("---------> address is null");
+            return new Address("","","");
+        }
         return address;
     }
 

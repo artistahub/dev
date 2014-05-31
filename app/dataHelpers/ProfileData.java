@@ -20,7 +20,14 @@ public class ProfileData {
     public ProfileData( SystemUser systemUser){
         setSystemUser(systemUser);
       //  setProfileImage( systemUser.getActiveProfileImage() );
-        setLocation( systemUser.getLocation() );
+        if ( systemUser != null ){
+            setLocation( systemUser.getLocation() );
+        }
+        else {
+           System.out.println("system user not set on ProfileData");
+            setLocation( new Address("","",""));
+        }
+
     }
 
 
@@ -73,6 +80,9 @@ public class ProfileData {
     }
 
     public void setLocation(Address location) {
+        if ( location == null){
+           location = new Address("","","");
+        }
         this.location = location;
     }
 }

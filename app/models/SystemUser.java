@@ -145,7 +145,7 @@ public class SystemUser extends Model {
 
     }
     public Address getLocation(){
-        if ( this.isItAPerson()){
+        if ( this.isItAPerson() ){
             return this.getPerson().getAddressId() ;
         }
         return this.getOrganization().getAddress();

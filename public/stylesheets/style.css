@@ -694,7 +694,7 @@ div#comments-Container .comment-row:first-child {
     list-style: none;
     float: right;
     margin: 0px;
-    padding: 0px 12px 0px 5px;
+    padding-right: 15px;
     position: relative;
 }
 #profile-ul > li{
@@ -702,11 +702,6 @@ div#comments-Container .comment-row:first-child {
 }
 .profile-li-height{
     padding: 0px 5px;
-}
-
-#drop-down-account{
-    position: relative;
-    top: -10px;
 }
 .caret{
     position: absolute;
@@ -729,13 +724,14 @@ div#comments-Container .comment-row:first-child {
     background: white;
 }
 #user-profile-div{
-    width: 33px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     overflow: hidden;
     vertical-align: middle;
     position: relative;
     top: 3px;
     border: solid 1px #222;
+    border-radius: 50px;
 }
 .v-center{
     position: absolute;
@@ -747,8 +743,9 @@ div#comments-Container .comment-row:first-child {
     padding: 4px 0px;
     text-indent: 5px;
     font-size: 13pt;
-    background-color: rgba(0, 0, 0, 0.09);
+    background-color: rgba(247, 239, 239, 1);
     border: rgb(196, 196, 196) solid 1px;
+    border-radius: 0px 0px 3px 3px;
 }
 #search-result{
     width: 100%;
@@ -803,7 +800,7 @@ div#comments-Container .comment-row:first-child {
 }
 #header-top-bar{
     background-color: #ffffff;
-    background-image: url("/images/noise-2.png");
+    /**background-image: url("/images/noise-2.png");    **/
     padding: 0px 0px 3px 0px;
     position: fixed;
     top:0;
