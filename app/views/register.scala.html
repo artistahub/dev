@@ -1,4 +1,4 @@
-@(firstName: String, lastName: String, email: String, userType: String, userTypes: String  )
+@(name:String, firstName: String, lastName: String, email: String, userType: String, userTypes: String  )
 @headerOut()
 
 <script type="text/javascript">
@@ -9,6 +9,7 @@
         var firstName = "@{ firstName }";
         var lastName = "@{ lastName }";
         var email = "@{ email }";
+        var name = "@{ name }";
         $.each( userTypes, function( i, ut ){
             console.log( ut );
             var $e = $('<option>');
@@ -24,28 +25,31 @@
                 // $('#who-are-you-container').after( new ArtistaForm().renderHtml().fadeIn( 'slow' ));
                 $("#registration-form").append( new SignUpPersonForm( firstName, lastName, email ).renderHtml());
             }
+            else {
+                $("#registration-form").append( new SignUpOrganizationForm( name, email ).renderHtml());
+            }
 
         }
 
         $('#user-types-select').change( function(){
             var $this = $(this);
-           // $('#dynamic-create-form').remove();
-            $( "select option:selected" ).each(function() {
+            $('.dynamic-create-form').html("");
+          //  $( "select option:selected" ).each(function() {
                 var $selectionVal = $( this ).val();
                 if ( $selectionVal == "artist"){
                    // $('#who-are-you-container').after( new ArtistaForm().renderHtml().fadeIn( 'slow' ));
                     $("#registration-form").append( new SignUpPersonForm().renderHtml());
                 }
                 else {
-                    if ( $selectionVal != ""){
-                        $('#who-are-you-container').after( new PerformanceForm( $selectionVal ).renderHtml().fadeIn( 'slow' ));
-                    }
-                    else {
-                        $this.siblings().fadeIn();
-                    }
+                   // if ( $selectionVal != ""){
+                        $('#registration-form').append( new SignUpOrganizationForm().renderHtml().fadeIn( 'slow' ));
+                   // }
+                  //  else {
+                       // $this.siblings().fadeIn();
+                    //}
 
                 }
-            });
+          //  });
 
         });
 

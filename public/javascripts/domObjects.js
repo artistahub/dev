@@ -233,7 +233,7 @@ function SignUpPersonForm( firstName, lastName, email  ){
                     profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage"}
                    };
     this.htmlForm = function(){
-        var $container = $("<div id='person-signup-form'></div>");
+        var $container = $("<div class='dynamic-create-form' id='person-signup-form'></div>");
         $.each( this.formFields , function( i, item){
             console.log( "i: " + i);
             console.log( "item: " + item.label);
@@ -255,6 +255,41 @@ function SignUpPersonForm( firstName, lastName, email  ){
        }
      this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="submit" value="Complete Registration" id="uploadProfileImage"></div>');
      this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
+}
+
+function SignUpOrganizationForm( name, email  ){
+    this.formFields = { name: { label: "Name", value : name || "", tag : "input", type: "text", name : "businessName" },
+        email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email" },
+        userName : { label: "User Name", value : name ? name : "", tag : "input", type: "text",  name : "userName" },
+        password: { label: "Password", value : "", tag : "input", type: "password" },
+        city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
+        state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
+        country : { label: "Country", value : "", tag : "input", type: "text", name: "country" },
+        profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage"}
+    };
+    this.htmlForm = function(){
+        var $container = $("<div class='dynamic-create-form' id='org-signup-form'></div>");
+        $.each( this.formFields , function( i, item){
+            console.log( "i: " + i);
+            console.log( "item: " + item.label);
+            var $frow = $("<div class='frow'></div>");
+            var $label = $("<div class='flabel'></div>").text( item.label );
+            if ( item.value ){ $label.css("display","none")};
+            //  var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
+            if ( item.tag == "input" && item.type != "radio" ){
+                var $input = $("<input class='finputText' value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
+            }
+            else if (  item.type == "radio" ){
+                var $input = $("<label class='radio inline'><input class='finputText' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
+                $label = "";
+            }
+            $frow.append( $label, $input);
+            $container.append( $frow );
+        });
+        return $container;
+    }
+    this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="submit" value="Complete Registration" id="uploadProfileImage"></div>');
+    this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
 }
 
 

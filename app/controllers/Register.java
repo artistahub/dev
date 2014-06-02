@@ -19,13 +19,14 @@ import static play.data.Form.*;
 public class Register extends Controller {
     public static Result index() {
         DynamicForm requestData = form().bindFromRequest();
-        String firstName = requestData.get( "firstName" );
+        String firstName = requestData.get("firstName");
         String lastName = requestData.get( "lastName" );
+        String name = requestData.get( "businessName" );
         String email = requestData.get( "email" );
         String userType = requestData.get( "userType" );
         List< UserType > userTypes = UserType.getUserTypes();
         String userTypesAsJson = Json.toJson( userTypes ).toString();
-        return ok( register.render( firstName, lastName, email, userType, userTypesAsJson ) );
+        return ok( register.render( name, firstName, lastName, email, userType, userTypesAsJson ) );
     }
 
 
@@ -33,6 +34,7 @@ public class Register extends Controller {
 
     public static Result completeRegistration() throws IOException {
         DynamicForm requestData = form().bindFromRequest();
+        String name = requestData.get( "businessName" );
         String firstName = requestData.get("firstName");
         String lastName = requestData.get("lastName");
         String email = requestData.get("email");
@@ -43,11 +45,19 @@ public class Register extends Controller {
         String state = requestData.get( "state" );
         String country = requestData.get( "country" );
 
-        Address ad = new Address( city ,state, country );
-        Person p = new Person(  firstName, lastName, email );
-        p.setAddressId( ad );
+        Address address = new Address( city ,state, country );
         UserType systemUserType = UserType.findUserTypeByName( userType );
-        SystemUser u = new SystemUser( p, password, systemUserType );
+        SystemUser u = null;
+        if ( !name.isEmpty() ){
+             Organization o = new Organization( name, email );
+             o.setAddress( address );
+             u = new SystemUser( o, password, systemUserType );
+        }
+        else {
+            Person p = new Person(  firstName, lastName, email );
+            p.setAddressId( address );
+            u = new SystemUser( p, password, systemUserType );
+        }
 
         u.setUserName( userName );
         u.save();

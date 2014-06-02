@@ -16,13 +16,21 @@ public class SessionUser {
     private Address location;
 
     public SessionUser( SystemUser systemUser){
+        if ( systemUser.isItAPerson()){
+            setFirstName( systemUser.getPerson().getFirstName() );
+            setLastName( systemUser.getPerson().getLastName() );
+            setFullName( getFirstName() + " " + getLastName());
+            setEmail( systemUser.getPerson().getEmail() );
+        }
+        else {
+            setFullName( systemUser.getOrganization().getName() );
+            setEmail( systemUser.getOrganization().getEmail() );
+        }
+
        setUserName( systemUser.getUserName());
-       setFirstName( systemUser.getPerson().getFirstName() );
-       setLastName( systemUser.getPerson().getLastName() );
-       setFullName( getFirstName() + " " + getLastName());
-       setEmail( systemUser.getPerson().getEmail() );
+
        setActiveProfileImage( SystemUser.getActiveProfilePhoto( systemUser.getId() ) );
-       setLocation( systemUser.getLocation());
+       setLocation( systemUser.getLocation() );
     }
 
 

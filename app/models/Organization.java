@@ -1,15 +1,13 @@
 package models;
 
 
-import java.util.*;
-import javax.persistence.*;
-
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.Expr;
-import com.avaje.ebean.annotation.EnumMapping;
-import com.avaje.ebean.annotation.UpdatedTimestamp;
-import play.data.format.Formats;
-import play.db.ebean.*;
+import play.db.ebean.Model;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "organizations")
@@ -47,6 +45,11 @@ public class Organization extends Model {
         setName( name );
         setEmail( email );
         setPhoneNumber( phoneNumber );
+        setCreateTime( new Date() );
+    }
+    public Organization( String name, String email ){
+        setName( name );
+        setEmail( email );
         setCreateTime( new Date() );
     }
 
