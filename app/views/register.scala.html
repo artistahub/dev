@@ -53,6 +53,41 @@
 
         });
 
+        // Signup Submit
+
+        $( "#registration-form" ).on( "click", "#uploadProfileImage", function() {
+            var $inputs = $("input");
+            if ( checkRequiredInputs( $inputs ) == 1){
+               // alert("submit the form");
+                $("#registration-form" ).submit();
+            }
+            else {
+               // alert(" fill the required fields " );
+            }
+        });
+
+
+        $( "#registration-form" ).on( "keyup", "input", function() {
+            $( this ).next().html("");
+        });
+
+        function checkRequiredInputs( $inputs ){
+            var status = 1;
+            $.each( $inputs, function( i, item ){
+
+                if ( item.type != "submit" ){
+                    var $item = $( item );
+                    var required = $item.attr("data-req");
+                    var value = $item.val();
+                    //alert(value.length);
+                    if( required == 1 && value.length <= 0 ){
+                        $item.next().html("this is a required field");
+                        status = 0;
+                    }
+                }
+            })
+            return status;
+        }
 
     });
 

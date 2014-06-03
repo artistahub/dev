@@ -220,52 +220,52 @@ function ArtistaForm(){
 }
 
 function SignUpPersonForm( firstName, lastName, email  ){
-    this.formFields = { firstName: { label: "First Name", value : firstName || "", tag : "input", type: "text", name : "firstName" },
-                    lastName : { label: "Last Name", value : lastName || "", tag : "input", type: "text", name: "lastName" },
-                    email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email" },
-                    userName : { label: "User Name", value : firstName && lastName ? firstName + "." + lastName : "", tag : "input", type: "text",  name : "userName" },
-                    password: { label: "Password", value : "", tag : "input", type: "password", name: "password" },
+    this.formFields = { firstName: { label: "First Name", value : firstName || "", tag : "input", type: "text", name : "firstName","data-req": 1 },
+                    lastName : { label: "Last Name", value : lastName || "", tag : "input", type: "text", name: "lastName","data-req": 1 },
+                    email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email","data-req": 1 },
+                    userName : { label: "User Name", value : firstName && lastName ? firstName + "." + lastName : "", tag : "input", type: "text",  name : "userName","data-req": 1 },
+                    password: { label: "Password", value : "", tag : "input", type: "password", name: "password","data-req": 1 },
                     city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
                     state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
-                    country : { label: "Country", value : "", tag : "input", type: "text", name: "country" },
+                    country : { label: "Country", value : "", tag : "input", type: "text", name: "country","data-req": 1 },
                     sex : { label: "Female", value : "female", tag : "input", type: "radio", name: "sex"},
                     sex2 : { label: "Male", value : "male", tag : "input", type: "radio", name: "sex"},
-                    profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage"}
+                    profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1}
                    };
     this.htmlForm = function(){
         var $container = $("<div class='dynamic-create-form' id='person-signup-form'></div>");
         $.each( this.formFields , function( i, item){
-            console.log( "i: " + i);
-            console.log( "item: " + item.label);
             var $frow = $("<div class='frow'></div>");
             var $label = $("<div class='flabel'></div>").text( item.label );
+            var $span = $("<span class='red'></span>");
+            var req = item["data-req"];
             if ( item.value ){ $label.css("display","none")};
           //  var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
             if ( item.tag == "input" && item.type != "radio" ){
-                var $input = $("<input class='finputText' value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
+                var $input = $("<input class='finputText' data-req='"+ req +"'  value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
             }
             else if (  item.type == "radio" ){
-                var $input = $("<label class='radio inline'><input class='finputText' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
+                var $input = $("<label class='radio inline'><input class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
                 $label = "";
             }
-            $frow.append( $label, $input);
+            $frow.append( $label, $input, $span );
             $container.append( $frow );
         });
         return $container;
        }
-     this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="submit" value="Complete Registration" id="uploadProfileImage"></div>');
+     this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="button" value="Complete Registration" id="uploadProfileImage"></div>');
      this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
 }
 
 function SignUpOrganizationForm( name, email  ){
-    this.formFields = { name: { label: "Name", value : name || "", tag : "input", type: "text", name : "businessName" },
-        email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email" },
-        userName : { label: "User Name", value : name ? name : "", tag : "input", type: "text",  name : "userName" },
-        password: { label: "Password", value : "", tag : "input", type: "password", name: "password" },
+    this.formFields = { name: { label: "Name", value : name || "", tag : "input", type: "text", name : "businessName","data-req": 1 },
+        email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email","data-req": 1 },
+        userName : { label: "User Name", value : name ? name : "", tag : "input", type: "text",  name : "userName","data-req": 1 },
+        password: { label: "Password", value : "", tag : "input", type: "password", name: "password","data-req": 1 },
         city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
         state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
-        country : { label: "Country", value : "", tag : "input", type: "text", name: "country" },
-        profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage"}
+        country : { label: "Country", value : "", tag : "input", type: "text", name: "country","data-req": 1 },
+        profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1}
     };
     this.htmlForm = function(){
         var $container = $("<div class='dynamic-create-form' id='org-signup-form'></div>");
@@ -274,21 +274,23 @@ function SignUpOrganizationForm( name, email  ){
             console.log( "item: " + item.label);
             var $frow = $("<div class='frow'></div>");
             var $label = $("<div class='flabel'></div>").text( item.label );
+            var $span = $("<span class='red'></span>");
+            var req = item["data-req"];
             if ( item.value ){ $label.css("display","none")};
             //  var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
             if ( item.tag == "input" && item.type != "radio" ){
-                var $input = $("<input class='finputText' value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
+                var $input = $("<input class='finputText' data-req='"+ req +"' value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
             }
             else if (  item.type == "radio" ){
-                var $input = $("<label class='radio inline'><input class='finputText' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
+                var $input = $("<label class='radio inline'><input class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
                 $label = "";
             }
-            $frow.append( $label, $input);
+            $frow.append( $label, $input, $span);
             $container.append( $frow );
         });
         return $container;
     }
-    this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="submit" value="Complete Registration" id="uploadProfileImage"></div>');
+    this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="button" value="Complete Registration" id="uploadProfileImage"></div>');
     this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
 }
 
