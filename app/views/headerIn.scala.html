@@ -61,7 +61,7 @@
             if (q.length >= 1){
                // alert( " > 3 " );
                 ajaxReturnJson( "/search/" + q, function ( data ){
-                    //alert( JSON.stringify(data) );
+                   // alert( JSON.stringify(data) );
                     $.each( data.searchResult , function( i, e){
                         $resultContainer.append(  new SearchResultObject( e ).render() );
                     });
