@@ -100,11 +100,16 @@ ToolBar.prototype.render = function(){
 var forms = {};
     forms.uploadMyphotos = "<form method='post' action='/addMyPhotos' enctype='multipart/form-data'>" +
                          "<input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form>";
-    forms.uploadMyvideos = '<form action="/addVideo" method="post"> <div class="frow"> <label class="flabel" for="videoLink" > Youtube video</label>' +
-        ' <input type="text" class="finputText" id="videoLink" name="videoLink"> </div> <div class="frow"> ' +
-        '<label class="flabel" for="videoDescription" > Video Description</label>' +
+    forms.uploadMyvideos = '<form action="/addVideo" method="post"> ' +
+        '<div class="frow"> <label class="flabel" for="videoLink" > YouTube Link </label>' +
+        ' <input type="text" class="finputText" id="videoLink" name="videoLink"> </div> ' +
+        '<div class="frow"> <label class="flabel" for="videoLink" > Title</label>' +
+        ' <input type="text" class="finputText" id="video-title" name="video-title"> </div> ' +
+        '<div class="frow"><label class="flabel" for="videoDescription" > Video Description</label>' +
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +
-        ' <div class="frow"> <input class="btn" type="submit" id="saveVideo" value="Save"> </div> </form>';
+        ' <div class="frow"> <input class="btn btn-primary" type="submit" id="saveVideo" value="Save"> </div> ' +
+        '<div><span class="span-info">Currently we only support YouTube videos</span></div>' +
+        '</form>';
     forms.submitMyphotoComment =  function( dataId, dataType){
         var f = '<div class="row-fluid relative"> ' +
                 '<label class="flabel" for="t" > Comments goes here</label><textarea name="t" id="comment-text-area" class="span12" rows="2" cols="30"></textarea>  </div> <div>' +
@@ -112,11 +117,11 @@ var forms = {};
         return f ;
     }
 
-function DropDownWindow( f ){
+function DropDownWindow( f, title ){
     this.wrapper = "<div class='window-wrapper'></div>";
-    this.header = "<div class='window-header'> Header</div>";
+    this.header = "<div class='window-header'> <h4>"+ title +"</h4></div>";
     this.body = "<div class='window-body'> " + f + "</div>";
-    this.footer = "<div class='window-footer'><span class='close-dropDown btn btn-primary'>Close</span></div>";
+    this.footer = "<div class='window-footer'><span class='close-dropDown'>close</span></div>";
     this.html = function(){
         return this.header + this.body + this.footer;
     }
@@ -230,7 +235,7 @@ function SignUpPersonForm( firstName, lastName, email  ){
                     country : { label: "Country", value : "", tag : "input", type: "text", name: "country","data-req": 1 },
                     sex : { label: "Female", value : "female", tag : "input", type: "radio", name: "sex"},
                     sex2 : { label: "Male", value : "male", tag : "input", type: "radio", name: "sex"},
-                    profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1}
+                    profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1, header: "Profile Photo"}
                    };
     this.htmlForm = function(){
         var $container = $("<div class='dynamic-create-form' id='person-signup-form'></div>");
@@ -247,6 +252,11 @@ function SignUpPersonForm( firstName, lastName, email  ){
             else if (  item.type == "radio" ){
                 var $input = $("<label class='radio inline'><input class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
                 $label = "";
+            }
+            if (  item.header ){
+                console.log( item.header );
+                console.log( $input.parent() );
+                $frow.append("<div><h4>"+ item.header +"</h4></div>");
             }
             $frow.append( $label, $input, $span );
             $container.append( $frow );
@@ -265,7 +275,7 @@ function SignUpOrganizationForm( name, email  ){
         city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
         state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
         country : { label: "Country", value : "", tag : "input", type: "text", name: "country","data-req": 1 },
-        profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1}
+        profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1, header: "Profile Photo"}
     };
     this.htmlForm = function(){
         var $container = $("<div class='dynamic-create-form' id='org-signup-form'></div>");
@@ -284,6 +294,11 @@ function SignUpOrganizationForm( name, email  ){
             else if (  item.type == "radio" ){
                 var $input = $("<label class='radio inline'><input class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
                 $label = "";
+            }
+            if (  item.header ){
+                console.log( item.header );
+                console.log( $input.parent() );
+                $frow.append("<div><h4>"+ item.header +"</h4></div>");
             }
             $frow.append( $label, $input, $span);
             $container.append( $frow );

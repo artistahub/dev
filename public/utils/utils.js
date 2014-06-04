@@ -29,9 +29,8 @@ $(function () {
 
     $body.on('click', '.finputText', function () {
         $finputText = $('.finputText');
-        console.log('cliecke');
         $.each($finputText, function (i, element) {
-            console.log( 'test' );
+           // console.log( 'test' );
             $(element).val().length > 0 ? "" : $(element).siblings().fadeIn();
         });
         $(this).focus().siblings().hide();
