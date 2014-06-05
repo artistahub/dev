@@ -48,7 +48,8 @@ public class Register extends Controller {
         Address address = new Address( city ,state, country );
         UserType systemUserType = UserType.findUserTypeByName( userType );
         SystemUser u = null;
-        if ( !name.isEmpty() ){
+        System.out.println( "Name: " + name);
+        if ( name != null  ){
              Organization o = new Organization( name, email );
              o.setAddress( address );
              u = new SystemUser( o, password, systemUserType );

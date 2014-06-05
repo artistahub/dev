@@ -8,6 +8,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.libs.Json;
 import java.util.List;
+import org.apache.commons.mail.*;
+
+
 import views.*;
 
 import static play.data.Form.*;
@@ -15,9 +18,20 @@ import static play.data.Form.*;
 
 public class Application extends Controller {
 
-    public static Result index() {
+    public static Result index() throws EmailException {
        // String sessionUser =  session("sessionUser");
         //System.out.println( "\n session User: \n" + sessionUser);
+
+
+       SimpleEmail email = new SimpleEmail();
+
+       email.setHostName("localhost");
+       email.setFrom("sender@zenexity.fr");
+       email.addTo("berberacrobat@gmail.com");
+       email.setSubject("subject");
+       email.setMsg("Message");
+       email.send();
+       //*/
 
 
         if ( session("sessionUser") != null){
