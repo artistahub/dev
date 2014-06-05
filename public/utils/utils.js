@@ -231,7 +231,7 @@ function displayPhotoMediaFrame( $this, loggedIn ){
         $imgPreview.append($signInBtn);
     }
     $imgPreview.append( $bounderBottomBar );
-    $imgWrapper.append('<button id="c" class="close-icon close-img-preview" style="z-index:5; position: absolute;top: -40px; right: -11px"></button>');//.fadeIn();
+    $imgWrapper.append('<button class="close-icon close-img-preview" style="z-index:5; position: absolute;top: -40px; right: -11px"></button>');//.fadeIn();
 
     $mediaFrame.append( $imgWrapper );
     $( 'body' ).append( $mediaFrame );
