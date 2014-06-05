@@ -99,11 +99,15 @@ ToolBar.prototype.render = function(){
 }
 var forms = {};
     forms.uploadMyphotos = "<form method='post' action='/addMyPhotos' enctype='multipart/form-data'>" +
-                         "<input type='file' name='myphotos-upload' ><input type='submit' class='btn btn-primary' value='Upload'></form>";
+        '<div class="frow"> <label class="flabel" for="photo-title" > Title</label>' +
+        ' <input type="text" class="finputText" id="photo-title" name="photo-title"> </div> ' +
+                         "<input type='file' name='myphotos-upload' >" +
+
+        "<input type='submit' class='btn btn-primary' value='Upload'></form>";
     forms.uploadMyvideos = '<form action="/addVideo" method="post"> ' +
         '<div class="frow"> <label class="flabel" for="videoLink" > YouTube Link </label>' +
         ' <input type="text" class="finputText" id="videoLink" name="videoLink"> </div> ' +
-        '<div class="frow"> <label class="flabel" for="videoLink" > Title</label>' +
+        '<div class="frow"> <label class="flabel" for="video-title" > Title</label>' +
         ' <input type="text" class="finputText" id="video-title" name="video-title"> </div> ' +
         '<div class="frow"><label class="flabel" for="videoDescription" > Video Description</label>' +
         ' <textarea class="finputText" id="videoDescription" name="videoDescription" rows="5" ></textarea> </div>' +

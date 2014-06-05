@@ -104,9 +104,11 @@ public class Register extends Controller {
         DynamicForm requestData = form().bindFromRequest();
         SystemUser u = SystemUser.findUserById(session("currentUserId"));
         String videoLink = requestData.get("videoLink");
-        String videoTitle= requestData.get("videoDescription");
+        String videoTitle= requestData.get("video-title");
+        String videoDescription= requestData.get("videoDescription");
         Video video = new Video( u, videoTitle, videoLink );
-        video.setOwner(u);
+       // video.setOwner(u);
+        video.setDescription( videoDescription );
         video.save();
         return redirect( routes.Application.myVideos());
 
