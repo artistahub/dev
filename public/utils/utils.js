@@ -186,18 +186,20 @@ function stripTagsFromHtml( input ){
 
 function displayPhotoMediaFrame( $this, loggedIn ){
     $('body').addClass('overflow-hidden');
+    var $thisChild = $this.children(":first");
+    var imgTitle =  $thisChild.attr("title") || "No title";
     var $commentsContainer = $('<div>');
     $commentsContainer.attr('id', 'comments-Container');
     var $mediaFrame = $("<div id='photo-media-frame' class='overflow-auto'>");
     $mediaFrame.css({ width:'100%', height:'100%', border:"solid 1px red", position: "fixed", top: "0", bottom : "0", 'z-index':"999"});
     var $imgWrapper = $("<div id='media-wrapper'>");
-    var $bounderTopBar = $("<div class='container-fluid boundery-top-bar' > Top Bar</div>");
+    var $bounderTopBar = $("<div class='container-fluid boundery-top-bar ' > <h3 class='img-title'>"+ imgTitle +"</h3></div>");
     var $bounderBottomBar = $("<div class='container-fluid boundery-bottom-bar' >");
     var $imgPreview = $("<div id='media-preview'>");
     $imgWrapper.append( $bounderTopBar, $imgPreview );
     $imgWrapper.css({ 'max-width': '600px','z-index' : 5, height: 'auto', display: 'block'});
     //$imgPreview.html("");
-    var $thisChild = $this.children(":first");
+
     var dataId = $thisChild.attr('data-id');
     var dataType = $thisChild.attr('data-type');
    // var getCommentsUrl = dataType == "profileImage" ? '/getProfileImageComment/' : '/getComments/';

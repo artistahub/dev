@@ -33,9 +33,9 @@
                 var $dropDownContainer = $("<div>");
                 var $dropDownShadow = $("<div>");
                 $dropDownShadow.attr('class', "dropDownShadow");
-                $dropDownContainer.attr({'id' : "dropDownContainer", 'class': "div-absolute-center" });
+                $dropDownContainer.attr({'id' : "dropDownContainer", 'class': "div-absolute-center form-background" });
                 $dropDownShadow.css({'z-index':1, 'position':'absolute', 'backgroundColor':'rgb(6, 1, 8)', height:"100%", width:"100%", 'top':0, 'opacity':0.8});
-                $dropDownContainer.css({'position' :'absolute', 'backgroundColor' :'rgb(230, 230, 230)', 'width' : $bodyWidth/2,'top' : "-400px","min-width" : "300px", "max-width" :"500px", padding: "10px"});
+                $dropDownContainer.css({'position' :'absolute', 'width' : $bodyWidth/2,'top' : "-400px","min-width" : "300px", "max-width" :"500px", padding: "10px"});
                 $body.append( $dropDownShadow );
                 // var wHtml = new DropDownWindow().render();
                 $dropDownContainer.html( new DropDownWindow( forms.uploadMyvideos, "Add Videos" ).render() );

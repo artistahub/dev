@@ -2,6 +2,7 @@ package controllers;
 
 import models.*;
 import dataHelpers.SessionUser;
+import org.apache.commons.mail.*;
 import play.data.DynamicForm;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -32,14 +33,16 @@ public class Register extends Controller {
 
 
 
-    public static Result completeRegistration() throws IOException {
+    public static Result completeRegistration() throws IOException, EmailException {
         DynamicForm requestData = form().bindFromRequest();
-        String name = requestData.get( "businessName" );
+        String name = requestData.get("businessName");
         String firstName = requestData.get("firstName");
         String lastName = requestData.get("lastName");
-        String email = requestData.get("email");
+        String accountEmail = requestData.get("email");
         String password = requestData.get("password");
         String userName = requestData.get("userName");
+        String sex = requestData.get("sex");
+        System.out.println(" Gender: ---> " + sex.trim() );
         String userType = requestData.get( "userType" );
         String city = requestData.get( "city" );
         String state = requestData.get( "state" );
@@ -50,13 +53,22 @@ public class Register extends Controller {
         SystemUser u = null;
         System.out.println( "Name: " + name);
         if ( name != null  ){
-             Organization o = new Organization( name, email );
+             Organization o = new Organization( name, accountEmail );
              o.setAddress( address );
              u = new SystemUser( o, password, systemUserType );
         }
         else {
-            Person p = new Person(  firstName, lastName, email );
+            Person p = new Person(  firstName, lastName, accountEmail );
             p.setAddressId( address );
+            if ( sex.trim().equalsIgnoreCase("female")){
+                p.setGender( Person.Sex.Female );
+            }
+            else if ( sex.trim().equalsIgnoreCase("Male")){
+                p.setGender( Person.Sex.Male );
+            }
+            else {
+                p.setGender( Person.Sex.Other );
+            }
             u = new SystemUser( p, password, systemUserType );
         }
 
@@ -84,15 +96,21 @@ public class Register extends Controller {
             profilePhoto.save();
 
             SessionUser sessionUser = new SessionUser( u );
-            //ObjectMapper om = new ObjectMapper();
-            //String json = om.writeValueAsString( sessionUser );
-            //ObjectNode artistas = Json.newObject();
-           // su.put("sessionUsr", Json.toJson( sessionUser ));
-           // String connectedUser = Json.toJson( sessionUser );
             System.out.println( "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Session user: \n" + Json.toJson( sessionUser ).toString() );
-           // session("sessionUser" , Json.toJson( sessionUser ).toString());
             session("sessionUser",Json.toJson( sessionUser ).toString());
             session("currentUserId" , u.getId());
+
+            Email email = new SimpleEmail();
+            email.setHostName("smtp.googlemail.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("artistahub@gmail.com", "acrobat8"));
+            email.setSSLOnConnect(true);
+            email.setFrom("artistahub@gmail.com");
+            email.setSubject("Welcome to ArtistaOne");
+            email.setMsg(" Hello " + u.getFullName());
+            email.addTo( accountEmail );
+            email.send();
+
             return redirect(routes.Application.home());
         } else {
             System.out.print("Missing file");

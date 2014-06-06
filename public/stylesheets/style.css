@@ -53,7 +53,10 @@ h1{
 #c{
     position: relative;
     border-radius: 4px;
-    background-color: #222;
+}
+.form-background{
+    background-color: rgb(182, 175, 175) !important;
+    background-image: url("../images/noise-2.png");
 }
 
 .f{
@@ -618,7 +621,7 @@ input[type="text"],input[type="password"], select{
 .window-footer{
 }
 .span-info{
-    color: gray;
+    color: #fff;
     font-size: 8pt;
     position: absolute;
     right: 9px;
@@ -858,9 +861,16 @@ div#comments-Container .comment-row:first-child {
     width: 104%;
 }
 
+.img-title{
+    margin: 0 !important;
+    padding: 10px !important;
+    text-shadow: 1px 1px 2px white;
+    line-height: 20px;
+    font-size: 14pt;
+}
 .boundery-top-bar{
     background-color: rgb(229, 229, 229);
-    padding: 5px 0px;
+    /*padding: 3px 0px;*/
     border-radius: 5px 5px 0px 0px;
     color: rgb(44, 42, 42);
     text-shadow: 0px 1px 15px #e1e1e1;

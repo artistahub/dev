@@ -11,7 +11,8 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
      "mysql" % "mysql-connector-java" % "5.1.25",
     "com.amazonaws" % "aws-java-sdk" % "1.3.11",
-   // "com.typesafe" %% "play-plugins-mailer" % "2.1-RC2",
+    "com.typesafe" %% "play-plugins-mailer" % "2.1-RC2",
+    "org.apache.commons" % "commons-email" % "1.3.1",
     javaCore,
     javaJdbc,
     javaEbean

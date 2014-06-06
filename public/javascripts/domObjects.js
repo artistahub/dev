@@ -254,12 +254,13 @@ function SignUpPersonForm( firstName, lastName, email  ){
                 var $input = $("<input class='finputText' data-req='"+ req +"'  value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
             }
             else if (  item.type == "radio" ){
-                var $input = $("<label class='radio inline'><input class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
+                var $input = $("<label class='radio inline'><input value='"+ item.label +"' class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+item.label+"</label>");
                 $label = "";
             }
             if (  item.header ){
                 console.log( item.header );
                 console.log( $input.parent() );
+                $input.removeClass("finputText");
                 $frow.append("<div><h4>"+ item.header +"</h4></div>");
             }
             $frow.append( $label, $input, $span );
