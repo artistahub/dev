@@ -1,21 +1,22 @@
 package controllers;
 
-import models.*;
 import dataHelpers.SessionUser;
+import models.*;
 import org.apache.commons.mail.*;
+
 import play.data.DynamicForm;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
+import views.html.register;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
-
-import views.html.*;
-
-import static play.data.Form.*;
+import static play.data.Form.form;
 
 public class Register extends Controller {
     public static Result index() {
@@ -27,7 +28,7 @@ public class Register extends Controller {
         String userType = requestData.get( "userType" );
         List< UserType > userTypes = UserType.getUserTypes();
         String userTypesAsJson = Json.toJson( userTypes ).toString();
-        return ok( register.render( name, firstName, lastName, email, userType, userTypesAsJson ) );
+        return ok( register.render(name, firstName, lastName, email, userType, userTypesAsJson) );
     }
 
 
@@ -42,7 +43,7 @@ public class Register extends Controller {
         String password = requestData.get("password");
         String userName = requestData.get("userName");
         String sex = requestData.get("sex");
-        System.out.println(" Gender: ---> " + sex.trim() );
+        //System.out.println(" Gender: ---> " + sex.trim() );
         String userType = requestData.get( "userType" );
         String city = requestData.get( "city" );
         String state = requestData.get( "state" );
@@ -91,7 +92,8 @@ public class Register extends Controller {
             Album profileAlbum = new Album( u, "Profile album ", " Profile album description ", Album.AlbumType.profile );
             Photo profilePhoto = new Photo( u, "profile photo", s3File.getUrl().toString(), profileAlbum );
             u.setActiveProfileImage(profilePhoto);
-            Feed feed = new Feed( u, s3File.getUrl().toString() , " Text text...") ;
+            String photoUrl = s3File.getUrl().toString();
+            Feed feed = new Feed( u, photoUrl , " Text text...") ;
             feed.save();
             profilePhoto.save();
 
@@ -110,6 +112,7 @@ public class Register extends Controller {
             email.setMsg(" Hello " + u.getFullName());
             email.addTo( accountEmail );
             email.send();
+            sendHtmlasEmail( u, photoUrl );
 
             return redirect(routes.Application.home());
         } else {
@@ -132,5 +135,30 @@ public class Register extends Controller {
         return redirect( routes.Application.myVideos());
 
     }
+
+    public static void sendHtmlasEmail( SystemUser u, String photoUrl ) throws EmailException, MalformedURLException {
+        // Create the email message
+        HtmlEmail email = new HtmlEmail();
+        email.setHostName("smtp.googlemail.com");
+        email.setSmtpPort(465);
+        email.setAuthenticator(new DefaultAuthenticator("artistahub@gmail.com", "acrobat8"));
+        email.setSSLOnConnect(true);
+        email.setFrom("artistahub@gmail.com");
+        email.setSubject("Welcome to ArtistaOne");
+
+        // embed the image and get the content id
+        URL url = new URL( photoUrl );
+        String cid = email.embed(url, u.getFullName());
+
+        // set the html message
+        email.setHtmlMsg("<html><h1>Welcome to ArtistaOne</h1>   <img src=\"cid:"+cid+"\">  <hr><hr></html>");
+
+        // set the alternative message
+        email.setTextMsg("Your email client does not support HTML messages");
+        email.addTo( "berberacrobat@gmail.com" );
+        // send the email
+        email.send();
+    }
+
 
 }
