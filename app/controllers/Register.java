@@ -103,6 +103,7 @@ public class Register extends Controller {
             session("sessionUser",Json.toJson( sessionUser ).toString());
             session("currentUserId" , u.getId());
 
+            /*
             Email email = new SimpleEmail();
             email.setHostName("smtp.googlemail.com");
             email.setSmtpPort(465);
@@ -112,8 +113,8 @@ public class Register extends Controller {
             email.setSubject("Welcome to ArtistaOne");
             email.setMsg(" Hello " + u.getFullName());
             email.addTo( accountEmail );
-            email.send();
-            sendHtmlasEmail( u, photoUrl );
+            email.send();   **/
+            sendHtmlasEmail( u, photoUrl, accountEmail );
 
             return redirect(routes.Application.home());
         } else {
@@ -137,7 +138,7 @@ public class Register extends Controller {
 
     }
 
-    public static void sendHtmlasEmail( SystemUser u, String photoUrl ) throws EmailException, MalformedURLException {
+    public static void sendHtmlasEmail( SystemUser u, String photoUrl, String accountEmail ) throws EmailException, MalformedURLException {
         // Create the email message
         HtmlEmail email = new HtmlEmail();
         email.setHostName("smtp.googlemail.com");
@@ -149,7 +150,7 @@ public class Register extends Controller {
 
         // embed the image and get the content id
         URL url = new URL( photoUrl );
-        String cid = email.embed(url, u.getFullName());
+      //  String cid = email.embed(url, u.getFullName());
 
         // set the html message
         //email.setHtmlMsg("<html><h1>Welcome to ArtistaOne</h1>   <img src=\"cid:"+cid+"\">  <hr><hr></html>");
@@ -160,9 +161,9 @@ public class Register extends Controller {
                 "    <script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-latest.js\">  </script>\n" +
                 "\n" +
                 "</head>\n" +
-                "<body style=\"font-family: Helvetica Neue, Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;color: #333333;font-weight: 400 !important;text-shadow: 1px 1px 2px white;\">\n" +
+                "<body style=\"font-family: Helvetica Neue, Helvetica, Arial, sans-serif;font-size: 15px;line-height: 23px;color: #333333;font-weight: 400 !important;text-shadow: 1px 1px 2px white;\">\n" +
                 "\n" +
-                "<div style=\"background: #E6E4E4;width: 940px;margin: auto;border-radius: 5px 5px 0px 0px;border: solid thin #e1e1e1;box-shadow: 1px 1px 2px #C7C6C6;\">\n" +
+                "<div style=\"background: #E6E4E4; min-width: 300px; width:100%; max-width: 900px; margin: auto;border-radius: 5px 5px 0px 0px;border: solid thin #e1e1e1;box-shadow: 1px 1px 2px #C7C6C6;\">\n" +
                 "    <div style=\" margin: 0; padding: 0px 5px;\">\n" +
                 "        <div style=\"float: left;\" ><h1 style=\"font-size: 14pt; color: #333;\"> "+ u.getFullName() +", Welcome to ArtistaOne</h1></div>\n" +
                 "        <div style=\"float: right;\" > <h1 style=\"font-size: 14pt; color: #333;\">ArtistaOne</h1></div>\n" +
@@ -171,13 +172,15 @@ public class Register extends Controller {
                 "    <div style=\" margin: 0; padding: 0px 5px;\"  >\n" +
                 "        <p>Hi " + u.getFullName() + ",</p>\n" +
                 "        <p>Welcome to ArtistaOne -- we are so happy to have you onboard! You have just joined a community of Artists from every country in the world.\n" +
-                "            Together, we are striving toward a mission to connect entertainers, shows busineses and people to a great entertainment.</p>\n" +
-                "    </div>\n" +
+                "            Now, You will be able to access and interact with your similar peers, colleagues and individual artists, performers and organizers of" +
+                " shows and entertainment events from other countries.</p>\n" +
+                " <p>Your membership will allow you to connect and build bridges locally, regionally and worldwide with various expressions, events," +
+                " performers as well as companies involved in the entertainment business and its related operations and organizations.</p> </div>\n" +
                 "    <hr style=\"border-bottom: solid thin #FFFFFF;border-top: solid thin rgb(196, 196, 196);clear: both;margin: 0 0px;padding: 0px;\">\n" +
                 "    <div style=\" margin: 0; padding: 0px 5px;\">\n" +
-                "        <div class=\"img-container\" style=\"width: 300px;margin: auto;margin-top: 20px;margin-bottom: 20px;border: solid thin #C9C9C9;box-shadow: 1px 1px 2px #D6D2D2;border-radius: 6px;overflow: hidden;\">\n" +
-                "           <a href=\" http://localhost:9000/profile/"+ u.getFullName() +"\"><img style=\"width: 100%;height: auto;\" src=\"cid:"+ cid +"\"> </a>\n" +
-                "           <span  style=\" text-align: center;font-size: 16pt;display: block;padding: 2px;background: rgb(48, 48, 48);color: white;text-shadow: 1px 1px 2px #333;\"><a href=\" http://localhost:9000/profile/\"+ u.getUserName() +\"\">  Elhassan Rais</a></span>\n" +
+                "        <div style=\"width: 300px;margin: auto;margin-top: 20px;margin-bottom: 20px;border: solid thin #C9C9C9;box-shadow: 1px 1px 2px #D6D2D2;border-radius: 6px;overflow: hidden;\">\n" +
+                "           <a href=\" http://localhost:9000/profile/"+ u.getUserName() +"\"><img style=\"width: 100%;height: auto;\" src=\" " + photoUrl + "\"> </a>\n" +
+                "           <span  style=\" text-align: center;font-size: 16pt;display: block;padding: 2px;background: rgb(48, 48, 48);color: white;text-shadow: 1px 1px 2px #333;\"><a href=\" http://localhost:9000/profile/"+ u.getUserName() +"\">  "+ u.getFullName()+"</a></span>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "</div>\n" +
@@ -186,7 +189,8 @@ public class Register extends Controller {
 
         // set the alternative message
         email.setTextMsg("Your email client does not support HTML messages");
-        email.addTo( "berberacrobat@gmail.com" );
+      //  email.addTo( "berberacrobat@gmail.com" );
+        email.addTo( accountEmail );
         // send the email
         email.send();
     }
