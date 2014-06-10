@@ -7,6 +7,7 @@ import org.apache.commons.mail.*;
 import play.data.DynamicForm;
 import play.libs.Json;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
@@ -35,6 +36,7 @@ public class Register extends Controller {
 
 
     public static Result completeRegistration() throws IOException, EmailException {
+        String baseUrl = request().path();
         DynamicForm requestData = form().bindFromRequest();
         String name = requestData.get("businessName");
         String firstName = requestData.get("firstName");
@@ -147,6 +149,8 @@ public class Register extends Controller {
         email.setSSLOnConnect(true);
         email.setFrom("artistahub@gmail.com");
         email.setSubject("Welcome to ArtistaOne");
+        String baseUrl = request().host();
+
 
         // embed the image and get the content id
         URL url = new URL( photoUrl );
@@ -179,8 +183,8 @@ public class Register extends Controller {
                 "    <hr style=\"border-bottom: solid thin #FFFFFF;border-top: solid thin rgb(196, 196, 196);clear: both;margin: 0 0px;padding: 0px;\">\n" +
                 "    <div style=\" margin: 0; padding: 0px 5px;\">\n" +
                 "        <div style=\"width: 300px;margin: auto;margin-top: 20px;margin-bottom: 20px;border: solid thin #C9C9C9;box-shadow: 1px 1px 2px #D6D2D2;border-radius: 6px;overflow: hidden;\">\n" +
-                "           <a href=\" http://localhost:9000/profile/"+ u.getUserName() +"\"><img style=\"width: 100%;height: auto;\" src=\" " + photoUrl + "\"> </a>\n" +
-                "           <span  style=\" text-align: center;font-size: 16pt;display: block;padding: 2px;background: rgb(48, 48, 48);color: white;text-shadow: 1px 1px 2px #333;\"><a href=\" http://localhost:9000/profile/"+ u.getUserName() +"\">  "+ u.getFullName()+"</a></span>\n" +
+                "           <a href=\" http://"+ request().host() + "/profile/"+ u.getUserName() +"\"><img style=\"width: 100%;height: auto;\" src=\" " + photoUrl + "\"> </a>\n" +
+                "           <span  style=\" text-align: center;font-size: 16pt;display: block;padding: 2px;background: rgb(48, 48, 48);color: white;text-shadow: 1px 1px 2px #333;\"><a href=\" http://"+ request().host() + "/profile/"+ u.getUserName() + "\">  "+ u.getFullName()+"</a></span>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "</div>\n" +
