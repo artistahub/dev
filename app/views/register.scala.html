@@ -75,14 +75,23 @@
             var status = 1;
             $.each( $inputs, function( i, item ){
 
+
                 if ( item.type != "submit" ){
                     var $item = $( item );
+                   // alert("$item.name: " + $item.name);
                     var required = $item.attr("data-req");
+                    var itemName = $item.attr("name");
                     var value = $item.val();
-                    //alert(value.length);
+                   // alert( itemName );
                     if( required == 1 && value.length <= 0 ){
                         $item.next().html("This is a required field");
                         status = 0;
+                    }
+                    if ( itemName == "email" && value.length > 0){
+                         if (!validateEmail( value )){
+                            // alert(" check email ");
+                             $item.next().html("This is not a valid email format.").fadeIn();
+                         }
                     }
                 }
             })

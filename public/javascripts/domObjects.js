@@ -301,8 +301,8 @@ function SignUpOrganizationForm( name, email  ){
                 $label = "";
             }
             if (  item.header ){
-                console.log( item.header );
-                console.log( $input.parent() );
+               // console.log( item.header );
+              //  console.log( $input.parent() );
                 $frow.append("<div><h4>"+ item.header +"</h4></div>");
             }
             $frow.append( $label, $input, $span);
