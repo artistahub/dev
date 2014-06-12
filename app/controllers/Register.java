@@ -33,8 +33,6 @@ public class Register extends Controller {
     }
 
 
-
-
     public static Result completeRegistration() throws IOException, EmailException {
         String baseUrl = request().path();
         DynamicForm requestData = form().bindFromRequest();
@@ -93,7 +91,10 @@ public class Register extends Controller {
             //ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
             Album profileAlbum = new Album( u, "Profile album ", " Profile album description ", Album.AlbumType.profile );
             Photo profilePhoto = new Photo( u, "profile photo", s3File.getUrl().toString(), profileAlbum );
+            profilePhoto.setTitle(" Profile Photo");
             u.setActiveProfileImage(profilePhoto);
+            u.setProfileImageId( profilePhoto.getId());
+            u.setProfileImageUrl( profilePhoto.getUrl() );
             String photoUrl = s3File.getUrl().toString();
             System.out.println( "Photo URL: " + photoUrl);
             Feed feed = new Feed( u, photoUrl , " Text text...") ;

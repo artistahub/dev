@@ -23,6 +23,8 @@ public class SystemUser extends Model {
     private UserType userType;
     @OneToOne(cascade = CascadeType.ALL)
     private Photo activeProfileImage;
+    private String profileImageId;
+    private String profileImageUrl;
     private Date createTime;
     @Version
     @Column(columnDefinition = "timestamp")
@@ -194,4 +196,20 @@ public class SystemUser extends Model {
         this.activeProfileImage = activeProfileImage;
     }
 
+
+    public String getProfileImageId() {
+        return profileImageId;
+    }
+
+    public void setProfileImageId(String profileImageId) {
+        this.profileImageId = profileImageId;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 }

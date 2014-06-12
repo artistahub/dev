@@ -40,7 +40,6 @@ public class Person extends Model {
     @Version
     @Column(columnDefinition = "timestamp")
     private Date updateTime;
-    private String test;
 
     public List<Organization> getOrganizations() {
         return organizations;
@@ -56,14 +55,6 @@ public class Person extends Model {
 
     public void setCategories(List<PersonCategory> categories) {
         this.categories = categories;
-    }
-
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
     }
 
 

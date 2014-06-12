@@ -103,7 +103,6 @@ create table persons (
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
   create_time               datetime,
-  test                      varchar(255),
   update_time               timestamp not null,
   constraint ck_persons_gender check (gender in ('Male','Female','Other')),
   constraint pk_persons primary key (id))
@@ -185,6 +184,8 @@ create table systemusers (
   organization_id           varchar(255),
   user_type_id              varchar(255),
   active_profile_image_id   varchar(255),
+  profile_image_id          varchar(255),
+  profile_image_url         varchar(255),
   create_time               datetime,
   update_time               timestamp not null,
   constraint pk_systemusers primary key (id))
