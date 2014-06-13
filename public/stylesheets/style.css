@@ -14,8 +14,11 @@ body{
     /*background-color: rgb(230, 224, 224);
     background-color: rgb(246, 239, 240); */
     background-color:rgb(182, 175, 175);
-
-    background-image: url("../images/noise-2.png");
+    background-image: url("../images/clown.png");
+    background-size: 44px;
+    background-repeat: no-repeat;
+    background-position: 99% 15%;
+    /*background-image: url("../images/noise-2.png"); */
 }
 .red{
     color: #f2005f;
