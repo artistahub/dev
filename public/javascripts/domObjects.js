@@ -140,7 +140,7 @@ function CommentObject( o ){
     var commenterUserName = o.commenter.userName;
     var commenterFullName = o.commenter.fullName;
     var comment = o.description;
-    var commenterImg = commenterObject.activeProfileImage.url;
+    var commenterImg = commenterObject.profileImageUrl;
    // alert(o.dateCreated);
     //var dateCreated = new Date(o.dateCreated).toString("MM/dd/yyyy HH:mm tt");
     var dateCreated = new Date(o.dateCreated);
@@ -159,7 +159,7 @@ function CommentObject( o ){
 CommentObject.prototype.render = function(){ return this.html()};
 
 function SearchResultObject( o ){
-    var profileImg = o.activeProfileImage.url || 'images/clown.jpg';
+    var profileImg = o.profileImageUrl || 'images/clown.jpg';
     var profileLink = "/profile/" + o.userName;
     this.rowWrapper = "<div class='row-fluid search-result-row'>";
     this.rowContent = " <a href='" + profileLink + "'><div class='search-result-img-div' > <img class='v-center' width='100%' src='" + profileImg + "'></div>" +
@@ -304,6 +304,7 @@ function SignUpOrganizationForm( name, email  ){
             if (  item.header ){
                // console.log( item.header );
               //  console.log( $input.parent() );
+                $input.removeClass("finputText");
                 $frow.append("<div><h4>"+ item.header +"</h4></div>");
             }
             $frow.append( $label, $input, $span);

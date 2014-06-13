@@ -147,7 +147,7 @@ h4 {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fedc4d',endColorstr='#fd9512',GradientType=0);
     border-color: #ec8b11;
 }
-.signup-btn:hover{
+.signup-btn:hover,.signup-btn:visited, .signup-btn:focus{
     border: solid  1px #ff7824;
     color: #000000;
     background-color: #fd9512;

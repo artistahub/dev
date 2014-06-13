@@ -2,12 +2,12 @@ package controllers;
 
 import dataHelpers.SessionUser;
 import models.*;
-import org.apache.commons.mail.*;
-
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
 import play.data.DynamicForm;
 import play.libs.Json;
 import play.mvc.Controller;
-import play.mvc.Http;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
@@ -92,7 +92,7 @@ public class Register extends Controller {
             Album profileAlbum = new Album( u, "Profile album ", " Profile album description ", Album.AlbumType.profile );
             Photo profilePhoto = new Photo( u, "profile photo", s3File.getUrl().toString(), profileAlbum );
             profilePhoto.setTitle(" Profile Photo");
-            u.setActiveProfileImage(profilePhoto);
+          //  u.setActiveProfileImage(profilePhoto);
             u.setProfileImageId( profilePhoto.getId());
             u.setProfileImageUrl( profilePhoto.getUrl() );
             String photoUrl = s3File.getUrl().toString();

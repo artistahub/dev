@@ -205,11 +205,11 @@ public class Application extends Controller {
 
     }
     public static void createUserTypeIfNotExist(){
-        new UserType( "artist", "ut-00001", "an artist / performer" ).save();
-        new UserType( "performance", "ut-00002", " a performance / show" ).save();
-        new UserType( "festival", "ut-00003", "a festival" ).save();
-        new UserType( "theater", "ut-00004", "a theater" ).save();
-        new UserType( "Gym", "ut-00004", "a gym" ).save();
+        new UserType( "artist", "ut-00001", "artist / performer" ).save();
+        new UserType( "performance", "ut-00002", "performance / show" ).save();
+        new UserType( "festival", "ut-00003", "festival" ).save();
+        new UserType( "theater", "ut-00004", "theater" ).save();
+        new UserType( "Gym", "ut-00004", "gym" ).save();
 
     }
 

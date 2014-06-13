@@ -21,8 +21,8 @@ public class SystemUser extends Model {
     private Organization organization;
     @OneToOne(cascade = CascadeType.ALL)
     private UserType userType;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Photo activeProfileImage;
+   // @OneToOne(cascade = CascadeType.ALL)
+   // private Photo activeProfileImage;
     private String profileImageId;
     private String profileImageUrl;
     private Date createTime;
@@ -188,13 +188,15 @@ public class SystemUser extends Model {
     }
 
 
-    public Photo getActiveProfileImage() {
+   /* public Photo getActiveProfileImage() {
         return activeProfileImage;
     }
 
     public void setActiveProfileImage(Photo activeProfileImage) {
         this.activeProfileImage = activeProfileImage;
     }
+
+    */
 
 
     public String getProfileImageId() {
