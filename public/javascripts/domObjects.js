@@ -1,10 +1,11 @@
 function Screen( o ){
     var userName = o.userName || "artista";
     var fullName = o.fullName || "artista";
-    if (o.activeProfileImage== null ){
-        o.activeProfileImage = {};
-        o.activeProfileImage.url = "images/clown.jpg";
-    }
+    var profileImageUrl = o.profileImageUrl != null ? o.profileImageUrl : "images/clown.jpg" ;
+    //if (o.activeProfileImage== null ){
+      //  o.activeProfileImage = {};
+     //   o.activeProfileImage.url = "images/clown.jpg";
+   // }
     if (o.location == null ){
         o.location = {};
         o.location.city = "Agadir";
@@ -14,7 +15,7 @@ function Screen( o ){
     this.wrapperOpener = '<a href=' + "/profile/" + encodeURI( userName )  +'> <div class="item wrapper">';
     this.topBar = "<div class='row topBar'> <b>" +fullName +"</b></div>";
     this.secondaryBar = "<div class='row secondaryBar'> Secondary Bar</div>";
-    this.body = '<div class="row screenBody"><div class="imgContainer"> <img class="" style="width: 100%" src= ' + encodeURI(o.activeProfileImage.url) + '  ></div></div>';
+    this.body = '<div class="row screenBody"><div class="imgContainer"> <img class="" style="width: 100%" src= ' + encodeURI( o.profileImageUrl ) + '  ></div></div>';
     this.footer = "<div class='row screenFooter'>  <b>" + o.location.city + ", " + o.location.country +  "</b></div>";
     this.wrapperCloser = "</div></a>";
    // this.screenHtml = this.wrapperOpener + this.topBar + this.secondaryBar + this.body + this.footer; + this.wrapperCloser;

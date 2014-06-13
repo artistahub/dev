@@ -15,15 +15,16 @@
         var $headerBar = $('#header-top-bar');
         console.log(profileData);
         // $("#pImage").attr('src' , profileData.systemUser.activeProfileImage.url);
-        $("#pImage").attr({'src':encodeURI(profileData.systemUser.activeProfileImage.url), 'data-id':profileData.systemUser.activeProfileImage.id, 'data-type':profileData.systemUser.activeProfileImage.imageType});
+        $("#pImage").attr({'src':encodeURI(profileData.systemUser.profileImageUrl), 'data-id':profileData.systemUser.profileImageId, title: "Profile Photo"});
         $("#profilePersonalInfo").html(new ProfilePersonalInfo(profileData.systemUser).html );
 
         $.each(profilePhotos, function (i, e) {
             //console.log(JSON.stringify(e));
             var $imgContainer = $("<div>");
             var $img = $("<img>");
-            $imgContainer.attr({'class':'artista-img', 'data-id':e.id});
-            $img.attr({'src':e.url, 'data-id':e.id});
+            $imgContainer.attr({'class':'artista-img', 'data-id':e.id, title: e.title});
+            $img.attr({'src':e.url, 'data-id':e.id, title: e.title});
+            console.log( "e.title: " + e.title);
             $imgContainer.append($img);
             $mediaContainer.append($imgContainer);
         });
