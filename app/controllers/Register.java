@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import dataHelpers.SessionUser;
 import models.*;
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -29,6 +30,8 @@ public class Register extends Controller {
         String userType = requestData.get( "userType" );
         List< UserType > userTypes = UserType.getUserTypes();
         String userTypesAsJson = Json.toJson( userTypes ).toString();
+        checkAccountByEmail( email );
+        System.out.println( "checkAccountByEmail( email ):  " + checkAccountByEmail( email ));
         return ok( register.render(name, firstName, lastName, email, userType, userTypesAsJson) );
     }
 
@@ -139,6 +142,16 @@ public class Register extends Controller {
         video.save();
         return redirect( routes.Application.myVideos());
 
+    }
+
+    //
+    public static boolean checkAccountByEmail( String email ){
+        boolean result = false;
+       // ObjectNode checkResponse = Json.newObject();
+        SystemAccount systemAccount= SystemAccount.findSystemAccountByEmail( email );
+       // checkResponse.put("systemAccount" , Json.toJson( systemAccount ));
+        System.out.println(" System acount found: " + Json.toJson( systemAccount));
+        return systemAccount != null ? true: false;
     }
 
     public static void sendHtmlasEmail( SystemUser u, String photoUrl, String accountEmail ) throws EmailException, MalformedURLException {
