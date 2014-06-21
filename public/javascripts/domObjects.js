@@ -29,13 +29,19 @@ function ProfilePersonalInfo( systemUser ){
    // alert( " from profile p i function" );
     if ( systemUser.location == null ){
         systemUser.location = {};
-        systemUser.location.addressText = " not provided";
+        systemUser.location.addressText = "no category";
+    }
+    if ( systemUser.person.category == null ){
+        systemUser.person.category = {};
+        systemUser.person.category.label = "";
     }
      this.userFullName = "<div> <h2 class='h'> " + systemUser.fullName + "</h2></div>";
      this.userTitle = " <div> <h4 class='h'> " + systemUser.userType.label + "</h4></div>";
+     this.userCategory = " <div> <h4 class='h'> " + systemUser.person.category.label + "</h4></div>";
      this.userLocation = " <div> <h5 class='h'> " +  systemUser.location.addressText + "</h5></div>";
      this.html = this.userFullName;
      this.html += this.userTitle;
+     this.html += this.userCategory;
      this.html += this.userLocation;
      this.html += "<div><p> <strong> Profession:</strong> Human pyramids, Moroccan Tumbling, Chinese pole and Hnd balancing </p></div>";
      return this.html;
@@ -229,11 +235,13 @@ function ArtistaForm(){
     this.renderHtml = function(){ return this.htmlForm()};
 }
 
-function SignUpPersonForm( firstName, lastName, email  ){
+function SignUpPersonForm( firstName, lastName, email, personCategories  ){
+    console.log( personCategories ) ;
     this.formFields = { firstName: { label: "First Name", value : firstName || "", tag : "input", type: "text", name : "firstName","data-req": 1 },
                     lastName : { label: "Last Name", value : lastName || "", tag : "input", type: "text", name: "lastName","data-req": 1 },
                     email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email","data-req": 1 },
                     userName : { label: "User Name", value : firstName && lastName ? firstName + "." + lastName : "", tag : "input", type: "text",  name : "userName","data-req": 1 },
+                    category : { label: "Category", value : "", tag : "select", type: "select",  name : "personCategory","data-req": 1 },
                     password: { label: "Password", value : "", tag : "input", type: "password", name: "password","data-req": 1 },
                     city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
                     state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
@@ -257,6 +265,18 @@ function SignUpPersonForm( firstName, lastName, email  ){
             else if (  item.type == "radio" ){
                 var $input = $("<label class='radio inline'><input value='"+ item.label +"' class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+item.label+"</label>");
                 $label = "";
+            }
+            else if ( item.type == "select" ){
+               var $input = $("<select class='finputText signup-select' data-req='"+ req +"' name='" + item.name + "'><option></option></select>");
+                $.each( personCategories, function( i, cat ){
+                    // console.log( ut );
+                    var $e = $('<option>');
+                    $e.attr({ 'value' : cat.name , 'data-ref' : cat.reference});
+                    $e.text( ucFirstAllWords(cat.label) );
+
+                    $input.append( $e );
+                });
+
             }
             if (  item.header ){
                 console.log( item.header );

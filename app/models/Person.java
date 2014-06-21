@@ -28,6 +28,8 @@ public class Person extends Model {
     private Sex gender;
     @ManyToMany( cascade = CascadeType.ALL )
     private List< PersonCategory >  categories;
+    @OneToOne(cascade = CascadeType.ALL)
+    private PersonCategory category;
     @ManyToMany( cascade = CascadeType.ALL )
     private List< Organization > organizations;
     @OneToOne(cascade = CascadeType.ALL)
@@ -55,6 +57,14 @@ public class Person extends Model {
 
     public void setCategories(List<PersonCategory> categories) {
         this.categories = categories;
+    }
+
+    public PersonCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(PersonCategory category) {
+        this.category = category;
     }
 
 

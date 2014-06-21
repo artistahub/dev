@@ -72,6 +72,7 @@ create table organizations (
   email                     varchar(255),
   www                       varchar(255),
   phone_number              varchar(255),
+  category_id               varchar(255),
   address_id                varchar(255),
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
@@ -99,6 +100,7 @@ create table persons (
   cell                      varchar(255),
   birth_date                datetime,
   gender                    varchar(6),
+  category_id               varchar(255),
   address_id                varchar(255),
   billing_address_id        varchar(255),
   shipping_address_id       varchar(255),
@@ -278,50 +280,54 @@ alter table feeds add constraint fk_feeds_systemUser_6 foreign key (system_user_
 create index ix_feeds_systemUser_6 on feeds (system_user_id);
 alter table myphoto add constraint fk_myphoto_systemUser_7 foreign key (system_user_id) references systemusers (id) on delete restrict on update restrict;
 create index ix_myphoto_systemUser_7 on myphoto (system_user_id);
-alter table organizations add constraint fk_organizations_address_8 foreign key (address_id) references address (id) on delete restrict on update restrict;
-create index ix_organizations_address_8 on organizations (address_id);
-alter table organizations add constraint fk_organizations_billingAddress_9 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
-create index ix_organizations_billingAddress_9 on organizations (billing_address_id);
-alter table organizations add constraint fk_organizations_shippingAddress_10 foreign key (shipping_address_id) references address (id) on delete restrict on update restrict;
-create index ix_organizations_shippingAddress_10 on organizations (shipping_address_id);
-alter table persons add constraint fk_persons_address_11 foreign key (address_id) references address (id) on delete restrict on update restrict;
-create index ix_persons_address_11 on persons (address_id);
-alter table persons add constraint fk_persons_billingAddress_12 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
-create index ix_persons_billingAddress_12 on persons (billing_address_id);
-alter table persons add constraint fk_persons_shippingAddress_13 foreign key (shipping_address_id) references address (id) on delete restrict on update restrict;
-create index ix_persons_shippingAddress_13 on persons (shipping_address_id);
-alter table photos add constraint fk_photos_album_14 foreign key (album_id) references albums (id) on delete restrict on update restrict;
-create index ix_photos_album_14 on photos (album_id);
-alter table photos add constraint fk_photos_owner_15 foreign key (owner_id) references systemusers (id) on delete restrict on update restrict;
-create index ix_photos_owner_15 on photos (owner_id);
-alter table profileimagecomments add constraint fk_profileimagecomments_commenter_16 foreign key (commenter_id) references systemusers (id) on delete restrict on update restrict;
-create index ix_profileimagecomments_commenter_16 on profileimagecomments (commenter_id);
-alter table profileimagecomments add constraint fk_profileimagecomments_myProfilePhoto_17 foreign key (my_profile_photo_id) references profileImages (id) on delete restrict on update restrict;
-create index ix_profileimagecomments_myProfilePhoto_17 on profileimagecomments (my_profile_photo_id);
-alter table systemaccounts add constraint fk_systemaccounts_systemUser_18 foreign key (system_user_id) references systemusers (id) on delete restrict on update restrict;
-create index ix_systemaccounts_systemUser_18 on systemaccounts (system_user_id);
-alter table systemusers add constraint fk_systemusers_person_19 foreign key (person_id) references persons (id) on delete restrict on update restrict;
-create index ix_systemusers_person_19 on systemusers (person_id);
-alter table systemusers add constraint fk_systemusers_organization_20 foreign key (organization_id) references organizations (id) on delete restrict on update restrict;
-create index ix_systemusers_organization_20 on systemusers (organization_id);
-alter table systemusers add constraint fk_systemusers_userType_21 foreign key (user_type_id) references usertypes (id) on delete restrict on update restrict;
-create index ix_systemusers_userType_21 on systemusers (user_type_id);
-alter table artistas add constraint fk_artistas_activeProfileImage_22 foreign key (active_profile_image_id) references profileImages (id) on delete restrict on update restrict;
-create index ix_artistas_activeProfileImage_22 on artistas (active_profile_image_id);
-alter table artistas add constraint fk_artistas_location_23 foreign key (location_id) references address (id) on delete restrict on update restrict;
-create index ix_artistas_location_23 on artistas (location_id);
-alter table artistas add constraint fk_artistas_BillingAddress_24 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
-create index ix_artistas_BillingAddress_24 on artistas (billing_address_id);
-alter table artistas add constraint fk_artistas_MailingAddress_25 foreign key (mailing_address_id) references address (id) on delete restrict on update restrict;
-create index ix_artistas_MailingAddress_25 on artistas (mailing_address_id);
-alter table artistas add constraint fk_artistas_userType_26 foreign key (user_type_id) references usertypes (id) on delete restrict on update restrict;
-create index ix_artistas_userType_26 on artistas (user_type_id);
-alter table videos add constraint fk_videos_album_27 foreign key (album_id) references albums (id) on delete restrict on update restrict;
-create index ix_videos_album_27 on videos (album_id);
-alter table videos add constraint fk_videos_owner_28 foreign key (owner_id) references systemusers (id) on delete restrict on update restrict;
-create index ix_videos_owner_28 on videos (owner_id);
-alter table Video1s add constraint fk_Video1s_systemUser1_29 foreign key (system_user1_id) references artistas (id) on delete restrict on update restrict;
-create index ix_Video1s_systemUser1_29 on Video1s (system_user1_id);
+alter table organizations add constraint fk_organizations_category_8 foreign key (category_id) references organizationcategories (id) on delete restrict on update restrict;
+create index ix_organizations_category_8 on organizations (category_id);
+alter table organizations add constraint fk_organizations_address_9 foreign key (address_id) references address (id) on delete restrict on update restrict;
+create index ix_organizations_address_9 on organizations (address_id);
+alter table organizations add constraint fk_organizations_billingAddress_10 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_organizations_billingAddress_10 on organizations (billing_address_id);
+alter table organizations add constraint fk_organizations_shippingAddress_11 foreign key (shipping_address_id) references address (id) on delete restrict on update restrict;
+create index ix_organizations_shippingAddress_11 on organizations (shipping_address_id);
+alter table persons add constraint fk_persons_category_12 foreign key (category_id) references personcategories (id) on delete restrict on update restrict;
+create index ix_persons_category_12 on persons (category_id);
+alter table persons add constraint fk_persons_address_13 foreign key (address_id) references address (id) on delete restrict on update restrict;
+create index ix_persons_address_13 on persons (address_id);
+alter table persons add constraint fk_persons_billingAddress_14 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_persons_billingAddress_14 on persons (billing_address_id);
+alter table persons add constraint fk_persons_shippingAddress_15 foreign key (shipping_address_id) references address (id) on delete restrict on update restrict;
+create index ix_persons_shippingAddress_15 on persons (shipping_address_id);
+alter table photos add constraint fk_photos_album_16 foreign key (album_id) references albums (id) on delete restrict on update restrict;
+create index ix_photos_album_16 on photos (album_id);
+alter table photos add constraint fk_photos_owner_17 foreign key (owner_id) references systemusers (id) on delete restrict on update restrict;
+create index ix_photos_owner_17 on photos (owner_id);
+alter table profileimagecomments add constraint fk_profileimagecomments_commenter_18 foreign key (commenter_id) references systemusers (id) on delete restrict on update restrict;
+create index ix_profileimagecomments_commenter_18 on profileimagecomments (commenter_id);
+alter table profileimagecomments add constraint fk_profileimagecomments_myProfilePhoto_19 foreign key (my_profile_photo_id) references profileImages (id) on delete restrict on update restrict;
+create index ix_profileimagecomments_myProfilePhoto_19 on profileimagecomments (my_profile_photo_id);
+alter table systemaccounts add constraint fk_systemaccounts_systemUser_20 foreign key (system_user_id) references systemusers (id) on delete restrict on update restrict;
+create index ix_systemaccounts_systemUser_20 on systemaccounts (system_user_id);
+alter table systemusers add constraint fk_systemusers_person_21 foreign key (person_id) references persons (id) on delete restrict on update restrict;
+create index ix_systemusers_person_21 on systemusers (person_id);
+alter table systemusers add constraint fk_systemusers_organization_22 foreign key (organization_id) references organizations (id) on delete restrict on update restrict;
+create index ix_systemusers_organization_22 on systemusers (organization_id);
+alter table systemusers add constraint fk_systemusers_userType_23 foreign key (user_type_id) references usertypes (id) on delete restrict on update restrict;
+create index ix_systemusers_userType_23 on systemusers (user_type_id);
+alter table artistas add constraint fk_artistas_activeProfileImage_24 foreign key (active_profile_image_id) references profileImages (id) on delete restrict on update restrict;
+create index ix_artistas_activeProfileImage_24 on artistas (active_profile_image_id);
+alter table artistas add constraint fk_artistas_location_25 foreign key (location_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_location_25 on artistas (location_id);
+alter table artistas add constraint fk_artistas_BillingAddress_26 foreign key (billing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_BillingAddress_26 on artistas (billing_address_id);
+alter table artistas add constraint fk_artistas_MailingAddress_27 foreign key (mailing_address_id) references address (id) on delete restrict on update restrict;
+create index ix_artistas_MailingAddress_27 on artistas (mailing_address_id);
+alter table artistas add constraint fk_artistas_userType_28 foreign key (user_type_id) references usertypes (id) on delete restrict on update restrict;
+create index ix_artistas_userType_28 on artistas (user_type_id);
+alter table videos add constraint fk_videos_album_29 foreign key (album_id) references albums (id) on delete restrict on update restrict;
+create index ix_videos_album_29 on videos (album_id);
+alter table videos add constraint fk_videos_owner_30 foreign key (owner_id) references systemusers (id) on delete restrict on update restrict;
+create index ix_videos_owner_30 on videos (owner_id);
+alter table Video1s add constraint fk_Video1s_systemUser1_31 foreign key (system_user1_id) references artistas (id) on delete restrict on update restrict;
+create index ix_Video1s_systemUser1_31 on Video1s (system_user1_id);
 
 
 

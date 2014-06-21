@@ -135,6 +135,7 @@ h4 {
     display: inline-block;
     padding: 3px;
     border-radius: 2px;
+    border: solid thin rgb(16, 87, 121);
 }
 
 .signup-btn{
@@ -468,7 +469,7 @@ input[type="text"],input[type="password"], select{
     color: #0A0A0A;
 }
 #profilePersonalInfo div > .h{
-    margin: 0px;
+    margin: 1px;
 }
 #profileImageContainer{
     border: solid 6px rgb(214, 214, 199);
@@ -861,10 +862,22 @@ div#comments-Container .comment-row:first-child {
 }
 
 #user-types-select {
+
+}
+.logo{
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    width: 46px;
+    display: inline-block;
+    height: 40px;
+    background-size: 40px;
+    vertical-align: -8px;
+}
+.signup-select {
     font-size: 13pt;
     padding-bottom: -21px;
     height: 39px;
-    width: 104%;
+    width: 103%;
 }
 
 .img-title{

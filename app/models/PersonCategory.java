@@ -31,6 +31,19 @@ public class PersonCategory extends Model {
          setCreateTime( new Date() );
     }
 
+
+    private static Finder<Long, PersonCategory> find = new Finder<Long, PersonCategory>(Long.class, PersonCategory.class);
+
+    public static List<PersonCategory> getPersonCategories() {
+        List<PersonCategory> personCategories = Ebean.find(PersonCategory.class).findList();
+        System.out.print(" Person CAtegories >>>>>>> " + personCategories);
+        return personCategories;
+    }
+
+    public static PersonCategory findPersonCategoryByName( String name){
+        return  Ebean.find( PersonCategory.class).where().like("name", name.toLowerCase()).findUnique();
+    }
+
     public String getReference() {
         return reference;
     }

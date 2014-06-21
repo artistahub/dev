@@ -29,10 +29,12 @@ public class Register extends Controller {
         String email = requestData.get( "email" );
         String userType = requestData.get( "userType" );
         List< UserType > userTypes = UserType.getUserTypes();
+        List< PersonCategory> personCategories = PersonCategory.getPersonCategories();
         String userTypesAsJson = Json.toJson( userTypes ).toString();
+        String personCategoriesAsJson = Json.toJson( personCategories ).toString();
         checkAccountByEmail( email );
         System.out.println( "checkAccountByEmail( email ):  " + checkAccountByEmail( email ));
-        return ok( register.render(name, firstName, lastName, email, userType, userTypesAsJson) );
+        return ok( register.render(name, firstName, lastName, email, userType, userTypesAsJson, personCategoriesAsJson ) );
     }
 
 
@@ -45,6 +47,7 @@ public class Register extends Controller {
         String accountEmail = requestData.get("email");
         String password = requestData.get("password");
         String userName = requestData.get("userName");
+        String personCategory = requestData.get("personCategory");
         String sex = requestData.get("sex");
         //System.out.println(" Gender: ---> " + sex.trim() );
         String userType = requestData.get( "userType" );
@@ -54,6 +57,7 @@ public class Register extends Controller {
 
         Address address = new Address( city ,state, country );
         UserType systemUserType = UserType.findUserTypeByName( userType );
+        PersonCategory systemPersonCategory = PersonCategory.findPersonCategoryByName( personCategory );
         SystemUser u = null;
         System.out.println( "Name: " + name);
         if ( name != null  ){
@@ -64,6 +68,7 @@ public class Register extends Controller {
         else {
             Person p = new Person(  firstName, lastName, accountEmail );
             p.setAddressId( address );
+            p.setCategory( systemPersonCategory );
             if ( sex.trim().equalsIgnoreCase("female")){
                 p.setGender( Person.Sex.Female );
             }

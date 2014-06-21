@@ -21,6 +21,8 @@ public class Organization extends Model {
     private String phoneNumber;
     @ManyToMany( mappedBy = "organizations", cascade = CascadeType.ALL )
     private List<Person> persons;
+    @OneToOne(cascade = CascadeType.ALL)
+    private OrganizationCategory category;
     @ManyToMany( cascade = CascadeType.ALL )
     private List< OrganizationCategory >  categories;
     @OneToOne(cascade = CascadeType.ALL)
@@ -151,6 +153,14 @@ public class Organization extends Model {
 
     public void setCategories(List<OrganizationCategory> categories) {
         this.categories = categories;
+    }
+
+    public OrganizationCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(OrganizationCategory category) {
+        this.category = category;
     }
 }
 

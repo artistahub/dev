@@ -1,10 +1,11 @@
-@(name:String, firstName: String, lastName: String, email: String, userType: String, userTypes: String  )
+@(name:String, firstName: String, lastName: String, email: String, userType: String, userTypes: String, personCategories: String  )
 @headerOut()
 
 <script type="text/javascript">
     // set default userTypes on selection html element
     $( document).ready( function(){
         var userTypes = @Html(userTypes);
+        var personCategories = @Html(personCategories);
         var selectedUserType = "@{ userType }";
         var firstName = "@{ firstName }";
         var lastName = "@{ lastName }";
@@ -23,7 +24,7 @@
             $("#user-types-select").val( selectedUserType );
             if ( selectedUserType == "artist"){
                 // $('#who-are-you-container').after( new ArtistaForm().renderHtml().fadeIn( 'slow' ));
-                $("#registration-form").append( new SignUpPersonForm( firstName, lastName, email ).renderHtml());
+                $("#registration-form").append( new SignUpPersonForm( firstName, lastName, email, personCategories ).renderHtml());
             }
             else {
                 $("#registration-form").append( new SignUpOrganizationForm( name, email ).renderHtml());
@@ -32,17 +33,18 @@
         }
 
         $('#user-types-select').change( function(){
+            alert("test ");
             var $this = $(this);
             $('.dynamic-create-form').html("");
           //  $( "select option:selected" ).each(function() {
                 var $selectionVal = $( this ).val();
                 if ( $selectionVal == "artist"){
                    // $('#who-are-you-container').after( new ArtistaForm().renderHtml().fadeIn( 'slow' ));
-                    $("#registration-form").append( new SignUpPersonForm().renderHtml());
+                    $("#registration-form").append( new SignUpPersonForm( firstName, lastName, email, personCategories ).renderHtml());
                 }
                 else {
                    // if ( $selectionVal != ""){
-                        $('#registration-form').append( new SignUpOrganizationForm().renderHtml().fadeIn( 'slow' ));
+                        $('#registration-form').append( new SignUpOrganizationForm( name, email ).renderHtml().fadeIn( 'slow' ));
                    // }
                   //  else {
                        // $this.siblings().fadeIn();
@@ -115,7 +117,7 @@
                     <form id="registration-form" action="completeRegistration" method="post" enctype="multipart/form-data">
                        <div class="frow">
                             <div class="flabel " style="display: none;"> Who are you?</div>
-                            <select class="finputText" name="userType" id="user-types-select">
+                            <select class="finputText signup-select" name="userType" id="user-types-select">
                                 <option></option>
 
                             </select>
