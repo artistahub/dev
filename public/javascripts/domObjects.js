@@ -27,17 +27,33 @@ Screen.prototype.render = function(){
 
 function ProfilePersonalInfo( systemUser ){
    // alert( " from profile p i function" );
+    var artistaCat = "";
     if ( systemUser.location == null ){
         systemUser.location = {};
         systemUser.location.addressText = "no category";
     }
-    if ( systemUser.person.category == null ){
-        systemUser.person.category = {};
-        systemUser.person.category.label = "";
+
+    if ( systemUser.person ){
+        if ( systemUser.person.category == null ){
+            systemUser.person.category = {};
+            systemUser.person.category.label = " Person Category";
+
+        }
+        artistaCat =  systemUser.person.category.label;
     }
+    else {
+        if ( systemUser.organization.category == null ){
+            systemUser.organization.category = {};
+            systemUser.organization.category.label = " Organization Category";
+
+        }
+        artistaCat =  systemUser.organization.category.label;
+
+    }
+
      this.userFullName = "<div> <h2 class='h'> " + systemUser.fullName + "</h2></div>";
      this.userTitle = " <div> <h4 class='h'> " + systemUser.userType.label + "</h4></div>";
-     this.userCategory = " <div> <h4 class='h'> " + systemUser.person.category.label + "</h4></div>";
+     this.userCategory = " <div> <h4 class='h'> " + artistaCat + "</h4></div>";
      this.userLocation = " <div> <h5 class='h'> " +  systemUser.location.addressText + "</h5></div>";
      this.html = this.userFullName;
      this.html += this.userTitle;

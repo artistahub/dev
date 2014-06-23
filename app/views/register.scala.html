@@ -33,7 +33,7 @@
         }
 
         $('#user-types-select').change( function(){
-            alert("test ");
+            //alert("test ");
             var $this = $(this);
             $('.dynamic-create-form').html("");
           //  $( "select option:selected" ).each(function() {
@@ -42,7 +42,11 @@
                    // $('#who-are-you-container').after( new ArtistaForm().renderHtml().fadeIn( 'slow' ));
                     $("#registration-form").append( new SignUpPersonForm( firstName, lastName, email, personCategories ).renderHtml());
                 }
-                else {
+               else if ( !$selectionVal.length ){
+                //    alert(" empty");
+                    $this.prev().fadeIn();
+               }
+               else {
                    // if ( $selectionVal != ""){
                         $('#registration-form').append( new SignUpOrganizationForm( name, email ).renderHtml().fadeIn( 'slow' ));
                    // }

@@ -57,7 +57,7 @@ public class Register extends Controller {
 
         Address address = new Address( city ,state, country );
         UserType systemUserType = UserType.findUserTypeByName( userType );
-        PersonCategory systemPersonCategory = PersonCategory.findPersonCategoryByName( personCategory );
+
         SystemUser u = null;
         System.out.println( "Name: " + name);
         if ( name != null  ){
@@ -66,6 +66,7 @@ public class Register extends Controller {
              u = new SystemUser( o, password, systemUserType );
         }
         else {
+            PersonCategory systemPersonCategory = PersonCategory.findPersonCategoryByName( personCategory );
             Person p = new Person(  firstName, lastName, accountEmail );
             p.setAddressId( address );
             p.setCategory( systemPersonCategory );
