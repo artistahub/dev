@@ -1,5 +1,6 @@
 package models;
 
+import com.avaje.ebean.Ebean;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -26,6 +27,17 @@ public class OrganizationCategory extends Model {
     public OrganizationCategory(){
          setReference( "org-cat-" + count++ );
          setCreateTime( new Date() );
+    }
+    private static Finder<Long, OrganizationCategory> find = new Finder<Long, OrganizationCategory>(Long.class, OrganizationCategory.class);
+
+    public static List<OrganizationCategory> getOrganizationCategories() {
+        List<OrganizationCategory> orgCategories = Ebean.find(OrganizationCategory.class).findList();
+        System.out.print(" Org Categories >>>>>>> " + orgCategories);
+        return orgCategories;
+    }
+
+    public static OrganizationCategory findOrgCategoryByName( String name){
+        return  Ebean.find( OrganizationCategory.class).where().like("name", name.toLowerCase()).findUnique();
     }
 
     public String getReference() {

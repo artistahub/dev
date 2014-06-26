@@ -24,17 +24,19 @@ public class Register extends Controller {
     public static Result index() {
         DynamicForm requestData = form().bindFromRequest();
         String firstName = requestData.get("firstName");
-        String lastName = requestData.get( "lastName" );
+        String lastName = requestData.get("lastName");
         String name = requestData.get( "businessName" );
         String email = requestData.get( "email" );
         String userType = requestData.get( "userType" );
         List< UserType > userTypes = UserType.getUserTypes();
         List< PersonCategory> personCategories = PersonCategory.getPersonCategories();
+        List< OrganizationCategory> orgCategories = OrganizationCategory.getOrganizationCategories();
         String userTypesAsJson = Json.toJson( userTypes ).toString();
         String personCategoriesAsJson = Json.toJson( personCategories ).toString();
+        String orgCategoriesAsJson = Json.toJson( orgCategories ).toString();
         checkAccountByEmail( email );
         System.out.println( "checkAccountByEmail( email ):  " + checkAccountByEmail( email ));
-        return ok( register.render(name, firstName, lastName, email, userType, userTypesAsJson, personCategoriesAsJson ) );
+        return ok( register.render(name, firstName, lastName, email, userType, userTypesAsJson, personCategoriesAsJson, orgCategoriesAsJson  ) );
     }
 
 
@@ -50,7 +52,7 @@ public class Register extends Controller {
         String personCategory = requestData.get("personCategory");
         String sex = requestData.get("sex");
         //System.out.println(" Gender: ---> " + sex.trim() );
-        String userType = requestData.get( "userType" );
+        String userType = requestData.get("userType" );
         String city = requestData.get( "city" );
         String state = requestData.get( "state" );
         String country = requestData.get( "country" );
@@ -148,6 +150,82 @@ public class Register extends Controller {
         video.save();
         return redirect( routes.Application.myVideos());
 
+    }
+
+    public static Result saveProfileData() throws MalformedURLException {
+        String currentUserId = session("currentUserId");
+        SystemUser currentUser = SystemUser.findUserById( currentUserId );
+        String baseUrl = request().path();
+        DynamicForm requestData = form().bindFromRequest();
+        String name = requestData.get("businessName");
+        String firstName = requestData.get("firstName");
+        String lastName = requestData.get("lastName");
+        String userName = requestData.get("userName");
+        String selectedPersonCategory = requestData.get("personCategory");
+        String selectedOrgCategory = requestData.get("orgCategory");
+        String sex = requestData.get("sex");
+        //System.out.println(" Gender: ---> " + sex.trim() );
+       // String userType = requestData.get("userType" );
+        String city = requestData.get( "city" );
+        String state = requestData.get( "state" );
+        String country = requestData.get( "country" );
+
+        if ( currentUser.isItAPerson() ){
+             PersonCategory personCategory = PersonCategory.findPersonCategoryByName( selectedPersonCategory );
+             currentUser.getPerson().setCategory( personCategory );
+             currentUser.getPerson().setFirstName( firstName );
+             currentUser.getPerson().setLastName(lastName);
+             currentUser.setUserName(userName);
+             currentUser.getPerson().getAddressId().setCity(city);
+             currentUser.getPerson().getAddressId().setState(state);
+             currentUser.getPerson().getAddressId().setCountry( country );
+
+        }
+        else {
+            OrganizationCategory orgCategory = OrganizationCategory.findOrgCategoryByName(selectedOrgCategory);
+            currentUser.getOrganization().setCategory( orgCategory  );
+            currentUser.getOrganization().setName( name );
+            currentUser.setUserName( userName );
+            currentUser.getOrganization().getAddress().setCity( city );
+            currentUser.getOrganization().getAddress().setState(state);
+            currentUser.getOrganization().getAddress().setCountry( country );
+
+        }
+        currentUser.save();
+        SessionUser sessionUser = new SessionUser( currentUser );
+        session("sessionUser",Json.toJson( sessionUser ).toString());
+        session("currentUserId" , currentUser.getId());
+
+        // Save the file in AWS
+        MultipartFormData b = request().body().asMultipartFormData();
+        // System.out.print(b);
+        FilePart picture = b.getFile("profileImage");
+        if (picture != null) {
+            S3File s3File = new S3File();
+            s3File.name = picture.getFilename().trim();
+            s3File.file = picture.getFile();
+            s3File.save();
+
+            //ProfileImage profileImage = new ProfileImage( s3File.getUrl().toString(), s3File.name);
+           // Album profileAlbum = new Album( currentUser , "Profile album ", " Profile album description ", Album.AlbumType.profile );
+            Album profileAlbum = Album.findProfileAlbumByOwner( currentUser.getId() );
+            Photo profilePhoto = new Photo( currentUser , " 1 New profile photo", s3File.getUrl().toString(), profileAlbum );
+            profilePhoto.setTitle(" New Profile Photo");
+            //  u.setActiveProfileImage(profilePhoto);
+            currentUser.setProfileImageId( profilePhoto.getId());
+            currentUser.setProfileImageUrl( profilePhoto.getUrl() );
+            String photoUrl = s3File.getUrl().toString();
+            System.out.println( "Photo URL: " + photoUrl);
+           // Feed feed = new Feed( u, photoUrl , " Text text...") ;
+           // feed.save();
+            profilePhoto.save();
+        //} else {
+          //  System.out.print("Missing file");
+          //  flash("error", "Missing file");
+         //   return redirect(routes.Application.index());
+       }
+
+        return redirect( routes.Application.myProfile() );
     }
 
     //

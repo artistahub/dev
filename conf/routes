@@ -27,8 +27,10 @@ POST     /addMyPhotos               controllers.AddPhotos.addMyPhotos()
 
 GET      /login                     controllers.LogIn.index()
 POST      /login                    controllers.LogIn.index()
-GET    /register                  controllers.Register.index()
+GET    /register                    controllers.Register.index()
 POST     /register                  controllers.Register.index()
+
+POST    /saveProfileData            controllers.Register.saveProfileData()
 
 
 

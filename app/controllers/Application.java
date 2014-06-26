@@ -110,9 +110,18 @@ public class Application extends Controller {
     public static Result myProfile(){
 
         if ( session("sessionUser") != null){
-
-           //return  ok( session("user"));
-           return  ok( views.html.profile.editProfile.render() );
+            List< UserType > userTypes = UserType.getUserTypes();
+            List< PersonCategory> personCategories = PersonCategory.getPersonCategories();
+            List< OrganizationCategory> orgCategories = OrganizationCategory.getOrganizationCategories();
+            String userTypesAsJson = Json.toJson( userTypes ).toString();
+            String personCategoriesAsJson = Json.toJson( personCategories ).toString();
+            String orgCategoriesAsJson = Json.toJson( orgCategories ).toString();
+            String currentUserId = session("currentUserId");
+            SystemUser currentUser = SystemUser.findUserById( currentUserId );
+            System.out.println( "********* current User: " + currentUser);
+            ProfileData profileData = new ProfileData( currentUser );
+             //return  ok( session("user"));
+           return  ok( views.html.profile.editProfile.render( Json.toJson( profileData ).toString(),personCategoriesAsJson, orgCategoriesAsJson ) );
         }
         else {
            return  ok(" no session -  not logged in");

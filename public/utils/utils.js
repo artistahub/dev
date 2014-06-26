@@ -227,17 +227,36 @@ function displayPhotoMediaFrame( $this, loggedIn ){
         $imgPreview.append(forms.submitMyphotoComment(dataId, dataType));
     } else {
         var $signInBtn = $('<div>');
-        $signInBtn.attr({'class':'btn btn-primary' });
+        $signInBtn.attr({'class':'btn btn-primary' , id: 'comment-signing-btn'});
         $signInBtn.css({'position':'absolute', 'left':0, 'right':0 });
         $signInBtn.text(" Please sign in to leave a comment");
         $imgPreview.append($signInBtn);
     }
+
     $imgPreview.append( $bounderBottomBar );
     $imgWrapper.append('<button class="close-icon close-img-preview" style="z-index:5; position: absolute;top: -40px; right: -11px"></button>');//.fadeIn();
 
     $mediaFrame.append( $imgWrapper );
     $( 'body' ).append( $mediaFrame );
     showShadow();
+
+    $signInBtn.on( 'click', function(){
+     //   alert(" clicked");
+        $body = $('body');
+        $bodyWidth = $body.width();
+        $bodyHeight = $body.height();
+        var $dropDownContainer = $("<div>");
+        $dropDownContainer.css({left: 0, right: 0, 'position':'absolute', 'z-index': 1000,  'backgroundColor':'rgb(230, 230, 230)', 'width':$bodyWidth / 2, 'top':"-400px", "min-width" : "300px", "max-width" :"360px", padding: "10px", margin: "auto"});
+        $dropDownContainer.html( new DropDownWindow( "<div>Sign in form</div>", "sign in from").render());
+        $( 'body').append($dropDownContainer);
+        $dropDownContainer.animate({
+            top:0
+        }, "slow", function(){
+            $(".close-dropDown").on( 'click', function(){
+                $( this).parent().parent().fadeOut();
+            });
+        });
+    });
 
 
 }

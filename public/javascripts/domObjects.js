@@ -150,10 +150,12 @@ function DropDownWindow( f, title ){
     this.body = "<div class='window-body'> " + f + "</div>";
     this.footer = "<div class='window-footer'><span class='close-dropDown'>close</span></div>";
     this.html = function(){
+
         return this.header + this.body + this.footer;
     }
 }
 DropDownWindow.prototype.render = function(){
+
     return this.html();
 }
 
@@ -252,7 +254,7 @@ function ArtistaForm(){
 }
 
 function SignUpPersonForm( firstName, lastName, email, personCategories  ){
-    console.log( personCategories ) ;
+   // console.log( personCategories ) ;
     this.formFields = { firstName: { label: "First Name", value : firstName || "", tag : "input", type: "text", name : "firstName","data-req": 1 },
                     lastName : { label: "Last Name", value : lastName || "", tag : "input", type: "text", name: "lastName","data-req": 1 },
                     email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email","data-req": 1 },
@@ -284,14 +286,19 @@ function SignUpPersonForm( firstName, lastName, email, personCategories  ){
             }
             else if ( item.type == "select" ){
                var $input = $("<select class='finputText signup-select' data-req='"+ req +"' name='" + item.name + "'><option></option></select>");
-                $.each( personCategories, function( i, cat ){
-                    // console.log( ut );
-                    var $e = $('<option>');
-                    $e.attr({ 'value' : cat.name , 'data-ref' : cat.reference});
-                    $e.text( ucFirstAllWords(cat.label) );
+                if ( personCategories ){
+                    $.each( personCategories, function( i, cat ){
+                        // console.log( ut );
+                        var $e = $('<option>');
+                        $e.attr({ 'value' : cat.name , 'data-ref' : cat.reference});
+                        $e.text( ucFirstAllWords(cat.label) );
 
-                    $input.append( $e );
-                });
+                        $input.append( $e );
+                    });
+
+                }
+
+
 
             }
             if (  item.header ){
@@ -308,11 +315,70 @@ function SignUpPersonForm( firstName, lastName, email, personCategories  ){
      this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="button" value="Complete Registration" id="uploadProfileImage"></div>');
      this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
 }
+function EditPersonProfileForm( firstName, lastName, email, personCategories  ){
+    // console.log( personCategories ) ;
+    this.formFields = { firstName: { label: "First Name", value : firstName || "", tag : "input", type: "text", name : "firstName","data-req": 1 },
+        lastName : { label: "Last Name", value : lastName || "", tag : "input", type: "text", name: "lastName","data-req": 1 },
+        userName : { label: "User Name", value : firstName && lastName ? firstName + "." + lastName : "", tag : "input", type: "text",  name : "userName","data-req": 1 },
+        category : { label: "Category", value : "", tag : "select", type: "select",  name : "personCategory","data-req": 1 },
+        city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
+        state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
+        country : { label: "Country", value : "", tag : "input", type: "text", name: "country","data-req": 1 },
+        sex : { label: "Female", value : "female", tag : "input", type: "radio", name: "sex"},
+        sex2 : { label: "Male", value : "male", tag : "input", type: "radio", name: "sex"},
+        profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1, header: "Profile Photo"}
+    };
+    this.htmlForm = function(){
+        var $container = $("<div class='dynamic-create-form' id='person-signup-form'></div>");
+        $.each( this.formFields , function( i, item){
+            var $frow = $("<div class='frow'></div>");
+            var $label = $("<div class='flabel'></div>").text( item.label );
+            var $span = $("<span class='red'></span>");
+            var req = item["data-req"];
+            if ( item.value ){ $label.css("display","none")};
+            //  var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
+            if ( item.tag == "input" && item.type != "radio" ){
+                var $input = $("<input class='finputText' data-req='"+ req +"'  value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
+            }
+            else if (  item.type == "radio" ){
+                var $input = $("<label class='radio inline'><input value='"+ item.label +"' class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+item.label+"</label>");
+                $label = "";
+            }
+            else if ( item.type == "select" ){
+                var $input = $("<select class='finputText signup-select' data-req='"+ req +"' name='" + item.name + "'><option></option></select>");
+                if ( personCategories ){
+                    $.each( personCategories, function( i, cat ){
+                        // console.log( ut );
+                        var $e = $('<option>');
+                        $e.attr({ 'value' : cat.name , 'data-ref' : cat.reference});
+                        $e.text( ucFirstAllWords(cat.label) );
 
-function SignUpOrganizationForm( name, email  ){
+                        $input.append( $e );
+                    });
+
+                }
+
+            }
+            if (  item.header ){
+                console.log( item.header );
+                console.log( $input.parent() );
+                $input.removeClass("finputText");
+                $frow.append("<div><h4>"+ item.header +"</h4></div>");
+            }
+            $frow.append( $label, $input, $span );
+            $container.append( $frow );
+        });
+        return $container;
+    }
+    this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="submit" value="Save" id="saveProfileDate"></div>');
+    this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
+}
+
+function SignUpOrganizationForm( name, email, orgCategories  ){
     this.formFields = { name: { label: "Name", value : name || "", tag : "input", type: "text", name : "businessName","data-req": 1 },
         email : { label: "Email", value : email || "", tag : "input", type: "text", name: "email","data-req": 1 },
         userName : { label: "User Name", value : name ? name : "", tag : "input", type: "text",  name : "userName","data-req": 1 },
+        category : { label: "Category", value : "", tag : "select", type: "select",  name : "orgCategory","data-req": 1 },
         password: { label: "Password", value : "", tag : "input", type: "password", name: "password","data-req": 1 },
         city : { label: "City", value : "", tag : "input", type: "text", name : "city" },
         state : { label: "State", value : "", tag : "input", type: "text", name: "state" },
@@ -337,6 +403,21 @@ function SignUpOrganizationForm( name, email  ){
                 var $input = $("<label class='radio inline'><input class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
                 $label = "";
             }
+            else if ( item.type == "select" ){
+                var $input = $("<select class='finputText signup-select' data-req='"+ req +"' name='" + item.name + "'><option></option></select>");
+                if ( orgCategories ){
+                    $.each( orgCategories, function( i, cat ){
+                        // console.log( ut );
+                        var $e = $('<option>');
+                        $e.attr({ 'value' : cat.name , 'data-ref' : cat.reference});
+                        $e.text( ucFirstAllWords(cat.label) );
+
+                        $input.append( $e );
+                    });
+
+                }
+
+            }
             if (  item.header ){
                // console.log( item.header );
               //  console.log( $input.parent() );
@@ -349,6 +430,67 @@ function SignUpOrganizationForm( name, email  ){
         return $container;
     }
     this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="button" value="Complete Registration" id="uploadProfileImage"></div>');
+    this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
+}
+function EditOrganizationProfileForm( systemUser,  org,  orgCategories ){
+    console.log( org);
+    this.formFields = { name: { label: "Name", value : org.name || "", tag : "input", type: "text", name : "businessName","data-req": 1 },
+        userName : { label: "User Name", value : systemUser.userName ? systemUser.userName : "", tag : "input", type: "text",  name : "userName","data-req": 1 },
+        category : { label: "Category", value : org.category.name ? org.category.name : "", tag : "select", type: "select",  name : "orgCategory","data-req": 1 },
+        city : { label: "City", value : org.address.city ? org.address.city : "", tag : "input", type: "text", name : "city" },
+        state : { label: "State", value : org.address.state ? org.address.state : "", tag : "input", type: "text", name: "state" },
+        country : { label: "Country", value : org.address.country ? org.address.country : "", tag : "input", type: "text", name: "country","data-req": 1 },
+        profilePhoto : { label: "", value : "", tag : "input", type: "file", name: "profileImage","data-req": 1, header: "Profile Photo"}
+    };
+    this.htmlForm = function(){
+        var $container = $("<div class='dynamic-create-form' id='org-signup-form'></div>");
+        $.each( this.formFields , function( i, item){
+            console.log( "i: " + i);
+            console.log( "item: " + item.label);
+            var $frow = $("<div class='frow'></div>");
+            var $label = $("<div class='flabel'></div>").text( item.label );
+            var $span = $("<span class='red'></span>");
+            var req = item["data-req"];
+            if ( item.value ){ $label.css("display","none")};
+            //  var $input = $("<input class='finputText' type='text' name='" + i + "'></input>");
+            if ( item.tag == "input" && item.type != "radio" ){
+                var $input = $("<input class='finputText' data-req='"+ req +"' value='"+ item.value +"' type='" + item.type + "' name='" + item.name + "'></input>");
+            }
+            else if (  item.type == "radio" ){
+                var $input = $("<label class='radio inline'><input class='finputText' data-req='"+ req +"' type='" + item.type + "' name='" + item.name + "'></input> "+ item.label+"</label>");
+                $label = "";
+            }
+            else if ( item.type == "select" ){
+                var $input = $("<select class='finputText signup-select' data-req='"+ req +"' name='" + item.name + "'><option> </option></select>");
+                if ( orgCategories ){
+                    $.each( orgCategories, function( i, cat ){
+                        // console.log( ut );
+                        var $e = $('<option>');
+                        $e.attr({ 'value' : cat.name , 'data-ref' : cat.reference});
+                        if ( cat.name == item.value ){
+                           // alert( "set category selected");
+                            $e.attr({ 'selected' : 1});
+                        }
+                        $e.text( ucFirstAllWords(cat.label) );
+
+                        $input.append( $e );
+                    });
+
+                }
+
+            }
+            if (  item.header ){
+                // console.log( item.header );
+                //  console.log( $input.parent() );
+                $input.removeClass("finputText");
+                $frow.append("<div><h4>"+ item.header +"</h4></div>");
+            }
+            $frow.append( $label, $input, $span);
+            $container.append( $frow );
+        });
+        return $container;
+    }
+    this.footer = $('<div class="frow"><input class="btn signup-btn span12" type="submit" value="Save" id="saveProfileDate"></div>');
     this.renderHtml = function(){ return this.htmlForm().append(this.footer)};
 }
 
