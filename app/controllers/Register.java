@@ -191,10 +191,7 @@ public class Register extends Controller {
             currentUser.getOrganization().getAddress().setCountry( country );
 
         }
-        currentUser.save();
-        SessionUser sessionUser = new SessionUser( currentUser );
-        session("sessionUser",Json.toJson( sessionUser ).toString());
-        session("currentUserId" , currentUser.getId());
+
 
         // Save the file in AWS
         MultipartFormData b = request().body().asMultipartFormData();
@@ -219,11 +216,12 @@ public class Register extends Controller {
            // Feed feed = new Feed( u, photoUrl , " Text text...") ;
            // feed.save();
             profilePhoto.save();
-        //} else {
-          //  System.out.print("Missing file");
-          //  flash("error", "Missing file");
-         //   return redirect(routes.Application.index());
        }
+        currentUser.save();
+        session().remove("sessionUser");
+        SessionUser sessionUser = new SessionUser( currentUser );
+        session("sessionUser",Json.toJson( sessionUser ).toString());
+        session("currentUserId" , currentUser.getId());
 
         return redirect( routes.Application.myProfile() );
     }
