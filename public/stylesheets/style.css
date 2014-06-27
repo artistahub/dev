@@ -26,6 +26,22 @@ body{
 #artistas-container{
 
 }
+.artista-cat{
+    background: rgba(77, 187, 108, 0.65);
+    padding: 0px 2px;
+    font-size: 9pt;
+    border: solid thin rgb(10, 121, 97);
+}
+.artista-type{
+    font-size: 17.5px;
+    color: white;
+    text-shadow: 1px 1px 2px #222;
+    background: rgba(33, 124, 167, 0.65);
+    display: inline-block;
+    padding: 3px;
+    border-radius: 2px;
+    border: solid thin rgb(16, 87, 121);
+}
 #media-wrapper{
     top: 29px;
     left: 0;

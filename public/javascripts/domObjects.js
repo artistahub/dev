@@ -52,8 +52,8 @@ function ProfilePersonalInfo( systemUser ){
     }
 
      this.userFullName = "<div> <h2 class='h'> " + systemUser.fullName + "</h2></div>";
-     this.userTitle = " <div> <h4 class='h'> " + systemUser.userType.label + "</h4></div>";
-     this.userCategory = " <div> <h4 class='h'> " + artistaCat + "</h4></div>";
+     this.userTitle = " <div> <h4 class='h artista-type'> " + systemUser.userType.label + "</h4></div>";
+     this.userCategory = " <div> <h4 class='h artista-cat'> " + artistaCat + "</h4></div>";
      this.userLocation = " <div> <h5 class='h'> " +  systemUser.location.addressText + "</h5></div>";
      this.html = this.userFullName;
      this.html += this.userTitle;
