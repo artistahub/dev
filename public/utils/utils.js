@@ -246,8 +246,8 @@ function displayPhotoMediaFrame( $this, loggedIn ){
         $bodyWidth = $body.width();
         $bodyHeight = $body.height();
         var $dropDownContainer = $("<div>");
-        $dropDownContainer.css({left: 0, right: 0, 'position':'absolute', 'z-index': 1000,  'backgroundColor':'rgb(230, 230, 230)', 'width':$bodyWidth / 2, 'top':"-400px", "min-width" : "300px", "max-width" :"360px", padding: "10px", margin: "auto"});
-        $dropDownContainer.html( new DropDownWindow( "<div>Sign in form</div>", "sign in from").render());
+        $dropDownContainer.css({left: 0, right: 0, 'position':'absolute', 'z-index': 1000,  'backgroundColor':'rgb(230, 230, 230)', 'width':"100%", 'height': "100%", padding: "2px", margin: "auto"});
+        $dropDownContainer.html( new DropDownWindow( forms.logInPopUp(), "").render());
         $( 'body').append($dropDownContainer);
         $dropDownContainer.animate({
             top:0

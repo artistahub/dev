@@ -144,6 +144,16 @@ var forms = {};
         return f ;
     }
 
+    forms.logInPopUp =  function( dataId, dataType){
+        var f = '<div class="f2 "><form method="post" action="/loginToComment"><div class=" header"><div><h1 class="h1" style="padding: 0; color: white; text-shadow: 1px 1px 2px #222"> Sign in </h1></div>' +
+            '</div><div class="frow"><div class="flabel " style="display: block;"> Email</div><input class="finputText" type="text" name="email"></div>' +
+            '<div class="frow"><div class="flabel "> Password</div><input class="finputText" type="password" name="password"></div>' +
+            '<div class="frow"><div class="flabel "> cuttentUrl</div><input class="finputText" type="hidden" name="cuttentUrl" value="'+ document.URL +'"></div>' +
+            '<div class="frow"><input class="btn signup-btn" type="submit" value="Sign in to ArtistaOne"></div>' +
+            '</form></div>';
+        return f ;
+    }
+
 function DropDownWindow( f, title ){
     this.wrapper = "<div class='window-wrapper'></div>";
     this.header = "<div class='window-header'> <h4>"+ title +"</h4></div>";
