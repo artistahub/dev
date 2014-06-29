@@ -8,6 +8,8 @@
         var userTypes = @Html(userTypes);
         var personCategories = @Html(personCategories);
         var orgCategories = @Html(orgCategories);
+        console.log( " Org categoies: ");
+        console.log( orgCategories );
         var selectedUserType = "@{ userType }";
         var firstName = "@{ firstName }";
         var lastName = "@{ lastName }";
@@ -50,7 +52,7 @@
                }
                else {
                    // if ( $selectionVal != ""){
-                        $('#registration-form').append( new SignUpOrganizationForm( name, email ).renderHtml().fadeIn( 'slow' ));
+                        $('#registration-form').append( new SignUpOrganizationForm( name, email, orgCategories ).renderHtml().fadeIn( 'slow' ));
                    // }
                   //  else {
                        // $this.siblings().fadeIn();

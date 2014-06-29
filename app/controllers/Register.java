@@ -50,6 +50,7 @@ public class Register extends Controller {
         String password = requestData.get("password");
         String userName = requestData.get("userName");
         String personCategory = requestData.get("personCategory");
+        String orgCategory = requestData.get("orgCategory");
         String sex = requestData.get("sex");
         //System.out.println(" Gender: ---> " + sex.trim() );
         String userType = requestData.get("userType" );
@@ -63,9 +64,12 @@ public class Register extends Controller {
         SystemUser u = null;
         System.out.println( "Name: " + name);
         if ( name != null  ){
-             Organization o = new Organization( name, accountEmail );
-             o.setAddress( address );
-             u = new SystemUser( o, password, systemUserType );
+            OrganizationCategory systemOrgCategory = OrganizationCategory.findOrgCategoryByName( orgCategory );
+
+            Organization o = new Organization( name, accountEmail );
+            o.setCategory( systemOrgCategory );
+            o.setAddress( address );
+            u = new SystemUser( o, password, systemUserType );
         }
         else {
             PersonCategory systemPersonCategory = PersonCategory.findPersonCategoryByName( personCategory );
