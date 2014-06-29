@@ -51,14 +51,14 @@ public class LogIn extends Controller {
         String password = requestData.get( "password" );
         if ( session("sessionUser") == null ){
             if ( email == null || email.isEmpty() || password == null || password.isEmpty() ){
-                return  ok( views.html.login.render( "test" ));
+                return  ok( views.html.login.render( "Please Sign in" ) );
             }
             else{
                 // SystemUser systemUser = SystemUser.findUserByEmailAndPass(email, password);
                 SystemAccount systemAccount = SystemAccount.findSystemAccountByEmailAndPass( email, password );
                 System.out.println("\nSystem account :\n " + systemAccount);
                 if ( systemAccount == null ){
-                    return ok( views.html.login.render( " No account found " ));
+                    return ok( views.html.login.render( " No account found " ) );
                 }
                 else {
                     SystemUser systemUser = systemAccount.getSystemUser();
